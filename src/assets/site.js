@@ -61,6 +61,7 @@
   const form = document.querySelector("[data-chat-form]");
   if (form) {
     const endpoint = form.dataset.endpoint || "";
+    const thanks = form.dataset.thanks || "/thanks/";
     const summary = form.querySelector("[data-errors]");
     const serverBox = form.querySelector("[data-server-error]");
     const btn = form.querySelector('button[type="submit"]');
@@ -104,7 +105,7 @@
         summary.hidden = false; summary.focus();
         return;
       }
-      if (fd.get("website")) { location.href = "/thanks/"; return; } // honeypot filled: pretend success
+      if (fd.get("website")) { location.href = thanks; return; } // honeypot filled: pretend success
       const body = {
         name: v("name"), email: v("email"), role: v("role"), state: v("state"), school: v("school"),
         programTypes: fd.getAll("kind"), size: v("size"), topics: fd.getAll("topic"), currentTools: fd.getAll("current"),
@@ -113,9 +114,9 @@
       const turnstile = fd.get("cf-turnstile-response");
       if (turnstile) body.turnstileToken = turnstile;
       btn.disabled = true; btn.textContent = "Sending…";
-      if (!endpoint) { setTimeout(() => { location.href = "/thanks/"; }, 400); return; }
+      if (!endpoint) { setTimeout(() => { location.href = thanks; }, 400); return; }
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-        .then((r) => { if (!r.ok) throw new Error(String(r.status)); location.href = "/thanks/"; })
+        .then((r) => { if (!r.ok) throw new Error(String(r.status)); location.href = thanks; })
         .catch(() => { btn.disabled = false; btn.textContent = btn.dataset.label || "Send"; serverBox.hidden = false; serverBox.focus(); });
     });
   }
@@ -148,6 +149,7 @@
     const STEPS = { path: 7, practice: 7, class: 11, concert: 12 };
     const bandSeats = () => { const out = []; const cx = 430, cy = 610, R = [175, 275, 375]; BAND_ROWS.forEach((row, r) => row.forEach((sec, i) => { const a = (200 + 140 * (i + 0.5) / row.length) * Math.PI / 180; out.push({ sec, x: cx + R[r] * Math.cos(a), y: cy + R[r] * Math.sin(a) }); })); return out; };
     const choirSeats = () => { const out = []; const Y = [222, 342, 462]; CHOIR_ROWS.forEach((row, r) => row.forEach((sec, i) => out.push({ sec, x: 420 + (i - (row.length - 1) / 2) * 76, y: Y[r] }))); return out; };
+    const ICON = ((document.querySelector("link[rel=icon]") || {}).href || "/assets/favicon.svg").replace("favicon.svg", "logo-icon-rust.svg");
     const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
     const stage = pw.querySelector("[data-pw-stage]");
@@ -162,7 +164,7 @@
     const press = (n) => st === n ? "transform:scale(.94);box-shadow:0 0 0 4px rgb(170 69 43 / .3)" : "";
     const P = (label, n) => '<span style="font-size:14px;font-weight:600;padding:10px 16px;border-radius:8px;background:#AA452B;color:#FFFDF9;border:1.5px solid #AA452B;transition:transform .2s ease,box-shadow .2s ease;' + press(n) + '">' + label + "</span>";
     const O = (label, n) => '<span style="font-size:14px;font-weight:600;padding:10px 16px;border-radius:8px;background:#FFFDF9;color:#1C292C;border:1.5px solid #1C292C;transition:transform .2s ease,box-shadow .2s ease;' + press(n) + '">' + label + "</span>";
-    const topbar = (crumb, title, actions) => '<div style="position:absolute;left:0;top:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;background:#FFFDF9;border-bottom:1px solid #CAD7D9"><div style="display:flex;align-items:center;gap:14px"><img src="/assets/logo-icon-rust.svg" alt="" style="width:30px;height:30px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#4B5F64">' + esc(crumb) + '</span><span style="font-family:var(--font-serif);font-weight:500;font-size:24px;line-height:1.1">' + esc(title) + '</span></div></div><div style="display:flex;gap:10px;align-items:center">' + actions + "</div></div>";
+    const topbar = (crumb, title, actions) => '<div style="position:absolute;left:0;top:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;background:#FFFDF9;border-bottom:1px solid #CAD7D9"><div style="display:flex;align-items:center;gap:14px"><img src="' + ICON + '" alt="" style="width:30px;height:30px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#4B5F64">' + esc(crumb) + '</span><span style="font-family:var(--font-serif);font-weight:500;font-size:24px;line-height:1.1">' + esc(title) + '</span></div></div><div style="display:flex;gap:10px;align-items:center">' + actions + "</div></div>";
 
     function render() {
       const lv = LEVELS[name];

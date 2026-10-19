@@ -28,7 +28,7 @@ description: "Pick a time for a demo of Program Partner, or send us a note about
 <p class="muted" style="font-size:16px;line-height:1.6;padding-top:12px;border-top:1px solid var(--border)">Rather write first? Use the form, or email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
 </div>
 
-<form id="chat" class="form-card" data-chat-form data-endpoint="{{ site.chatEndpoint }}" novalidate aria-labelledby="form-h" style="flex:1.6 1 460px;min-width:0">
+<form id="chat" class="form-card" data-chat-form data-endpoint="{{ site.chatEndpoint }}" data-thanks="{{ "/thanks/" | url }}" novalidate aria-labelledby="form-h" style="flex:1.6 1 460px;min-width:0">
 <h2 id="form-h" style="font-size:28px;line-height:1.2">{{ site.ctaSecondary }}</h2>
 <p style="margin-top:-14px;font-size:15px" class="muted">Tell us a little about your program. Fields marked "required" must be filled in.</p>
 <div class="alert" data-errors hidden tabindex="-1" role="alert">

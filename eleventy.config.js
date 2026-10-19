@@ -1,7 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
+  // PATH_PREFIX is set by the deploy workflow while the site lives at the GitHub preview address.
+  // Remove it from the workflow when the custom domain is on.
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+  eleventyConfig.addGlobalData("pathPrefix", () => process.env.PATH_PREFIX || "/");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/screenshots": "screenshots" });
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
@@ -31,6 +36,7 @@ export default function (eleventyConfig) {
   );
 
   return {
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: { input: "src", output: "_site", includes: "_includes", data: "_data" },
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
