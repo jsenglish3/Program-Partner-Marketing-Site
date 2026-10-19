@@ -51,7 +51,7 @@
 {#- CTA band -#}
 {%- macro cta(heading, label, href, body) -%}
 <section class="cta-band" aria-labelledby="cta-h">
-<div class="wrap section row">
+<div class="wrap row">
 <div class="copy"><h2 id="cta-h">{{ heading }}</h2>{% if body %}<p>{{ body }}</p>{% endif %}</div>
 <div class="act"><a href="{{ href or '/demo/' }}" class="btn btn-primary">{{ label or 'Schedule a demo' }}</a></div>
 </div>

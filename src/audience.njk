@@ -3,10 +3,11 @@ layout: layouts/base.njk
 pagination:
   data: audiences
   size: 1
+  addAllPagesToCollections: true
   alias: a
 permalink: "/{{ a.key }}/"
 eleventyComputed:
-  title: "{{ a.h1 }}"
+  title: "{{ a.title or a.h1 }}"
   current: "{{ a.key }}"
   description: "{{ a.sub }}"
 ---
@@ -81,7 +82,7 @@ eleventyComputed:
 </div>
 <dl style="margin:0;display:flex;flex-direction:column">
 {%- for p in [["Data isolation","Each program's records are walled off from every other program's, enforced in the database itself."],["Role-based access","Staff see only the areas their job needs: a booster treasurer sees the books, an assistant sees attendance."],["No selling or advertising","Student and family data is never sold, never used for advertising, and never shared with outside analytics trackers."],["Data privacy agreement","We sign a data privacy agreement with your district, or review the one your district already uses."],["Return or delete","When a program leaves, its data is returned or deleted within 45 days."]] %}
-<div style="display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:6px 28px;padding:16px 0;border-bottom:1px solid var(--sand)"><dt style="font-weight:600;font-size:16px;line-height:1.45">{{ p[0] }}</dt><dd style="margin:0;font-size:16px;line-height:1.55">{{ p[1] }}</dd></div>
+<div style="display:flex;flex-wrap:wrap;gap:6px 28px;padding:16px 0;border-bottom:1px solid var(--sand)"><dt style="flex:0 0 200px;font-weight:600;font-size:16px;line-height:1.45">{{ p[0] }}</dt><dd style="flex:1 1 200px;min-width:0;margin:0;font-size:16px;line-height:1.55">{{ p[1] }}</dd></div>
 {%- endfor %}
 </dl>
 </article>

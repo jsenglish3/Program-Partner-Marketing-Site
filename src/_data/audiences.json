@@ -25,7 +25,7 @@
     ]
   },
   {
-    "key": "schools", "eyebrow": "For principals, coordinators and departments", "h1": "Approve it once and stop worrying about it.",
+    "key": "schools", "eyebrow": "For principals, coordinators and departments", "h1": "Approve it once and stop worrying about it.", "title": "For schools and districts",
     "sub": "For principals, fine arts coordinators and college departments: student data handled the way you'd expect, and purchasing that's simple.",
     "cta": "Ask for our data privacy agreement.", "ctaLabel": "Request the agreement", "ctaHref": "/security/#dpa"
   },
