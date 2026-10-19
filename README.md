@@ -49,4 +49,4 @@ Browser frames are 16:10, tablet frames 1180×820, phone frames 9:19.5. Anything
 
 ## Founder photo
 
-Put the photo at `src/assets/trey-english.png` (portrait, roughly 2:3). The home and About pages show a placeholder until it exists.
+Put the photo at `src/assets/trey-english.jpg` (portrait, roughly 2:3). The home and About pages show a placeholder until it exists.

@@ -22,7 +22,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());
   eleventyConfig.addGlobalData("hasFounderPhoto", () =>
-    fs.existsSync(path.join(process.cwd(), "src", "assets", "trey-english.png"))
+    fs.existsSync(path.join(process.cwd(), "src", "assets", "trey-english.jpg"))
   );
 
   eleventyConfig.addFilter("split", (s, sep) => String(s).split(sep));
