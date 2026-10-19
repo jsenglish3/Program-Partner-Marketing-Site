@@ -1,0 +1,37 @@
+<footer class="site-footer">
+<div class="inner">
+<div class="cols">
+<div class="about">
+<a href="/" style="display:inline-flex;width:max-content;border-radius:6px"><img src="/assets/logo-horizontal-white.svg" alt="Program Partner home" width="101" height="44"></a>
+<p style="font-size:17px;line-height:1.5">Program Partner is the program office for fine arts directors and teachers.</p>
+</div>
+<nav aria-label="Features"><h2>Features</h2><ul>
+{%- for f in nav.features %}<li><a href="{{ f.href }}">{{ f.name }}</a></li>{% endfor %}
+</ul></nav>
+<nav aria-label="Who it's for"><h2>Who it's for</h2><ul>
+{%- for w in nav.who %}<li><a href="{{ w.href }}">{{ w.name }}</a></li>{% endfor %}
+</ul></nav>
+<nav aria-label="Resources"><h2>Resources</h2><ul>
+<li><a href="/security/">Security and privacy</a></li>
+<li><a href="/families/">Families</a></li>
+<li><a href="/woodshed/">Woodshed</a></li>
+</ul></nav>
+<nav aria-label="Company"><h2>Company</h2><ul>
+{%- for c in nav.company %}<li><a href="{{ c.href }}">{{ c.name }}</a></li>{% endfor %}
+<li><a href="{{ site.appUrl }}">Log in</a></li>
+</ul></nav>
+</div>
+<div class="meta">
+<a href="mailto:{{ site.supportEmail }}" class="mail">{{ site.supportEmail }}</a>
+<a href="{{ site.facebook }}">Facebook</a>
+<a href="{{ site.instagram }}">Instagram</a>
+<a href="/woodshed/">Woodshed, our free practice site</a>
+</div>
+<div class="legal">
+<a href="/privacy/">Privacy</a><span aria-hidden="true">·</span>
+<a href="/terms/">Terms</a><span aria-hidden="true">·</span>
+<a href="/accessibility/">Accessibility</a><span aria-hidden="true">·</span>
+<span>© {{ buildYear }} Program Partner, LLC</span>
+</div>
+</div>
+</footer>

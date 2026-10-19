@@ -1,0 +1,16 @@
+{
+  "name": "Program Partner",
+  "url": "https://myprogrampartner.com",
+  "description": "Program Partner is the program office for fine arts directors and teachers: fees, families, instruments, music, seating and messages for band, orchestra, choir, theatre and private studios.",
+  "appUrl": "https://app.myprogrampartner.com",
+  "woodshedUrl": "https://woodshed.myprogrampartner.com",
+  "supportEmail": "support@myprogrampartner.com",
+  "facebook": "https://www.facebook.com/profile.php?id=61594217697359",
+  "instagram": "https://www.instagram.com/myprogrampartner/",
+  "bookingUrl": "",
+  "chatEndpoint": "https://app.myprogrampartner.com/api/public/demo-access-request",
+  "turnstileSiteKey": "",
+  "cloudflareAnalyticsToken": "",
+  "ctaPrimary": "Schedule a demo",
+  "ctaSecondary": "Let's chat"
+}

@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+current: demo
+title: Schedule a demo
+permalink: /demo/
+description: "Pick a time for a demo of Program Partner, or send us a note about your program and we'll reply within one business day."
+---
+{%- set states = "Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,District of Columbia,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming,Outside the US" | split(",") -%}
+{%- set roles = ["Director","Assistant director","Booster officer","Fine arts coordinator or administrator","Private studio teacher","Other"] -%}
+{%- set kinds = ["Band","Orchestra","Choir","Theatre","Guard","Private studio","Other"] -%}
+{%- set sizes = ["Under 50","50–150","150–300","300+"] -%}
+{%- set topics = [["fees","Fees and budgets"],["students","Students and families"],["communication","Communication"],["forms","Forms and paperwork"],["events","Events and trips"],["inventory","Inventory and uniforms"],["library","Music library"],["seating","Seating charts"],["teaching","Teaching tools"],["pricing","Pricing"]] -%}
+{%- set current = ["Spreadsheets","Charms or CutTime","BoosterHub","Presto","BAND or Remind","Something else"] -%}
+<div style="padding:clamp(48px,7vw,96px) 0 var(--section-y)">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,80px);align-items:flex-start">
+<div class="stack" style="flex:1 1 320px;max-width:420px;gap:20px">
+<h1 style="font-size:clamp(40px,5vw,60px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance">See Program Partner with your program in mind.</h1>
+<p class="body-lg muted">Pick a time and we'll walk through it together, using the demo school and your own questions.</p>
+<div class="stack" style="gap:12px;align-items:flex-start">
+{%- if site.bookingUrl %}
+<a href="{{ site.bookingUrl }}" class="btn btn-primary">{{ site.ctaPrimary }}</a>
+<p style="font-size:15px" class="muted">Opens our booking page. You'll pick a time that works for you.</p>
+{%- else %}
+<a href="#chat" class="btn btn-primary">{{ site.ctaPrimary }}</a>
+<p style="font-size:15px" class="muted">Tell us about your program below and we'll reply within one business day with times.</p>
+{%- endif %}
+</div>
+<p class="muted" style="font-size:16px;line-height:1.6;padding-top:12px;border-top:1px solid var(--border)">Rather write first? Use the form, or email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+</div>
+
+<form id="chat" class="form-card" data-chat-form data-endpoint="{{ site.chatEndpoint }}" novalidate aria-labelledby="form-h" style="flex:1.6 1 460px;min-width:0">
+<h2 id="form-h" style="font-size:28px;line-height:1.2">{{ site.ctaSecondary }}</h2>
+<p style="margin-top:-14px;font-size:15px" class="muted">Tell us a little about your program. Fields marked "required" must be filled in.</p>
+<div class="alert" data-errors hidden tabindex="-1" role="alert">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+<div class="stack" style="gap:8px"><p style="font-weight:600"></p><ul></ul></div>
+</div>
+<div class="alert" data-server-error hidden tabindex="-1" role="alert">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+<p><strong style="font-weight:600">Not sent.</strong> Something went wrong on our end. Try again, or email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+</div>
+<div class="choices" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px">
+<div class="field" data-field="name"><label for="f-name">Your name <span class="opt">(required)</span></label><input class="input" id="f-name" name="name" autocomplete="name" required></div>
+<div class="field" data-field="email"><label for="f-email">Work email <span class="opt">(required)</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="help-email" data-help="help-email"><p id="help-email" class="help">A personal email is fine if you're a booster officer.</p></div>
+<div class="field" data-field="role"><label for="f-role">Your role <span class="opt">(required)</span></label><select class="select" id="f-role" name="role" required><option value="">Choose one</option>{% for o in roles %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
+<div class="field" data-field="state"><label for="f-state">State <span class="opt">(required)</span></label><select class="select" id="f-state" name="state" autocomplete="address-level1" required><option value="">Choose a state</option>{% for o in states %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
+</div>
+<div class="field" data-field="school"><label for="f-school">School, college or studio name <span class="opt">(required)</span></label><input class="input" id="f-school" name="school" autocomplete="organization" required></div>
+<fieldset class="field" id="f-kind" data-field="kind" style="border:0;margin:0;padding:0;gap:12px">
+<legend>What kind of program? <span class="opt">(required; choose all that apply)</span></legend>
+<div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">{% for o in kinds %}<label><input type="checkbox" name="kind" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
+</fieldset>
+<fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
+<legend>About how many students?</legend>
+<div class="choices" style="display:flex;flex-wrap:wrap;gap:4px 24px">{% for o in sizes %}<label><input type="radio" name="size" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
+</fieldset>
+<fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
+<legend>What would you like help with? <span class="opt">(choose any)</span></legend>
+<div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{% for o in topics %}<label><input type="checkbox" name="topic" value="{{ o[0] }}">{{ o[1] }}</label>{% endfor %}</div>
+</fieldset>
+<fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
+<legend>What do you use now? <span class="opt">(choose any)</span></legend>
+<div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">{% for o in current %}<label><input type="checkbox" name="current" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
+</fieldset>
+<div class="field" data-field="notes"><label for="f-notes">Anything else we should know?</label><textarea class="textarea" id="f-notes" name="notes" rows="4"></textarea></div>
+<div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+<div class="field" data-field="consent" style="padding-top:18px;border-top:1px solid var(--border)">
+<label style="display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.45;cursor:pointer;font-weight:400"><input id="f-consent" type="checkbox" name="consent" style="accent-color:var(--primary);width:20px;height:20px;margin:1px 0 0;flex:none"><span>You can email me about my request. <span class="opt">(required)</span></span></label>
+</div>
+{%- if site.turnstileSiteKey %}
+<div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}"></div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{%- endif %}
+<div class="stack" style="gap:10px;align-items:flex-start">
+<button type="submit" class="btn btn-primary" data-label="Send">Send</button>
+<p style="font-size:15px" class="muted">We use this only to reply to you. We never sell it or share it.</p>
+</div>
+</form>
+</div>
+</div>

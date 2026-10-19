@@ -1,0 +1,53 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: features
+  size: 1
+  alias: f
+permalink: "/features/{{ f.key }}/"
+eleventyComputed:
+  title: "{{ f.name }}"
+  current: "{{ f.key }}"
+  description: "{{ f.sub }}"
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ crumb: f.name, crumbLabel: "Features", crumbHref: "/product/", title: f.h1, subhead: f.sub, primaryLabel: site.ctaPrimary, primaryHref: "/demo/?topic=" + f.key }, site, shots) }}
+
+{%- if f.isFees %}
+<section class="section band-sand" aria-labelledby="h-how">
+<div class="wrap-wide stack" style="gap:clamp(24px,4vw,40px)">
+<h2 id="h-how" class="h2">How it works</h2>
+{{ m.frame("browser", "Screenshot: a director creates a fee, a parent pays online, another uploads a receipt, and the director approves it, " + "Westbrook Middle School demo", "fees-walkthrough", shots) }}
+<ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px 40px">
+{%- for s in f.steps %}
+<li style="display:flex;gap:16px;align-items:baseline"><span class="serif" style="font-size:40px;line-height:1;color:var(--primary)"><span class="sr-only">Step </span>{{ loop.index }}</span><p style="font-size:17px;line-height:1.55">{{ s.body }}</p></li>
+{%- endfor %}
+</ol>
+</div>
+</section>
+{%- elif f.isSeating %}
+<section class="section band-sand" aria-labelledby="h-how">
+<div class="wrap-wide stack" style="gap:clamp(24px,4vw,40px)">
+<h2 id="h-how" class="h2">How it works</h2>
+<figure style="margin:0" class="stack">
+{{ m.frame("browser", "Screenshot: concert seating chart, Westbrook Middle School demo", "seating-how-main", shots) }}
+<figcaption class="body-lg" style="font-weight:500;margin-top:16px">Drag a student onto a taken chair and the two swap.</figcaption>
+</figure>
+</div>
+</section>
+{%- else %}
+{{ m.steps("How it works", f.steps, "sand", "h-how", shots) }}
+{%- endif %}
+
+<section class="section" aria-labelledby="h-get">
+<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(32px,5vw,72px)">
+<div class="stack" style="flex:1 1 420px;min-width:0;gap:20px;max-width:680px">
+<h2 id="h-get" class="h2-sm">What you get</h2>
+{%- for p in f.get %}<p class="body-lg">{{ p }}</p>{% endfor %}
+</div>
+<div style="flex:0 1 280px;width:min(100%,280px);margin:0 auto">{{ m.frame("phone", f.getPhone, "feature-" + f.key + "-phone", shots, "300px") }}</div>
+</div>
+</section>
+
+{{ m.faq("Questions directors and teachers ask", f.faq, "sand", "h-faq") }}
+{{ m.cta(f.cta, site.ctaPrimary, "/demo/?topic=" + f.key) }}

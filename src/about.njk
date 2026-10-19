@@ -1,0 +1,52 @@
+---
+layout: layouts/base.njk
+current: about
+title: About
+permalink: /about/
+description: "Program Partner started as one band director's answer to the paperwork that ate his planning periods. Built by a director, for directors and teachers."
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ title: "Built by a director, for directors and teachers.", subhead: "Program Partner started as one band director's answer to the paperwork that ate his planning periods." }, site, shots) }}
+<section aria-labelledby="h-story" style="padding:0 0 var(--section-y)">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,64px);align-items:stretch">
+<figure class="stack" style="flex:1 1 280px;max-width:400px;margin:0;align-self:flex-start;gap:12px">
+{%- if hasFounderPhoto %}
+<img src="/assets/trey-english.png" alt="Trey English, founder of Program Partner" style="width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center 30%;border-radius:16px">
+{%- else %}
+<div role="img" aria-label="Trey English, founder of Program Partner (photo coming)" style="width:100%;aspect-ratio:2/3;border-radius:16px;background:var(--sand)"></div>
+{%- endif %}
+<figcaption class="muted" style="font-size:15px">Trey English, Founder</figcaption>
+</figure>
+<div class="stack" style="flex:2 1 420px;min-width:0;gap:16px">
+<h2 id="h-story" class="h2-sm">Why I built Program Partner</h2>
+<div class="stack" style="max-width:680px;gap:20px;font-size:18px;line-height:1.65;text-wrap:pretty">
+<p>I’ve spent my whole career on the music side of the room. I’ve taught band and choir, music directed school and community theatre productions, taught at the college level, and run a private studio. Today I’m Director of Bands at Feagin Mill Middle School, adjunct professor of trombone at Mercer University, music director for the Warner Robins High School theatre department and Theatre Macon, and pianist at Mount Zion Baptist Church.</p>
+<p>Every one of those roles came with the same second job: fees and balances, forms, inventory, the music library, messages home, schedules. It’s the work that keeps a program running, and it usually happens after the students go home.</p>
+<p>Program Partner started as a simple idea: one place to keep my own program organized. One May, I was sitting in my office already thinking about the work it takes to get ready for a new school year. My summer and pre-planning to-do lists were ready to go. When I started working through them and found myself opening more than ten spreadsheets, Google Docs, and forms, I knew it was time for something better. Once it was working for us, colleagues started asking about it, including a theatre director, a friend with a private flute studio, and directors at other levels. Their programs looked different from mine, but what they needed was the same.</p>
+<p>I didn’t build it alone. A few wonderful former music educators who made their way into software development helped me a ton on this journey. They know what a rehearsal room feels like and what a director’s week looks like, and that shows up in every part of Program Partner.</p>
+<p>So it grew. Program Partner is built for fine arts programs of every kind: band, choir, theatre, and private studios. It’s designed the way I’d want it as a director. It fits how your program already runs, it speaks your program’s language, and your program’s money stays your program’s. When you need help, you’re talking to someone who has stood where you’re standing.</p>
+<p>Along the way, I kept coming back to my favorite part of teaching: watching students grow. So Program Partner doesn’t stop at the office work. Skill Pathways gives students clear steps to work toward and gives directors a quick way to check off progress. Practice logs help students and families see the work adding up between rehearsals. And <a href="/woodshed/">Woodshed</a>, our free practice site, is open to any band, orchestra, or choir student, no sign-in needed. Bringing the business side of a program and the student-growth side together in one place is what I always wanted as a director, and it’s the part I’m proudest of.</p>
+<p class="serif" style="font-size:clamp(22px,2.4vw,26px);line-height:1.4">I can’t give anyone more hours in the day. But I can help give a few of them back to the music. That’s what Program Partner is for.</p>
+<p style="font-size:16px;font-weight:600">Trey English, Founder</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section band-dark" aria-labelledby="h-believe">
+<div class="wrap stack" style="gap:clamp(32px,5vw,56px)">
+<h2 id="h-believe" class="h2">What we believe</h2>
+<ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px">
+{%- for b in ["A director's time belongs to students, not spreadsheets.", "A program's money belongs to the program. We never touch it and never take a cut of it.", "Student information belongs to the school. We protect it and never sell it.", "Software for teachers should be built by people who have stood in front of a band."] %}
+<li class="serif" style="border-top:1px solid rgb(255 255 255 / .2);padding-top:20px;font-size:24px;line-height:1.35">{{ b }}</li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+<section class="section" aria-label="Who uses it and company">
+<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px 64px">
+<div class="stack" style="gap:12px"><h2 style="font-size:32px">Who uses it</h2><p class="body-lg muted">Programs at Feagin Mill Middle School and Mercer University run on Program Partner today.</p></div>
+<div class="stack" style="gap:12px"><h2 style="font-size:32px">Company</h2>
+<ul style="list-style:none;margin:0;padding:0;font-size:18px;line-height:1.8"><li>Program Partner, LLC</li><li><a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a></li><li style="display:flex;gap:20px"><a href="{{ site.facebook }}">Facebook</a><a href="{{ site.instagram }}">Instagram</a></li></ul></div>
+</div>
+</section>
+{{ m.cta("See it with your own program in mind.", site.ctaPrimary, "/demo/") }}

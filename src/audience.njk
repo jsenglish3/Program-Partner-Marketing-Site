@@ -1,0 +1,123 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: audiences
+  size: 1
+  alias: a
+permalink: "/{{ a.key }}/"
+eleventyComputed:
+  title: "{{ a.h1 }}"
+  current: "{{ a.key }}"
+  description: "{{ a.sub }}"
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ eyebrow: a.eyebrow, title: a.h1, subhead: a.sub, primaryLabel: site.ctaPrimary, primaryHref: "/demo/" }, site, shots) }}
+
+{%- if a.key == "directors" %}
+<section class="section" aria-labelledby="h-week">
+<div class="wrap stack" style="max-width:1000px;gap:clamp(28px,4vw,44px)">
+<h2 id="h-week" class="h2-sm">What changes in your week</h2>
+<ol style="list-style:none;margin:0;padding:0;border-top:1px solid var(--border)">
+{%- for w in [["Monday","Parents check their own balances instead of emailing you."],["Tuesday","Permission slips and forms send their own reminders until they come back signed."],["Wednesday","You know which instruments are out, with whom, and in what shape."],["Thursday","Seating charts, concert charts and Skill Pathways sit right next to your roster."],["Friday","The Attention Center shows everything still waiting on you before the weekend."]] %}
+<li style="display:grid;grid-template-columns:minmax(110px,180px) minmax(0,1fr);gap:8px 32px;align-items:baseline;padding:clamp(20px,2.6vw,28px) 0;border-bottom:1px solid var(--border)">
+<span class="serif" style="font-size:clamp(24px,2.6vw,30px);line-height:1.2">{{ w[0] }}</span>
+<span class="body-lg">{{ w[1] }}</span>
+</li>
+{%- endfor %}
+</ol>
+</div>
+</section>
+
+{%- elif a.key == "boosters" %}
+<section class="section" aria-labelledby="h-report">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start">
+<div class="stack" style="flex:1 1 300px;min-width:0;max-width:420px;gap:16px">
+<h2 id="h-report" class="h2-sm">The treasurer's report, ready before the meeting.</h2>
+<p class="body-lg muted">Ledgers, budget and the receipts still waiting on you, pulled from the same records families pay into.</p>
+</div>
+<div class="card card-shadow" style="flex:2 1 520px;min-width:0;gap:28px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
+<div class="stack" style="gap:4px"><span class="serif" style="font-size:24px;line-height:1.2">Treasurer's report · October</span><span class="muted" style="font-size:15px">Westbrook Middle School Band Boosters</span></div>
+<span class="pill pill-accent">Sample</span>
+</div>
+<div class="stack" style="gap:10px">
+<span class="muted" style="font-size:14px;font-weight:600">Ledgers</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px">
+{%- for l in [["General fund","$4,000"],["Spring trip","$12,000"],["Concessions","$1,500"]] %}
+<div class="stack" style="background:var(--bg);border-radius:12px;padding:16px;gap:4px"><span class="muted" style="font-size:14px">{{ l[0] }}</span><span class="serif" style="font-size:28px;line-height:1.1">{{ l[1] }}</span></div>
+{%- endfor %}
+</div>
+</div>
+<div class="stack" style="gap:12px">
+<span class="muted" style="font-size:14px;font-weight:600">Budget vs. actual</span>
+{%- for b in [["Instruments and repair","$2,000","$5,000",40],["Uniforms","$1,000","$3,000",33],["Spring trip","$5,000","$12,000",42]] %}
+<div class="stack" style="gap:6px"><div style="display:flex;justify-content:space-between;gap:12px;font-size:16px"><span style="font-weight:500">{{ b[0] }}</span><span class="muted">{{ b[1] }} of {{ b[2] }}</span></div><div style="height:8px;border-radius:99px;background:var(--sand);overflow:hidden"><div style="height:100%;width:{{ b[3] }}%;background:var(--primary)"></div></div></div>
+{%- endfor %}
+</div>
+<div class="stack" style="gap:10px">
+<div style="display:flex;justify-content:space-between;gap:12px"><span class="muted" style="font-size:14px;font-weight:600">Receipts waiting for approval</span><span style="font-size:14px;font-weight:600">3 · $150</span></div>
+<div class="stack" style="border-top:1px solid var(--sand)">
+{%- for r in [["Martinez family","Cash","$50"],["Lee family","Check","$75"],["Patel family","Venmo","$25"]] %}
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--sand);font-size:16px"><span><span style="font-weight:500">{{ r[0] }}</span><span class="muted"> · {{ r[1] }}</span></span><span style="display:flex;align-items:center;gap:12px"><span>{{ r[2] }}</span><span style="font-size:14px;font-weight:600;padding:6px 12px;border-radius:8px;border:1.5px solid var(--fg)">Review</span></span></div>
+{%- endfor %}
+</div>
+</div>
+</div>
+</div>
+</section>
+
+{%- elif a.key == "schools" %}
+<section class="section" aria-labelledby="h-packet">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start">
+<div class="stack" style="flex:1 1 300px;min-width:0;max-width:420px;gap:16px">
+<h2 id="h-packet" class="h2-sm">One page for the people who sign off.</h2>
+<p class="body-lg muted">Print it, attach it, or forward it to your technology director. The details are on our <a href="/security/">Security and privacy</a> page.</p>
+<p class="body-lg muted">Each program gets its own quote, and we'll import your students, inventory and music library for you. Need a W-9 or a vendor form for purchasing? We'll send it.</p>
+</div>
+<article aria-label="For your approval packet" class="card card-shadow" style="flex:2 1 520px;min-width:0;border-radius:6px;padding:clamp(28px,4vw,52px);gap:24px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:18px;border-bottom:2px solid var(--fg)">
+<div class="stack" style="gap:4px"><span class="serif" style="font-size:clamp(24px,2.8vw,32px);line-height:1.15">For your approval packet</span><span class="muted" style="font-size:15px">Program Partner · Prepared for Westbrook School District</span></div>
+<span class="pill pill-accent">Sample</span>
+</div>
+<dl style="margin:0;display:flex;flex-direction:column">
+{%- for p in [["Data isolation","Each program's records are walled off from every other program's, enforced in the database itself."],["Role-based access","Staff see only the areas their job needs: a booster treasurer sees the books, an assistant sees attendance."],["No selling or advertising","Student and family data is never sold, never used for advertising, and never shared with outside analytics trackers."],["Data privacy agreement","We sign a data privacy agreement with your district, or review the one your district already uses."],["Return or delete","When a program leaves, its data is returned or deleted within 45 days."]] %}
+<div style="display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:6px 28px;padding:16px 0;border-bottom:1px solid var(--sand)"><dt style="font-weight:600;font-size:16px;line-height:1.45">{{ p[0] }}</dt><dd style="margin:0;font-size:16px;line-height:1.55">{{ p[1] }}</dd></div>
+{%- endfor %}
+</dl>
+</article>
+</div>
+</section>
+
+{%- elif a.key == "studios" %}
+<section class="section" aria-labelledby="h-day">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start">
+<div class="stack" style="flex:1 1 300px;min-width:0;max-width:420px;gap:16px">
+<h2 id="h-day" class="h2-sm">A lesson day, start to finish.</h2>
+<p class="body-lg muted">Your schedule, the makeup credits you owe and the notes families get after each lesson, on one screen.</p>
+</div>
+<div class="card card-shadow" style="flex:2 1 520px;min-width:0;gap:22px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
+<div class="stack" style="gap:4px"><span class="serif" style="font-size:24px;line-height:1.2">Tuesday afternoon</span><span class="muted" style="font-size:15px">Westbrook Music Studio · 3 lessons</span></div>
+<span class="pill pill-accent">Sample</span>
+</div>
+<div class="stack" style="border-top:1px solid var(--sand)">
+{%- for l in [["3:30","Emma Ruiz","Piano · 30 min","Note sent","pill-ok"],["4:15","Leo Kim","Violin · 45 min","Makeup","pill-accent"],["5:15","Nora Singh","Voice · 30 min","Paid","pill-sand"]] %}
+<div style="display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--sand)"><span style="font-size:16px;font-weight:600">{{ l[0] }}</span><span class="stack" style="gap:2px"><span style="font-size:16px;font-weight:500">{{ l[1] }}</span><span class="muted" style="font-size:14px">{{ l[2] }}</span></span><span class="pill {{ l[4] }}">{{ l[3] }}</span></div>
+{%- endfor %}
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+<div class="stack" style="background:var(--bg);border-radius:12px;padding:16px 18px;gap:6px"><span class="muted" style="font-size:14px;font-weight:600">Makeup credit</span><span style="font-size:16px;line-height:1.5">Leo Kim missed Oct 7 for a fever. His 1 credit is used today at 4:15.</span></div>
+<div class="stack" style="background:var(--sand);border-radius:12px;padding:16px 18px;gap:6px"><span class="muted" style="font-size:14px;font-weight:600">Lesson note · Emma Ruiz · Sent to family</span><span style="font-size:16px;line-height:1.5">Covered C major, hands together. Next: Minuet in G, measures 1 to 16. Practice 20 minutes a day.</span></div>
+</div>
+</div>
+</div>
+</section>
+{%- endif %}
+
+{%- if a.faq %}{{ m.faq(a.faqH, a.faq, "sand", "h-faq") }}{% endif %}
+{%- if a.proof %}
+<section aria-label="Who uses it" style="padding:clamp(56px,8vw,96px) var(--pad-x) 0">
+<p class="serif" style="max-width:820px;margin:0 auto;font-size:clamp(24px,3vw,34px);line-height:1.3;text-align:center;text-wrap:balance">{{ a.proof }}</p>
+</section>
+{%- endif %}
+{{ m.cta(a.cta, a.ctaLabel or site.ctaPrimary, a.ctaHref or "/demo/") }}

@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+current: pricing
+title: Pricing
+permalink: /pricing/
+description: "Program Partner is quoted to fit each program. No payment fees, portals at no cost to families, and guided setup."
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ title: "Pricing that fits your program.", primaryLabel: "Request a quote", primaryHref: "/demo/?topic=pricing" }, site, shots) }}
+{{ m.gets("Every program gets", [
+  "Every feature on this site, turned on or off to fit your program.",
+  "Parent and student portals at no cost to families.",
+  "Guided setup and help from people who run a program themselves.",
+  "No payment fees. Families pay through your own processor account, and Program Partner never takes a percentage."
+], "h-gets") }}
+<section aria-label="Setup and purchasing" style="padding:0 0 var(--section-y)">
+<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
+<div class="card"><h2 style="font-size:28px;line-height:1.2">Setup and import</h2><p class="muted">Send us your spreadsheets and we'll import your students, families, inventory and music library for you. It's quoted to your data, because a clean 50-row roster and a 15-year-old instrument spreadsheet are different jobs.</p></div>
+<div class="card"><h2 style="font-size:28px;line-height:1.2">Buying through your school</h2><p class="muted">Need a quote for your bookkeeper, a W-9 or a vendor form? Ask and we'll send it.</p></div>
+</div>
+</section>
+{{ m.faq("Questions", [
+  { q: "Why don't you list prices?", a: "Programs vary too much for one price to be fair. A quote takes one business day." },
+  { q: "Do families pay anything to use it?", a: "No. Families only pay the fees your program assigns." },
+  { q: "Are there payment processing fees?", a: "Your processor charges its standard rates. Program Partner adds nothing on top." }
+], "sand", "h-faq") }}
+{{ m.cta("Tell us about your program.", "Request a quote", "/demo/?topic=pricing") }}

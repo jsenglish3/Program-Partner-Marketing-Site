@@ -1,0 +1,42 @@
+[
+  {
+    "key": "directors", "eyebrow": "For directors", "h1": "Get your planning period back.",
+    "sub": "Program Partner handles the fees, forms, instruments and reminders, so your time goes to rehearsal instead of the copy room.",
+    "cta": "Get your planning period back, starting this semester.",
+    "faqH": "The things directors worry about",
+    "faq": [
+      { "q": "I don't have time to set up new software.", "a": "We set you up, and we can import your students, inventory and music library for you." },
+      { "q": "My boosters handle the money.", "a": "Give them their own access. They see the books; they don't see your grade book." },
+      { "q": "I teach at more than one school.", "a": "Each program keeps its own roster and records, and you switch between them." },
+      { "q": "What does it cost?", "a": "We quote each program to fit its size and the parts it uses." }
+    ],
+    "proof": "Built by the band director at Feagin Mill Middle School and used there every day."
+  },
+  {
+    "key": "boosters", "eyebrow": "For booster leaders and treasurers", "h1": "Books your whole board can trust.",
+    "sub": "Balances, payments, ledgers and budgets your whole board can see, so the treasurer's report is ready before the meeting starts.",
+    "cta": "Bring last year's treasurer's report.",
+    "faqH": "The things boosters worry about",
+    "faq": [
+      { "q": "What happens when the board turns over?", "a": "The records stay with the program, not in someone's laptop. New officers sign in and pick up where the last ones left off." },
+      { "q": "Who sees what?", "a": "Each officer gets access to the areas they run, and nothing else." },
+      { "q": "Does Program Partner hold our money?", "a": "Never. It goes straight to your account, with no Program Partner fee." },
+      { "q": "Some families pay us on Venmo, Cash App or Zelle.", "a": "They upload the receipt in their portal, and your treasurer approves it onto the right balance." }
+    ]
+  },
+  {
+    "key": "schools", "eyebrow": "For principals, coordinators and departments", "h1": "Approve it once and stop worrying about it.",
+    "sub": "For principals, fine arts coordinators and college departments: student data handled the way you'd expect, and purchasing that's simple.",
+    "cta": "Ask for our data privacy agreement.", "ctaLabel": "Request the agreement", "ctaHref": "/security/#dpa"
+  },
+  {
+    "key": "studios", "eyebrow": "For private studio teachers", "h1": "The front office for your private studio.",
+    "sub": "Lesson schedules, notes, makeup credits, policies and payments for private teachers, from the people who built it for school programs.",
+    "cta": "See it with your studio's schedule.",
+    "faqH": "Questions teachers ask",
+    "faq": [
+      { "q": "I only have 15 students. Is this overkill?", "a": "Turn on just the parts you need. The rest stays out of your way." },
+      { "q": "Can parents see the lesson notes?", "a": "Yes, once you send them." }
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+current: legal
+pagination:
+  data: legalKeys
+  size: 1
+  alias: k
+permalink: "/{{ k }}/"
+eleventyComputed:
+  title: "{{ legal[k].h1 }}"
+  description: "{{ legal[k].title }} for the Program Partner app and website."
+---
+{%- set doc = legal[k] -%}
+{%- set raw = doc.meta[0] | replace("Last reviewed: ", "") | replace("Oct ", "October ") -%}
+{%- macro segs(list) -%}
+{%- for s in list -%}
+{%- if s.href %}<a href="{{ s.href }}">{{ s.text }}</a>{% else %}<span{% if s.w or s.hl %} style="{% if s.w %}font-weight:{{ s.w }};{% endif %}"{% endif %}{% if s.hl %} class="hl"{% endif %}>{{ s.text }}</span>{% endif -%}
+{%- endfor -%}
+{%- endmacro -%}
+<div style="padding:clamp(56px,8vw,104px) 0 var(--section-y)">
+<article class="wrap-narrow stack" style="gap:22px">
+<nav aria-label="Legal pages" class="legal-nav">
+{%- for key in legalKeys %}<a href="/{{ key }}/"{% if key == k %} aria-current="page"{% endif %}>{{ legal[key].name }}</a>{% endfor %}
+</nav>
+<h1 style="font-size:clamp(40px,5.4vw,64px);line-height:1.05;letter-spacing:-.02em">{{ doc.h1 }}</h1>
+<div class="stack muted" style="gap:4px;font-size:16px">
+<p>{{ "Last reviewed: " if k == "accessibility" else "Effective: " }}{{ raw }}</p>
+{%- for m in doc.meta.slice(1) %}<p>{{ m }}</p>{% endfor %}
+</div>
+<div class="legal-body">
+{%- for b in doc.blocks %}
+{%- if b.t == "h2" %}<h2>{{ b.text }}</h2>
+{%- elif b.t == "p" %}<p>{{ segs(b.segs) }}</p>
+{%- elif b.t == "quote" %}<p class="quote">{{ segs(b.segs) }}</p>
+{%- elif b.t == "ul" %}<ul>{% for li in b.items %}<li>{{ segs(li) }}</li>{% endfor %}</ul>
+{%- elif b.t == "table" %}<div class="tbl"><table><thead><tr>{% for h in b.head %}<th scope="col">{{ h }}</th>{% endfor %}</tr></thead><tbody>{% for r in b.rows %}<tr>{% for c in r %}<td>{{ c }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>
+{%- endif %}
+{%- endfor %}
+</div>
+<p class="muted" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);font-size:16px">Questions? Email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+</article>
+</div>

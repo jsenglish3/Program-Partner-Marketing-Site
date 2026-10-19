@@ -1,0 +1,156 @@
+---
+layout: layouts/base.njk
+current: home
+permalink: /
+description: "Program Partner is the program office for fine arts directors and teachers: fees, families, instruments, music, seating and messages for band, orchestra, choir, theatre and private studios."
+---
+{% import "macros.njk" as m %}
+{%- set D = "Westbrook Middle School demo" -%}
+{%- set programs = [
+  { key: "all", label: "Every program", browser: "Screenshot: director dashboard, " + D, phone: "Screenshot: parent portal on a phone, " + D },
+  { key: "band", label: "Band", browser: "Screenshot: instrument inventory and check-outs, " + D, phone: "Screenshot: student Skill Pathways submission, " + D },
+  { key: "orchestra", label: "Orchestra", browser: "Screenshot: concert seating chart, " + D, phone: "Screenshot: student digital part, " + D },
+  { key: "choir", label: "Choir", browser: "Screenshot: riser plan by height, " + D, phone: "Screenshot: student practice recording, " + D },
+  { key: "theatre", label: "Theatre", browser: "Screenshot: Thespian Points progress, " + D, phone: "Screenshot: parent signing a permission form, " + D },
+  { key: "studio", label: "Private studio", browser: "Screenshot: weekly lesson schedule, studio demo", phone: "Screenshot: lesson notes on a parent phone, studio demo" }
+] -%}
+
+<section class="hero" aria-labelledby="hero-h">
+<div class="wrap-wide hero-row">
+<div class="hero-text">
+<p class="eyebrow">For band, orchestra, choir, theatre and private studios</p>
+<h1 id="hero-h" class="display-sm">Stress less. Teach more.</h1>
+<p class="lede">Fees, families, instruments, music, seating and messages for band, orchestra, choir, theatre and private studios, built by a director who still runs his own program on it.</p>
+<div class="hero-actions">
+<a href="/demo/" class="btn btn-primary">{{ site.ctaPrimary }}</a>
+<a href="/product/" class="btn btn-outline">See every feature</a>
+</div>
+</div>
+<div class="hero-visual" data-tabs>
+<div role="tablist" aria-label="See it for your kind of program" class="tabs">
+{%- for t in programs %}
+<button type="button" role="tab" id="tab-{{ t.key }}" aria-selected="{{ 'true' if loop.first else 'false' }}" aria-controls="panel-{{ t.key }}" tabindex="{{ 0 if loop.first else -1 }}">{{ t.label }}</button>
+{%- endfor %}
+</div>
+{%- for t in programs %}
+<div role="tabpanel" id="panel-{{ t.key }}" aria-labelledby="tab-{{ t.key }}"{% if not loop.first %} hidden{% endif %}>
+<div class="shot-pair">
+{{ m.frame("browser", t.browser, "home-hero-" + t.key + "-browser", shots) }}
+<div class="shot-phone">{{ m.frame("phone", t.phone, "home-hero-" + t.key + "-phone", shots, "100%") }}</div>
+</div>
+</div>
+{%- endfor %}
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="h-built">
+<div class="wrap-wide grid-2" style="gap:40px clamp(32px,5vw,72px);align-items:stretch">
+{%- if hasFounderPhoto %}
+<figure style="margin:0;min-height:clamp(360px,42vw,560px);border-radius:16px;overflow:hidden;background:var(--sand)">
+<img src="/assets/trey-english.png" alt="Trey English, founder of Program Partner" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" loading="lazy">
+</figure>
+{%- else %}
+<div role="img" aria-label="Founder photo, coming soon" style="min-height:clamp(360px,42vw,560px);border-radius:16px;background:var(--sand);display:flex;align-items:center;justify-content:center;padding:24px;text-align:center"><p class="eyebrow">FOUNDER PHOTO</p></div>
+{%- endif %}
+<div class="stack" style="justify-content:center;gap:24px;min-width:0">
+<h2 id="h-built" class="h2">Built by a director who uses it every day.</h2>
+<p class="body-lg">I've taught band and choir, music directed school and community theatre productions, taught at the college level, and run a private studio. Every one of those roles came with the same second job: fees and balances, forms, inventory, the music library, messages home, schedules. Program Partner started as one place to keep my own program organized. Once it was working for us, colleagues started asking about it.</p>
+<p style="font-size:16px;font-weight:600">Trey English, Founder</p>
+<a href="/about/" class="link">Read the story</a>
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="h-problem">
+<div class="wrap grid-2" style="gap:24px 64px;align-items:start">
+<h2 id="h-problem" class="h2"><span class="sr-only">You didn't start teaching to chase fee envelopes, permission slips, missing instruments, trip deposits or unread group texts.</span><span aria-hidden="true" style="display:block">You didn't start teaching to chase</span><span class="ticker" aria-hidden="true" data-ticker><span class="ticker-track"><span>fee envelopes.</span><span>permission slips.</span><span>missing instruments.</span><span>trip deposits.</span><span>unread group texts.</span></span></span></h2>
+<p class="body-lg muted">Balances live in one spreadsheet, the instrument list in another, permission slips in a folder, and reminders in a group text nobody reads. Program Partner gives your staff, boosters and families one shared program office, so the questions stop landing in your inbox.</p>
+<p class="pull" style="grid-column:1/-1">Wouldn't it be nice to teach more than 10% of the time?</p>
+</div>
+</section>
+
+{% include "partials/pathways.njk" %}
+
+<section class="band-dark" aria-labelledby="h-woodshed" style="padding:0 0 var(--section-y)">
+<div class="wrap-wide" style="border-top:1px solid var(--muted);padding-top:clamp(48px,6vw,72px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(32px,5vw,72px)">
+<div class="stack" style="flex:1 1 420px;min-width:0;gap:18px;max-width:640px">
+<h2 id="h-woodshed" class="h2" style="font-size:clamp(28px,3.4vw,40px)">Woodshed: free practice for every student.</h2>
+<p class="body-lg muted">Students practice fingerings, rhythm counting, solfège and lyrics for free, with no sign-in. Their Woodshed practice shows up next to their Skill Pathways and practice logs.</p>
+<a href="/woodshed/" class="link">Meet Woodshed</a>
+</div>
+<div style="flex:0 1 260px;width:min(100%,260px);margin:0 auto">{{ m.frame("phone", "Screenshot: Woodshed fingering practice", "home-woodshed", shots, "260px") }}</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="h-inside">
+<div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
+<div class="stack" style="gap:14px;max-width:760px">
+<h2 id="h-inside" class="h2">And every standard tool a program office needs.</h2>
+<p class="body-lg muted">Fees, rosters, forms, trips, inventory and the music library come with it, so you don't need a second system for the basics.</p>
+</div>
+<div class="feature-list">
+{%- set rest = [
+  ["fees","Fees and budgets","Balances, online payments into your own account, ledgers and budgets."],
+  ["students","Students and families","One roster, with portals for parents and students."],
+  ["communication","Communication","Announcements, messages and one shared calendar."],
+  ["forms","Forms and paperwork","Fillable PDF forms, signatures and reminders."],
+  ["events","Events and trips","Who has paid, signed and registered for every event."],
+  ["inventory","Inventory and uniforms","Every instrument and uniform, checked out and accounted for."],
+  ["library","Music library","Scores and parts, with optional digital parts and recordings."],
+  ["seating","Seating charts","Class seating and concert charts that combine groups."],
+  ["teaching","Teaching tools","Skill Pathways, practice logs, attendance and more."]
+] -%}
+{%- for f in rest %}
+<a href="/features/{{ f[0] }}/"><span class="t">{{ f[1] }}</span><span class="b">{{ f[2] }}</span></a>
+{%- endfor %}
+</div>
+<a href="/product/" class="link">See every feature</a>
+</div>
+</section>
+
+<section class="section" aria-labelledby="h-money">
+<div class="wrap stack" style="gap:clamp(32px,5vw,52px)">
+<h2 id="h-money" class="h2">Your money stays yours.</h2>
+<ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px 0">
+{%- set money = [
+  ["Family's phone","Families pay from their portal. Venmo works through PayPal."],
+  ["Your Stripe, Square or PayPal","The money goes straight into your program's own account."],
+  ["Student balance updates","The student's balance updates on its own."]
+] -%}
+{%- for s in money %}
+<li class="stack" style="gap:16px;min-width:0">
+<div style="display:flex;align-items:center">
+<span class="serif" style="flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:22px"><span class="sr-only">Step </span>{{ loop.index }}</span>
+<span aria-hidden="true" style="flex:1;height:1.5px;background:{{ 'var(--primary)' if not loop.last else 'transparent' }}"></span>
+</div>
+<div class="stack" style="gap:6px;padding-right:32px"><h3 class="h3">{{ s[0] }}</h3><p class="muted">{{ s[1] }}</p></div>
+</li>
+{%- endfor %}
+</ol>
+<p class="callout">Program Partner charges no payment fees and never holds your funds. Your processor's standard rates still apply.</p>
+</div>
+</section>
+
+<section class="section band-dark" aria-labelledby="h-families">
+<div class="wrap-wide" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px 64px;align-items:center">
+<div class="stack" style="gap:20px;max-width:520px">
+<h2 id="h-families" class="h2">Parents see what they owe. So do students.</h2>
+<p class="body-lg muted">Every family gets a portal with balances, forms and announcements. Students can sign in and see their own balance too, so nobody has to ask how much is still owed.</p>
+<a href="/families/" class="link">What families see</a>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:24px;align-items:end;width:100%">
+{{ m.frame("tablet", "Screenshot: parent portal balances, " + D, "home-fam-parent", shots) }}
+{{ m.frame("phone", "Screenshot: student portal balance, " + D, "home-fam-student", shots, "100%") }}
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="h-start">
+<div class="wrap grid-2" style="gap:24px 64px;align-items:start">
+<h2 id="h-start" class="h2">We'll get you running.</h2>
+<p class="body-lg">Schedule a demo and we'll walk through it with you, using the demo school and your own questions. When you're ready, we'll set you up and import your students, inventory and music library for you.</p>
+</div>
+</section>
+
+{{ m.cta("Bring your messiest spreadsheet. We'll show you where it goes.", site.ctaPrimary, "/demo/") }}

@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+current: families
+title: For parents and students
+permalink: /families/
+description: "Your director or teacher uses Program Partner to run your program. Here's how to get in and what you'll find."
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ title: "For parents and students", subhead: "Your director or teacher uses Program Partner to run your program. Here's how to get in and what you'll find.", browser: "Screenshot: parent portal home on a computer, Westbrook Middle School demo", phone: "Screenshot: student portal on a phone, Westbrook Middle School demo", slot: "families-hero" }, site, shots) }}
+<section class="section-tight band-sand" aria-label="Getting in">
+<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
+<div class="card" style="border:0"><h2 style="font-size:30px;line-height:1.15">Getting your account</h2><p>Your director or teacher sets up your account. You'll get a registration code or an email invitation from your program. Program Partner doesn't create accounts on its own, so if you haven't heard anything, ask your director or teacher.</p></div>
+<div class="card" style="border:0"><h2 style="font-size:30px;line-height:1.15">Signing in</h2><p>Go to <a href="{{ site.appUrl }}" style="font-weight:600">app.myprogrampartner.com</a>. It works on any phone, tablet or computer. On a phone or tablet, you can add it to your home screen so it opens like an app. Apps for the App Store and Google Play are on the way too, but you'll never need one.</p></div>
+</div>
+</section>
+{{ m.gets("What you'll see", ["What you owe, what you've paid, and a receipt for each payment.", "Forms to fill out and sign.", "Announcements, the program calendar and messages from staff.", "For students: your own balance, your assignments and your music."], "h-see") }}
+<section aria-label="Paying, help and privacy" style="padding:0 0 var(--section-y)">
+<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:40px 48px;border-top:1px solid var(--border);padding-top:clamp(40px,5vw,64px)">
+<div class="stack" style="gap:12px"><h2 style="font-size:28px">Paying</h2><p class="muted">Payments go straight to your program's account, never to Program Partner. Your program decides how you can pay.</p></div>
+<div class="stack" style="gap:12px"><h2 style="font-size:28px">Getting help</h2><ul class="muted" style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px"><li>Questions about fees, events or schedules: ask your director or teacher.</li><li>Trouble signing in: email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</li></ul></div>
+<div class="stack" style="gap:12px"><h2 style="font-size:28px">Your privacy</h2><p class="muted">Your information belongs to your school or program. Program Partner never sells it and never uses it for advertising.</p></div>
+</div>
+</section>
+<section class="section-tight band-dark" aria-labelledby="h-woodshed">
+<div class="wrap stack" style="max-width:820px;gap:16px;align-items:flex-start">
+<h2 id="h-woodshed" class="h2-sm">Practice at home</h2>
+<p style="font-size:18px;line-height:1.6">Woodshed is our free practice site for band, orchestra and choir students. No sign-in needed.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px 28px"><a href="{{ site.woodshedUrl }}" style="font-weight:600;font-size:18px">woodshed.myprogrampartner.com ↗</a><a href="/woodshed/" style="font-weight:600;font-size:18px">What Woodshed does →</a></div>
+</div>
+</section>

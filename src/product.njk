@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+current: product
+title: Every feature
+permalink: /product/
+description: "Fees, families, forms, events, inventory, music library, seating and teaching tools. Turn on the parts your program needs and leave the rest off."
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ title: "The office side of a fine arts program.", subhead: "Turn on the parts your program needs and leave the rest off. Each program chooses its own, and you can change your mind any time.", primaryLabel: site.ctaPrimary, primaryHref: "/demo/" }, site, shots) }}
+{%- set D = "Westbrook Middle School demo" -%}
+{%- set lead = [
+  ["fees","Fees and budgets","Fees, payments into your own account, every balance, plus ledgers and budgets for your boosters.","student balances"],
+  ["forms","Forms and paperwork","Fillable PDF forms, signatures and reminders, and a clear list of who hasn't signed.","form completion status"],
+  ["events","Events and trips","Who has paid, signed and registered for every concert, competition and trip.","Event HQ"]
+] -%}
+{%- set rest = [
+  ["students","Students and families","One roster with guardians and ensembles, and portals for parents and students."],
+  ["communication","Communication","Announcements, direct messages and one calendar for every rehearsal and event."],
+  ["inventory","Inventory and uniforms","Every instrument and uniform, with who has it, what shape it's in and what it's worth."],
+  ["library","Music library","Searchable repertoire, scores and parts, with digital parts and recordings if you want them."],
+  ["seating","Seating charts","Class seating from rankings, and concert charts that combine ensembles."],
+  ["teaching","Teaching tools","Skill Pathways, practice logs, curriculum, quizzes and attendance, in your own words."]
+] -%}
+<section aria-label="Features" style="padding:clamp(24px,4vw,48px) 0 var(--section-y)">
+<div class="wrap stack" style="gap:clamp(36px,5vw,56px)">
+<div class="grid-3" style="gap:40px">
+{%- for g in lead %}
+<a href="/features/{{ g[0] }}/" class="stack" style="gap:12px;color:var(--fg);text-decoration:none;min-width:0">
+{{ m.frame("browser", "Screenshot: " + g[3] + ", " + D, "product-" + g[0], shots) }}
+<h2 style="margin-top:8px;font-size:clamp(24px,2.4vw,28px);line-height:1.2;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px">{{ g[1] }}</h2>
+<span class="muted">{{ g[2] }}</span>
+</a>
+{%- endfor %}
+</div>
+<div class="feature-list">
+{%- for g in rest %}
+<a href="/features/{{ g[0] }}/"><span class="t">{{ g[1] }}</span><span class="b">{{ g[2] }}</span></a>
+{%- endfor %}
+</div>
+</div>
+</section>
+{{ m.cta("Turn on what you need. Leave the rest off.", site.ctaPrimary, "/demo/") }}

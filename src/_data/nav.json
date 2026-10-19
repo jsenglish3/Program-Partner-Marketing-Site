@@ -1,0 +1,31 @@
+{
+  "features": [
+    { "key": "fees", "name": "Fees and budgets", "href": "/features/fees/" },
+    { "key": "students", "name": "Students and families", "href": "/features/students/" },
+    { "key": "communication", "name": "Communication", "href": "/features/communication/" },
+    { "key": "forms", "name": "Forms and paperwork", "href": "/features/forms/" },
+    { "key": "events", "name": "Events and trips", "href": "/features/events/" },
+    { "key": "inventory", "name": "Inventory and uniforms", "href": "/features/inventory/" },
+    { "key": "library", "name": "Music library", "href": "/features/library/" },
+    { "key": "seating", "name": "Seating charts", "href": "/features/seating/" },
+    { "key": "teaching", "name": "Teaching tools", "href": "/features/teaching/" }
+  ],
+  "who": [
+    { "key": "directors", "name": "Directors", "href": "/directors/" },
+    { "key": "boosters", "name": "Boosters", "href": "/boosters/" },
+    { "key": "schools", "name": "Schools", "href": "/schools/" },
+    { "key": "studios", "name": "Studios", "href": "/studios/" },
+    { "key": "families", "name": "Families", "href": "/families/" }
+  ],
+  "resources": [
+    { "key": "security", "name": "Security and privacy", "href": "/security/" },
+    { "key": "woodshed", "name": "Woodshed", "href": "/woodshed/" },
+    { "key": "contact", "name": "Contact", "href": "/contact/" }
+  ],
+  "company": [
+    { "key": "about", "name": "About", "href": "/about/" },
+    { "key": "pricing", "name": "Pricing", "href": "/pricing/" },
+    { "key": "contact", "name": "Contact", "href": "/contact/" },
+    { "key": "demo", "name": "Schedule a demo", "href": "/demo/" }
+  ]
+}

@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+current: demo
+title: Thanks for reaching out
+permalink: /thanks/
+noindex: true
+---
+<div style="padding:clamp(64px,10vw,128px) 0">
+<div class="wrap-narrow stack" style="gap:24px">
+<h1 style="font-size:clamp(40px,6vw,72px);line-height:1.04;letter-spacing:-.02em;text-wrap:balance">Got it. Thanks for reaching out.</h1>
+<p class="lede">We'll reply within one business day. Watch your inbox for an email from Program Partner.</p>
+<div class="stack" style="margin-top:24px;padding-top:28px;border-top:1px solid var(--border);gap:14px">
+<h2 style="font-size:26px">While you wait</h2>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+{%- for l in [["/product/","See every feature"],["/features/fees/","Read how payments work"],["/woodshed/","Try Woodshed, our free practice site"]] %}
+<li style="border-bottom:1px solid var(--border)"><a href="{{ l[0] }}" style="display:flex;justify-content:space-between;align-items:center;min-height:60px;font-size:18px;font-weight:500;text-decoration:none">{{ l[1] }}<span aria-hidden="true">→</span></a></li>
+{%- endfor %}
+</ul>
+</div>
+</div>
+</div>

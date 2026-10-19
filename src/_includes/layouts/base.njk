@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title %}{{ title }} | Program Partner{% else %}Program Partner: the program office for fine arts directors and teachers{% endif %}</title>
+<meta name="description" content="{{ description or site.description }}">
+{%- if noindex %}
+<meta name="robots" content="noindex">
+{%- endif %}
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Program Partner">
+<meta property="og:title" content="{{ title or 'Program Partner' }}">
+<meta property="og:description" content="{{ description or site.description }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}/assets/share.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-stacked-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]}
+</script>
+</head>
+<body>
+{% include "partials/header.njk" %}
+<main id="main">
+{{ content | safe }}
+</main>
+{% include "partials/footer.njk" %}
+<script src="/assets/site.js" defer></script>
+{%- if site.cloudflareAnalyticsToken %}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cloudflareAnalyticsToken }}"}'></script>
+{%- endif %}
+</body>
+</html>

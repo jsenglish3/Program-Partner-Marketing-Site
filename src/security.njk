@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+current: security
+title: Security and privacy
+permalink: /security/
+description: "What Program Partner stores, who can see it, how it's protected, and what we will never do with student information."
+---
+{% import "macros.njk" as m %}
+{%- set sections = [
+  { id: "store", h: "What we store", p: "Rosters, guardian contacts, fees and payments, forms and signatures, attendance, assignments and recordings, inventory and music: the records a program needs to run. The full list is in our data privacy agreement." },
+  { id: "see", h: "Who can see it", items: ["Each program's records are walled off from every other program, enforced by the database on every request.", "Staff see only the areas their role allows. Families see only their own children.", "When we help with a support question, we open a time-limited session, record the reason, and log it."] },
+  { id: "protect", h: "How it's protected", items: ["Every connection is encrypted with HTTPS.", "Data is stored with Supabase, which states that data on its platform is encrypted at rest and in transit.", "Passwords and keys for connected services are encrypted before they're stored.", "A full encrypted backup is copied off-site every day, locked so that even our own server can't read it, and kept for 30 days.", "Demo schools are fictional, and nothing they \"send\" ever leaves the app."] },
+  { id: "payments", h: "Payments", p: "Card numbers never touch Program Partner. Families pay on Stripe's, Square's or PayPal's own secure pages, and we keep only the card brand and last four digits for the receipt." },
+  { id: "never", h: "What we will never do", items: ["Sell student or family information.", "Use it for advertising, or put advertising trackers in the app.", "Send school records to AI services, or let AI assistants and other outside apps sign in to anyone's account.", "Use it for anything other than running your program."] },
+  { id: "law", h: "Student privacy law", items: ["We act as a school official under FERPA, at the school's direction.", "For students under 13, the school provides consent for the information it shares with us, as COPPA allows.", "We'll sign a student data privacy agreement with your district. Request ours below."] },
+  { id: "rights", h: "Your rights and your data", items: ["Directors and teachers can export student records any time.", "To correct or delete information, contact your program first, or email us.", "When a program leaves or asks us to, we return or delete its records within 45 days."] }
+] -%}
+{{ m.hero({ title: "Your students' information, handled like it matters.", subhead: "What we store, who can see it, how it's protected, and what we will never do with it. Every statement on this page describes how the app works today." }, site, shots) }}
+<div style="padding:0 0 var(--section-y)">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,72px);align-items:flex-start">
+<nav aria-label="On this page" class="toc">
+<p class="muted" style="margin-bottom:10px;font-size:14px;font-weight:600">On this page</p>
+<ol>
+{%- for s in sections %}<li><a href="#{{ s.id }}">{{ s.h }}</a></li>{% endfor %}
+<li><a href="#dpa">Request our data privacy agreement</a></li>
+</ol>
+</nav>
+<div class="stack" style="flex:3 1 480px;min-width:0;max-width:760px">
+{%- for s in sections %}
+<section aria-labelledby="{{ s.id }}" class="stack" style="padding:36px 0;border-top:1px solid var(--border);gap:14px;scroll-margin-top:88px">
+<h2 id="{{ s.id }}" style="font-size:clamp(26px,3vw,34px);line-height:1.15;scroll-margin-top:96px">{{ s.h }}</h2>
+{%- if s.p %}<p style="font-size:18px;line-height:1.65">{{ s.p }}</p>{% endif %}
+{%- if s.items %}<ul class="bullets">{% for it in s.items %}<li><span class="dot" aria-hidden="true"></span><span>{{ it }}</span></li>{% endfor %}</ul>{% endif %}
+</section>
+{%- endfor %}
+<section aria-labelledby="dpa" class="card card-sand" style="margin:12px 0 36px;align-items:flex-start">
+<h2 id="dpa" style="font-size:clamp(26px,3vw,34px);line-height:1.15;scroll-margin-top:96px">Request our data privacy agreement</h2>
+<p style="font-size:18px;line-height:1.6">Send us your district's name and, if you have one, the agreement your district already uses. We'll reply within one business day with ours, or with yours signed.</p>
+<a href="mailto:{{ site.supportEmail }}?subject=Data%20privacy%20agreement%20request" class="btn btn-primary">Request the agreement</a>
+</section>
+<section aria-labelledby="h-q" class="stack" style="padding:36px 0;border-top:1px solid var(--border);gap:14px">
+<h2 id="h-q" style="font-size:clamp(26px,3vw,34px)">Questions or concerns</h2>
+<p style="font-size:18px"><a href="mailto:{{ site.supportEmail }}" style="font-weight:600">{{ site.supportEmail }}</a></p>
+</section>
+</div>
+</div>
+</div>

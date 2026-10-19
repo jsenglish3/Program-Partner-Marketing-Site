@@ -1,0 +1,119 @@
+{#- Screenshot frame. kind: browser | phone | tablet. slot: file stem in src/screenshots. shots: the global shots map. -#}
+{%- macro frame(kind, caption, slot, shots, phoneMax, showCaption) -%}
+{%- set clean = caption | replace("Screenshot: ", "") | replace(", Westbrook Middle School demo", "") | replace(", studio demo", "") -%}
+{%- set wood = (caption.indexOf("Screenshot: Woodshed") == 0) and (caption.indexOf("in Program Partner") < 0) -%}
+{%- set alt = ("Woodshed screen: " if wood else "Program Partner screen: ") + clean -%}
+<figure class="frame frame-{{ kind }}"{% if phoneMax %} style="--phone-max:{{ phoneMax }}"{% endif %}>
+{%- if kind == "browser" %}
+<div class="frame-browser"><div class="bar" aria-hidden="true"><span></span><span></span><span></span></div><div class="screen">
+{%- else %}
+<div class="device"><div class="screen">
+{%- endif %}
+{%- if shots and shots[slot] %}
+<img src="{{ shots[slot] }}" alt="{{ alt }}" loading="lazy">
+{%- else %}
+<div class="placeholder" role="img" aria-label="{{ alt }} (screenshot coming)">{{ clean | upper }}</div>
+{%- endif %}
+</div></div>
+{%- if showCaption %}<figcaption>{{ clean }}</figcaption>{% endif %}
+</figure>
+{%- endmacro -%}
+
+{#- Page hero -#}
+{%- macro hero(o, site, shots) -%}
+<section class="hero{% if o.tone == 'sand' %} band-sand{% endif %}" aria-labelledby="hero-h">
+<div class="wrap-wide hero-row">
+<div class="hero-text">
+{%- if o.crumb %}<nav aria-label="Breadcrumb" class="crumb"><a href="{{ o.crumbHref or '/product/' }}">{{ o.crumbLabel or 'Features' }}</a><span aria-hidden="true">/</span><span aria-current="page">{{ o.crumb }}</span></nav>{% endif %}
+{%- if o.eyebrow %}<p class="eyebrow">{{ o.eyebrow }}</p>{% endif %}
+<h1 id="hero-h" class="{{ 'display-sm' if (o.browser or o.programs) else 'display' }}">{{ o.title }}</h1>
+{%- if o.subhead %}<p class="lede">{{ o.subhead }}</p>{% endif %}
+{%- if o.primaryLabel %}
+<div class="hero-actions">
+<a href="{{ o.primaryHref or '/demo/' }}" class="btn btn-primary">{{ o.primaryLabel }}</a>
+{%- if o.secondaryLabel %}<a href="{{ o.secondaryHref or '/product/' }}" class="btn btn-outline">{{ o.secondaryLabel }}</a>{% endif %}
+</div>
+{%- endif %}
+</div>
+{%- if o.browser %}
+<div class="hero-visual">
+<div class="shot-pair"{% if not o.phone %} style="padding:0"{% endif %}>
+{{ frame("browser", o.browser, o.slot + "-browser", shots) }}
+{%- if o.phone %}<div class="shot-phone">{{ frame("phone", o.phone, o.slot + "-phone", shots, "100%") }}</div>{% endif %}
+</div>
+</div>
+{%- endif %}
+{{ caller() if caller }}
+</div>
+</section>
+{%- endmacro -%}
+
+{#- CTA band -#}
+{%- macro cta(heading, label, href, body) -%}
+<section class="cta-band" aria-labelledby="cta-h">
+<div class="wrap section row">
+<div class="copy"><h2 id="cta-h">{{ heading }}</h2>{% if body %}<p>{{ body }}</p>{% endif %}</div>
+<div class="act"><a href="{{ href or '/demo/' }}" class="btn btn-primary">{{ label or 'Schedule a demo' }}</a></div>
+</div>
+</section>
+{%- endmacro -%}
+
+{#- FAQ -#}
+{%- macro faq(heading, items, tone, hid) -%}
+<section class="section{% if tone == 'sand' %} band-sand{% endif %}" aria-labelledby="{{ hid or 'faq-h' }}">
+<div class="wrap faq">
+<div class="faq-head"><h2 id="{{ hid or 'faq-h' }}" class="h2-sm">{{ heading or 'Questions directors and teachers ask' }}</h2></div>
+<div class="faq-list">
+{%- for it in items %}
+<details><summary>{{ it.q }}</summary><p class="a">{{ it.a }}</p></details>
+{%- endfor %}
+</div>
+</div>
+</section>
+{%- endmacro -%}
+
+{#- What you get: check cards -#}
+{%- macro gets(heading, items, hid, intro) -%}
+<section class="section" aria-labelledby="{{ hid or 'wyg-h' }}">
+<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(24px,4vw,48px)">
+<div class="stack" style="flex:1 1 100%;max-width:760px;gap:12px"><h2 id="{{ hid or 'wyg-h' }}" class="h2-sm">{{ heading or 'What you get' }}</h2>{% if intro %}<p class="muted">{{ intro }}</p>{% endif %}</div>
+<ul class="check-grid">
+{%- for it in items %}
+<li><span class="tick" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A2E1F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="padding-top:2px">{{ it }}</span></li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+{%- endmacro -%}
+
+{#- Step strip. steps: [{n, body, title?, caption?, kind?, slot?}] -#}
+{%- macro steps(heading, items, tone, hid, shots, intro, footnote) -%}
+{%- set showcase = false -%}
+{%- for s in items %}{% if s.caption %}{% set showcase = true %}{% endif %}{% endfor -%}
+<section class="section{% if tone == 'sand' %} band-sand{% elif tone == 'dark' %} band-dark{% endif %}" aria-labelledby="{{ hid or 'steps-h' }}">
+<div class="{{ 'wrap-wide' if showcase else 'wrap' }} stack" style="gap:clamp(32px,5vw,56px)">
+<div class="stack" style="gap:14px;max-width:760px"><h2 id="{{ hid or 'steps-h' }}" class="h2">{{ heading }}</h2>{% if intro %}<p class="body-lg muted">{{ intro }}</p>{% endif %}</div>
+{%- if showcase %}
+<ol class="steps-show">
+{%- for s in items %}
+<li>
+<div class="text"><span class="num"><span class="sr-only">Step </span>{{ loop.index }}</span><p style="font-size:17px;line-height:1.55">{{ s.body }}</p></div>
+<div class="vis">{% if s.caption %}<div style="width:{{ 'min(100%,360px)' if s.kind == 'phone' else '100%' }}">{{ frame(s.kind or 'browser', s.caption, s.slot, shots, '360px') }}</div>{% endif %}</div>
+</li>
+{%- endfor %}
+</ol>
+{%- else %}
+<ol class="steps-grid">
+{%- for s in items %}
+<li>
+<div class="num-row"><span class="num"><span class="sr-only">Step </span>{{ loop.index }}</span><span class="rule" aria-hidden="true"></span></div>
+{%- if s.title %}<h3 style="font-size:24px;line-height:1.25">{{ s.title }}</h3>{% endif %}
+<p>{{ s.body }}</p>
+</li>
+{%- endfor %}
+</ol>
+{%- endif %}
+{%- if footnote %}<p class="callout">{{ footnote }}</p>{% endif %}
+</div>
+</section>
+{%- endmacro -%}
