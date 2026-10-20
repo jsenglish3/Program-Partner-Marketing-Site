@@ -83,15 +83,33 @@
     } else tryPlay();
   });
 
-  /* Home ticker */
+  /* Home ticker: one pass through the phrases (5 seconds, per the design) each time the heading
+     scrolls into view, ending back on the first phrase. One pass keeps it under WCAG's 5-second limit
+     for moving content, so it needs no pause button. Static for reduced motion. */
   document.querySelectorAll("[data-ticker]").forEach((el) => {
     if (REDUCE) return;
     const track = el.querySelector(".ticker-track");
-    const n = track.children.length; let i = 0;
-    const iv = setInterval(() => {
-      i++; track.style.transform = "translateY(" + (-1.2 * (i % n)) + "em)";
-      if (i >= n) clearInterval(iv);
-    }, 1000);
+    const n = track.children.length;
+    track.appendChild(track.children[0].cloneNode(true)); // lets the last step roll forward onto the first phrase
+    let running = false, armed = true;
+    const set = (i, animate) => {
+      track.style.transition = animate ? "" : "none";
+      track.style.transform = "translateY(" + (-1.2 * i) + "em)";
+    };
+    const play = () => {
+      running = true; armed = false;
+      let i = 0;
+      setTimeout(function step() {
+        i++; set(i, true);
+        if (i < n) setTimeout(step, 1000);
+        else setTimeout(() => { set(0, false); running = false; }, 700);
+      }, 900);
+    };
+    if (!("IntersectionObserver" in window)) { play(); return; }
+    new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting && e.intersectionRatio >= 0.9) { if (armed && !running) play(); }
+      else if (!e.isIntersecting) armed = true;
+    }), { threshold: [0, 0.9] }).observe(el);
   });
 
   /* Let's chat form */
