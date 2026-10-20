@@ -38,7 +38,7 @@ Slot names: open any built page and look for `class="placeholder"` — the text 
 - Families: `families-hero-browser`, `families-hero-phone`
 - Woodshed: `woodshed-hero-browser`, `woodshed-hero-phone`, `woodshed-create`, `woodshed-share`, `woodshed-practice`, `woodshed-linked`
 
-Browser frames are 16:10, tablet frames 1180×820, phone frames 9:19.5. Anything else is cropped from the top-left.
+Browser frames are 16:10, tablet frames 1180×820, phone frames iPhone 15 shape (393×852, so 786×1704 at 2×). Phone shots already include the iPhone status bar, Dynamic Island and home indicator (`tools/iphone.py` adds them to a raw 390-wide capture); the frame adds the titanium edge and buttons. Anything else is cropped from the top-left.
 
 Two extras:
 

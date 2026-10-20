@@ -166,10 +166,23 @@ button { font: inherit; }
 .frame-browser .bar span { width: 5px; height: 5px; border-radius: 50%; background: var(--border); }
 .frame-browser .screen { position: relative; aspect-ratio: 16 / 10; background: var(--card); }
 .frame-phone { align-items: center; }
-.frame-phone .device { width: 100%; max-width: var(--phone-max, 280px); background: var(--fg); border-radius: 34px; padding: 8px; outline: 1px solid rgb(249 245 232 / .2); box-shadow: 0 2px 4px rgb(28 41 44 / .08), 0 24px 48px -16px rgb(28 41 44 / .35); }
-.frame-phone .screen { position: relative; aspect-ratio: 9 / 19.5; border-radius: 27px; overflow: hidden; background: var(--card); }
-.frame-tablet .device { width: 100%; background: var(--fg); border-radius: 28px; padding: 14px; outline: 1px solid rgb(249 245 232 / .2); box-shadow: 0 2px 4px rgb(28 41 44 / .08), 0 24px 48px -16px rgb(28 41 44 / .35); }
-.frame-tablet .screen { position: relative; aspect-ratio: 1180 / 820; border-radius: 14px; overflow: hidden; background: var(--card); }
+/* iPhone 15 Pro proportions: 393 x 852 pt screen, 18 pt black border, 3 pt titanium band (435 x 894 overall).
+   Everything is in percentages of the device box, so it scales to any width. */
+.frame-phone .device { position: relative; width: 100%; max-width: var(--phone-max, 280px); aspect-ratio: 435 / 894; border-radius: 17.5% / 8.5%;
+  background: linear-gradient(100deg, #5f6164 0%, #b9bbbd 3%, #7d7f82 7%, #9a9c9f 50%, #7d7f82 93%, #b9bbbd 97%, #5f6164 100%);
+  box-shadow: 0 1px 2px rgb(28 41 44 / .12), 0 26px 50px -18px rgb(28 41 44 / .45), inset 0 0 0 1px rgb(255 255 255 / .18); }
+.frame-phone .device::before { content: ""; position: absolute; inset: .45% .92%; border-radius: 17% / 8.3%; background: #050506; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .06); }
+.frame-phone .screen { position: absolute; top: 2.35%; bottom: 2.35%; left: 4.83%; right: 4.83%; border-radius: 14% / 6.45%; overflow: hidden; background: var(--card); z-index: 1; }
+.frame-phone .hw { position: absolute; width: 1.1%; border-radius: 2px; background: linear-gradient(90deg, #6a6c6f, #a9abad 50%, #6a6c6f); }
+.frame-phone .hw-action { left: -.7%; top: 15.5%; height: 3.6%; }
+.frame-phone .hw-vol-up { left: -.7%; top: 22%; height: 7%; }
+.frame-phone .hw-vol-down { left: -.7%; top: 31%; height: 7%; }
+.frame-phone .hw-side { right: -.7%; top: 25%; height: 11%; }
+/* iPad proportions to match: thin even border, aluminium edge, front camera on the long edge */
+.frame-tablet .device { position: relative; width: 100%; padding: 2.4%; border-radius: 4.2% / 6%; background: #08090a;
+  box-shadow: inset 0 0 0 2px #a7a9ac, inset 0 0 0 3px #4b4d50, 0 1px 2px rgb(28 41 44 / .12), 0 26px 50px -18px rgb(28 41 44 / .45); }
+.frame-tablet .device::before { content: ""; position: absolute; top: 1.6%; left: 50%; width: .7%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: #1c2a33; box-shadow: inset 0 0 0 1px #2b3a44; }
+.frame-tablet .screen { position: relative; aspect-ratio: 1180 / 820; border-radius: 1.6% / 2.3%; overflow: hidden; background: var(--card); }
 .frame .screen img, .frame .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
 .frame .screen .shot-d { display: none; }
 [data-shot-theme="dark"] .frame .screen .shot-l { display: none; }

@@ -6,6 +6,8 @@
 <figure class="frame frame-{{ kind }}"{% if phoneMax %} style="--phone-max:{{ phoneMax }}"{% endif %}>
 {%- if kind == "browser" %}
 <div class="frame-browser"><div class="bar" aria-hidden="true"><span></span><span></span><span></span></div><div class="screen">
+{%- elif kind == "phone" %}
+<div class="device"><span class="hw hw-action" aria-hidden="true"></span><span class="hw hw-vol-up" aria-hidden="true"></span><span class="hw hw-vol-down" aria-hidden="true"></span><span class="hw hw-side" aria-hidden="true"></span><div class="screen">
 {%- else %}
 <div class="device"><div class="screen">
 {%- endif %}
