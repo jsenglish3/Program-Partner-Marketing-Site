@@ -18,7 +18,7 @@ eleventyComputed:
 <section class="section band-sand" aria-labelledby="h-how">
 <div class="wrap-wide stack" style="gap:clamp(24px,4vw,40px)">
 <h2 id="h-how" class="h2">How it works</h2>
-{{ m.frame("browser", "Screenshot: a director creates a fee, a parent pays online, another uploads a receipt, and the director approves it, " + "Westbrook Middle School demo", "fees-walkthrough", shots) }}
+{{ m.frame("browser", "Screenshot: a director creates a fee, a parent uploads a payment receipt, and the director approves it, " + "Westbrook Middle School demo", "fees-walkthrough", shots) }}
 <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px 40px">
 {%- for s in f.steps %}
 <li style="display:flex;gap:16px;align-items:baseline"><span class="serif" style="font-size:40px;line-height:1;color:var(--primary)"><span class="sr-only">Step </span>{{ loop.index }}</span><p style="font-size:17px;line-height:1.55">{{ s.body }}</p></li>
@@ -31,8 +31,8 @@ eleventyComputed:
 <div class="wrap-wide stack" style="gap:clamp(24px,4vw,40px)">
 <h2 id="h-how" class="h2">How it works</h2>
 <figure style="margin:0" class="stack">
-{{ m.frame("browser", "Screenshot: concert seating chart, Westbrook Middle School demo", "seating-how-main", shots) }}
-<figcaption class="body-lg" style="font-weight:500;margin-top:16px">Drag a student onto a taken chair and the two swap.</figcaption>
+{{ m.frame("browser", "Screenshot: moving a student on a combined concert seating chart, Westbrook Middle School demo", "seating-how-main", shots) }}
+<figcaption class="body-lg" style="font-weight:500;margin-top:16px">Pick a student, then a chair. If the chair is taken, the two swap.</figcaption>
 </figure>
 </div>
 </section>

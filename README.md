@@ -40,6 +40,13 @@ Slot names: open any built page and look for `class="placeholder"` — the text 
 
 Browser frames are 16:10, tablet frames 1180×820, phone frames 9:19.5. Anything else is cropped from the top-left.
 
+Two extras:
+
+- **Dark mode.** Add `<slot>-dark.webp` next to a home hero shot and the hero's Light/Dark switch shows it. Every home hero slot has one.
+- **Animations.** Add `<slot>.mp4` (and optionally `<slot>.webm`) and the frame plays it as a short muted loop, with `<slot>.webp` as its poster. It plays only while on screen, has a pause button, and stays paused for visitors who ask for reduced motion. Current animations: `fees-walkthrough` (create a fee, a parent uploads a receipt, approve it), `teaching-how-2` (review a Skill Pathways submission and pass it) and `seating-how-main` (move a student on a concert chart; a taken chair swaps).
+
+How the current set was taken: the Westbrook demo at app.myprogrampartner.com/demo, captured at 2× (desktop 1440×900, tablet 1180×820, phone 390×845) in both light and dark color schemes. The demo resets nightly, so retakes look the same.
+
 ## Settings in `src/_data/site.json`
 
 - `bookingUrl` — the public booking page. While empty, "Schedule a demo" scrolls to the Let's chat form instead.

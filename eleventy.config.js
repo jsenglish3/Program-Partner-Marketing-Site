@@ -14,6 +14,9 @@ export default function (eleventyConfig) {
 
   // Screenshots live in src/screenshots/<slot>.png (or .jpg/.webp).
   // The frame partial shows the image when the file exists, otherwise a quiet placeholder.
+  // <slot>-dark.webp is the same screen in dark mode (the home hero's Light/Dark switch shows it).
+  // <slot>.mp4 (plus an optional <slot>.webm) is a short looping animation; <slot>.webp is its poster and fallback.
+  // Videos are exposed as shots["<slot>@video"] so the frame macro can see them.
   const shotDir = path.join(process.cwd(), "src", "screenshots");
   eleventyConfig.addGlobalData("shots", () => {
     const out = {};
@@ -21,6 +24,8 @@ export default function (eleventyConfig) {
     for (const f of fs.readdirSync(shotDir)) {
       const m = f.match(/^(.+)\.(png|jpe?g|webp)$/i);
       if (m) out[m[1]] = "/screenshots/" + f;
+      const v = f.match(/^(.+)\.(mp4|webm)$/i);
+      if (v) out[v[1] + (v[2].toLowerCase() === "mp4" ? "@video" : "@webm")] = "/screenshots/" + f;
     }
     return out;
   });

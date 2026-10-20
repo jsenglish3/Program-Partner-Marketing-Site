@@ -308,13 +308,13 @@ const PATCH = {
       "You grade, give feedback and see progress across the whole program.",
       "Their rankings can set the class seating chart."
     ],
-    shots: [S("browser", "Skill Pathways setup"), S("phone", "student recording submission"), S("tablet", "program progress"), S("browser", "class seating from rankings")]
+    shots: [S("browser", "Skill Pathways setup"), S("phone", "student recording submission"), S("browser", "reviewing a submission and passing it"), S("browser", "class seating from rankings")]
   }
 };
 
 const PHONE = {
-  fees: "parent portal payment", students: "parent portal home", communication: "parent portal on a phone",
-  forms: "parent signing a form", events: "parent event registration", inventory: "student portal balance",
+  fees: "parent portal payment", students: "parent portal home", communication: "parent announcements on a phone",
+  forms: "parent signing a form", events: "parent event registration", inventory: "student instrument check-out",
   library: "student digital part", seating: "student practice recording", teaching: "student Skill Pathways submission"
 };
 

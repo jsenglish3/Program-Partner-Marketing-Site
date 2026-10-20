@@ -9,8 +9,13 @@
 {%- else %}
 <div class="device"><div class="screen">
 {%- endif %}
-{%- if shots and shots[slot] %}
-<img src="{{ shots[slot] }}" alt="{{ alt }}" loading="lazy">
+{%- set dark = shots[slot + "-dark"] if shots else "" -%}
+{%- if shots and shots[slot + "@video"] %}
+<video class="shot-video" muted loop playsinline preload="none"{% if shots[slot] %} poster="{{ shots[slot] }}"{% endif %} aria-label="{{ alt }} (short animation)" data-shot-video><source src="{{ shots[slot + '@video'] }}" type="video/mp4">{% if shots[slot + '@webm'] %}<source src="{{ shots[slot + '@webm'] }}" type="video/webm">{% endif %}</video>
+<button type="button" class="shot-toggle" data-video-toggle aria-label="Play animation" hidden><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path class="i-play" d="M4 2.5v11l9-5.5z"/><path class="i-pause" d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button>
+{%- elif shots and shots[slot] %}
+<img src="{{ shots[slot] }}" alt="{{ alt }}" loading="lazy"{% if dark %} class="shot-l"{% endif %}>
+{%- if dark %}<img src="{{ dark }}" alt="{{ alt }}, in dark mode" loading="lazy" class="shot-d">{% endif %}
 {%- else %}
 <div class="placeholder" role="img" aria-label="{{ alt }} (screenshot coming)">{{ clean | upper }}</div>
 {%- endif %}

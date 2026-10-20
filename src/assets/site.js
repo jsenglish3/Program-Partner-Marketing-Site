@@ -46,6 +46,43 @@
   }
   document.querySelectorAll("[data-tabs]").forEach((r) => wireTabs(r));
 
+  /* Light / dark screenshots (home hero) */
+  document.querySelectorAll("[data-theme-switch]").forEach((sw) => {
+    const host = sw.closest("[data-shot-theme]");
+    const btns = Array.from(sw.querySelectorAll("[data-theme]"));
+    btns.forEach((b) => b.addEventListener("click", () => {
+      host.setAttribute("data-shot-theme", b.dataset.theme);
+      btns.forEach((o) => o.setAttribute("aria-pressed", o === b ? "true" : "false"));
+    }));
+  });
+
+  /* Product animations: play while on screen, pausable, and paused for reduced motion */
+  document.querySelectorAll("[data-shot-video]").forEach((v) => {
+    const btn = v.parentElement.querySelector("[data-video-toggle]");
+    let userPaused = REDUCE;
+    const sync = () => {
+      if (!btn) return;
+      const playing = !v.paused;
+      btn.toggleAttribute("data-playing", playing);
+      btn.setAttribute("aria-label", playing ? "Pause animation" : "Play animation");
+    };
+    const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    v.addEventListener("play", sync);
+    v.addEventListener("pause", sync);
+    if (btn) {
+      btn.hidden = false;
+      btn.addEventListener("click", () => {
+        if (v.paused) { userPaused = false; tryPlay(); } else { userPaused = true; v.pause(); }
+      });
+    }
+    if (REDUCE) { v.preload = "metadata"; sync(); return; }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { if (!userPaused) tryPlay(); } else v.pause();
+      }), { threshold: 0.35 }).observe(v);
+    } else tryPlay();
+  });
+
   /* Home ticker */
   document.querySelectorAll("[data-ticker]").forEach((el) => {
     if (REDUCE) return;
