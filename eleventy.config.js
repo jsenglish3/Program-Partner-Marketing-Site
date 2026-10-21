@@ -7,6 +7,8 @@ export default function (eleventyConfig) {
   // Remove it from the workflow when the custom domain is on.
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addGlobalData("pathPrefix", () => process.env.PATH_PREFIX || "/");
+  // Where link previews (iMessage, Slack, Facebook) fetch the share image from. Defaults to site.url.
+  eleventyConfig.addGlobalData("shareOrigin", () => process.env.SHARE_ORIGIN || "");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/screenshots": "screenshots" });
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });

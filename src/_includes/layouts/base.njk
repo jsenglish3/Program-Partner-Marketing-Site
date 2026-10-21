@@ -13,9 +13,14 @@
 <meta property="og:site_name" content="Program Partner">
 <meta property="og:title" content="{{ title or 'Program Partner' }}">
 <meta property="og:description" content="{{ description or site.description }}">
-<meta property="og:url" content="{{ site.url }}{{ page.url }}">
-<meta property="og:image" content="{{ site.url }}/assets/share.png">
+{%- set origin = shareOrigin or site.url %}
+<meta property="og:url" content="{{ origin }}{{ page.url }}">
+<meta property="og:image" content="{{ origin }}/assets/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Program Partner: Stress less. Teach more. The program office for band, orchestra, choir, theatre and private studios.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ origin }}/assets/share.png">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

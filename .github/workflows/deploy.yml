@@ -22,8 +22,9 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          # Preview address only. Delete these two lines when myprogrampartner.com is set as the custom domain.
+          # Preview address only. Delete these three lines when myprogrampartner.com is set as the custom domain.
           PATH_PREFIX: /Program-Partner-Marketing-Site/
+          SHARE_ORIGIN: https://jsenglish3.github.io/Program-Partner-Marketing-Site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
