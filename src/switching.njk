@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+current: switching
+title: Switching to Program Partner
+permalink: /switching/
+description: "Moving your program off spreadsheets, paper forms and group texts, or off another system? Here's what changes, what to ask, and how the switch works."
+---
+{% import "macros.njk" as m %}
+{%- set s = switching -%}
+{{ m.hero({ eyebrow: "Switching", title: "Switching to Program Partner", subhead: "Most programs come to us from spreadsheets, paper forms and group texts, or from another system. Here's what changes and how the move works.", primaryLabel: site.ctaPrimary, primaryHref: "/demo/", secondaryLabel: "See every feature", secondaryHref: "/product/" }, site, shots) }}
+
+<section class="section" aria-labelledby="h-changes" style="padding-top:0">
+<div class="wrap stack" style="gap:clamp(20px,3vw,28px)">
+<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-changes" class="h2-sm">What changes</h2><p class="body-lg muted">How programs often run the office side today, and how the same work runs in Program Partner.</p></div>
+<div class="compare-wrap">
+<table class="compare-table">
+<caption class="sr-only">How programs often work today, and the same work in Program Partner</caption>
+<thead><tr><th scope="col"><span class="sr-only">Topic</span></th><th scope="col">Often today</th><th scope="col">With Program Partner</th></tr></thead>
+<tbody>
+{%- for r in s.rows %}
+<tr><th scope="row">{{ r[0] }}</th><td data-label="Often today">{{ r[1] }}</td><td data-label="With Program Partner">{{ r[2] }}</td></tr>
+{%- endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="section band-sand" aria-labelledby="h-ask">
+<div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
+<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-ask" class="h2-sm">Questions to ask any program office</h2><p class="body-lg muted">Whatever you're comparing, ask these. Here are our answers.</p></div>
+<div class="grid-2" style="gap:24px">
+{%- for q in s.questions %}
+<div class="card stack" style="gap:10px"><h3 style="font-size:24px;line-height:1.25">{{ q[0] }}</h3><p class="muted" style="font-size:17px;line-height:1.55">{{ q[1] }}</p></div>
+{%- endfor %}
+</div>
+</div>
+</section>
+
+{{ m.steps("How the switch works", s.steps, "", "h-steps") }}
+{{ m.faq("Questions about switching", s.faq, "sand", "h-faq") }}
+{{ m.cta("Ready to switch? Tell us about your program.", site.ctaPrimary, "/demo/") }}
