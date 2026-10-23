@@ -3,11 +3,12 @@ import path from "node:path";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
-  // PATH_PREFIX is set by the deploy workflow while the site lives at the GitHub preview address.
-  // Remove it from the workflow when the custom domain is on.
+  // The site is served from the root of myprogrampartner.com. PATH_PREFIX is only for building a copy that
+  // lives under a subfolder (for example a GitHub preview address); production builds leave it unset.
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addGlobalData("pathPrefix", () => process.env.PATH_PREFIX || "/");
-  // Where link previews (iMessage, Slack, Facebook) fetch the share image from. Defaults to site.url.
+  // Where link previews (iMessage, Slack, Facebook) fetch the share image from. Defaults to site.url;
+  // SHARE_ORIGIN overrides it only for a copy built for another address.
   eleventyConfig.addGlobalData("shareOrigin", () => process.env.SHARE_ORIGIN || "");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/screenshots": "screenshots" });
