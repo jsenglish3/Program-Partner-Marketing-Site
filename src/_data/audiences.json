@@ -9,8 +9,7 @@
       { "q": "My boosters handle the money.", "a": "Give them their own access. They see the books; they don't see your grade book." },
       { "q": "I teach at more than one school.", "a": "Each program keeps its own roster and records, and you switch between them." },
       { "q": "What does it cost?", "a": "We quote each program to fit its size and the parts it uses." }
-    ],
-    "proof": "Built by the band director at Feagin Mill Middle School and used there every day."
+    ]
   },
   {
     "key": "boosters", "eyebrow": "For booster leaders and treasurers", "h1": "Books your whole board can trust.",
@@ -26,7 +25,7 @@
   },
   {
     "key": "schools", "eyebrow": "For principals, coordinators and departments", "h1": "Approve it once and stop worrying about it.", "title": "For schools and districts",
-    "sub": "For principals, fine arts coordinators and college departments: student data handled the way you'd expect, and purchasing that's simple.",
+    "sub": "For principals, performing arts coordinators and college departments: student data handled the way you'd expect, and purchasing that's simple.",
     "cta": "Ask for our data privacy agreement.", "ctaLabel": "Request the agreement", "ctaHref": "/security/#dpa"
   },
   {
