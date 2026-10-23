@@ -10,7 +10,7 @@
   "bookingUrl": "",
   "chatEndpoint": "https://app.myprogrampartner.com/api/public/demo-access-request",
   "turnstileSiteKey": "",
-  "cloudflareAnalyticsToken": "",
+  "cloudflareAnalyticsToken": "7a229bb68f8248aaa313ddc676f23a72",
   "ctaPrimary": "Schedule a demo",
   "ctaSecondary": "Let's chat"
 }
