@@ -50,8 +50,8 @@ How the current set was taken: the Westbrook demo at app.myprogrampartner.com/de
 ## Settings in `src/_data/site.json`
 
 - `bookingUrl` — the public booking page. While empty, "Schedule a demo" scrolls to the Let's chat form instead.
-- `chatEndpoint` — where the Let's chat form posts (the app's `/api/public/demo-access-request`). Empty means preview mode: the form goes straight to the thank-you page.
-- `turnstileSiteKey` — optional Cloudflare Turnstile widget on the form.
+- `chatEndpoint` — where the Let's chat form posts (the app's `/api/public/demo-access-request`). Empty means preview mode: the form goes straight to the thank-you page. The app accepts only the fields in its `demoAccessRequestSchema` (`src/lib/demo-access.ts` in programhq-fmms) and only from https://myprogrampartner.com and https://www.myprogrampartner.com, so the form can't be tested from a preview address. If you change the form's fields or role list, change the app's schema to match.
+- `turnstileSiteKey` — optional Cloudflare Turnstile widget on the form. The app doesn't check Turnstile yet, so the token isn't sent; leave this empty until it does.
 - `cloudflareAnalyticsToken` — optional Cloudflare Web Analytics beacon.
 
 ## Founder photo

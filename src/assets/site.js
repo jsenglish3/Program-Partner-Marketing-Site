@@ -161,13 +161,19 @@
         return;
       }
       if (fd.get("website")) { location.href = thanks; return; } // honeypot filled: pretend success
-      const body = {
-        name: v("name"), email: v("email"), role: v("role"), state: v("state"), school: v("school"),
-        programTypes: fd.getAll("kind"), size: v("size"), topics: fd.getAll("topic"), currentTools: fd.getAll("current"),
-        message: v("notes"), consent: true, page: document.referrer || location.href, source: "myprogrampartner.com"
-      };
-      const turnstile = fd.get("cf-turnstile-response");
-      if (turnstile) body.turnstileToken = turnstile;
+      // Field names match the app's demoAccessRequestSchema (programhq-fmms, src/lib/demo-access.ts).
+      // The app refuses any field it doesn't name, so nothing else goes in this object.
+      const kinds = fd.getAll("kind");
+      const PROGRAM_KEYS = { "Band": "band", "Choir": "chorus", "Orchestra": "orchestra", "Theatre": "theatre", "Private studio": "studio" };
+      const firstProgram = kinds.map((k) => PROGRAM_KEYS[k]).find(Boolean);
+      const labelOf = (name, value) => { const el = form.querySelector('input[name="' + name + '"][value="' + value + '"]'); return el ? el.parentElement.textContent.trim() : value; };
+      const picked = (name) => fd.getAll(name).map((x) => labelOf(name, x));
+      const body = { contactName: v("name"), contactEmail: v("email"), schoolName: v("school"), roleTitle: v("role"), state: v("state"), programTypes: kinds };
+      if (firstProgram) body.programKey = firstProgram;
+      if (v("size")) body.studentCount = v("size");
+      if (picked("topic").length) body.helpWith = picked("topic");
+      if (picked("current").length) body.currentTools = picked("current");
+      if (v("notes")) body.message = v("notes");
       btn.disabled = true; btn.textContent = "Sending…";
       if (!endpoint) { setTimeout(() => { location.href = thanks; }, 400); return; }
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
