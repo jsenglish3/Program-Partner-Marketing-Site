@@ -19,6 +19,7 @@
   ],
   "resources": [
     { "key": "security", "name": "Security and privacy", "href": "/security/" },
+    { "key": "switching", "name": "Switching to Program Partner", "href": "/switching/" },
     { "key": "woodshed", "name": "Woodshed", "href": "/woodshed/" },
     { "key": "contact", "name": "Contact", "href": "/contact/" }
   ],
