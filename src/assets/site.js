@@ -172,7 +172,16 @@
       if (firstProgram) body.programKey = firstProgram;
       if (v("size")) body.studentCount = v("size");
       if (picked("topic").length) body.helpWith = picked("topic");
-      if (picked("current").length) body.currentTools = picked("current");
+      // "What do you use now?" is free text, but the app takes it as a list of
+      // short items (12 at most, 60 characters each). Split on commas, and break
+      // any longer piece at a space, so a long answer is never refused.
+      const tools = v("tools").split(/[,;\n]/).map((x) => x.trim()).filter(Boolean).flatMap((x) => {
+        const out = []; let cur = "";
+        x.split(/\s+/).forEach((w) => { w = w.slice(0, 60); if (cur && (cur + " " + w).length > 60) { out.push(cur); cur = w; } else cur = cur ? cur + " " + w : w; });
+        if (cur) out.push(cur);
+        return out;
+      }).slice(0, 12);
+      if (tools.length) body.currentTools = tools;
       if (v("notes")) body.message = v("notes");
       btn.disabled = true; btn.textContent = "Sending…";
       if (!endpoint) { setTimeout(() => { location.href = thanks; }, 400); return; }
