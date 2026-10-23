@@ -1,0 +1,68 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: comparisons
+  size: 1
+  addAllPagesToCollections: true
+  alias: c
+permalink: "/compare/{{ c.key }}/"
+eleventyComputed:
+  title: "{{ ('Program Partner vs ' + c.name) | safe }}"
+  current: "compare"
+  description: "{{ c.description | safe }}"
+---
+{% import "macros.njk" as m %}
+{{ m.hero({ eyebrow: "Compare", title: "Program Partner vs " + c.name, subhead: c.sub, primaryLabel: site.ctaPrimary, primaryHref: "/demo/", secondaryLabel: "See every feature", secondaryHref: "/product/" }, site, shots) }}
+
+<section class="section" aria-labelledby="h-glance" style="padding-top:0">
+<div class="wrap stack" style="gap:clamp(20px,3vw,28px)">
+<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-glance" class="h2-sm">At a glance</h2>{% if c.glanceIntro %}<p class="body-lg muted">{{ c.glanceIntro }}</p>{% endif %}</div>
+<div class="compare-wrap">
+<table class="compare-table">
+<caption class="sr-only">Program Partner and {{ c.name }} compared</caption>
+<thead><tr><th scope="col"><span class="sr-only">Topic</span></th><th scope="col">Program Partner</th><th scope="col">{{ c.name }}</th></tr></thead>
+<tbody>
+{%- for r in c.rows %}
+<tr><th scope="row">{{ r[0] }}</th><td data-label="Program Partner">{{ r[1] }}</td><td data-label="{{ c.name }}">{{ r[2] }}</td></tr>
+{%- endfor %}
+</tbody>
+</table>
+</div>
+<p class="muted" style="font-size:15px;line-height:1.5;max-width:820px">{{ c.sourceNote }}</p>
+</div>
+</section>
+
+<section class="section band-sand" aria-labelledby="h-diff">
+<div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
+<h2 id="h-diff" class="h2-sm">Where Program Partner is different</h2>
+<div class="grid-2" style="gap:24px">
+{%- for d in c.differences %}
+<div class="card stack" style="gap:10px"><h3 style="font-size:24px;line-height:1.25">{{ d[0] }}</h3><p class="muted" style="font-size:17px;line-height:1.55">{{ d[1] }}</p></div>
+{%- endfor %}
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="h-fit">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start">
+<div class="stack" style="flex:1 1 300px;min-width:0;max-width:440px;gap:16px">
+<h2 id="h-fit" class="h2-sm">When {{ c.name }} may suit you better</h2>
+<p class="body-lg muted">{{ c.fitIntro }}</p>
+</div>
+<ul class="stack" style="flex:2 1 460px;min-width:0;margin:0;padding:0;list-style:none;gap:0;border-top:1px solid var(--border)">
+{%- for f in c.fit %}
+<li style="padding:18px 0;border-bottom:1px solid var(--border);font-size:17px;line-height:1.55">{{ f }}</li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+
+<section class="section band-sand" aria-labelledby="h-switch">
+<div class="wrap stack" style="gap:16px;max-width:820px">
+<h2 id="h-switch" class="h2-sm">Switching from {{ c.name }}</h2>
+{%- for p in c.switching %}<p class="body-lg">{{ p }}</p>{% endfor %}
+</div>
+</section>
+
+{%- if c.faq %}{{ m.faq("Questions about switching", c.faq, "", "h-faq") }}{% endif %}
+{{ m.cta(c.cta, site.ctaPrimary, "/demo/") }}
