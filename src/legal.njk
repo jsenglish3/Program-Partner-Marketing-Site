@@ -8,8 +8,8 @@ pagination:
   alias: k
 permalink: "/{{ k }}/"
 eleventyComputed:
-  title: "{{ legal[k].h1 }}"
-  description: "{{ legal[k].title }} for the Program Partner app and website."
+  title: "{{ legal[k].h1 | safe }}"
+  description: "{{ legal[k].title | safe }} for the Program Partner app and website."
 ---
 {%- set doc = legal[k] -%}
 {%- set raw = doc.meta[0] | replace("Last reviewed: ", "") | replace("Oct ", "October ") -%}

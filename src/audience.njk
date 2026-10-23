@@ -7,9 +7,9 @@ pagination:
   alias: a
 permalink: "/{{ a.key }}/"
 eleventyComputed:
-  title: "{{ a.title or a.h1 }}"
+  title: "{{ (a.title or a.h1) | safe }}"
   current: "{{ a.key }}"
-  description: "{{ a.sub }}"
+  description: "{{ a.sub | safe }}"
 ---
 {% import "macros.njk" as m %}
 {{ m.hero({ eyebrow: a.eyebrow, title: a.h1, subhead: a.sub, primaryLabel: site.ctaPrimary, primaryHref: "/demo/" }, site, shots) }}

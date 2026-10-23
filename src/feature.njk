@@ -7,9 +7,9 @@ pagination:
   alias: f
 permalink: "/features/{{ f.key }}/"
 eleventyComputed:
-  title: "{{ f.name }}"
+  title: "{{ f.name | safe }}"
   current: "{{ f.key }}"
-  description: "{{ f.sub }}"
+  description: "{{ f.sub | safe }}"
 ---
 {% import "macros.njk" as m %}
 {{ m.hero({ crumb: f.name, crumbLabel: "Features", crumbHref: "/product/", title: f.h1, subhead: f.sub, primaryLabel: site.ctaPrimary, primaryHref: "/demo/?topic=" + f.key }, site, shots) }}
