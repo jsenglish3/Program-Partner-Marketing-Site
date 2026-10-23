@@ -11,7 +11,6 @@ description: "Pick a time for a demo of Program Partner, or send us a note about
 {%- set kinds = ["Band","Orchestra","Choir","Theatre","Guard","Private studio","Other"] -%}
 {%- set sizes = ["Under 50","50–150","150–300","300+"] -%}
 {%- set topics = [["fees","Fees and budgets"],["students","Students and families"],["communication","Communication"],["forms","Forms and paperwork"],["events","Events and trips"],["inventory","Inventory and uniforms"],["library","Music library"],["seating","Seating charts"],["teaching","Teaching tools"],["pricing","Pricing"]] -%}
-{%- set current = ["Spreadsheets","Charms or CutTime","BoosterHub","Presto","BAND or Remind","Something else"] -%}
 <div style="padding:clamp(48px,7vw,96px) 0 var(--section-y)">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,80px);align-items:flex-start">
 <div class="stack" style="flex:1 1 320px;max-width:420px;gap:20px">
@@ -40,7 +39,7 @@ description: "Pick a time for a demo of Program Partner, or send us a note about
 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
 <p><strong style="font-weight:600">Not sent.</strong> Something went wrong on our end. Try again, or email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
 </div>
-<div class="choices" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px">
+<div class="form-grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px">
 <div class="field" data-field="name"><label for="f-name">Your name <span class="opt">(required)</span></label><input class="input" id="f-name" name="name" autocomplete="name" maxlength="120" required></div>
 <div class="field" data-field="email"><label for="f-email">Work email <span class="opt">(required)</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" maxlength="320" required aria-describedby="help-email" data-help="help-email"><p id="help-email" class="help">A personal email is fine if you're a booster officer.</p></div>
 <div class="field" data-field="role"><label for="f-role">Your role <span class="opt">(required)</span></label><select class="select" id="f-role" name="role" required><option value="">Choose one</option>{% for o in roles %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
@@ -59,10 +58,7 @@ description: "Pick a time for a demo of Program Partner, or send us a note about
 <legend>What would you like help with? <span class="opt">(choose any)</span></legend>
 <div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{% for o in topics %}<label><input type="checkbox" name="topic" value="{{ o[0] }}">{{ o[1] }}</label>{% endfor %}</div>
 </fieldset>
-<fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
-<legend>What do you use now? <span class="opt">(choose any)</span></legend>
-<div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">{% for o in current %}<label><input type="checkbox" name="current" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
-</fieldset>
+<div class="field" data-field="tools"><label for="f-tools">What do you use now?</label><input class="input" id="f-tools" name="tools" maxlength="200" aria-describedby="help-tools" data-help="help-tools"><p id="help-tools" class="help">For example: spreadsheets, paper forms, an app, or a mix.</p></div>
 <div class="field" data-field="notes"><label for="f-notes">Anything else we should know?</label><textarea class="textarea" id="f-notes" name="notes" rows="4" maxlength="2000"></textarea></div>
 <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 <div class="field" data-field="consent" style="padding-top:18px;border-top:1px solid var(--border)">

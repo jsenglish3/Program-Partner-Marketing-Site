@@ -157,7 +157,8 @@ button { font: inherit; }
 .tabs [role="tab"] { white-space: nowrap; min-height: 44px; padding: 0; margin-bottom: -1px; font-size: 16px; font-weight: 500; cursor: pointer; background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent; display: inline-flex; align-items: center; }
 .tabs [role="tab"]:hover { color: var(--fg); }
 .tabs [role="tab"][aria-selected="true"] { color: var(--fg); font-weight: 600; border-bottom-color: var(--primary); }
-[role="tabpanel"][hidden] { display: none; }
+/* "hidden" always wins, even over a component that sets its own display (the form's error boxes are flex). */
+[hidden] { display: none !important; }
 
 /* Screenshot frames */
 .frame { margin: 0; display: flex; flex-direction: column; gap: 10px; width: 100%; }
@@ -283,9 +284,10 @@ button { font: inherit; }
 .input, .select, .textarea { height: 48px; font: inherit; font-size: 16px; color: var(--fg); background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0 12px; width: 100%; }
 .textarea { height: auto; min-height: 120px; padding: 12px; resize: vertical; }
 .input[aria-invalid="true"], .select[aria-invalid="true"] { border-color: var(--primary); border-width: 2px; }
+.form-grid { display: grid; }
 .choices { display: grid; gap: 4px 16px; }
 .choices label { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 16px; cursor: pointer; font-weight: 400; }
-.choices input { accent-color: var(--primary); width: 20px; height: 20px; margin: 0; flex: none; }
+.choices input[type="checkbox"], .choices input[type="radio"] { accent-color: var(--primary); width: 20px; height: 20px; margin: 0; flex: none; }
 .err { color: var(--primary); font-size: 15px; font-weight: 500; display: flex; gap: 6px; align-items: center; }
 .alert { background: var(--accent); color: var(--primary-deep); border-radius: 12px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; font-size: 16px; line-height: 1.5; }
 .alert a { color: var(--primary-deep); }
