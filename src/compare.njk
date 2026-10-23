@@ -28,7 +28,10 @@ eleventyComputed:
 </tbody>
 </table>
 </div>
-<p class="muted" style="font-size:15px;line-height:1.5;max-width:820px">{{ c.sourceNote }}</p>
+<div class="stack" style="gap:8px;max-width:820px">
+<p class="muted" style="font-size:15px;line-height:1.5">{{ c.sourceNote }}</p>
+<p class="muted" style="font-size:15px;line-height:1.5">Sources: {% for s in c.sources %}<a href="{{ s[1] }}" rel="nofollow noopener" target="_blank">{{ s[0] }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+</div>
 </div>
 </section>
 
