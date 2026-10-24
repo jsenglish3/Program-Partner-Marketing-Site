@@ -312,7 +312,7 @@ const PATCH = {
 const PHONE = {
   fees: "parent portal payment", students: "parent portal home", communication: "parent announcements on a phone",
   forms: "parent signing a form", events: "parent event registration", inventory: "student instrument check-out",
-  library: "student digital part", seating: null, teaching: "student Skill Pathways submission"
+  library: "student digital part", seating: "combined concert seating chart on a phone", teaching: "student Skill Pathways submission"
 };
 
 export default Object.keys(F).map((key) => {
