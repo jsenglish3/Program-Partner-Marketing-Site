@@ -13,20 +13,18 @@
 </ul></nav>
 <nav aria-label="Resources"><h2>Resources</h2><ul>
 <li><a href="/security/">Security and privacy</a></li>
-<li><a href="/families/">Families</a></li>
 <li><a href="/switching/">Switching to Program Partner</a></li>
 <li><a href="/woodshed/">Woodshed</a></li>
 </ul></nav>
 <nav aria-label="Company"><h2>Company</h2><ul>
 {%- for c in nav.company %}<li><a href="{{ c.href }}">{{ c.name }}</a></li>{% endfor %}
-<li><a href="{{ site.appUrl }}">Log in</a></li>
+<li><a href="{{ site.appUrl }}">Sign in</a></li>
 </ul></nav>
 </div>
 <div class="meta">
 <a href="mailto:{{ site.supportEmail }}" class="mail">{{ site.supportEmail }}</a>
 <a href="{{ site.facebook }}">Facebook</a>
 <a href="{{ site.instagram }}">Instagram</a>
-<a href="/woodshed/">Woodshed, our free practice site</a>
 </div>
 <div class="legal">
 <a href="/privacy/">Privacy</a><span aria-hidden="true">·</span>

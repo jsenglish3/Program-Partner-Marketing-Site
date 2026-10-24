@@ -11,7 +11,7 @@ const F = {
     how: [
       "Assign a fee to one student, an ensemble or the whole program.",
       "Families pay online from their portal, or turn in cash or a check and upload the receipt for you to approve.",
-      "Each payment lands on the right balance, and reminders go out on their own."
+      "Each payment lands on the right balance, and reminders go out automatically."
     ],
     shots: [S("browser", "assign a fee"), S("phone", "parent portal payment"), S("browser", "student balances")],
     get: [
@@ -32,8 +32,8 @@ const F = {
   },
   students: {
     name: "Students and families",
-    h1: "One roster everyone can trust.",
-    sub: "Students, guardians and ensembles on one roster, with portals that answer parents' questions before they reach your inbox.",
+    h1: "One roster for students and families.",
+    sub: "Students, guardians and ensembles together, with portals that answer parents' questions before they reach your inbox.",
     how: [
       "Import your roster from a spreadsheet, or send it to us and we'll do it.",
       "Give each family a private registration code and a printed welcome letter.",
@@ -58,7 +58,7 @@ const F = {
   },
   communication: {
     name: "Communication",
-    h1: "Messages people actually see.",
+    h1: "Know who got the message.",
     sub: "Announcements by email, direct messages, and one calendar for the whole program.",
     how: [
       "Write it once and choose who it's for: everyone, an ensemble, or a handful of families.",
@@ -75,13 +75,13 @@ const F = {
       "Volunteer jobs and shifts with sign-ups and automatic reminders."
     ],
     faq: [
-      ["How do I know families actually got it?", "Delivery tracking shows who received each announcement and who opened it, and flags any email that bounced."]
+      ["What if an email bounces?", "Delivery tracking flags it, so you can fix the address."]
     ]
   },
   forms: {
     name: "Forms and paperwork",
     h1: "Permission slips that chase themselves.",
-    sub: "Fillable forms with signatures, reminders that go out on their own, and a clear list of who still hasn't signed.",
+    sub: "Fillable forms with signatures, automatic reminders, and a clear list of who still hasn't signed.",
     how: [
       "Upload the PDF you already use, start from a template, or build a form from scratch.",
       "Assign it to a student, an ensemble or everyone going on a trip.",
@@ -97,7 +97,7 @@ const F = {
       "Workflow Studio, if you want it, to turn form answers into roster updates and fees. Forms work fine without it."
     ],
     faq: [
-      ["Can I keep using my own forms?", "Yes. Upload your PDF and make its fields fillable."],
+      ["Can parents sign on a phone?", "Yes. They can also use a tablet or computer."],
       ["Who can see a signed form?", "Only staff with access to forms, and the family it belongs to."]
     ]
   },
@@ -128,9 +128,9 @@ const F = {
   inventory: {
     name: "Inventory and uniforms",
     h1: "Know where every instrument is.",
-    sub: "Instruments, equipment and uniforms with who has them, what shape they're in and what they're worth, so the year-end count isn't a scavenger hunt.",
+    sub: "Instruments, equipment and uniforms: who has each one, its condition and its value.",
     how: [
-      "Add your inventory, or send us your spreadsheet.",
+      "Add your inventory, or import your spreadsheet.",
       "Check items out to students, with a signed equipment agreement on file.",
       "Track condition, repairs and value through the year."
     ],
@@ -144,7 +144,6 @@ const F = {
       "Vendor size charts that suggest the right size from a student's measurements."
     ],
     faq: [
-      ["Can I bring in my current spreadsheet?", "Yes. Import it yourself, or we'll do it as part of setup."],
       ["Can I hand the principal an inventory report?", "Yes. Reports has an inventory summary, including items in repair and overdue check-outs, that you can print."]
     ]
   },
@@ -165,8 +164,7 @@ const F = {
       "Recordings that play inside Program Partner rather than as files passed around."
     ],
     faq: [
-      ["Do I have to use digital parts?", "No. They stay off until you turn them on."],
-      ["Who can hear a recording?", "Only the students you share it with."]
+      ["Do I have to use digital parts?", "No. They stay off until you turn them on."]
     ]
   },
   seating: {
@@ -188,14 +186,13 @@ const F = {
       "Instrument areas, standing players and an unassigned list, so nobody gets lost between charts."
     ],
     faq: [
-      ["Will a concert chart change my class seating?", "No. Concert charts are separate."],
-      ["Can several groups share one stage setup for a concert?", "Yes. Shared concert seating keeps one room for up to four performances."]
+      ["Will a concert chart change my class seating?", "No. Concert charts are separate."]
     ]
   },
   teaching: {
     name: "Teaching tools",
-    h1: "Teaching tools that speak your program's language.",
-    sub: "Skill Pathways, practice logs, curriculum, quizzes and attendance, renamed to match the words your students already use.",
+    h1: "Teaching tools, with levels named your way.",
+    sub: "Skill Pathways, practice logs, curriculum, quizzes and attendance. Rename Skill Pathways and its levels to match the words your students already use.",
     how: [
       "Set up your levels and skills, and call them whatever your program calls them.",
       "Students submit recordings and practice logs from their phones.",
@@ -223,87 +220,87 @@ const PATCH = {
   fees: {
     get: [
       "Every student has a live balance that staff, parents and the student can all see. Families pay online through your program's own Stripe, Square or PayPal account, with Venmo through PayPal.",
-      "Cash, checks and anything paid outside the app, like Venmo, Cash App, Zelle or a ticketing site, go to a review queue. Families upload the receipt and you approve it onto the right balance.",
-      "Fee reminders go out on their own, and every payment gets a receipt."
+      "Payments made outside the app, like cash, checks, a direct Venmo payment, Cash App, Zelle or a ticketing site, go to a review queue before they reach a balance.",
+      "Every payment gets a receipt. For your boosters, ledgers and fiscal-year budgets track income and expenses, with budget vs. actual as the year goes."
     ],
-    cta: "Bring your fee spreadsheet. We'll show you it here."
+    cta: "See how your fees would work."
   },
   students: {
     get: [
-      "Each student profile holds guardians, ensembles, instrument and section. Every family gets a private registration code and a welcome letter.",
+      "Each student profile holds guardians, ensembles, instrument, section and uniform sizes.",
       "Parents see balances, forms and announcements for every child they're linked to. Students see their own balance, assignments and music.",
       "At the end of the year, rollover promotes grades, archives graduates and carries balances forward, with a record of every change."
     ],
-    cta: "Send us your roster and watch it get set up.",
+    cta: "Start with your roster.",
     how: [
-      "Import your roster from a spreadsheet, or send it to us and we'll do it.",
-      "Give each family a private registration code. Parents and students sign in to see balances, forms and announcements."
+      "Import your roster from a spreadsheet, or send it to us and we can import it for you.",
+      "Give each family a private registration code and a printed welcome letter. Families sign in to their own portal."
     ],
     shots: [S("browser", "student roster"), S("phone", "parent portal home")]
   },
   communication: {
     get: [
-      "Announcements go out by email, with notifications on families' phones, and you can schedule them for Sunday night. Delivery tracking means a bounced email doesn't go unnoticed.",
+      "Announcements go out by email, with notifications on families' phones, and you can schedule them for Sunday night.",
       "Direct messages keep staff and family conversations in threads. One program calendar imports your Google Calendar and gives families feeds they can add to their own phones."
     ],
-    cta: "See what your families would actually receive.",
+    cta: "See what your families would receive.",
     how: [
       "Write it once and choose who it's for: everyone, an ensemble or a handful of families. Send it now or schedule it for later.",
-      "See who received it and who opened it."
+      "See who received it, and who opened it where email apps report it."
     ],
     shots: [S("browser", "new announcement"), S("browser", "announcement delivery tracking")]
   },
   forms: {
     get: [
-      "Parents fill out and sign PDF forms from their portal. Start from your own PDF or a ready-made template for medical releases and travel forms.",
-      "Assign a form to a student, an ensemble or an event, and reminders keep going until it's signed. The acknowledgements page shows everyone who has, and hasn't, signed the handbook or a policy."
+      "Parents fill out and sign from their portal, and templates cover common forms like medical releases and travel forms.",
+      "The acknowledgements page shows everyone who has, and hasn't, signed the handbook or a policy."
     ],
     cta: "Bring the permission slip you used last year."
   },
   events: {
     get: [
-      "Each event has a readiness view showing who has paid, signed and registered, student by student. Make it required or optional, with a registration deadline.",
-      "Trips get traveler rosters, payment packages and installment due dates. Parents can sign up to chaperone, with your approval."
+      "Set registration deadlines, and event reminders go out automatically.",
+      "Trips get traveler rosters, payment packages and installment due dates, and adults who travel can be charged without creating fake student records. Parents can sign up to chaperone, with your approval."
     ],
-    cta: "Bring your next trip. We'll set it up with you.",
+    cta: "Plan your next trip in Program Partner.",
     h1: "Every student ready before the bus leaves."
   },
   inventory: {
     get: [
-      "Every instrument and piece of equipment has its serial number, barcode, condition and value. Check-outs come with a signed equipment agreement saved as a PDF.",
-      "Repairs are tracked, and when something comes back broken you can open a damage case and send a letter to the family. Uniforms get their own catalog with condition, cost and who has each piece."
+      "Every instrument and piece of equipment has its serial number, barcode, condition and value.",
+      "Repairs are tracked, and when something comes back broken you can open a damage case and send a letter to the family. Uniforms get their own catalog with condition, cost and who has each piece, and on fitting day you can enter sizes for a whole ensemble in one grid."
     ],
-    cta: "Bring us your instrument spreadsheet.",
+    cta: "Let's look at your instrument list together.",
     h1: "The year-end instrument count, without the scavenger hunt."
   },
   library: {
     get: [
-      "Your repertoire and scores are searchable, with part assignments and check-outs by student.",
-      "If you turn them on, digital parts, scores and practice recordings are shared with the students who have each piece. Recordings play inside Program Partner instead of as files passed around."
+      "Assign parts and check out music by student, so you know who has which folder.",
+      "Recordings play inside Program Partner instead of as files passed around, and only the students you share them with can hear them."
     ],
     cta: "Bring your library catalog, however messy it is.",
     how: [
-      "Import your catalog from a spreadsheet, or we'll do it. Then assign parts to students and track what's checked out.",
+      "Import your catalog from a spreadsheet, or have us import it. Then assign parts to students.",
       "If you choose, share PDF parts and practice recordings with the students playing each piece."
     ],
     shots: [S("browser", "music library catalog"), S("tablet", "student digital part")]
   },
   seating: {
     get: [
-      "Class seating and rankings stay with the class. Concert charts combine ensembles or any students you choose, and they're kept separate from class seating.",
+      "Class seating and rankings stay with the class. Concert charts combine ensembles or any students you choose.",
       "Riser planning places singers by height from their measurements and keeps your pins in place. Shared concert seating holds one room setup for up to four performances in a single concert."
     ],
-    cta: "Bring this year's seating chart.",
-    h1: "Seat the class from rankings. Seat the concert from everyone."
+    cta: "See your next concert chart set up.",
+    h1: "Seating charts for class and concert."
   },
   teaching: {
     get: [
-      "Skill Pathways gives students leveled skills to pass with video or audio submissions, graded pass or try again, plus a Quick Skill Check for in-person passes. Rename the program, levels and skills to match your own.",
+      "Skill Pathways gives students leveled skills to pass with video or audio submissions, graded pass or try again, plus a Quick Skill Check for in-person passes.",
       "Practice Studio collects practice logs, reflections and recordings, with your feedback and optional parent sign-off. Attendance covers rehearsals, lessons and events, with parent absence requests."
     ],
     cta: "Show us how your students level up.",
     how: [
-      "Set up your levels and skills, and call them whatever your program calls them.",
+      "Set up your levels and skills.",
       "Students submit recordings and practice logs from their phones.",
       "You grade, give feedback and see progress across the whole program.",
       "Their rankings can set the class seating chart."
@@ -315,7 +312,7 @@ const PATCH = {
 const PHONE = {
   fees: "parent portal payment", students: "parent portal home", communication: "parent announcements on a phone",
   forms: "parent signing a form", events: "parent event registration", inventory: "student instrument check-out",
-  library: "student digital part", seating: "student practice recording", teaching: "student Skill Pathways submission"
+  library: "student digital part", seating: null, teaching: "student Skill Pathways submission"
 };
 
 export default Object.keys(F).map((key) => {
@@ -329,7 +326,7 @@ export default Object.keys(F).map((key) => {
     name: d.name, h1: d.h1, sub: d.sub, get: d.get, cta: d.cta,
     faq: d.faq.map(([q, a]) => ({ q, a })),
     steps,
-    getPhone: "Screenshot: " + PHONE[key] + ", " + D,
+    getPhone: PHONE[key] ? "Screenshot: " + PHONE[key] + ", " + D : null,
     isFees: key === "fees",
     isSeating: key === "seating"
   };

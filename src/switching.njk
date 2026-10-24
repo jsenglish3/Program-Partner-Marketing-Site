@@ -1,13 +1,13 @@
 ---
 layout: layouts/base.njk
 current: switching
-title: Switching to Program Partner
+title: How switching works
 permalink: /switching/
 description: "Moving your program off spreadsheets, paper forms and group texts, or off another system? Here's what changes, what to ask, and how the switch works."
 ---
 {% import "macros.njk" as m %}
 {%- set s = switching -%}
-{{ m.hero({ eyebrow: "Switching", title: "Switching to Program Partner", subhead: "Most programs come to us from spreadsheets, paper forms and group texts, or from another system. Here's what changes and how the move works.", primaryLabel: site.ctaPrimary, primaryHref: "/demo/", secondaryLabel: "See every feature", secondaryHref: "/product/" }, site, shots) }}
+{{ m.hero({ eyebrow: "Switching", title: "Switching to Program Partner", subhead: "Most programs run on spreadsheets, paper forms and group texts, or on another system. Here's what changes when you switch, and how the move works.", primaryLabel: site.ctaPrimary, primaryHref: "/demo/", secondaryLabel: "See every feature", secondaryHref: "/product/" }, site, shots) }}
 
 <section class="section" aria-labelledby="h-changes" style="padding-top:0">
 <div class="wrap stack" style="gap:clamp(20px,3vw,28px)">
@@ -28,7 +28,7 @@ description: "Moving your program off spreadsheets, paper forms and group texts,
 
 <section class="section band-sand" aria-labelledby="h-ask">
 <div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
-<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-ask" class="h2-sm">Questions to ask any program office</h2><p class="body-lg muted">Whatever you're comparing, ask these. Here are our answers.</p></div>
+<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-ask" class="h2-sm">Questions worth asking before you switch</h2><p class="body-lg muted">Ask these of anything you're considering. Here's how we answer.</p></div>
 <div class="grid-2" style="gap:24px">
 {%- for q in s.questions %}
 <div class="card stack" style="gap:10px"><h3 style="font-size:24px;line-height:1.25">{{ q[0] }}</h3><p class="muted" style="font-size:17px;line-height:1.55">{{ q[1] }}</p></div>
@@ -39,4 +39,4 @@ description: "Moving your program off spreadsheets, paper forms and group texts,
 
 {{ m.steps("How the switch works", s.steps, "", "h-steps") }}
 {{ m.faq("Questions about switching", s.faq, "sand", "h-faq") }}
-{{ m.cta("Ready to switch? Tell us about your program.", site.ctaPrimary, "/demo/") }}
+{{ m.cta("Tell us what you use now.", site.ctaPrimary, "/demo/") }}

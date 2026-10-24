@@ -14,7 +14,7 @@ export default {
     [
       "Fees and payments",
       "Cash and checks in envelopes, a payment app, or a platform that adds a convenience fee to each online payment.",
-      "Families pay online into your program's own processor account. Program Partner adds no fee; your processor's standard rates apply.",
+      "Families pay online, straight into your program's own account.",
     ],
     [
       "Communication",
@@ -24,7 +24,7 @@ export default {
     [
       "Forms and signatures",
       "Paper permission slips, collected and chased by hand.",
-      "Fillable forms with signatures, reminders that go out on their own, and a list of who hasn't signed.",
+      "Fillable forms with signatures, automatic reminders, and a list of who hasn't signed.",
     ],
     [
       "Events and trips",
@@ -49,12 +49,12 @@ export default {
     [
       "Teaching",
       "Paper practice logs, or a separate app for each tool.",
-      "Skill Pathways, practice logs, curriculum, quizzes and attendance, next to the roster.",
+      "Skill Pathways, practice logs, curriculum, quizzes and attendance.",
     ],
     [
       "Booster books",
       "The treasurer's own spreadsheet, rebuilt before every meeting.",
-      "Ledgers and budgets your board can see, with the treasurer's report ready before the meeting.",
+      "Ledgers and budgets for income and expenses, with receipts attached.",
     ],
   ],
 
@@ -70,11 +70,11 @@ export default {
     ],
     [
       "Does it cover the teaching side too?",
-      "Yes. Skill Pathways, practice logs, quizzes, attendance and seating charts sit next to the roster, so there's no second app for class.",
+      "Yes. Skill Pathways, practice logs, quizzes, attendance and seating charts are built in, so there's no second app for class.",
     ],
     [
       "Can your boosters run their books in it?",
-      "Yes. Ledgers and budgets come from the same records families pay into, so the treasurer's report is ready before the meeting.",
+      "Yes. Ledgers and budgets come from the same records families pay into, so the books stay current.",
     ],
   ],
 
@@ -85,26 +85,22 @@ export default {
     },
     {
       title: "Send us what you have",
-      body: "Spreadsheets, or exports from what you use now: students, families, inventory and music library. Import it yourself, or we'll do it as part of setup.",
+      body: "Spreadsheets, or exports from what you use now. Import them yourself, or we can do it for you, quoted to your data.",
     },
     {
       title: "Switch when it suits you",
-      body: "Many programs switch at a natural break, such as summer or between semesters. We'll plan the move around your calendar.",
+      body: "A natural break, like summer or between semesters, is the easiest time to switch. We'll plan the move around your calendar.",
     },
   ],
 
   faq: [
     {
-      q: "Can you bring over what we have now?",
-      a: "Yes. Send us your spreadsheets, or whatever exports you can get from your current system, and we'll import your students, families, inventory and music library. Setup and import are quoted to your data.",
-    },
-    {
-      q: "Do families pay a fee to pay online?",
-      a: "Program Partner adds none. Families pay into your program's own processor account at its standard rates.",
-    },
-    {
       q: "What does it cost?",
-      a: "We quote each program to fit its size and the parts it uses. A quote takes one business day.",
+      a: "Each program gets its own quote, based on its size and the parts it uses.",
+    },
+    {
+      q: "How do families get in?",
+      a: "You invite them by email or give them a registration code. They sign in at app.myprogrampartner.com.",
     },
   ],
 };

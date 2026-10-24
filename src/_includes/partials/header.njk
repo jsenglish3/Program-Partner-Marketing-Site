@@ -3,7 +3,7 @@
 {%- for f in nav.features %}{% if f.key == cur %}{% set inFeatures = true %}{% endif %}{% endfor -%}
 {%- set inWho = false -%}
 {%- for w in nav.who %}{% if w.key == cur %}{% set inWho = true %}{% endif %}{% endfor -%}
-{%- set inRes = (cur == "security" or cur == "woodshed" or cur == "contact") -%}
+{%- set inRes = (cur == "security" or cur == "woodshed" or cur == "contact" or cur == "switching") -%}
 {%- macro chevron() %}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg>{% endmacro -%}
 <header class="site-header">
 <a href="#main" class="skip">Skip to content</a>
@@ -41,7 +41,7 @@
 <a href="/about/"{% if cur == "about" %} aria-current="page"{% endif %}>About</a>
 </nav>
 <div class="header-actions">
-<a href="{{ site.appUrl }}" class="login-link">Log in</a>
+<a href="{{ site.appUrl }}" class="login-link">Sign in</a>
 <a href="/demo/" class="btn btn-primary">{{ site.ctaPrimary }}</a>
 <details class="mobile-menu">
 <summary aria-label="Menu"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>Menu</summary>
@@ -57,7 +57,7 @@
 <div><p class="group-label">Company</p><ul>
 <li><a href="/pricing/">Pricing</a></li>
 <li><a href="/about/">About</a></li>
-<li><a href="{{ site.appUrl }}" class="strong">Log in</a></li>
+<li><a href="{{ site.appUrl }}" class="strong">Sign in</a></li>
 </ul></div>
 </nav>
 </div>

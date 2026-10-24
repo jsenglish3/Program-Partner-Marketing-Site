@@ -120,7 +120,7 @@
     const summary = form.querySelector("[data-errors]");
     const serverBox = form.querySelector("[data-server-error]");
     const btn = form.querySelector('button[type="submit"]');
-    const LABELS = { name: "your name", email: "your work email", role: "your role", state: "your state", school: "your school, college or studio name", kind: "what kind of program", consent: "permission to email you" };
+    const LABELS = { name: "your name", email: "your email", role: "your role", state: "your state", school: "your school, college or studio name", kind: "what kind of program", consent: "permission to email you" };
     const ORDER = ["name", "email", "role", "state", "school", "kind", "consent"];
     try {
       const t = new URLSearchParams(location.search).get("topic");
@@ -243,7 +243,7 @@
         const skills = SKILLS[name] || SKILLS.default;
         html += topbar("Teaching · " + name, name, O("Quick Skill Check", -1) + P("New skill", -1));
         alt = name + ": five levels with how many students have passed each, and a review queue where the director passes a video submission or asks the student to try again.";
-        cap = "Students submit video or audio from their phones. You pass it or send it back with a note, and their level updates on its own.";
+        cap = "Students submit video or audio from their phones. You pass it or send it back with a note, and their level updates automatically.";
         const bump = st >= 2 ? 1 : 0;
         html += '<div style="position:absolute;left:28px;top:92px;width:500px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:600">Levels · Symphonic Band</span>';
         lv.forEach((l, i) => {

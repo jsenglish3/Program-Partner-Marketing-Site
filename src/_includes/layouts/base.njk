@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if title %}{{ title }} | Program Partner{% else %}Program Partner: the program office for performing arts programs{% endif %}</title>
+<title>{% if title %}{{ title }} | Program Partner{% else %}Program Partner: a program office for performing arts{% endif %}</title>
 <meta name="description" content="{{ description or site.description }}">
 {%- if noindex %}
 <meta name="robots" content="noindex">
@@ -22,11 +22,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ origin }}/assets/share.png">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="/assets/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-stacked-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]}
+{"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-horizontal-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]}
 </script>
 </head>
 <body>

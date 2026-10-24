@@ -9,7 +9,7 @@ pagination:
 permalink: "/{{ k }}/"
 eleventyComputed:
   title: "{{ legal[k].h1 | safe }}"
-  description: "{{ legal[k].title | safe }} for the Program Partner app and website."
+  description: "{{ (legal[k].desc or (legal[k].title + ' for the Program Partner app and website.')) | safe }}"
 ---
 {%- set doc = legal[k] -%}
 {%- set raw = doc.meta[0] | replace("Last reviewed: ", "") | replace("Oct ", "October ") -%}

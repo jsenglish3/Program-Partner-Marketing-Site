@@ -46,7 +46,9 @@ eleventyComputed:
 <h2 id="h-get" class="h2-sm">What you get</h2>
 {%- for p in f.get %}<p class="body-lg">{{ p }}</p>{% endfor %}
 </div>
+{%- if f.getPhone %}
 <div style="flex:0 1 280px;width:min(100%,280px);margin:0 auto">{{ m.frame("phone", f.getPhone, "feature-" + f.key + "-phone", shots, "300px") }}</div>
+{%- endif %}
 </div>
 </section>
 

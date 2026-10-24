@@ -3,7 +3,7 @@ layout: layouts/base.njk
 current: product
 title: Every feature
 permalink: /product/
-description: "Fees, families, forms, events, inventory, music library, seating and teaching tools. Turn on the parts your program needs and leave the rest off."
+description: "Fees, families, forms, events, inventory, music library, seating and teaching tools for band, orchestra, choir, theatre and private studios."
 ---
 {% import "macros.njk" as m %}
 {{ m.hero({ title: "The office side of a performing arts program.", subhead: "Turn on the parts your program needs and leave the rest off. Each program chooses its own, and you can change your mind any time.", primaryLabel: site.ctaPrimary, primaryHref: "/demo/" }, site, shots) }}
@@ -18,7 +18,7 @@ description: "Fees, families, forms, events, inventory, music library, seating a
   ["inventory","Inventory and uniforms","Every instrument and uniform, with who has it, what shape it's in and what it's worth.","band instrument inventory"],
   ["library","Music library","Searchable repertoire, scores and parts, with digital parts and recordings if you want them.","choral music library"],
   ["seating","Seating charts","Class seating from rankings, and concert charts that combine ensembles.","orchestra concert seating chart"],
-  ["teaching","Teaching tools","Skill Pathways, practice logs, curriculum, quizzes and attendance, in your own words.","Skill Pathways levels"]
+  ["teaching","Teaching tools","Skill Pathways, practice logs, curriculum, quizzes and attendance, with levels you can rename.","Skill Pathways levels"]
 ] -%}
 <section aria-label="Features" style="padding:clamp(24px,4vw,48px) 0 var(--section-y)">
 <div class="wrap">
@@ -33,4 +33,4 @@ description: "Fees, families, forms, events, inventory, music library, seating a
 </div>
 </div>
 </section>
-{{ m.cta("Turn on what you need. Leave the rest off.", site.ctaPrimary, "/demo/") }}
+{{ m.cta("See it set up for your program.", site.ctaPrimary, "/demo/") }}

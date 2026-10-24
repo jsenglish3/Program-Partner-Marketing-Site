@@ -19,7 +19,7 @@ eleventyComputed:
 <div class="wrap stack" style="max-width:1000px;gap:clamp(28px,4vw,44px)">
 <h2 id="h-week" class="h2-sm">What changes in your week</h2>
 <ol style="list-style:none;margin:0;padding:0;border-top:1px solid var(--border)">
-{%- for w in [["Monday","Parents check their own balances instead of emailing you."],["Tuesday","Permission slips and forms send their own reminders until they come back signed."],["Wednesday","You know which instruments are out, with whom, and in what shape."],["Thursday","Seating charts, concert charts and Skill Pathways sit right next to your roster."],["Friday","The Attention Center shows everything still waiting on you before the weekend."]] %}
+{%- for w in [["Monday","Parents check their own balances instead of emailing you."],["Tuesday","Permission slips and forms send their own reminders until they come back signed."],["Wednesday","You know which instruments are out, with whom, and in what shape."],["Thursday","Seating charts and Skill Pathways pull from your roster, so you never retype names."],["Friday","The Attention Center, your to-do list in Program Partner, shows everything still waiting on you before the weekend."]] %}
 <li style="display:grid;grid-template-columns:minmax(110px,180px) minmax(0,1fr);gap:8px 32px;align-items:baseline;padding:clamp(20px,2.6vw,28px) 0;border-bottom:1px solid var(--border)">
 <span class="serif" style="font-size:clamp(24px,2.6vw,30px);line-height:1.2">{{ w[0] }}</span>
 <span class="body-lg">{{ w[1] }}</span>
@@ -33,8 +33,8 @@ eleventyComputed:
 <section class="section" aria-labelledby="h-report">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start">
 <div class="stack" style="flex:1 1 300px;min-width:0;max-width:420px;gap:16px">
-<h2 id="h-report" class="h2-sm">The treasurer's report, ready before the meeting.</h2>
-<p class="body-lg muted">Ledgers, budget and the receipts still waiting on you, pulled from the same records families pay into.</p>
+<h2 id="h-report" class="h2-sm">What the treasurer sees.</h2>
+<p class="body-lg muted">Ledgers, budget and the receipts still waiting for approval, pulled from the same records families pay into.</p>
 </div>
 <div class="card card-shadow" style="flex:2 1 520px;min-width:0;gap:28px">
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
@@ -71,9 +71,9 @@ eleventyComputed:
 <section class="section" aria-labelledby="h-packet">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start">
 <div class="stack" style="flex:1 1 300px;min-width:0;max-width:420px;gap:16px">
-<h2 id="h-packet" class="h2-sm">One page for the people who sign off.</h2>
-<p class="body-lg muted">Print it, attach it, or forward it to your technology director. The details are on our <a href="/security/">Security and privacy</a> page.</p>
-<p class="body-lg muted">Each program gets its own quote, and we'll import your students, inventory and music library for you. Need a W-9 or a vendor form for purchasing? We'll send it.</p>
+<h2 id="h-packet" class="h2-sm">What goes in your approval packet.</h2>
+<p class="body-lg muted">Share these points with your technology director. The details are on our <a href="/security/">Security and privacy</a> page.</p>
+<p class="body-lg muted">Each program gets its own quote, and we can import your existing records for you. Need a W-9 or a vendor form for purchasing? We'll send it.</p>
 </div>
 <article aria-label="For your approval packet" class="card card-shadow" style="flex:2 1 520px;min-width:0;border-radius:6px;padding:clamp(28px,4vw,52px);gap:24px">
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:18px;border-bottom:2px solid var(--fg)">
@@ -81,7 +81,7 @@ eleventyComputed:
 <span class="pill pill-accent">Sample</span>
 </div>
 <dl style="margin:0;display:flex;flex-direction:column">
-{%- for p in [["Data isolation","Each program's records are walled off from every other program's, enforced in the database itself."],["Role-based access","Staff see only the areas their job needs: a booster treasurer sees the books, an assistant sees attendance."],["No selling or advertising","Student and family data is never sold, never used for advertising, and never shared with outside analytics trackers."],["Data privacy agreement","We sign a data privacy agreement with your district, or review the one your district already uses."],["Return or delete","When a program leaves, its data is returned or deleted within 45 days."]] %}
+{%- for p in [["Data isolation","Each program's records are walled off from every other program's, enforced in the database itself."],["Role-based access","Staff see only the areas their job needs: a booster treasurer sees the books, an assistant sees attendance."],["No selling or advertising","Student and family data is never sold, never used for advertising, and never shared with outside analytics trackers."],["Data privacy agreement","We sign a data privacy agreement with your district, or review the one your district already uses."],["Return and deletion","When a program leaves, we return its records on request, then delete them within 45 days. Backup copies expire within 30 days after that."]] %}
 <div style="display:flex;flex-wrap:wrap;gap:6px 28px;padding:16px 0;border-bottom:1px solid var(--sand)"><dt style="flex:0 0 200px;font-weight:600;font-size:16px;line-height:1.45">{{ p[0] }}</dt><dd style="flex:1 1 200px;min-width:0;margin:0;font-size:16px;line-height:1.55">{{ p[1] }}</dd></div>
 {%- endfor %}
 </dl>

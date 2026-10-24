@@ -3,10 +3,10 @@ layout: layouts/base.njk
 current: woodshed
 title: Woodshed, free practice
 permalink: /woodshed/
-description: "Woodshed helps students practice fingerings, rhythm counting, solfège and lyrics. Free for every student, no sign-in, on any phone, tablet or laptop."
+description: "Woodshed helps band, orchestra and choir students practice fingerings, rhythm counting, solfège and lyrics. Free, with no sign-in and nothing to download."
 ---
 {% import "macros.njk" as m %}
-{{ m.hero({ eyebrow: "Woodshed, from Program Partner", title: "Free practice for every student, on any device.", subhead: "Woodshed helps students practice fingerings, rhythm counting, solfège and lyrics. Free for every student, no sign-in, on any phone, tablet or laptop.", primaryLabel: "Open Woodshed", primaryHref: site.woodshedUrl, browser: "Screenshot: Woodshed rhythm counting", phone: "Screenshot: Woodshed fingering practice", slot: "woodshed-hero" }, site, shots) }}
+{{ m.hero({ eyebrow: "Woodshed, from Program Partner", title: "Free practice for every band, orchestra and choir student.", subhead: "Woodshed helps students practice fingerings, rhythm counting, solfège and lyrics on any phone, tablet or laptop. No sign-in, no download.", primaryLabel: "Open Woodshed", primaryHref: site.woodshedUrl, browser: "Screenshot: Woodshed rhythm counting", phone: "Screenshot: Woodshed fingering practice", slot: "woodshed-hero" }, site, shots) }}
 <section class="section band-sand" aria-labelledby="h-practice">
 <div class="wrap stack" style="gap:clamp(28px,4vw,48px)">
 <h2 id="h-practice" class="h2" style="max-width:760px">What students practice</h2>
@@ -20,13 +20,13 @@ description: "Woodshed helps students practice fingerings, rhythm counting, solf
 {{ m.steps("Build an exercise for your own music.", [
   { body: "Build a custom exercise from the music your students are playing.", kind: "browser", caption: "Screenshot: Woodshed custom exercise", slot: "woodshed-create" },
   { body: "Share it as a link in an announcement, on the board or anywhere else.", kind: "phone", caption: "Screenshot: Woodshed share link", slot: "woodshed-share" },
-  { body: "Students open it and practice on a phone, tablet or laptop. No account, no app to download.", kind: "tablet", caption: "Screenshot: Woodshed rhythm counting on a tablet", slot: "woodshed-practice" }
+  { body: "Students open the link and start practicing.", kind: "tablet", caption: "Screenshot: Woodshed rhythm counting on a tablet", slot: "woodshed-practice" }
 ], "plain", "h-create", shots) }}
 <section class="section band-dark" aria-labelledby="h-linked">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,72px);align-items:center">
 <div class="stack" style="flex:1 1 360px;min-width:0;gap:18px">
 <h2 id="h-linked" class="h2">Linked to Program Partner, so practice shows up where you track progress.</h2>
-<p class="body-lg">Woodshed works on its own for anyone. When your program runs on Program Partner, the practice your students do in Woodshed sits next to their Skill Pathways and practice logs.</p>
+<p class="body-lg">Woodshed works on its own for anyone. When you assign Woodshed practice from Program Partner, students open it from a link, and their results come back next to their Skill Pathways and practice logs.</p>
 <a href="/features/teaching/" class="link">See the teaching tools →</a>
 </div>
 <div style="flex:2 1 520px;min-width:0">{{ m.frame("browser", "Screenshot: Woodshed progress in Program Partner", "woodshed-linked", shots) }}</div>

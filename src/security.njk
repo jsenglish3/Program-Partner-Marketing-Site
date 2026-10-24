@@ -10,12 +10,12 @@ description: "What Program Partner stores, who can see it, how it's protected, a
   { id: "store", h: "What we store", p: "Rosters, guardian contacts, fees and payments, forms and signatures, attendance, assignments and recordings, inventory and music: the records a program needs to run. The full list is in our data privacy agreement." },
   { id: "see", h: "Who can see it", items: ["Each program's records are walled off from every other program, enforced by the database on every request.", "Staff see only the areas their role allows. Families see only their own children.", "When we help with a support question, we open a time-limited session, record the reason, and log it."] },
   { id: "protect", h: "How it's protected", items: ["Every connection is encrypted with HTTPS.", "Data is stored with Supabase, which states that data on its platform is encrypted at rest and in transit.", "Passwords and keys for connected services are encrypted before they're stored.", "A full encrypted backup is copied off-site every day, locked so that even our own server can't read it, and kept for 30 days.", "Demo schools are fictional, and nothing they \"send\" ever leaves the app."] },
-  { id: "payments", h: "Payments", p: "Card numbers never touch Program Partner. Families pay on Stripe's, Square's or PayPal's own secure pages, and we keep only the card brand and last four digits for the receipt." },
-  { id: "never", h: "What we will never do", items: ["Sell student or family information.", "Use it for advertising, or put advertising trackers in the app.", "Send school records to AI services, or let AI assistants and other outside apps sign in to anyone's account.", "Use it for anything other than running your program."] },
+  { id: "payments", h: "Payments", p: "Card numbers never touch Program Partner. Families pay on Stripe's, Square's or PayPal's own secure pages. Of the card itself, we keep only the brand and last four digits, for the receipt." },
+  { id: "never", h: "What we will never do", items: ["Sell student or family information.", "Use it for advertising, or put advertising trackers in the app.", "Have the app send school records to AI services, or let AI assistants and other outside apps sign in to anyone's account."] },
   { id: "law", h: "Student privacy law", items: ["We act as a school official under FERPA, at the school's direction.", "For students under 13, the school provides consent for the information it shares with us, as COPPA allows.", "We'll sign a student data privacy agreement with your district. Request ours below."] },
-  { id: "rights", h: "Your rights and your data", items: ["Directors and teachers can export student records any time.", "To correct or delete information, contact your program first, or email us.", "When a program leaves or asks us to, we return or delete its records within 45 days."] }
+  { id: "rights", h: "Your rights and your data", items: ["Directors and teachers can export student records any time.", "To correct or delete information, contact your program first, or email us.", "When a program leaves, or asks us to delete its records, we send an export if asked, then delete them within 45 days. Backup copies expire within 30 days after that."] }
 ] -%}
-{{ m.hero({ title: "Your students' information, handled like it matters.", subhead: "What we store, who can see it, how it's protected, and what we will never do with it. Every statement on this page describes how the app works today." }, site, shots) }}
+{{ m.hero({ title: "How we protect your students' information.", subhead: "What we store, who can see it, how it's protected, and what we will never do with it. Every statement on this page describes how the app works today." }, site, shots) }}
 <div style="padding:0 0 var(--section-y)">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,72px);align-items:flex-start">
 <nav aria-label="On this page" class="toc">
@@ -35,7 +35,7 @@ description: "What Program Partner stores, who can see it, how it's protected, a
 {%- endfor %}
 <section aria-labelledby="dpa" class="card card-sand" style="margin:12px 0 36px;align-items:flex-start">
 <h2 id="dpa" style="font-size:clamp(26px,3vw,34px);line-height:1.15;scroll-margin-top:96px">Request our data privacy agreement</h2>
-<p style="font-size:18px;line-height:1.6">Send us your district's name and, if you have one, the agreement your district already uses. We'll reply within one business day with ours, or with yours signed.</p>
+<p style="font-size:18px;line-height:1.6">Send us your district's name and, if you have one, the agreement your district already uses. We'll reply within one business day with ours, or with our questions about yours.</p>
 <a href="mailto:{{ site.supportEmail }}?subject=Data%20privacy%20agreement%20request" class="btn btn-primary">Request the agreement</a>
 </section>
 <section aria-labelledby="h-q" class="stack" style="padding:36px 0;border-top:1px solid var(--border);gap:14px">
