@@ -120,8 +120,8 @@
     const summary = form.querySelector("[data-errors]");
     const serverBox = form.querySelector("[data-server-error]");
     const btn = form.querySelector('button[type="submit"]');
-    const LABELS = { name: "your name", email: "your email", role: "your role", state: "your state", school: "your school, college or studio name", kind: "what kind of program", consent: "permission to email you" };
-    const ORDER = ["name", "email", "role", "state", "school", "kind", "consent"];
+    const LABELS = { name: "your name", email: "your email", role: "your role", state: "your state", school: "your school, college or studio name", kind: "what kind of program" };
+    const ORDER = ["name", "email", "role", "state", "school", "kind"];
     try {
       const t = new URLSearchParams(location.search).get("topic");
       const el = t && form.querySelector('input[name=topic][value="' + t + '"]');
@@ -150,7 +150,6 @@
       ["name", "role", "state", "school"].forEach((k) => { if (!v(k)) errs[k] = 1; });
       if (!v("email")) errs.email = 1; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email"))) errs.email = "bad";
       if (!fd.getAll("kind").length) errs.kind = 1;
-      if (!fd.get("consent")) errs.consent = 1;
       const msg = (k) => errs[k] === "bad" ? "That email address doesn't look right." : "Please add " + LABELS[k] + ".";
       const list = ORDER.filter((k) => errs[k]);
       if (list.length) {
