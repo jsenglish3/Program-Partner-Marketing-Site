@@ -64,10 +64,10 @@ description: "Ask for a demo of Program Partner. Tell us about your program and 
 <div class="hp" aria-hidden="true"><label for="f-website">{{ copy["demo"].introduction.text_031 | safe }}</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 {%- if site.turnstileSiteKey %}
 <div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}"></div>
-<script src="{{ copy["demo"].introduction.text_032 | escape }}" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {%- endif %}
 <div class="stack" style="gap:10px;align-items:flex-start">
-<button type="submit" class="btn btn-primary" data-label="Send">{{ copy["demo"].introduction.text_033 | safe }}</button>
+<button type="submit" class="btn btn-primary" data-label="{{ copy.demo.introduction.text_033 | escape }}">{{ copy["demo"].introduction.text_033 | safe }}</button>
 <p style="font-size:15px" class="muted">{{ copy["demo"].introduction.text_034 | safe }}</p>
 </div>
 </form>

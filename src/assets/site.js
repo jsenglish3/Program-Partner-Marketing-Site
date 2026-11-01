@@ -225,6 +225,11 @@
     const canvas = pw.querySelector("[data-pw-canvas]");
     const caption = pw.querySelector("[data-pw-caption]");
     const panel = pw.querySelector("#pw-panel");
+    const pathCaption = caption.textContent;
+    const displayNameFor = key => {
+      const chip = Array.from(pw.querySelectorAll("[data-pw-names] .chip")).find(c=>c.dataset.name===key);
+      return chip?.textContent.trim() || key;
+    };
     let name = NAMES[0], tab = "path", st = 99, iv = null, started = false;
 
     const fit = () => { canvas.style.transform = "scale(" + stage.clientWidth / 1120 + ")"; };
@@ -236,12 +241,13 @@
     const topbar = (crumb, title, actions) => '<div style="position:absolute;left:0;top:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;background:#FFFDF9;border-bottom:1px solid #CAD7D9"><div style="display:flex;align-items:center;gap:14px"><img src="' + ICON + '" alt="" style="width:30px;height:30px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#4B5F64">' + esc(crumb) + '</span><span style="font-family:var(--font-serif);font-weight:500;font-size:24px;line-height:1.1">' + esc(title) + '</span></div></div><div style="display:flex;gap:10px;align-items:center">' + actions + "</div></div>";
 
     function render() {
-      const lv = LEVELS[name];
+      const lv = LEVELS[name] || LEVELS[NAMES[0]];
+      const displayName = displayNameFor(name);
       let html = "", alt = "", cap = "";
       if (tab === "path") {
         const skills = SKILLS[name] || SKILLS.default;
-        html += topbar("Teaching · " + name, name, O("Quick Skill Check", -1) + P("New skill", -1));
-        alt = name + ": five levels with how many students have passed each, and a review queue where the director passes a video submission or asks the student to try again.";
+        html += topbar("Teaching · " + displayName, displayName, O("Quick Skill Check", -1) + P("New skill", -1));
+        alt = displayName + ": five levels with how many students have passed each, and a review queue where the director passes a video submission or asks the student to try again.";
         cap = "Students submit video or audio from their phones. You pass it or send it back with a note, and their level updates automatically.";
         const bump = st >= 2 ? 1 : 0;
         html += '<div style="position:absolute;left:28px;top:92px;width:500px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:600">Levels · Symphonic Band</span>';
@@ -289,8 +295,8 @@
         const counts = {}; seats.forEach((s) => { counts[s.sec] = (counts[s.sec] || 0) + 1; });
         if (isClass) {
           html += topbar("Seating · Symphonic Band", "Class seating", P("Seat by ranking", 1) + O("Save chart", 8));
-          alt = "Class seating chart for Symphonic Band: 24 students seated in three curved rows, color coded and labeled by section, seated from their " + name + " rankings. Two clarinets are dragged and swapped.";
-          cap = "Seat a class from its " + name + " rankings, then drag to adjust. Drop a student on a filled chair and the two swap. Class seating stays separate from concert charts.";
+          alt = "Class seating chart for Symphonic Band: 24 students seated in three curved rows, color coded and labeled by section, seated from their " + displayName + " rankings. Two clarinets are dragged and swapped.";
+          cap = "Seat a class from its " + displayName + " rankings, then drag to adjust. Drop a student on a filled chair and the two swap. Class seating stays separate from concert charts.";
           html += '<div style="position:absolute;left:28px;top:90px;display:flex;gap:8px;align-items:center;font-size:14px;color:#4B5F64"><span>Seat by</span><span style="font-size:14px;font-weight:500;padding:6px 14px;border-radius:999px;background:#1C292C;color:#F9F5E8;border:1.5px solid #1C292C">✓ ' + esc(name) + ' ranking</span><span style="font-size:14px;font-weight:500;padding:6px 14px;border-radius:999px;background:#FFFDF9;color:#1C292C;border:1.5px solid #CAD7D9">Section</span></div>';
           html += '<div style="position:absolute;left:350px;top:616px;width:160px;text-align:center;font-size:12px;font-weight:600;letter-spacing:.2em;color:#4B5F64;padding:6px 0;background:#EFE3D0;border-radius:6px">PODIUM</div>';
         } else {
@@ -303,7 +309,7 @@
           });
           html += '<div style="position:absolute;left:340px;top:600px;width:160px;text-align:center;font-size:12px;font-weight:600;letter-spacing:.2em;color:#4B5F64;padding:6px 0;background:#EFE3D0;border-radius:6px">AUDIENCE</div>';
         }
-        const status = placed ? (isClass ? "✓ All 24 seated from " + name + " rankings" : "✓ All 27 placed by voice part, shortest in front") : "Unseated · " + seats.length;
+        const status = placed ? (isClass ? "✓ All 24 seated from " + displayName + " rankings" : "✓ All 27 placed by voice part, shortest in front") : "Unseated · " + seats.length;
         html += '<div style="position:absolute;left:870px;top:88px;width:222px;bottom:20px;background:#FFFDF9;border:1px solid #CAD7D9;border-radius:12px"></div><div style="position:absolute;left:886px;top:102px;width:192px;font-size:13px;font-weight:600;color:' + (placed ? "#1F5133" : "#4B5F64") + '">' + esc(status) + "</div>";
         html += '<div style="position:absolute;left:886px;top:440px;width:192px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600">' + (isClass ? "Sections" : "Voice parts") + "</span>";
         Object.keys(counts).forEach((k) => { html += '<span style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="width:14px;height:14px;border-radius:50%;background:' + SEC[k][1] + '"></span>' + SEC[k][0] + " · " + counts[k] + "</span>"; });
@@ -328,7 +334,8 @@
       }
       canvas.innerHTML = html;
       stage.setAttribute("aria-label", alt);
-      caption.textContent = cap;
+      const configuredCaption = tab === "path" ? pathCaption : pw.dataset["caption" + tab[0].toUpperCase() + tab.slice(1)];
+      caption.textContent = configuredCaption ? configuredCaption.split("{name}").join(displayName) : cap;
     }
 
     function play() {
@@ -344,7 +351,7 @@
       chip.addEventListener("click", () => {
         name = chip.dataset.name;
         pw.querySelectorAll("[data-pw-names] .chip").forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
-        pw.querySelector("#pw-tab-path").textContent = name;
+        pw.querySelector("#pw-tab-path").textContent = displayNameFor(name);
         play();
       });
     });

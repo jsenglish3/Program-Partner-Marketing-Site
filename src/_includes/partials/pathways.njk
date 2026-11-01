@@ -1,4 +1,4 @@
-<section class="section pw" aria-labelledby="h-pathways" data-pathways>
+<section class="section pw" aria-labelledby="h-pathways" data-pathways data-caption-practice="{{ copy.pathways.pathways.practiceCaption | escape }}" data-caption-class="{{ copy.pathways.pathways.classCaption | escape }}" data-caption-concert="{{ copy.pathways.pathways.concertCaption | escape }}">
 <div class="wrap-wide stack" style="gap:clamp(24px,3.5vw,40px)">
 <div class="pw-head">
 <div class="stack" style="flex:1 1 520px;min-width:0;gap:14px;max-width:760px">
@@ -9,8 +9,14 @@
 <div class="stack" style="flex:0 1 460px;min-width:0;gap:10px">
 <p id="pw-name-label" class="muted" style="font-size:14px;font-weight:600">{{ copy["pathways"].pathways.text_004 | safe }}</p>
 <div role="group" aria-labelledby="pw-name-label" class="pw-chips" data-pw-names>
-{%- for n in [copy["pathways"].pathways.text_005,copy["pathways"].pathways.text_006,copy["pathways"].pathways.text_007,copy["pathways"].pathways.text_008,copy["pathways"].pathways.text_009] %}
-<button type="button" class="chip" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-name="{{ n }}">{{ n }}</button>
+{%- for n in [
+ { key: "Skill Pathways", label: copy.pathways.pathways.text_005 },
+ { key: "Choir Karate", label: copy.pathways.pathways.text_006 },
+ { key: "Scale Wars", label: copy.pathways.pathways.text_007 },
+ { key: "Band Olympics", label: copy.pathways.pathways.text_008 },
+ { key: "String Quest", label: copy.pathways.pathways.text_009 }
+] %}
+<button type="button" class="chip" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-name="{{ n.key }}">{{ n.label | escape }}</button>
 {%- endfor %}
 </div>
 </div>

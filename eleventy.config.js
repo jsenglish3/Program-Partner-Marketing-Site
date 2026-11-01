@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { buildCms } from "./scripts/build-cms.mjs";
 import { resolveMedia } from "./scripts/media.mjs";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
@@ -19,6 +20,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/admin/config.json": "admin/config.json", "src/admin/preview.js": "admin/preview.js" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addWatchTarget("content/");
+  eleventyConfig.on("eleventy.after",({directories})=>buildCms(directories.output));
   // Screenshots live in src/screenshots/<slot>.png (or .jpg/.webp).
   // The frame partial shows the image when the file exists, otherwise a quiet placeholder.
   // <slot>-dark.webp is the same screen in dark mode (the home hero's Light/Dark switch shows it).

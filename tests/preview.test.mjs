@@ -34,3 +34,10 @@ test('replacement uploads and still-image selection supersede animations in prev
 });
 
 test('SEO images accept both uploaded paths and external HTTPS URLs',async()=>{const p=await preview(),seo=structuredClone(bundle.data.seo);seo['/'].image='https://example.com/social.png';let html=p.render('seo',seo,x=>x);assert.ok(html.includes('content="https://example.com/social.png"'));assert.ok(!html.includes('https://myprogrampartner.comhttps://'));seo['/'].image='/uploads/social.png';html=p.render('seo',seo,x=>x);assert.ok(html.includes('content="https://myprogrampartner.com/uploads/social.png"'))});
+
+test('editable showcase labels keep stable keys and scripts remain outside content fields',async()=>{
+ const p=await preview(),copy=structuredClone(bundle.data.copy.pathways);copy.pathways.text_006='Renamed choir activity';const html=p.render('copy_pathways',copy,x=>x);
+ assert.ok(html.includes('data-name="Choir Karate">Renamed choir activity</button>'));
+ const demo=config.collections[0].files.find(f=>f.name==='copy_demo');assert.ok(!demo.fields.some(section=>section.fields.some(f=>f.name==='text_032')));
+ assert.ok(fs.readFileSync('src/demo.njk','utf8').includes('src="https://challenges.cloudflare.com/turnstile/v0/api.js"'));
+});

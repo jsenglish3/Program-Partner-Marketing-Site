@@ -10,7 +10,7 @@
  const h=window.h;
  function context(file,value,selected){
   const d=structuredClone(bundle.data);let template='index.njk',pageUrl='/';
-  if(file.startsWith('copy_')){const key=file.slice(5);d.copy[key]=value;if(bundle.pages[key+'.njk'])template=key+'.njk';if(key==='pathways')template='product.njk';}
+  if(file.startsWith('copy_')){const key=file.slice(5);d.copy[key]=value;if(bundle.pages[key+'.njk'])template=key+'.njk';if(key==='pathways')template='index.njk';}
   else if(file.startsWith('features_')){d.f=value;template='feature.njk';d.features=d.features.map(f=>f.key===value.key?value:f);}
   else if(file.startsWith('audiences_')){d.a=value;template='audience.njk';d.audiences=d.audiences.map(a=>a.key===value.key?value:a);}
   else if(file.startsWith('legal_')){d.k=file.slice(6);d.legal[d.k]=value;template='legal.njk';}

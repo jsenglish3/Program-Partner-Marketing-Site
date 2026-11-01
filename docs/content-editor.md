@@ -54,7 +54,7 @@ If the site later moves to Cloudflare Pages, reuse the structured content and pr
 - src/_data/site.json and nav.json: shared site settings/buttons and navigation.
 - src/admin/config.json: readable editor fields, GitHub repository and editorial workflow.
 - src/admin/preview.js: sandboxed live rendering using the same Nunjucks templates and CSS.
-- scripts/build-cms.mjs: public preview data and Nunjucks browser bundle.
+- scripts/build-cms.mjs: public preview data and Nunjucks browser bundle, generated after every Eleventy build including watched serve builds.
 - oauth/: independent Cloudflare sign-in endpoint.
 - tests/: OAuth rejection/protocol and live preview regression checks.
 
@@ -64,6 +64,6 @@ Before calling the editor ready, verify in the actual browser: owner sign-in, de
 
 ## Verification status
 
-The restored implementation builds successfully and all fifteen automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags and equivalent apostrophe entities). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
+The restored implementation builds successfully and all eighteen automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags, equivalent apostrophe entities and new showcase data attributes). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
 
 Actual dedicated GitHub App setup, encrypted secret installation, live sign-in, GitHub draft saving/publishing, production deployment round-trip and image upload remain unverified until setup and human merge. Desktop and 390px phone previews have been checked visually in the local browser. Production appearance must be checked after release.

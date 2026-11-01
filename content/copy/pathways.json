@@ -1,1 +1,22 @@
-{"pathways":{"text_001":"Teaching tools","text_002":"Skill levels, practice logs and seating, built in.","text_003":"Students move up through levels you define, log their practice from home, and their rankings set the class seating chart. Concert charts build from the same roster.","text_004":"Skill Pathways is the default. Call it whatever your program calls it:","text_005":"Skill Pathways","text_006":"Choir Karate","text_007":"Scale Wars","text_008":"Band Olympics","text_009":"String Quest","text_010":"Skill Pathways","text_011":"Practice log","text_012":"Class seating","text_013":"Concert seating","text_014":"Students submit video or audio from their phones. You pass it or send it back with a note, and their level updates automatically.","text_015":"↻ Replay"}}
+{
+  "pathways": {
+    "text_001": "Teaching tools",
+    "text_002": "Skill levels, practice logs and seating, built in.",
+    "text_003": "Students move up through levels you define, log their practice from home, and their rankings set the class seating chart. Concert charts build from the same roster.",
+    "text_004": "Skill Pathways is the default. Call it whatever your program calls it:",
+    "text_005": "Skill Pathways",
+    "text_006": "Choir Karate",
+    "text_007": "Scale Wars",
+    "text_008": "Band Olympics",
+    "text_009": "String Quest",
+    "text_010": "Skill Pathways",
+    "text_011": "Practice log",
+    "text_012": "Class seating",
+    "text_013": "Concert seating",
+    "text_014": "Students submit video or audio from their phones. You pass it or send it back with a note, and their level updates automatically.",
+    "text_015": "↻ Replay",
+    "practiceCaption": "Students log minutes, write a reflection and attach a recording. Parents can sign off, and you reply with feedback.",
+    "classCaption": "Seat a class from its {name} rankings, then drag to adjust. Drop a student on a filled chair and the two swap. Class seating stays separate from concert charts.",
+    "concertCaption": "Combine whole ensembles or hand-picked students. Auto-arrange by voice part and height, drag to fine-tune, and export a PDF for the stage crew."
+  }
+}

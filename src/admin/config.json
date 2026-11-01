@@ -1007,12 +1007,6 @@
                   "required": false
                 },
                 {
-                  "name": "text_032",
-                  "label": "Image",
-                  "widget": "image",
-                  "required": false
-                },
-                {
                   "name": "text_033",
                   "label": "Send",
                   "widget": "string",
@@ -3314,6 +3308,25 @@
                   "name": "text_015",
                   "label": "↻ Replay",
                   "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "practiceCaption",
+                  "label": "Practice log caption",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "classCaption",
+                  "label": "Class seating caption",
+                  "widget": "text",
+                  "required": false,
+                  "hint": "Use {name} for the selected program label."
+                },
+                {
+                  "name": "concertCaption",
+                  "label": "Concert seating caption",
+                  "widget": "text",
                   "required": false
                 }
               ]
