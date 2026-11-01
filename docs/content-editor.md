@@ -64,6 +64,6 @@ Before calling the editor ready, verify in the actual browser: owner sign-in, de
 
 ## Verification status
 
-The restored implementation builds successfully and all fourteen automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags and equivalent apostrophe entities). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
+The restored implementation builds successfully and all fifteen automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags and equivalent apostrophe entities). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
 
 Actual dedicated GitHub App setup, encrypted secret installation, live sign-in, GitHub draft saving/publishing, production deployment round-trip and image upload remain unverified until setup and human merge. Desktop and 390px phone previews have been checked visually in the local browser. Production appearance must be checked after release.

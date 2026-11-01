@@ -32,3 +32,5 @@ test('replacement uploads and still-image selection supersede animations in prev
  assert.ok(!p.render('media',media,x=>x,'features/fees').includes('<video'));
  media['fees-walkthrough'].preferImage=false;assert.ok(p.render('media',media,x=>x,'features/fees').includes('<video'));
 });
+
+test('SEO images accept both uploaded paths and external HTTPS URLs',async()=>{const p=await preview(),seo=structuredClone(bundle.data.seo);seo['/'].image='https://example.com/social.png';let html=p.render('seo',seo,x=>x);assert.ok(html.includes('content="https://example.com/social.png"'));assert.ok(!html.includes('https://myprogrampartner.comhttps://'));seo['/'].image='/uploads/social.png';html=p.render('seo',seo,x=>x);assert.ok(html.includes('content="https://myprogrampartner.com/uploads/social.png"'))});
