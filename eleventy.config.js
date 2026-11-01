@@ -15,7 +15,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
 
-  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
+  eleventyConfig.addPassthroughCopy({ "src/admin/config.json": "admin/config.json", "src/admin/preview.js": "admin/preview.js" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addWatchTarget("content/");
   // Screenshots live in src/screenshots/<slot>.png (or .jpg/.webp).

@@ -29,7 +29,7 @@ Create a new, separate **Program Partner Marketing Editor** GitHub App in the js
 
 - Homepage: https://myprogrampartner.com
 - OAuth callback: https://program-partner-editor.jsenglish3.workers.dev/api/callback
-- Request user authorization during installation; retain expiring user tokens.
+- Leave OAuth authorization during installation off; sign in from the editor after setup. Retain expiring user tokens.
 - Webhook: inactive. No events, account or organization permissions.
 - Repository permissions: **Contents read/write**, **Pull requests read/write**, **Commit statuses read**, **Metadata read** (automatic).
 - Install using **Only select repositories**, selecting **Program-Partner-Marketing-Site only**.
@@ -64,6 +64,6 @@ Before calling the editor ready, verify in the actual browser: owner sign-in, de
 
 ## Verification status
 
-The restored implementation builds successfully and all ten automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
+The restored implementation builds successfully and all eleven automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
 
-Actual dedicated GitHub App setup, encrypted secret installation, live sign-in, GitHub draft saving/publishing, production deployment round-trip and image upload remain unverified until setup and human merge. Desktop/mobile preview behavior is being checked locally; production appearance must be checked after release.
+Actual dedicated GitHub App setup, encrypted secret installation, live sign-in, GitHub draft saving/publishing, production deployment round-trip and image upload remain unverified until setup and human merge. Desktop and 390px phone previews have been checked visually in the local browser. Production appearance must be checked after release.

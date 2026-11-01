@@ -9,5 +9,6 @@ try{
  const html=[];function walk(d){for(const f of fs.readdirSync(d,{withFileTypes:true})){const p=path.join(d,f.name);if(f.isDirectory())walk(p);else if(p.endsWith('.html'))html.push(path.relative(path.join(dir,'_site'),p));}}walk(path.join(dir,'_site'));
  const normalize=s=>s.replace(/>\s+</g,'><').trim();
  for(const p of html)assert.equal(normalize(fs.readFileSync(path.join(root,'_site',p),'utf8')),normalize(fs.readFileSync(path.join(dir,'_site',p),'utf8')),'Existing published HTML changed: '+p);
+ assert.equal(normalize(fs.readFileSync(path.join(root,'_site/sitemap.xml'),'utf8')),normalize(fs.readFileSync(path.join(dir,'_site/sitemap.xml'),'utf8')),'Public sitemap changed');
  console.log('Preserved the existing HTML, copy and layout of '+html.length+' pages.');
 }finally{fs.rmSync(dir,{recursive:true,force:true})}
