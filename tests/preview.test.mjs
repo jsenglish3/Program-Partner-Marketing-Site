@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';import nunjucks from 'nunjucks';
 const config=JSON.parse(fs.readFileSync('src/admin/config.json')),bundle=JSON.parse(fs.readFileSync('_site/admin/preview-data.json'));
 const source=fs.readFileSync('src/admin/preview.js','utf8');
-async function preview(){const window={h:()=>null,createClass:spec=>spec};const sandbox={window,nunjucks,structuredClone,location:{origin:'https://myprogrampartner.com'},fetch:async url=>({json:async()=>url.includes('config.json')?config:bundle}),CMS:{registerPreviewTemplate(){},init(){}},document:{getElementById(){return {append(){}}}}};await vm.runInNewContext(source,sandbox);assert.ok(window.ProgramPartnerPreview,'preview must initialize');return window.ProgramPartnerPreview;}
+async function preview(overrides={}){const window={h:()=>null,createClass:spec=>spec};const sandbox={window,nunjucks,structuredClone,location:{origin:'https://myprogrampartner.com'},fetch:async url=>({json:async()=>url.includes('config.json')?config:bundle}),CMS:{registerPreviewTemplate(){},init(){}},document:{getElementById(){return {append(){}}}}};Object.assign(sandbox,overrides);await vm.runInNewContext(source,sandbox);assert.ok(window.ProgramPartnerPreview,'preview must initialize');return window.ProgramPartnerPreview;}
 test('all configured content entries render the production templates',async()=>{const p=await preview();for(const f of config.collections[0].files){const data=JSON.parse(fs.readFileSync(f.file));const html=p.render(f.name,data,x=>x);assert.match(html,/<!doctype html>/i,f.name);assert.ok(!html.includes('undefined'),f.name);assert.match(html,/assets\/site.css/,f.name)}});
 test('draft heading updates immediately without changing source',async()=>{
  const p=await preview(),original=fs.readFileSync('content/copy/index.json','utf8'),data=JSON.parse(original);
@@ -45,4 +45,17 @@ test('editable showcase labels keep stable keys and scripts remain outside conte
  assert.ok(html.includes('data-name="Choir Karate">Renamed choir activity</button>'));
  const demo=config.collections[0].files.find(f=>f.name==='copy_demo');assert.ok(!demo.fields.some(section=>section.fields.some(f=>f.name==='text_032')));
  assert.ok(fs.readFileSync('src/demo.njk','utf8').includes('src="https://challenges.cloudflare.com/turnstile/v0/api.js"'));
+});
+
+
+test('uploaded blob images become data URLs inside the isolated preview',async()=>{
+ const blobUrl='blob:https://myprogrampartner.com/test-upload',dataUrl='data:image/png;base64,dGVzdA==';let reads=0;
+ const p=await preview({fetch:async url=>url.startsWith('blob:')?{ok:true,blob:async()=>{reads++;return {};}}:{json:async()=>url.includes('config.json')?config:bundle},FileReader:class{readAsDataURL(){this.result=dataUrl;this.onload();}}});
+ const media=structuredClone(bundle.data.media);media['home-hero-all-browser']={image:'/uploads/test.png',alt:'Upload test',caption:'Upload caption'};
+ const getAsset=path=>path==='/uploads/test.png'?blobUrl:path;
+ assert.equal(await p.prepareAssets(media,getAsset),true);
+ const html=p.render('media',media,getAsset);
+ assert.ok(html.includes('src="'+dataUrl+'"'));assert.ok(!html.includes(blobUrl));
+ assert.equal(await p.prepareAssets(media,getAsset),false);assert.equal(reads,1);
+ assert.ok(source.includes("sandbox:'allow-scripts'"));assert.ok(!source.includes('allow-same-origin'));
 });

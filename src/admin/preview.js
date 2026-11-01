@@ -36,9 +36,22 @@
   }
   return {d,template};
  }
+ // Blob URLs belong to the editor origin; the isolated preview needs image bytes.
+ const assetDataUrls=new Map(),assetLoads=new Map();
+ async function prepareAssets(value,getAsset){
+  const urls=new Set();
+  function collect(obj){if(!obj||typeof obj!=='object')return;for(const v of Object.values(obj)){if(typeof v==='string'&&v.startsWith('/uploads/')){const asset=getAsset(v);const url=asset?String(asset):v;if(url.startsWith('blob:'+location.origin+'/'))urls.add(url);}else if(v&&typeof v==='object')collect(v);}}
+  collect(value);
+  const missing=[...urls].filter(url=>!assetDataUrls.has(url));
+  await Promise.all(missing.map(url=>{
+   if(!assetLoads.has(url))assetLoads.set(url,fetch(url).then(r=>{if(!r.ok)throw Error('Image could not be read');return r.blob();}).then(blob=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>{assetDataUrls.set(url,String(reader.result));resolve();};reader.onerror=()=>reject(Error('Image could not be read'));reader.readAsDataURL(blob);})).catch(error=>{assetLoads.delete(url);throw error;}));
+   return assetLoads.get(url);
+  }));
+  return missing.length>0;
+ }
  function render(file,value,getAsset,selected){
   const {d,template}=context(file,value,selected);
-  function assets(obj){if(!obj||typeof obj!=='object')return;for(const [k,v]of Object.entries(obj)){if(typeof v==='string'&&/^(\/uploads\/|\/screenshots\/|\/assets\/)/.test(v)){const asset=getAsset(v);obj[k]=asset?String(asset):v;}else if(v&&typeof v==='object')assets(v);}}assets(d);
+  function assets(obj){if(!obj||typeof obj!=='object')return;for(const [k,v]of Object.entries(obj)){if(typeof v==='string'&&/^(\/uploads\/|\/screenshots\/|\/assets\/)/.test(v)){const asset=getAsset(v);const url=asset?String(asset):v;obj[k]=assetDataUrls.get(url)||url;}else if(v&&typeof v==='object')assets(v);}}assets(d);
   d.content=env.render(template,d);let html=env.render('layouts/base.njk',d);
   const origin=location.origin;
   const protection='<base href="'+origin+'/"><meta http-equiv="Content-Security-Policy" content="default-src '+origin+' blob: data:; script-src '+origin+' \'unsafe-inline\'; style-src '+origin+' \'unsafe-inline\'; img-src '+origin+' blob: data: https:; font-src '+origin+'; connect-src \'none\'; form-action \'none\'"><script>addEventListener("submit",e=>{e.preventDefault();e.stopImmediatePropagation()},true);addEventListener("click",e=>{if(e.target.closest("a"))e.preventDefault()},true)<\/script>';
@@ -49,10 +62,16 @@
  const Preview=window.createClass({
   getInitialState(){return {page:'',phone:false,available:600};},
   componentDidMount(){
+   this.previewMounted=true;this.prepareUploadAssets();
    this.resizeObserver=new ResizeObserver(entries=>{const available=Math.round(entries[0].contentRect.width);if(available>0&&available!==this.state.available)this.setState({available});});
    if(this.previewContainer)this.resizeObserver.observe(this.previewContainer);
   },
-  componentWillUnmount(){this.resizeObserver?.disconnect();},
+  componentDidUpdate(){this.prepareUploadAssets();},
+  prepareUploadAssets(){
+   const value=this.props.entry.get('data').toJS();
+   prepareAssets(value,this.props.getAsset).then(changed=>{if(changed&&this.previewMounted)this.setState({assetRevision:(this.state.assetRevision||0)+1});}).catch(()=>{});
+  },
+  componentWillUnmount(){this.previewMounted=false;this.resizeObserver?.disconnect();},
   render(){
    const props=this.props;const slug=props.entry.get('slug');
    const file=config.collections[0].files.find(f=>f.name===slug||f.file===props.entry.get('path'))?.name||slug;
@@ -73,6 +92,6 @@
  });
  CMS.registerPreviewTemplate('website',Preview);
  for(const file of config.collections[0].files)CMS.registerPreviewTemplate(file.name,Preview);
- window.ProgramPartnerPreview={render,context};
+ window.ProgramPartnerPreview={render,context,prepareAssets};
  CMS.init({config,load_config_file:false});
 })().catch(()=>{document.getElementById('editor-note').append(' The editor could not load. Refresh to try again.');});
