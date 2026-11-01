@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveMedia } from "./scripts/media.mjs";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
@@ -34,12 +35,7 @@ export default function (eleventyConfig) {
       if (v) out[v[1] + (v[2].toLowerCase() === "mp4" ? "@video" : "@webm")] = "/screenshots/" + f;
     }
     const media=JSON.parse(fs.readFileSync(new URL('./content/media.json',import.meta.url),'utf8'));
-    for(const [slot,m] of Object.entries(media)){
-      if(m.image)out[slot]=m.image;
-      out[slot+'@alt']=m.alt;
-      out[slot+'@caption']=m.caption;
-    }
-    return out;
+    return resolveMedia(out,media);
   });
 
   eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());

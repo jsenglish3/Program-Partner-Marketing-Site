@@ -9,3 +9,26 @@ test('preview cannot submit forms or reach editor storage',async()=>{const p=awa
 test('editable data has no code or form endpoint fields in visible widgets',()=>{assert.equal(config.publish_mode,'editorial_workflow');assert.equal(config.backend.repo,'jsenglish3/Program-Partner-Marketing-Site');assert.equal(config.backend.branch,'main');const site=config.collections[0].files.find(f=>f.name==='site');assert.equal(site.fields.find(f=>f.name==='chatEndpoint').widget,'hidden');for(const f of config.collections[0].files)assert.match(f.file,/\.json$/)});
 
 test('admin stays out of the public sitemap and delivers no front matter',()=>{const html=fs.readFileSync('_site/admin/index.html','utf8');assert.ok(html.startsWith('<!doctype html>'));assert.match(html,/name="robots" content="noindex,nofollow"/);assert.ok(!fs.readFileSync('_site/sitemap.xml','utf8').includes('/admin/'))});
+
+test('quotes and markup in edited image text remain valid escaped attributes',async()=>{
+ const p=await preview(),media=structuredClone(bundle.data.media),text='The "Fees" screen <sample>';
+ media['home-hero-all-browser'].alt=text;
+ media['fees-walkthrough'].alt=text;
+ let html=p.render('media',media,x=>x);
+ assert.ok(html.includes('alt="The &quot;Fees&quot; screen &lt;sample&gt;"'));
+ html=p.render('media',media,x=>x,'features/fees');
+ assert.ok(html.includes('aria-label="The &quot;Fees&quot; screen &lt;sample&gt; (short animation)"'));
+ const seo=structuredClone(bundle.data.seo);seo['/'].imageAlt=text;seo['/'].title=text;seo['/'].description=text;
+ html=p.render('seo',seo,x=>x);assert.ok(html.includes('content="The &quot;Fees&quot; screen &lt;sample&gt;"'));
+});
+
+test('replacement uploads and still-image selection supersede animations in preview',async()=>{
+ const p=await preview(),media=structuredClone(bundle.data.media);
+ let context=p.context('media',media,'features/fees');assert.ok(context.d.shots['fees-walkthrough@video']);
+ media['fees-walkthrough'].image='/uploads/replacement.png';
+ context=p.context('media',media,'features/fees');assert.equal(context.d.shots['fees-walkthrough@video'],undefined);assert.equal(context.d.shots['fees-walkthrough@webm'],undefined);
+ let html=p.render('media',media,x=>x,'features/fees');assert.ok(html.includes('src="/uploads/replacement.png"'));assert.ok(!html.includes('<video'));
+ media['fees-walkthrough'].image=bundle.data.originalShots['fees-walkthrough'];media['fees-walkthrough'].preferImage=true;
+ assert.ok(!p.render('media',media,x=>x,'features/fees').includes('<video'));
+ media['fees-walkthrough'].preferImage=false;assert.ok(p.render('media',media,x=>x,'features/fees').includes('<video'));
+});

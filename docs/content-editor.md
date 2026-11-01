@@ -9,7 +9,7 @@ This is content editing with a visual website preview. It is not a drag-and-drop
 1. Choose **Login with GitHub** using **jsenglish3**.
 2. Open **Website content** and choose a page, feature, audience or shared section.
 3. Expand the named section, edit the fields, and use the preview page selector and **Desktop / Phone** controls.
-4. For images, choose/upload an image and enter meaningful alternative text. Screenshots also have an optional caption. Empty screenshot alt text retains the existing descriptive fallback.
+4. For images, choose/upload an image and enter meaningful alternative text. Screenshots also have an optional caption and a still-image override for animated slots. Empty screenshot alt text retains the existing descriptive fallback.
 5. **Save** creates or updates a draft on its own GitHub branch/pull request. It does not update the live site.
 6. When ready, use the editorial workflow status controls and **Publish**. Decap merges the content draft into main. The existing GitHub Pages workflow builds and deploys it; wait for that workflow to finish, then check the public page.
 7. Expired GitHub user tokens require signing in again. An unpublished draft can be discarded in the editor. A published change can be corrected in a new draft or reverted in GitHub.
@@ -64,6 +64,6 @@ Before calling the editor ready, verify in the actual browser: owner sign-in, de
 
 ## Verification status
 
-The restored implementation builds successfully and all eleven automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
+The restored implementation builds successfully and all fourteen automated tests pass. All 28 original HTML pages and the sitemap retain their original output (HTML comparison ignores whitespace between tags and equivalent apostrophe entities). In the isolated Decap test-backend browser session, editing the home heading updated the styled preview immediately and Save created a Draft separately from published content. That local test does not verify GitHub OAuth or remote publishing.
 
 Actual dedicated GitHub App setup, encrypted secret installation, live sign-in, GitHub draft saving/publishing, production deployment round-trip and image upload remain unverified until setup and human merge. Desktop and 390px phone previews have been checked visually in the local browser. Production appearance must be checked after release.

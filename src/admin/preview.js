@@ -29,7 +29,11 @@
   else if(template==='legal.njk'){d.k??='privacy';pageUrl='/'+d.k+'/';d.title=d.legal[d.k].h1;d.description=d.legal[d.k].desc||d.legal[d.k].title+' for the Program Partner app and website.';d.current='legal';}
   else Object.assign(d,{title:meta.title,description:meta.description,current:meta.current,noindex:meta.noindex});
   d.page={url:pageUrl};d.site.chatEndpoint='';d.site.cloudflareAnalyticsToken='';d.site.turnstileSiteKey='';
-  for(const [slot,m] of Object.entries(d.media)){if(m.image)d.shots[slot]=m.image;d.shots[slot+'@alt']=m.alt;d.shots[slot+'@caption']=m.caption;}
+  d.shots={...d.originalShots};
+  for(const [slot,m] of Object.entries(d.media)){
+   if(m.preferImage||(m.image&&m.image!==d.originalShots[slot])){delete d.shots[slot+'@video'];delete d.shots[slot+'@webm'];}
+   if(m.image)d.shots[slot]=m.image;d.shots[slot+'@alt']=m.alt;d.shots[slot+'@caption']=m.caption;
+  }
   return {d,template};
  }
  function render(file,value,getAsset,selected){
