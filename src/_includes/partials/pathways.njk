@@ -2,14 +2,14 @@
 <div class="wrap-wide stack" style="gap:clamp(24px,3.5vw,40px)">
 <div class="pw-head">
 <div class="stack" style="flex:1 1 520px;min-width:0;gap:14px;max-width:760px">
-<p class="eyebrow" style="color:var(--coral)">Teaching tools</p>
-<h2 id="h-pathways" class="h2">Skill levels, practice logs and seating, built in.</h2>
-<p class="muted" style="font-size:clamp(17px,1.5vw,19px);line-height:1.6;text-wrap:pretty">Students move up through levels you define, log their practice from home, and their rankings set the class seating chart. Concert charts build from the same roster.</p>
+<p class="eyebrow" style="color:var(--coral)">{{ copy["pathways"].pathways.text_001 | safe }}</p>
+<h2 id="h-pathways" class="h2">{{ copy["pathways"].pathways.text_002 | safe }}</h2>
+<p class="muted" style="font-size:clamp(17px,1.5vw,19px);line-height:1.6;text-wrap:pretty">{{ copy["pathways"].pathways.text_003 | safe }}</p>
 </div>
 <div class="stack" style="flex:0 1 460px;min-width:0;gap:10px">
-<p id="pw-name-label" class="muted" style="font-size:14px;font-weight:600">Skill Pathways is the default. Call it whatever your program calls it:</p>
+<p id="pw-name-label" class="muted" style="font-size:14px;font-weight:600">{{ copy["pathways"].pathways.text_004 | safe }}</p>
 <div role="group" aria-labelledby="pw-name-label" class="pw-chips" data-pw-names>
-{%- for n in ["Skill Pathways","Choir Karate","Scale Wars","Band Olympics","String Quest"] %}
+{%- for n in [copy["pathways"].pathways.text_005,copy["pathways"].pathways.text_006,copy["pathways"].pathways.text_007,copy["pathways"].pathways.text_008,copy["pathways"].pathways.text_009] %}
 <button type="button" class="chip" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-name="{{ n }}">{{ n }}</button>
 {%- endfor %}
 </div>
@@ -17,18 +17,18 @@
 </div>
 <div class="stack" style="gap:14px">
 <div role="tablist" aria-label="Teaching tools" class="pw-tabs" data-pw-tabs>
-<button type="button" role="tab" id="pw-tab-path" aria-selected="true" aria-controls="pw-panel" tabindex="0" data-tab="path">Skill Pathways</button>
-<button type="button" role="tab" id="pw-tab-practice" aria-selected="false" aria-controls="pw-panel" tabindex="-1" data-tab="practice">Practice log</button>
-<button type="button" role="tab" id="pw-tab-class" aria-selected="false" aria-controls="pw-panel" tabindex="-1" data-tab="class">Class seating</button>
-<button type="button" role="tab" id="pw-tab-concert" aria-selected="false" aria-controls="pw-panel" tabindex="-1" data-tab="concert">Concert seating</button>
+<button type="button" role="tab" id="pw-tab-path" aria-selected="true" aria-controls="pw-panel" tabindex="0" data-tab="path">{{ copy["pathways"].pathways.text_010 | safe }}</button>
+<button type="button" role="tab" id="pw-tab-practice" aria-selected="false" aria-controls="pw-panel" tabindex="-1" data-tab="practice">{{ copy["pathways"].pathways.text_011 | safe }}</button>
+<button type="button" role="tab" id="pw-tab-class" aria-selected="false" aria-controls="pw-panel" tabindex="-1" data-tab="class">{{ copy["pathways"].pathways.text_012 | safe }}</button>
+<button type="button" role="tab" id="pw-tab-concert" aria-selected="false" aria-controls="pw-panel" tabindex="-1" data-tab="concert">{{ copy["pathways"].pathways.text_013 | safe }}</button>
 </div>
 <div role="tabpanel" id="pw-panel" aria-labelledby="pw-tab-path" class="stack" style="gap:12px">
 <div class="pw-stage" role="img" aria-label="Skill Pathways: five levels with how many students have passed each, and a review queue where the director passes a video submission or asks the student to try again." data-pw-stage>
 <div class="pw-canvas" aria-hidden="true" data-pw-canvas></div>
 </div>
 <div class="pw-foot">
-<p data-pw-caption>Students submit video or audio from their phones. You pass it or send it back with a note, and their level updates automatically.</p>
-<button type="button" class="btn btn-outline btn-sm" data-pw-replay>↻ Replay</button>
+<p data-pw-caption>{{ copy["pathways"].pathways.text_014 | safe }}</p>
+<button type="button" class="btn btn-outline btn-sm" data-pw-replay>{{ copy["pathways"].pathways.text_015 | safe }}</button>
 </div>
 </div>
 </div>

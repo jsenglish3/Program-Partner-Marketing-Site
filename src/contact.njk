@@ -8,17 +8,17 @@ description: "Questions about Program Partner, a quote, a form your district nee
 <div style="padding:clamp(64px,10vw,128px) 0">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,80px);align-items:flex-start">
 <div class="stack" style="flex:1.4 1 420px;min-width:0;gap:24px">
-<h1 class="display">Talk to a person.</h1>
-<p class="lede">Questions about Program Partner, a quote, a form your district needs, or help once you're signed in? Email <a href="mailto:{{ site.supportEmail }}" style="font-weight:600">{{ site.supportEmail }}</a> and we'll reply within one business day. Signed in already? Open Help from the menu for guides to every section.</p>
+<h1 class="display">{{ copy["contact"].introduction.text_001 | safe }}</h1>
+<p class="lede">{{ copy["contact"].introduction.text_002 | safe }} <a href="mailto:{{ site.supportEmail }}" style="font-weight:600">{{ site.supportEmail }}</a> {{ copy["contact"].introduction.text_003 | safe }}</p>
 <div class="hero-actions">
-<a href="/demo/" class="btn btn-primary">{{ site.ctaPrimary }}</a>
-<a href="{{ site.appUrl }}" class="btn btn-outline">Sign in</a>
+<a href="{{ copy["contact"].introduction.text_004 | escape }}" class="btn btn-primary">{{ site.ctaPrimary }}</a>
+<a href="{{ site.appUrl }}" class="btn btn-outline">{{ copy["contact"].introduction.text_005 | safe }}</a>
 </div>
 </div>
 <aside aria-labelledby="h-fam" class="card card-sand" style="flex:1 1 300px;min-width:0;gap:12px">
-<h2 id="h-fam" style="font-size:26px;line-height:1.2">Parent or student?</h2>
-<p>Questions about fees, events or schedules go to your director or teacher. Trouble signing in? Email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
-<a href="/families/" class="link" style="font-size:16px">Help for families</a>
+<h2 id="h-fam" style="font-size:26px;line-height:1.2">{{ copy["contact"].fam.text_006 | safe }}</h2>
+<p>{{ copy["contact"].fam.text_007 | safe }} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+<a href="{{ copy["contact"].fam.text_008 | escape }}" class="link" style="font-size:16px">{{ copy["contact"].fam.text_009 | safe }}</a>
 </aside>
 </div>
 </div>

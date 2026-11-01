@@ -19,9 +19,9 @@ npm run build    # writes the site to _site/
 | Reusable sections (hero, CTA band, FAQ, steps, screenshot frames) | `src/_includes/macros.njk` |
 | Site-wide settings (booking link, form endpoint, analytics token, CTA labels) | `src/_data/site.json` |
 | Navigation | `src/_data/nav.json` |
-| Feature page copy | `src/_data/features.js` |
-| Audience page copy (directors, boosters, schools, studios) | `src/_data/audiences.json` |
-| Privacy, terms, accessibility text | `src/_data/legal.json` |
+| Feature page copy | `content/features/` |
+| Audience page copy (directors, boosters, schools, studios) | `content/audiences/` |
+| Privacy, terms, accessibility text | `content/legal/` |
 | Styles and script | `src/assets/site.css`, `src/assets/site.js` |
 | Screenshots | `src/screenshots/<slot>.png` — see below |
 
@@ -57,3 +57,9 @@ How the current set was taken: the Westbrook demo at app.myprogrampartner.com/de
 ## Founder photo
 
 Put the photo at `src/assets/trey-english.jpg` (portrait, roughly 2:3). The home and About pages show a placeholder until it exists.
+
+## Visual content editor
+
+The Decap content editor is implemented at `/admin/` with a live preview and separate draft/publish workflow. **It is not activated until the dedicated GitHub App and Cloudflare OAuth Worker secrets are configured.** See [setup, editing instructions and verification status](docs/content-editor.md).
+
+Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/_data/`. The existing templates, Newsreader/DM Sans typography, CSS, scripts and GitHub Pages deployment remain in place. Run `npm run build` and `npm test` for the editor checks.

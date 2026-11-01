@@ -7,15 +7,15 @@ description: "Moving your program off spreadsheets, paper forms and group texts,
 ---
 {% import "macros.njk" as m %}
 {%- set s = switching -%}
-{{ m.hero({ eyebrow: "Switching", title: "Switching to Program Partner", subhead: "Most programs run on spreadsheets, paper forms and group texts, or on another system. Here's what changes when you switch, and how the move works.", primaryLabel: site.ctaPrimary, primaryHref: "/demo/", secondaryLabel: "See every feature", secondaryHref: "/product/" }, site, shots) }}
+{{ m.hero({ eyebrow: "Switching", title: copy["switching"].introduction.text_001, subhead: copy["switching"].introduction.text_002, primaryLabel: site.ctaPrimary, primaryHref: copy["switching"].buttons.link_01, secondaryLabel: copy["switching"].introduction.text_003, secondaryHref: copy["switching"].buttons.link_02 }, site, shots) }}
 
 <section class="section" aria-labelledby="h-changes" style="padding-top:0">
 <div class="wrap stack" style="gap:clamp(20px,3vw,28px)">
-<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-changes" class="h2-sm">What changes</h2><p class="body-lg muted">How programs often run the office side today, and how the same work runs in Program Partner.</p></div>
+<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-changes" class="h2-sm">{{ copy["switching"].changes.text_004 | safe }}</h2><p class="body-lg muted">{{ copy["switching"].changes.text_005 | safe }}</p></div>
 <div class="compare-wrap">
 <table class="compare-table">
-<caption class="sr-only">How programs often work today, and the same work in Program Partner</caption>
-<thead><tr><th scope="col"><span class="sr-only">Topic</span></th><th scope="col">Often today</th><th scope="col">With Program Partner</th></tr></thead>
+<caption class="sr-only">{{ copy["switching"].changes.text_006 | safe }}</caption>
+<thead><tr><th scope="col"><span class="sr-only">{{ copy["switching"].changes.text_007 | safe }}</span></th><th scope="col">{{ copy["switching"].changes.text_008 | safe }}</th><th scope="col">{{ copy["switching"].changes.text_009 | safe }}</th></tr></thead>
 <tbody>
 {%- for r in s.rows %}
 <tr><th scope="row">{{ r[0] }}</th><td data-label="Often today">{{ r[1] }}</td><td data-label="With Program Partner">{{ r[2] }}</td></tr>
@@ -28,7 +28,7 @@ description: "Moving your program off spreadsheets, paper forms and group texts,
 
 <section class="section band-sand" aria-labelledby="h-ask">
 <div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
-<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-ask" class="h2-sm">Questions worth asking before you switch</h2><p class="body-lg muted">Ask these of anything you're considering. Here's how we answer.</p></div>
+<div class="stack" style="gap:12px;max-width:760px"><h2 id="h-ask" class="h2-sm">{{ copy["switching"].ask.text_010 | safe }}</h2><p class="body-lg muted">{{ copy["switching"].ask.text_011 | safe }}</p></div>
 <div class="grid-2" style="gap:24px">
 {%- for q in s.questions %}
 <div class="card stack" style="gap:10px"><h3 style="font-size:24px;line-height:1.25">{{ q[0] }}</h3><p class="muted" style="font-size:17px;line-height:1.55">{{ q[1] }}</p></div>
@@ -37,6 +37,6 @@ description: "Moving your program off spreadsheets, paper forms and group texts,
 </div>
 </section>
 
-{{ m.steps("How the switch works", s.steps, "", "h-steps") }}
-{{ m.faq("Questions about switching", s.faq, "sand", "h-faq") }}
-{{ m.cta("Tell us what you use now.", site.ctaPrimary, "/demo/") }}
+{{ m.steps(copy["switching"].ask.text_012, s.steps, "", "h-steps") }}
+{{ m.faq(copy["switching"].ask.text_013, s.faq, "sand", "h-faq") }}
+{{ m.cta(copy["switching"].ask.text_014, site.ctaPrimary, copy["switching"].buttons.link_03) }}

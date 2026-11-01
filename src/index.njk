@@ -5,25 +5,25 @@ permalink: /
 description: "The program office for band, orchestra, choir, theatre and private studios: fees, families, instruments, music, seating and messages, built by a director."
 ---
 {% import "macros.njk" as m %}
-{%- set D = "Westbrook Middle School demo" -%}
+{%- set D = copy["index"].introduction.text_001 -%}
 {%- set programs = [
-  { key: "all", label: "Every program", browser: "Screenshot: director dashboard, " + D, phone: "Screenshot: parent portal on a phone, " + D },
+  { key: "all", label: copy["index"].introduction.text_002, browser: "Screenshot: director dashboard, " + D, phone: "Screenshot: parent portal on a phone, " + D },
   { key: "band", label: "Band", browser: "Screenshot: instrument inventory and check-outs, " + D, phone: "Screenshot: student Skill Pathways submission, " + D },
   { key: "orchestra", label: "Orchestra", browser: "Screenshot: combined concert seating chart, " + D, phone: "Screenshot: student practice assignments, " + D },
   { key: "choir", label: "Choir", browser: "Screenshot: choral music library, " + D, phone: "Screenshot: student part and practice track, " + D },
   { key: "theatre", label: "Theatre", browser: "Screenshot: Thespian Points progress, " + D, phone: "Screenshot: parent signing a permission form, " + D },
-  { key: "studio", label: "Private studio", browser: "Screenshot: weekly lesson schedule, studio demo", phone: "Screenshot: practice log on a parent phone, studio demo" }
+  { key: "studio", label: copy["index"].introduction.text_003, browser: "Screenshot: weekly lesson schedule, studio demo", phone: "Screenshot: practice log on a parent phone, studio demo" }
 ] -%}
 
 <section class="hero" aria-labelledby="hero-h">
 <div class="wrap-wide hero-row">
 <div class="hero-text">
-<p class="eyebrow">For band, orchestra, choir, theatre and private studios</p>
-<h1 id="hero-h" class="display-sm">Stress less. Teach more.</h1>
-<p class="lede">Fees, families, instruments, music, seating and messages, built by a band director who still runs his own program on it.</p>
+<p class="eyebrow">{{ copy["index"].hero_h.text_004 | safe }}</p>
+<h1 id="hero-h" class="display-sm">{{ copy["index"].hero_h.text_005 | safe }}</h1>
+<p class="lede">{{ copy["index"].hero_h.text_006 | safe }}</p>
 <div class="hero-actions">
-<a href="/demo/" class="btn btn-primary">{{ site.ctaPrimary }}</a>
-<a href="/product/" class="btn btn-outline">See every feature</a>
+<a href="{{ copy["index"].hero_h.text_007 | escape }}" class="btn btn-primary">{{ site.ctaPrimary }}</a>
+<a href="{{ copy["index"].hero_h.text_008 | escape }}" class="btn btn-outline">{{ copy["index"].hero_h.text_009 | safe }}</a>
 </div>
 </div>
 <div class="hero-visual" data-tabs data-shot-theme="light">
@@ -41,10 +41,10 @@ description: "The program office for band, orchestra, choir, theatre and private
 </div>
 {%- endfor %}
 <div class="theme-switch" data-theme-switch>
-<span id="theme-switch-label">Every screen works in light and dark mode.</span>
+<span id="theme-switch-label">{{ copy["index"].hero_h.text_010 | safe }}</span>
 <span class="seg" role="group" aria-labelledby="theme-switch-label">
-<button type="button" aria-pressed="true" data-theme="light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Light</button>
-<button type="button" aria-pressed="false" data-theme="dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>Dark</button>
+<button type="button" aria-pressed="true" data-theme="light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>{{ copy["index"].hero_h.text_011 | safe }}</button>
+<button type="button" aria-pressed="false" data-theme="dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>{{ copy["index"].hero_h.text_012 | safe }}</button>
 </span>
 </div>
 </div>
@@ -53,17 +53,17 @@ description: "The program office for band, orchestra, choir, theatre and private
 
 <section class="section" aria-labelledby="h-built">
 <div class="wrap stack" style="gap:24px;max-width:820px">
-<h2 id="h-built" class="h2">Built by a director who uses it every day.</h2>
-<p class="body-lg">I've taught band and choir, music directed school and community theatre productions, taught at the college level, and run a private studio. Every one of those roles came with the same second job: fees and balances, forms, inventory, the music library, messages home, schedules. Program Partner started as one place to keep my own program organized. When other directors saw it, they asked if they could use it.</p>
-<p style="font-size:16px;font-weight:600">Trey English, Founder</p>
-<a href="/about/" class="link">Read the story</a>
+<h2 id="h-built" class="h2">{{ copy["index"].built.text_013 | safe }}</h2>
+<p class="body-lg">{{ copy["index"].built.text_014 | safe }}</p>
+<p style="font-size:16px;font-weight:600">{{ copy["index"].built.text_015 | safe }}</p>
+<a href="{{ copy["index"].built.text_016 | escape }}" class="link">{{ copy["index"].built.text_017 | safe }}</a>
 </div>
 </section>
 
 <section class="section" aria-labelledby="h-problem">
 <div class="wrap grid-2" style="gap:24px 64px;align-items:start">
-<h2 id="h-problem" class="h2"><span class="sr-only">You didn't start teaching to chase fee envelopes, permission slips, missing instruments, trip deposits or unread group texts.</span><span aria-hidden="true" style="display:block">You didn't start teaching to chase</span><span class="ticker" aria-hidden="true" data-ticker><span class="ticker-track"><span>fee envelopes.</span><span>permission slips.</span><span>missing instruments.</span><span>trip deposits.</span><span>unread group texts.</span></span></span></h2>
-<p class="body-lg muted">Balances live in one spreadsheet, the instrument list in another, permission slips in a folder, and reminders in a group text nobody reads. Program Partner gives your staff, boosters and families one shared program office, so the questions stop landing in your inbox.</p>
+<h2 id="h-problem" class="h2"><span class="sr-only">{{ copy["index"].problem.text_018 | safe }}</span><span aria-hidden="true" style="display:block">{{ copy["index"].problem.text_019 | safe }}</span><span class="ticker" aria-hidden="true" data-ticker><span class="ticker-track"><span>{{ copy["index"].problem.text_020 | safe }}</span><span>{{ copy["index"].problem.text_021 | safe }}</span><span>{{ copy["index"].problem.text_022 | safe }}</span><span>{{ copy["index"].problem.text_023 | safe }}</span><span>{{ copy["index"].problem.text_024 | safe }}</span></span></span></h2>
+<p class="body-lg muted">{{ copy["index"].problem.text_025 | safe }}</p>
 </div>
 </section>
 
@@ -72,9 +72,9 @@ description: "The program office for band, orchestra, choir, theatre and private
 <section class="band-dark" aria-labelledby="h-woodshed" style="padding:0 0 var(--section-y)">
 <div class="wrap-wide" style="border-top:1px solid var(--muted);padding-top:clamp(48px,6vw,72px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(32px,5vw,72px)">
 <div class="stack" style="flex:1 1 420px;min-width:0;gap:18px;max-width:640px">
-<h2 id="h-woodshed" class="h2" style="font-size:clamp(28px,3.4vw,40px)">Woodshed: free practice for band, orchestra and choir students.</h2>
-<p class="body-lg muted">Students practice fingerings, rhythm counting, solfège and lyrics for free, with no sign-in. Practice you assign from Program Partner reports back next to their Skill Pathways and practice logs.</p>
-<a href="/woodshed/" class="link">Meet Woodshed</a>
+<h2 id="h-woodshed" class="h2" style="font-size:clamp(28px,3.4vw,40px)">{{ copy["index"].woodshed.text_026 | safe }}</h2>
+<p class="body-lg muted">{{ copy["index"].woodshed.text_027 | safe }}</p>
+<a href="{{ copy["index"].woodshed.text_028 | escape }}" class="link">{{ copy["index"].woodshed.text_029 | safe }}</a>
 </div>
 <div style="flex:0 1 260px;width:min(100%,260px);margin:0 auto">{{ m.frame("phone", "Screenshot: Woodshed fingering practice", "home-woodshed", shots, "260px") }}</div>
 </div>
@@ -83,58 +83,58 @@ description: "The program office for band, orchestra, choir, theatre and private
 <section class="section" aria-labelledby="h-inside">
 <div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
 <div class="stack" style="gap:14px;max-width:760px">
-<h2 id="h-inside" class="h2">And every standard tool a program office needs.</h2>
-<p class="body-lg muted">Fees, rosters, forms, trips, inventory and the music library come with it, so you don't need a second system for the basics.</p>
+<h2 id="h-inside" class="h2">{{ copy["index"].inside.text_030 | safe }}</h2>
+<p class="body-lg muted">{{ copy["index"].inside.text_031 | safe }}</p>
 </div>
 <div class="feature-list">
 {%- set rest = [
-  ["fees","Fees and budgets","Balances, online payments into your own account, ledgers and budgets."],
-  ["students","Students and families","One roster, with portals for parents and students."],
-  ["communication","Communication","Announcements, messages and one shared calendar."],
-  ["forms","Forms and paperwork","Fillable PDF forms, signatures and reminders."],
-  ["events","Events and trips","Who has paid, signed and registered for every event."],
-  ["inventory","Inventory and uniforms","Every instrument and uniform, checked out and accounted for."],
-  ["library","Music library","Scores and parts, with optional digital parts and recordings."],
-  ["seating","Seating charts","Class seating and concert charts that combine groups."],
-  ["teaching","Teaching tools","Skill Pathways, practice logs, attendance and more."]
+  ["fees",copy["index"].inside.text_032,copy["index"].inside.text_033],
+  ["students",copy["index"].inside.text_034,copy["index"].inside.text_035],
+  ["communication","Communication",copy["index"].inside.text_036],
+  ["forms",copy["index"].inside.text_037,copy["index"].inside.text_038],
+  ["events",copy["index"].inside.text_039,copy["index"].inside.text_040],
+  ["inventory",copy["index"].inside.text_041,copy["index"].inside.text_042],
+  ["library",copy["index"].inside.text_043,copy["index"].inside.text_044],
+  ["seating",copy["index"].inside.text_045,copy["index"].inside.text_046],
+  ["teaching",copy["index"].inside.text_047,copy["index"].inside.text_048]
 ] -%}
 {%- for f in rest %}
 <a href="/features/{{ f[0] }}/"><span class="t">{{ f[1] }}</span><span class="b">{{ f[2] }}</span></a>
 {%- endfor %}
 </div>
-<a href="/product/" class="link">See every feature</a>
+<a href="{{ copy["index"].inside.text_049 | escape }}" class="link">{{ copy["index"].inside.text_050 | safe }}</a>
 </div>
 </section>
 
 <section class="section" aria-labelledby="h-money">
 <div class="wrap stack" style="gap:clamp(32px,5vw,52px)">
-<h2 id="h-money" class="h2">Your money stays yours.</h2>
+<h2 id="h-money" class="h2">{{ copy["index"].money.text_051 | safe }}</h2>
 <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px 0">
 {%- set money = [
-  ["Family's phone","Families pay from their portal. Venmo works through PayPal."],
-  ["Your Stripe, Square or PayPal","The money goes straight into your program's own account."],
-  ["Student balance updates","No one has to post the payment by hand."]
+  [copy["index"].money.text_052,copy["index"].money.text_053],
+  [copy["index"].money.text_054,copy["index"].money.text_055],
+  [copy["index"].money.text_056,copy["index"].money.text_057]
 ] -%}
 {%- for s in money %}
 <li class="stack" style="gap:16px;min-width:0">
 <div style="display:flex;align-items:center">
-<span class="serif" style="flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:22px"><span class="sr-only">Step </span>{{ loop.index }}</span>
+<span class="serif" style="flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:22px"><span class="sr-only">{{ copy["index"].money.text_058 | safe }} </span>{{ loop.index }}</span>
 <span aria-hidden="true" style="flex:1;height:1.5px;background:{{ 'var(--primary)' if not loop.last else 'transparent' }}"></span>
 </div>
 <div class="stack" style="gap:6px;padding-right:32px"><h3 class="h3">{{ s[0] }}</h3><p class="muted">{{ s[1] }}</p></div>
 </li>
 {%- endfor %}
 </ol>
-<p class="callout">Program Partner charges no payment fees and never holds your funds. Your processor's standard rates still apply.</p>
+<p class="callout">{{ copy["index"].money.text_059 | safe }}</p>
 </div>
 </section>
 
 <section class="section band-dark" aria-labelledby="h-families">
 <div class="wrap-wide" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px 64px;align-items:center">
 <div class="stack" style="gap:20px;max-width:520px">
-<h2 id="h-families" class="h2">Parents and students both see what's owed.</h2>
-<p class="body-lg muted">Every family gets a portal with balances, forms and announcements. Students can sign in and see their own balance too, so nobody has to ask how much is still owed.</p>
-<a href="/families/" class="link">What families see</a>
+<h2 id="h-families" class="h2">{{ copy["index"].families.text_060 | safe }}</h2>
+<p class="body-lg muted">{{ copy["index"].families.text_061 | safe }}</p>
+<a href="{{ copy["index"].families.text_062 | escape }}" class="link">{{ copy["index"].families.text_063 | safe }}</a>
 </div>
 <div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:24px;align-items:end;width:100%">
 {{ m.frame("tablet", "Screenshot: parent portal balances, " + D, "home-fam-parent", shots) }}
@@ -145,9 +145,9 @@ description: "The program office for band, orchestra, choir, theatre and private
 
 <section class="section" aria-labelledby="h-start">
 <div class="wrap grid-2" style="gap:24px 64px;align-items:start">
-<h2 id="h-start" class="h2">We'll get you running.</h2>
-<p class="body-lg">Schedule a demo and we'll walk through it with you, using the demo school and your own questions. When you're ready, we'll set you up, and we can move your spreadsheets in for you.</p>
+<h2 id="h-start" class="h2">{{ copy["index"].start.text_064 | safe }}</h2>
+<p class="body-lg">{{ copy["index"].start.text_065 | safe }}</p>
 </div>
 </section>
 
-{{ m.cta("Bring your messiest spreadsheet. We'll show you where it goes.", site.ctaPrimary, "/demo/") }}
+{{ m.cta(copy["index"].start.text_066, site.ctaPrimary, copy["index"].buttons.link_01) }}

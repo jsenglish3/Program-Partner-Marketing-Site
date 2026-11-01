@@ -14,61 +14,61 @@ description: "Ask for a demo of Program Partner. Tell us about your program and 
 <div style="padding:clamp(48px,7vw,96px) 0 var(--section-y)">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,80px);align-items:flex-start">
 <div class="stack" style="flex:1 1 320px;max-width:420px;gap:20px">
-<h1 style="font-size:clamp(40px,5vw,60px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance">See Program Partner with your program in mind.</h1>
-<p class="body-lg muted">We'll walk through it together, using the demo school and your own questions.</p>
+<h1 style="font-size:clamp(40px,5vw,60px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance">{{ copy["demo"].introduction.text_001 | safe }}</h1>
+<p class="body-lg muted">{{ copy["demo"].introduction.text_002 | safe }}</p>
 <div class="stack" style="gap:12px;align-items:flex-start">
 {#- Setting bookingUrl or turnstileSiteKey in site.json changes what the Privacy Policy (section 12) must say: update it in the same change. -#}
 {%- if site.bookingUrl %}
 <a href="{{ site.bookingUrl }}" class="btn btn-primary">{{ site.ctaPrimary }}</a>
-<p style="font-size:15px" class="muted">Opens our booking page. You'll pick a time that works for you.</p>
+<p style="font-size:15px" class="muted">{{ copy["demo"].introduction.text_003 | safe }}</p>
 {%- else %}
 <a href="#chat" class="btn btn-primary">{{ site.ctaPrimary }}</a>
-<p style="font-size:15px" class="muted">Tell us about your program below and we'll reply within one business day with times.</p>
+<p style="font-size:15px" class="muted">{{ copy["demo"].introduction.text_004 | safe }}</p>
 {%- endif %}
 </div>
-<p class="muted" style="font-size:16px;line-height:1.6;padding-top:12px;border-top:1px solid var(--border)">{% if site.bookingUrl %}Rather write first? Use the form, or email{% else %}Prefer email? Write to{% endif %} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+<p class="muted" style="font-size:16px;line-height:1.6;padding-top:12px;border-top:1px solid var(--border)">{% if site.bookingUrl %}{{ copy["demo"].introduction.text_005 | safe }}{% else %}{{ copy["demo"].introduction.text_006 | safe }}{% endif %} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
 </div>
 
 <form id="chat" class="form-card" data-chat-form data-endpoint="{{ site.chatEndpoint }}" data-thanks="{{ "/thanks/" | url }}" novalidate aria-labelledby="form-h" style="flex:1.6 1 460px;min-width:0">
 <h2 id="form-h" style="font-size:28px;line-height:1.2">{{ site.ctaSecondary }}</h2>
-<p style="margin-top:-14px;font-size:15px" class="muted">Tell us a little about your program. Fields marked "required" must be filled in.</p>
+<p style="margin-top:-14px;font-size:15px" class="muted">{{ copy["demo"].introduction.text_007 | safe }}</p>
 <div class="alert" data-errors hidden tabindex="-1" role="alert">
 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
 <div class="stack" style="gap:8px"><p style="font-weight:600"></p><ul></ul></div>
 </div>
 <div class="alert" data-server-error hidden tabindex="-1" role="alert">
 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
-<p><strong style="font-weight:600">Not sent.</strong> Something went wrong on our end. Try again, or email <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+<p><strong style="font-weight:600">{{ copy["demo"].introduction.text_008 | safe }}</strong> {{ copy["demo"].introduction.text_009 | safe }} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
 </div>
 <div class="form-grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px">
-<div class="field" data-field="name"><label for="f-name">Your name <span class="opt">(required)</span></label><input class="input" id="f-name" name="name" autocomplete="name" maxlength="120" required></div>
-<div class="field" data-field="email"><label for="f-email">Email <span class="opt">(required)</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" maxlength="320" required aria-describedby="help-email" data-help="help-email"><p id="help-email" class="help">Use your school email if you have one.</p></div>
-<div class="field" data-field="role"><label for="f-role">Your role <span class="opt">(required)</span></label><select class="select" id="f-role" name="role" required><option value="">Choose one</option>{% for o in roles %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
-<div class="field" data-field="state"><label for="f-state">State <span class="opt">(required)</span></label><select class="select" id="f-state" name="state" autocomplete="address-level1" required><option value="">Choose a state</option>{% for o in states %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
+<div class="field" data-field="name"><label for="f-name">{{ copy["demo"].introduction.text_010 | safe }} <span class="opt">{{ copy["demo"].introduction.text_011 | safe }}</span></label><input class="input" id="f-name" name="name" autocomplete="name" maxlength="120" required></div>
+<div class="field" data-field="email"><label for="f-email">{{ copy["demo"].introduction.text_012 | safe }} <span class="opt">{{ copy["demo"].introduction.text_013 | safe }}</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" maxlength="320" required aria-describedby="help-email" data-help="help-email"><p id="help-email" class="help">{{ copy["demo"].introduction.text_014 | safe }}</p></div>
+<div class="field" data-field="role"><label for="f-role">{{ copy["demo"].introduction.text_015 | safe }} <span class="opt">{{ copy["demo"].introduction.text_016 | safe }}</span></label><select class="select" id="f-role" name="role" required><option value="">{{ copy["demo"].introduction.text_017 | safe }}</option>{% for o in roles %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
+<div class="field" data-field="state"><label for="f-state">{{ copy["demo"].introduction.text_018 | safe }} <span class="opt">{{ copy["demo"].introduction.text_019 | safe }}</span></label><select class="select" id="f-state" name="state" autocomplete="address-level1" required><option value="">{{ copy["demo"].introduction.text_020 | safe }}</option>{% for o in states %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
 </div>
-<div class="field" data-field="school"><label for="f-school">School, college or studio name <span class="opt">(required)</span></label><input class="input" id="f-school" name="school" autocomplete="organization" maxlength="160" required></div>
+<div class="field" data-field="school"><label for="f-school">{{ copy["demo"].introduction.text_021 | safe }} <span class="opt">{{ copy["demo"].introduction.text_022 | safe }}</span></label><input class="input" id="f-school" name="school" autocomplete="organization" maxlength="160" required></div>
 <fieldset class="field" id="f-kind" data-field="kind" style="border:0;margin:0;padding:0;gap:12px">
-<legend>What kind of program? <span class="opt">(required; choose all that apply)</span></legend>
+<legend>{{ copy["demo"].introduction.text_023 | safe }} <span class="opt">{{ copy["demo"].introduction.text_024 | safe }}</span></legend>
 <div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">{% for o in kinds %}<label><input type="checkbox" name="kind" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
 </fieldset>
 <fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
-<legend>About how many students?</legend>
+<legend>{{ copy["demo"].introduction.text_025 | safe }}</legend>
 <div class="choices" style="display:flex;flex-wrap:wrap;gap:4px 24px">{% for o in sizes %}<label><input type="radio" name="size" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
 </fieldset>
 <fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
-<legend>What would you like help with? <span class="opt">(choose any)</span></legend>
+<legend>{{ copy["demo"].introduction.text_026 | safe }} <span class="opt">{{ copy["demo"].introduction.text_027 | safe }}</span></legend>
 <div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{% for o in topics %}<label><input type="checkbox" name="topic" value="{{ o[0] }}">{{ o[1] }}</label>{% endfor %}</div>
 </fieldset>
-<div class="field" data-field="tools"><label for="f-tools">What do you use now?</label><input class="input" id="f-tools" name="tools" maxlength="200" aria-describedby="help-tools" data-help="help-tools"><p id="help-tools" class="help">For example: spreadsheets, paper forms, an app, or a mix.</p></div>
-<div class="field" data-field="notes"><label for="f-notes">Anything else we should know?</label><textarea class="textarea" id="f-notes" name="notes" rows="4" maxlength="2000"></textarea></div>
-<div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+<div class="field" data-field="tools"><label for="f-tools">{{ copy["demo"].introduction.text_028 | safe }}</label><input class="input" id="f-tools" name="tools" maxlength="200" aria-describedby="help-tools" data-help="help-tools"><p id="help-tools" class="help">{{ copy["demo"].introduction.text_029 | safe }}</p></div>
+<div class="field" data-field="notes"><label for="f-notes">{{ copy["demo"].introduction.text_030 | safe }}</label><textarea class="textarea" id="f-notes" name="notes" rows="4" maxlength="2000"></textarea></div>
+<div class="hp" aria-hidden="true"><label for="f-website">{{ copy["demo"].introduction.text_031 | safe }}</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 {%- if site.turnstileSiteKey %}
 <div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}"></div>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="{{ copy["demo"].introduction.text_032 | escape }}" async defer></script>
 {%- endif %}
 <div class="stack" style="gap:10px;align-items:flex-start">
-<button type="submit" class="btn btn-primary" data-label="Send">Send</button>
-<p style="font-size:15px" class="muted">We use this only to reply to you. We never sell it or share it for marketing.</p>
+<button type="submit" class="btn btn-primary" data-label="Send">{{ copy["demo"].introduction.text_033 | safe }}</button>
+<p style="font-size:15px" class="muted">{{ copy["demo"].introduction.text_034 | safe }}</p>
 </div>
 </form>
 </div>

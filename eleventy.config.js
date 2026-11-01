@@ -15,6 +15,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
 
+  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
+  eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
+  eleventyConfig.addWatchTarget("content/");
   // Screenshots live in src/screenshots/<slot>.png (or .jpg/.webp).
   // The frame partial shows the image when the file exists, otherwise a quiet placeholder.
   // <slot>-dark.webp is the same screen in dark mode (the home hero's Light/Dark switch shows it).
@@ -29,6 +32,12 @@ export default function (eleventyConfig) {
       if (m) out[m[1]] = "/screenshots/" + f;
       const v = f.match(/^(.+)\.(mp4|webm)$/i);
       if (v) out[v[1] + (v[2].toLowerCase() === "mp4" ? "@video" : "@webm")] = "/screenshots/" + f;
+    }
+    const media=JSON.parse(fs.readFileSync(new URL('./content/media.json',import.meta.url),'utf8'));
+    for(const [slot,m] of Object.entries(media)){
+      if(m.image)out[slot]=m.image;
+      out[slot+'@alt']=m.alt;
+      out[slot+'@caption']=m.caption;
     }
     return out;
   });

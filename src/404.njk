@@ -7,12 +7,12 @@ noindex: true
 ---
 <div style="padding:clamp(72px,12vw,160px) 0">
 <div class="wrap-narrow stack" style="gap:24px">
-<p class="eyebrow">Error 404</p>
-<h1 class="display">We can't find that page.</h1>
-<p class="lede">It may have moved. Try the home page or every feature.</p>
+<p class="eyebrow">{{ copy["404"].introduction.text_001 | safe }}</p>
+<h1 class="display">{{ copy["404"].introduction.text_002 | safe }}</h1>
+<p class="lede">{{ copy["404"].introduction.text_003 | safe }}</p>
 <div class="hero-actions">
-<a href="/" class="btn btn-primary">Home</a>
-<a href="/product/" class="btn btn-outline">See every feature</a>
+<a href="{{ copy["404"].introduction.text_004 | escape }}" class="btn btn-primary">{{ copy["404"].introduction.text_005 | safe }}</a>
+<a href="{{ copy["404"].introduction.text_006 | escape }}" class="btn btn-outline">{{ copy["404"].introduction.text_007 | safe }}</a>
 </div>
 </div>
 </div>
