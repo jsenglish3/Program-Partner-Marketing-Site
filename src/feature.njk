@@ -12,16 +12,16 @@ eleventyComputed:
   description: "{{ f.sub | safe }}"
 ---
 {% import "macros.njk" as m %}
-{{ m.hero({ crumb: f.name, crumbLabel: "Features", crumbHref: "/product/", title: f.h1, subhead: f.sub, primaryLabel: site.ctaPrimary, primaryHref: "/demo/?topic=" + f.key }, site, shots) }}
+{{ m.hero({ crumb: f.name, crumbLabel: "Features", crumbHref: copy["feature"].buttons.link_01, title: f.h1, subhead: f.sub, primaryLabel: site.ctaPrimary, primaryHref: copy["feature"].buttons.link_02 + f.key }, site, shots) }}
 
 {%- if f.isFees %}
 <section class="section band-sand" aria-labelledby="h-how">
 <div class="wrap-wide stack" style="gap:clamp(24px,4vw,40px)">
-<h2 id="h-how" class="h2">How it works</h2>
-{{ m.frame("browser", "Screenshot: a director creates a fee, a parent uploads a payment receipt, and the director approves it, " + "Westbrook Middle School demo", "fees-walkthrough", shots) }}
+<h2 id="h-how" class="h2">{{ copy["feature"].how.text_001 | safe }}</h2>
+{{ m.frame("browser", "Screenshot: a director creates a fee, a parent uploads a payment receipt, and the director approves it, " + copy["feature"].how.text_002, "fees-walkthrough", shots) }}
 <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px 40px">
 {%- for s in f.steps %}
-<li style="display:flex;gap:16px;align-items:baseline"><span class="serif" style="font-size:40px;line-height:1;color:var(--primary)"><span class="sr-only">Step </span>{{ loop.index }}</span><p style="font-size:17px;line-height:1.55">{{ s.body }}</p></li>
+<li style="display:flex;gap:16px;align-items:baseline"><span class="serif" style="font-size:40px;line-height:1;color:var(--primary)"><span class="sr-only">{{ copy["feature"].how.text_003 | safe }} </span>{{ loop.index }}</span><p style="font-size:17px;line-height:1.55">{{ s.body }}</p></li>
 {%- endfor %}
 </ol>
 </div>
@@ -29,21 +29,21 @@ eleventyComputed:
 {%- elif f.isSeating %}
 <section class="section band-sand" aria-labelledby="h-how">
 <div class="wrap-wide stack" style="gap:clamp(24px,4vw,40px)">
-<h2 id="h-how" class="h2">How it works</h2>
+<h2 id="h-how" class="h2">{{ copy["feature"].how.text_004 | safe }}</h2>
 <figure style="margin:0" class="stack">
 {{ m.frame("browser", "Screenshot: moving a student on a combined concert seating chart, Westbrook Middle School demo", "seating-how-main", shots) }}
-<figcaption class="body-lg" style="font-weight:500;margin-top:16px">Pick a student, then a chair. If the chair is taken, the two swap.</figcaption>
+<figcaption class="body-lg" style="font-weight:500;margin-top:16px">{{ copy["feature"].how.text_005 | safe }}</figcaption>
 </figure>
 </div>
 </section>
 {%- else %}
-{{ m.steps("How it works", f.steps, "sand", "h-how", shots) }}
+{{ m.steps(copy["feature"].how.text_006, f.steps, "sand", "h-how", shots) }}
 {%- endif %}
 
 <section class="section" aria-labelledby="h-get">
 <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(32px,5vw,72px)">
 <div class="stack" style="flex:1 1 420px;min-width:0;gap:20px;max-width:680px">
-<h2 id="h-get" class="h2-sm">What you get</h2>
+<h2 id="h-get" class="h2-sm">{{ copy["feature"].get.text_007 | safe }}</h2>
 {%- for p in f.get %}<p class="body-lg">{{ p }}</p>{% endfor %}
 </div>
 {%- if f.getPhone %}
@@ -52,5 +52,5 @@ eleventyComputed:
 </div>
 </section>
 
-{{ m.faq("Questions directors and teachers ask", f.faq, "sand", "h-faq") }}
-{{ m.cta(f.cta, site.ctaPrimary, "/demo/?topic=" + f.key) }}
+{{ m.faq(copy["feature"].get.text_008, f.faq, "sand", "h-faq") }}
+{{ m.cta(f.cta, site.ctaPrimary, copy["feature"].buttons.link_03 + f.key) }}

@@ -1,0 +1,27 @@
+name: Marketing editor checks
+on:
+  pull_request:
+  push:
+    branches: [codex/marketing-content-editor]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: node scripts/check-preservation.mjs
+        if: github.head_ref == 'codex/marketing-content-editor' || github.ref_name == 'codex/marketing-content-editor'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marketing-editor-preview
+          path: _site

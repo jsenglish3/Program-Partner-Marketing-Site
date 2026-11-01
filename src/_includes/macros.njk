@@ -3,6 +3,8 @@
 {%- set clean = caption | replace("Screenshot: ", "") | replace(", Westbrook Middle School demo", "") | replace(", studio demo", "") -%}
 {%- set wood = (caption.indexOf("Screenshot: Woodshed") == 0) and (caption.indexOf("in Program Partner") < 0) -%}
 {%- set alt = ("Woodshed screen: " if wood else "Program Partner screen: ") + clean -%}
+{%- set alt = (shots[slot + "@alt"] | escape) if shots[slot + "@alt"] else alt -%}
+{%- set customCaption = shots[slot + "@caption"] -%}
 <figure class="frame frame-{{ kind }}"{% if phoneMax %} style="--phone-max:{{ phoneMax }}"{% endif %}>
 {%- if kind == "browser" %}
 <div class="frame-browser"><div class="bar" aria-hidden="true"><span></span><span></span><span></span></div><div class="screen">
@@ -22,7 +24,7 @@
 <div class="placeholder" role="img" aria-label="{{ alt }} (screenshot coming)">{{ clean | upper }}</div>
 {%- endif %}
 </div></div>
-{%- if showCaption %}<figcaption>{{ clean }}</figcaption>{% endif %}
+{%- if showCaption or customCaption %}<figcaption>{{ (customCaption | escape) if customCaption else clean }}</figcaption>{% endif %}
 </figure>
 {%- endmacro -%}
 
