@@ -1,1 +1,89 @@
-{"introduction":{"text_001":"Westbrook Middle School demo","text_002":"Every program","text_003":"Private studio"},"hero_h":{"text_004":"For band, orchestra, choir, theatre and private studios","text_005":"Stress less. Teach more.","text_006":"Fees, families, instruments, music, seating and messages, built by a band director who still runs his own program on it.","text_007":"/demo/","text_008":"/product/","text_009":"See every feature","text_010":"Every screen works in light and dark mode.","text_011":"Light","text_012":"Dark"},"built":{"text_013":"Built by a director who uses it every day.","text_014":"I've taught band and choir, music directed school and community theatre productions, taught at the college level, and run a private studio. Every one of those roles came with the same second job: fees and balances, forms, inventory, the music library, messages home, schedules. Program Partner started as one place to keep my own program organized. When other directors saw it, they asked if they could use it.","text_015":"Trey English, Founder","text_016":"/about/","text_017":"Read the story"},"problem":{"text_018":"You didn't start teaching to chase fee envelopes, permission slips, missing instruments, trip deposits or unread group texts.","text_019":"You didn't start teaching to chase","text_020":"fee envelopes.","text_021":"permission slips.","text_022":"missing instruments.","text_023":"trip deposits.","text_024":"unread group texts.","text_025":"Balances live in one spreadsheet, the instrument list in another, permission slips in a folder, and reminders in a group text nobody reads. Program Partner gives your staff, boosters and families one shared program office, so the questions stop landing in your inbox."},"woodshed":{"text_026":"Woodshed: free practice for band, orchestra and choir students.","text_027":"Students practice fingerings, rhythm counting, solfège and lyrics for free, with no sign-in. Practice you assign from Program Partner reports back next to their Skill Pathways and practice logs.","text_028":"/woodshed/","text_029":"Meet Woodshed"},"inside":{"text_030":"And every standard tool a program office needs.","text_031":"Fees, rosters, forms, trips, inventory and the music library come with it, so you don't need a second system for the basics.","text_032":"Fees and budgets","text_033":"Balances, online payments into your own account, ledgers and budgets.","text_034":"Students and families","text_035":"One roster, with portals for parents and students.","text_036":"Announcements, messages and one shared calendar.","text_037":"Forms and paperwork","text_038":"Fillable PDF forms, signatures and reminders.","text_039":"Events and trips","text_040":"Who has paid, signed and registered for every event.","text_041":"Inventory and uniforms","text_042":"Every instrument and uniform, checked out and accounted for.","text_043":"Music library","text_044":"Scores and parts, with optional digital parts and recordings.","text_045":"Seating charts","text_046":"Class seating and concert charts that combine groups.","text_047":"Teaching tools","text_048":"Skill Pathways, practice logs, attendance and more.","text_049":"/product/","text_050":"See every feature"},"money":{"text_051":"Your money stays yours.","text_052":"Family's phone","text_053":"Families pay from their portal. Venmo works through PayPal.","text_054":"Your Stripe, Square or PayPal","text_055":"The money goes straight into your program's own account.","text_056":"Student balance updates","text_057":"No one has to post the payment by hand.","text_058":"Step","text_059":"Program Partner charges no payment fees and never holds your funds. Your processor's standard rates still apply."},"families":{"text_060":"Parents and students both see what's owed.","text_061":"Every family gets a portal with balances, forms and announcements. Students can sign in and see their own balance too, so nobody has to ask how much is still owed.","text_062":"/families/","text_063":"What families see"},"start":{"text_064":"We'll get you running.","text_065":"Schedule a demo and we'll walk through it with you, using the demo school and your own questions. When you're ready, we'll set you up, and we can move your spreadsheets in for you.","text_066":"Bring your messiest spreadsheet. We'll show you where it goes."},"buttons":{"link_01":"/demo/"}}
+{
+  "money": {
+    "text_057": "No one has to post the payment by hand.",
+    "text_058": "Step",
+    "text_059": "Program Partner charges no payment fees and never holds your funds. Your processor's standard rates still apply.",
+    "text_051": "Your money stays yours.",
+    "text_052": "Family's phone",
+    "text_053": "Families pay from their portal. Venmo works through PayPal.",
+    "text_054": "Your Stripe, Square or PayPal",
+    "text_055": "The money goes straight into your program's own account.",
+    "text_056": "Student balance updates"
+  },
+  "woodshed": {
+    "text_026": "Woodshed: free practice for band, orchestra and choir students.",
+    "text_027": "Students practice fingerings, rhythm counting, solfège and lyrics for free, with no sign-in. Practice you assign from Program Partner reports back next to their Skill Pathways and practice logs.",
+    "text_028": "/woodshed/",
+    "text_029": "Meet Woodshed"
+  },
+  "buttons": {
+    "link_01": "/demo/"
+  },
+  "start": {
+    "text_064": "We'll get you running.",
+    "text_065": "Schedule a demo and we'll walk through it with you, using the demo school and your own questions. When you're ready, we'll set you up, and we can move your spreadsheets in for you.",
+    "text_066": "Bring your messiest spreadsheet. We'll show you where it goes."
+  },
+  "families": {
+    "text_060": "Parents and students both see what's owed.",
+    "text_061": "Every family gets a portal with balances, forms and announcements. Students can sign in and see their own balance too, so nobody has to ask how much is still owed.",
+    "text_062": "/families/",
+    "text_063": "What families see"
+  },
+  "hero_h": {
+    "text_004": "For band, orchestra, choir, theatre and private studios",
+    "text_005": "Stress less. Teach more!",
+    "text_006": "Fees, families, instruments, music, seating and messages, built by a band director who still runs his own program on it.",
+    "text_007": "/demo/",
+    "text_008": "/product/",
+    "text_009": "See every feature",
+    "text_010": "Every screen works in light and dark mode.",
+    "text_011": "Light",
+    "text_012": "Dark"
+  },
+  "introduction": {
+    "text_001": "Westbrook Middle School demo",
+    "text_002": "Every program",
+    "text_003": "Private studio"
+  },
+  "inside": {
+    "text_035": "One roster, with portals for parents and students.",
+    "text_046": "Class seating and concert charts that combine groups.",
+    "text_036": "Announcements, messages and one shared calendar.",
+    "text_047": "Teaching tools",
+    "text_037": "Forms and paperwork",
+    "text_048": "Skill Pathways, practice logs, attendance and more.",
+    "text_038": "Fillable PDF forms, signatures and reminders.",
+    "text_049": "/product/",
+    "text_039": "Events and trips",
+    "text_050": "See every feature",
+    "text_040": "Who has paid, signed and registered for every event.",
+    "text_030": "And every standard tool a program office needs.",
+    "text_041": "Inventory and uniforms",
+    "text_031": "Fees, rosters, forms, trips, inventory and the music library come with it, so you don't need a second system for the basics.",
+    "text_042": "Every instrument and uniform, checked out and accounted for.",
+    "text_032": "Fees and budgets",
+    "text_043": "Music library",
+    "text_033": "Balances, online payments into your own account, ledgers and budgets.",
+    "text_044": "Scores and parts, with optional digital parts and recordings.",
+    "text_034": "Students and families",
+    "text_045": "Seating charts"
+  },
+  "built": {
+    "text_013": "Built by a director who uses it every day.",
+    "text_014": "I've taught band and choir, music directed school and community theatre productions, taught at the college level, and run a private studio. Every one of those roles came with the same second job: fees and balances, forms, inventory, the music library, messages home, schedules. Program Partner started as one place to keep my own program organized. When other directors saw it, they asked if they could use it.",
+    "text_015": "Trey English, Founder",
+    "text_016": "/about/",
+    "text_017": "Read the story"
+  },
+  "problem": {
+    "text_018": "You didn't start teaching to chase fee envelopes, permission slips, missing instruments, trip deposits or unread group texts.",
+    "text_019": "You didn't start teaching to chase",
+    "text_020": "fee envelopes.",
+    "text_021": "permission slips.",
+    "text_022": "missing instruments.",
+    "text_023": "trip deposits.",
+    "text_024": "unread group texts.",
+    "text_025": "Balances live in one spreadsheet, the instrument list in another, permission slips in a folder, and reminders in a group text nobody reads. Program Partner gives your staff, boosters and families one shared program office, so the questions stop landing in your inbox."
+  }
+}
