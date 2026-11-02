@@ -66,4 +66,4 @@ Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/
 
 ## Typography staging review
 
-Urbanist + Lora are staged on a separate branch and Cloudflare Pages review copy; production stays on GitHub Pages. See [the staging build and typography record](docs/typography-staging.md).
+Cabin + Lora are staged on a separate branch and Cloudflare Pages review copy; production stays on GitHub Pages. See [the staging build and typography record](docs/typography-staging.md).

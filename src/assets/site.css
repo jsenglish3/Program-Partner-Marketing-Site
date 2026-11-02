@@ -2,45 +2,45 @@
    Tokens follow the Program Partner design system (terracotta primary, cream background, ink foreground). */
 
 /* Fonts are served from this site (SIL Open Font License, see assets/fonts/), so no visitor data goes to a font service. */
+@font-face {
+  font-family: "Cabin";
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/cabin-latin-ext-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Cabin";
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/cabin-latin-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Cabin";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/cabin-latin-ext-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Cabin";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/cabin-latin-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @font-face { font-family: "DM Sans"; font-style: normal; font-weight: 100 1000; font-display: swap; src: url("fonts/dm-sans-latin-wght-normal.woff2") format("woff2"); }
 @font-face { font-family: "Newsreader"; font-style: normal; font-weight: 200 800; font-display: swap; src: url("fonts/newsreader-latin-opsz-normal.woff2") format("woff2"); }
 
-
-@font-face {
-  font-family: "Urbanist";
-  font-style: italic;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("fonts/urbanist-latin-ext-italic.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: "Urbanist";
-  font-style: italic;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("fonts/urbanist-latin-italic.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Urbanist";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("fonts/urbanist-latin-ext-normal.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: "Urbanist";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("fonts/urbanist-latin-normal.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
 @font-face {
   font-family: "Lora";
@@ -94,9 +94,9 @@
   --ok-bg: #E3EEE6;
   --ok-fg: #1F5133;
   --ink-2: #34474B;
-  --font-sans: "Urbanist", ui-sans-serif, system-ui, sans-serif;
-  /* Legacy heading-role alias; headings and interface now share Urbanist. */
-  --font-serif: "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Cabin", ui-sans-serif, system-ui, sans-serif;
+  /* Legacy heading-role alias; headings and interface now share Cabin. */
+  --font-serif: "Cabin", ui-sans-serif, system-ui, sans-serif;
   --font-reading: "Lora", ui-serif, Georgia, serif;
   --radius: 12px;
   --pad-x: clamp(20px, 5vw, 40px);
@@ -435,6 +435,6 @@ button { font: inherit; }
   .compare-table td::before { content: attr(data-label); display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
 }
 
-/* Reading roles only: controls, metadata, tables and headings remain Urbanist. */
+/* Reading roles only: controls, metadata, tables and headings remain Cabin. */
 p.lede, p.body-lg, .pull, .faq p.a, .reading-copy > p,
 .legal-body > p, .legal-body > ul { font-family: var(--font-reading); }
