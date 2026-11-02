@@ -1,12 +1,15 @@
 name: Marketing editor checks
 on:
   pull_request:
-  push:
-    branches: [codex/marketing-content-editor]
+  workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: marketing-check-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,3 +28,4 @@ jobs:
         with:
           name: marketing-editor-preview
           path: _site
+          retention-days: 3
