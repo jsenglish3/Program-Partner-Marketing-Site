@@ -4,15 +4,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // Cabin is the one typeface for the public site (docs/TYPOGRAPHY.md). Pages and
-// components use the tokens (var(--font-sans), var(--font-heading),
-// var(--font-numeric)); a family name written anywhere else fails here.
+// components name no family at all: they use the tokens (var(--font-sans),
+// var(--font-heading), var(--font-numeric)), whose values live only in the
+// custom properties in site.css. The literal family names appear nowhere else.
 // src/admin is the content editor's own chrome, not a public page, and is not scanned.
-const ALLOWED = new Set([
-  'cabin', 'cabin figures', 'cabin fallback',
-  'ui-sans-serif', 'system-ui', 'sans-serif',
-  'ui-monospace', 'sfmono-regular', 'menlo', 'consolas', 'liberation mono', 'monospace',
-  'inherit', 'initial', 'unset',
-]);
+const KEYWORDS = new Set(['inherit', 'initial', 'unset']);
+const TOKEN = /^var\(--font-(sans|heading|numeric)\)$/;
 const FONT_DIR = 'src/assets/fonts';
 
 function files(dir, ext) {
@@ -24,24 +21,31 @@ function files(dir, ext) {
 }
 
 function families(value) {
-  let v = value.trim();
-  if (/^(inherit|initial|unset)$/i.test(v)) return [];
-  return v.split(',').map((f) => f.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+  return value.split(',').map((f) => f.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
 }
+
+// A declared value: unquoted text, or a quoted family name in either quote
+// style. A quote followed by markup (the end of a style="" attribute) ends it.
+const VALUE = String.raw`((?:"[\w\s-]+"|'[\w\s-]+'|[^;}"'<>\n])+)`;
 
 function declarations(source) {
   const out = [];
   // Strip @font-face blocks: their src: local(...) names are the fallback's sources, not usage.
   const text = source.replace(/@font-face\s*{[^}]*}/g, '');
-  for (const m of text.matchAll(/font-family\s*:\s*([^;}"'<>]+(?:"[^"]*"[^;}"'<>]*)*)/gi)) out.push(m[1]);
-  for (const m of text.matchAll(/(?<![-\w])font\s*:\s*([^;}"<>]+)/gi)) {
+  for (const m of text.matchAll(new RegExp(String.raw`font-family\s*:\s*` + VALUE, 'gi'))) out.push(m[1]);
+  for (const m of text.matchAll(new RegExp(String.raw`(?<![-\w])font\s*:\s*` + VALUE, 'gi'))) {
     const v = m[1].trim();
-    if (/^(inherit|initial|unset)$/i.test(v)) continue;
+    if (KEYWORDS.has(v.toLowerCase())) continue;
     // Shorthand: style/weight, then size[/line-height], then the family list.
-    const rest = v.replace(/^.*?\d[\d.]*(px|rem|em|%)(\s*\/\s*[\d.]+\w*)?\s+/, '');
-    out.push(rest);
+    out.push(v.replace(/^.*?\d[\d.]*(px|rem|em|%)(\s*\/\s*[\d.]+\w*)?\s*/, ''));
   }
   return out;
+}
+
+function offenders(source) {
+  return declarations(source)
+    .flatMap(families)
+    .filter((fam) => !TOKEN.test(fam) && !KEYWORDS.has(fam.toLowerCase()));
 }
 
 const scanned = [
@@ -50,16 +54,32 @@ const scanned = [
   ...fs.readdirSync('src').filter((f) => f.endsWith('.njk')).map((f) => path.join('src', f)),
 ];
 
-test('no hard-coded font families outside the Cabin tokens', () => {
-  const bad = [];
-  for (const file of scanned) {
-    for (const decl of declarations(fs.readFileSync(file, 'utf8'))) {
-      for (const fam of families(decl)) {
-        if (/^var\(--font-(sans|heading|numeric)\)$/.test(fam)) continue;
-        if (!ALLOWED.has(fam.toLowerCase())) bad.push(`${file}: ${fam}`);
-      }
-    }
+test('the guard catches families however they are written', () => {
+  for (const css of [
+    "font-family: 'Georgia'",
+    'font-family:"Georgia"',
+    'font-family: Georgia, serif',
+    'font-family: Cabin',
+    'font: 600 12px "Georgia"',
+    "font:12px/1.4 'Georgia', serif",
+    '<span style="font-family:Georgia">x</span>',
+  ]) {
+    assert.ok(offenders(css).length > 0, `missed: ${css}`);
   }
+  for (const css of [
+    'font-family: var(--font-heading)',
+    '<span style="font-family:var(--font-sans);font-weight:500">x</span>',
+    'font: inherit',
+    'font: 500 14px var(--font-sans)',
+  ]) {
+    assert.deepEqual(offenders(css), [], css);
+  }
+});
+
+test('pages and components use the font tokens, never a family name', () => {
+  const bad = scanned.flatMap((file) =>
+    offenders(fs.readFileSync(file, 'utf8')).map((fam) => `${file}: ${fam}`),
+  );
   assert.deepEqual(bad, []);
 });
 
