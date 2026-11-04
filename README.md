@@ -10,6 +10,18 @@ npm start        # local preview at http://localhost:8080
 npm run build    # writes the site to _site/
 ```
 
+## Staging review copy
+
+Changes are reviewed on the Cloudflare Pages project `program-partner-marketing-staging` (https://program-partner-marketing-staging.pages.dev) before they reach `main`. Production stays on GitHub Pages and is never touched by this.
+
+```
+npm ci
+npm run build:staging   # _site/, then a review copy in _staging/
+npx wrangler pages deploy _staging --project-name program-partner-marketing-staging --branch staging
+```
+
+`scripts/prepare-staging.mjs` makes the review copy: every page is `noindex`, the content editor and `CNAME` are left out, the contact form posts nowhere, and app links point to the staging app. Upload only `_staging/`, never `_site/`.
+
 ## Where things live
 
 | What | Where |

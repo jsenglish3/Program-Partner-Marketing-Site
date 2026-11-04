@@ -6,3 +6,6 @@ _site
 .env
 .env.*
 .wrangler/
+
+# Local staging review build (npm run build:staging)
+_staging/
