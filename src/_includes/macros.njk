@@ -138,11 +138,11 @@
 <a class="btn btn-primary" href="{{ site.appUrl }}/demo?program={{ program }}&amp;persona=director">Explore the {{ program }} demo</a>
 <a class="btn btn-outline" href="/demo/{% if program == 'band' %}?topic=events{% endif %}">Request a walkthrough</a>
 </div>
-<p class="muted">First visit? Request access at the demo entrance.</p>
+<p class="muted">The live demo requires an invitation. You can request a link on the next screen.</p>
 </div>
 <div class="hero-visual">
-{% if program == 'band' %}{{ frame("browser", p.caption, "events-how-2", shots) }}
-{% else %}{{ frame("browser", p.caption, "home-hero-theatre-browser", shots) }}{% endif %}
+{% if program == 'band' %}{{ frame("browser", p.caption | escape, "events-how-2", shots, "", true) }}
+{% else %}{{ frame("browser", p.caption | escape, "home-hero-theatre-browser", shots, "", true) }}{% endif %}
 </div>
 </div></section>
 <section class="section band-sand"><div class="wrap stack">
