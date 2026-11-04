@@ -5867,6 +5867,105 @@
                   "widget": "text"
                 }
               ]
+            },
+            {
+              "name": "/band/",
+              "label": "/band/",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Title",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "imageAlt",
+                  "label": "Social image alternative text",
+                  "required": false,
+                  "widget": "text"
+                }
+              ]
+            },
+            {
+              "name": "/theatre/",
+              "label": "/theatre/",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Title",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "imageAlt",
+                  "label": "Social image alternative text",
+                  "required": false,
+                  "widget": "text"
+                }
+              ]
+            },
+            {
+              "name": "/resources/band-trip-checklist/",
+              "label": "/resources/band-trip-checklist/",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Title",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "imageAlt",
+                  "label": "Social image alternative text",
+                  "required": false,
+                  "widget": "text"
+                }
+              ]
             }
           ]
         },
@@ -9134,6 +9233,118 @@
               "label": "Desc",
               "required": false,
               "widget": "string"
+            }
+          ]
+        },
+        {
+          "name": "copy_band",
+          "label": "School band management software",
+          "file": "content/copy/band.json",
+          "fields": [
+            {
+              "name": "heading",
+              "label": "Heading",
+              "widget": "text"
+            },
+            {
+              "name": "lead",
+              "label": "Lead",
+              "widget": "text"
+            },
+            {
+              "name": "caption",
+              "label": "Caption",
+              "widget": "text"
+            },
+            {
+              "name": "steps",
+              "label": "Steps",
+              "widget": "list",
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Heading",
+                  "widget": "string"
+                },
+                {
+                  "name": "body",
+                  "label": "Body",
+                  "widget": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "copy_theatre",
+          "label": "School theatre management software",
+          "file": "content/copy/theatre.json",
+          "fields": [
+            {
+              "name": "heading",
+              "label": "Heading",
+              "widget": "text"
+            },
+            {
+              "name": "lead",
+              "label": "Lead",
+              "widget": "text"
+            },
+            {
+              "name": "caption",
+              "label": "Caption",
+              "widget": "text"
+            },
+            {
+              "name": "steps",
+              "label": "Steps",
+              "widget": "list",
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Heading",
+                  "widget": "string"
+                },
+                {
+                  "name": "body",
+                  "label": "Body",
+                  "widget": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "copy_band-trip-checklist",
+          "label": "Band trip forms and payments checklist",
+          "file": "content/copy/band-trip-checklist.json",
+          "fields": [
+            {
+              "name": "heading",
+              "label": "Heading",
+              "widget": "text"
+            },
+            {
+              "name": "lead",
+              "label": "Lead",
+              "widget": "text"
+            },
+            {
+              "name": "steps",
+              "label": "Steps",
+              "widget": "list",
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Heading",
+                  "widget": "string"
+                },
+                {
+                  "name": "body",
+                  "label": "Body",
+                  "widget": "text"
+                }
+              ]
             }
           ]
         }

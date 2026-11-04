@@ -12,6 +12,8 @@
   ],
   "who": [
     { "key": "directors", "name": "Directors", "href": "/directors/" },
+    { "key": "band", "name": "Band directors", "href": "/band/" },
+    { "key": "theatre", "name": "Theatre directors", "href": "/theatre/" },
     { "key": "boosters", "name": "Boosters", "href": "/boosters/" },
     { "key": "schools", "name": "Schools", "href": "/schools/" },
     { "key": "studios", "name": "Studios", "href": "/studios/" },

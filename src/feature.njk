@@ -52,5 +52,6 @@ eleventyComputed:
 </div>
 </section>
 
+{% if f.key == "events" %}<div class="wrap"><p><a class="link" href="/resources/band-trip-checklist/">Band trip forms and payments checklist</a></p></div>{% endif %}
 {{ m.faq(copy["feature"].get.text_008, f.faq, "sand", "h-faq") }}
 {{ m.cta(f.cta, site.ctaPrimary, copy["feature"].buttons.link_03 + f.key) }}

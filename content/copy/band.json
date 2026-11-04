@@ -1,0 +1,19 @@
+{
+  "heading": "Which students are ready for Friday’s band trip?",
+  "lead": "When the bus leaves Friday morning, you need to know who is going, whose permission slip is missing, and which families still have a balance.",
+  "caption": "Sample band program showing trip readiness in Event HQ.",
+  "steps": [
+    {
+      "heading": "Invite the right group",
+      "body": "Choose the ensemble and make the trip optional when families need to opt in. Start with the students who are actually going."
+    },
+    {
+      "heading": "Follow up on one missing item",
+      "body": "A student can have a signed form and still owe a fee. Check both before sending the family a reminder."
+    },
+    {
+      "heading": "Make your departure list",
+      "body": "Review outstanding items in Event HQ before rehearsal ends so you can follow up before the buses arrive."
+    }
+  ]
+}

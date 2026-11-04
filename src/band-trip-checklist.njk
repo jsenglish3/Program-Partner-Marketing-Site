@@ -1,0 +1,12 @@
+---
+layout: layouts/base.njk
+current: band-trip-checklist
+permalink: /resources/band-trip-checklist/
+---
+{% set guide = copy["band-trip-checklist"] %}
+<article class="section"><div class="wrap stack" style="max-width:800px">
+<p class="eyebrow">Director resources</p><h1 class="display-sm">{{ guide.heading | escape }}</h1>
+<p class="lede">{{ guide.lead | escape }}</p>
+{% for step in guide.steps %}<section class="card"><h2>{{ step.heading | escape }}</h2><p>{{ step.body | escape }}</p></section>{% endfor %}
+<p>See how to <a href="/band/">manage a band trip in Program Partner</a> or explore <a href="/features/events/">Event HQ</a>.</p>
+</div></article>

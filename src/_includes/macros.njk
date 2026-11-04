@@ -126,3 +126,31 @@
 </div>
 </section>
 {%- endmacro -%}
+
+{% macro programStory(p, program, site, shots) %}
+<section class="hero" aria-labelledby="hero-h">
+<div class="wrap-wide hero-row">
+<div class="hero-text">
+<p class="eyebrow">{{ program | capitalize }} program management</p>
+<h1 id="hero-h" class="display-sm">{{ p.heading | escape }}</h1>
+<p class="lede">{{ p.lead | escape }}</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="{{ site.appUrl }}/demo?program={{ program }}&amp;persona=director">Explore the {{ program }} demo</a>
+<a class="btn btn-outline" href="/demo/{% if program == 'band' %}?topic=events{% endif %}">Request a walkthrough</a>
+</div>
+<p class="muted">First visit? Request access at the demo entrance.</p>
+</div>
+<div class="hero-visual">
+{% if program == 'band' %}{{ frame("browser", p.caption, "events-how-2", shots) }}
+{% else %}{{ frame("browser", p.caption, "home-hero-theatre-browser", shots) }}{% endif %}
+</div>
+</div></section>
+<section class="section band-sand"><div class="wrap stack">
+<h2 class="h2-sm">{{ 'Preparing a band trip' if program == 'band' else 'Tracking participation across productions' }}</h2>
+{% for step in p.steps %}<div class="card"><h3>{{ step.heading | escape }}</h3><p>{{ step.body | escape }}</p></div>{% endfor %}
+{% if program == 'band' %}
+<p>Explore <a href="/features/events/">events and trips</a>, <a href="/features/forms/">permission forms</a>, and <a href="/features/fees/">fees and payments</a>.</p>
+<p><a class="link" href="/resources/band-trip-checklist/">Use the band trip forms and payments checklist</a></p>
+{% else %}<p>Explore <a href="/features/communication/">family communication</a> and <a href="/features/events/">events and registration</a>.</p>{% endif %}
+</div></section>
+{% endmacro %}
