@@ -26,7 +26,7 @@ description: "Program Partner started as one band director's answer to the paper
 <p>{{ copy["about"].story.text_010 | safe }}</p>
 <p>{{ copy["about"].story.text_011 | safe }}</p>
 <p>{{ copy["about"].story.text_012 | safe }} <a href="{{ copy["about"].story.text_013 | escape }}">{{ copy["about"].story.text_014 | safe }}</a>{{ copy["about"].story.text_015 | safe }}</p>
-<p class="serif" style="font-size:clamp(22px,2.4vw,26px);line-height:1.4">{{ copy["about"].story.text_016 | safe }}</p>
+<p class="font-heading" style="font-size:clamp(22px,2.4vw,26px);line-height:1.4">{{ copy["about"].story.text_016 | safe }}</p>
 <p style="font-size:16px;font-weight:600">{{ copy["about"].story.text_017 | safe }}</p>
 </div>
 </div>
@@ -37,7 +37,7 @@ description: "Program Partner started as one band director's answer to the paper
 <h2 id="h-believe" class="h2">{{ copy["about"].believe.text_018 | safe }}</h2>
 <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px">
 {%- for b in [copy["about"].believe.text_019, copy["about"].believe.text_020, copy["about"].believe.text_021] %}
-<li class="serif" style="border-top:1px solid rgb(255 255 255 / .2);padding-top:20px;font-size:24px;line-height:1.35">{{ b }}</li>
+<li class="font-heading" style="border-top:1px solid rgb(255 255 255 / .2);padding-top:20px;font-size:24px;line-height:1.35">{{ b }}</li>
 {%- endfor %}
 </ul>
 </div>

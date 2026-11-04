@@ -118,7 +118,7 @@ description: "The program office for band, orchestra, choir, theatre and private
 {%- for s in money %}
 <li class="stack" style="gap:16px;min-width:0">
 <div style="display:flex;align-items:center">
-<span class="serif" style="flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:22px"><span class="sr-only">{{ copy["index"].money.text_058 | safe }} </span>{{ loop.index }}</span>
+<span class="font-heading" style="flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:22px"><span class="sr-only">{{ copy["index"].money.text_058 | safe }} </span>{{ loop.index }}</span>
 <span aria-hidden="true" style="flex:1;height:1.5px;background:{{ 'var(--primary)' if not loop.last else 'transparent' }}"></span>
 </div>
 <div class="stack" style="gap:6px;padding-right:32px"><h3 class="h3">{{ s[0] }}</h3><p class="muted">{{ s[1] }}</p></div>

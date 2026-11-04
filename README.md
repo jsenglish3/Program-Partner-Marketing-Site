@@ -62,4 +62,4 @@ Put the photo at `src/assets/trey-english.jpg` (portrait, roughly 2:3). The home
 
 The Decap content editor is implemented at `/admin/` with a live preview and separate draft/publish workflow. **It is not activated until the dedicated GitHub App and Cloudflare OAuth Worker secrets are configured.** See [setup, editing instructions and verification status](docs/content-editor.md).
 
-Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/_data/`. The existing templates, Newsreader/DM Sans typography, CSS, scripts and GitHub Pages deployment remain in place. Run `npm run build` and `npm test` for the editor checks.
+Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/_data/`. The existing templates, Cabin typography (docs/TYPOGRAPHY.md), CSS, scripts and GitHub Pages deployment remain in place. Run `npm run build` and `npm test` for the editor checks.
