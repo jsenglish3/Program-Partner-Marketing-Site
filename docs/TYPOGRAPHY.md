@@ -17,7 +17,7 @@ This file is identical in every repository. Change it in all three at once.
 | `--font-sans`    | `"Cabin", "Cabin Fallback", ui-sans-serif, system-ui, sans-serif`                           | Everything by default: body, navigation, buttons, forms, tables, dialogs |
 | `--font-heading` | same as `--font-sans`                                                                       | Heading roles and display numerals. A separate token so a future heading face is a one-line change |
 | `--font-numeric` | `"Cabin Figures", "Cabin", "Cabin Fallback", ui-sans-serif, system-ui, sans-serif`          | Any element with tabular numerals (`tabular-nums`): money, counts, scores, times in columns |
-| `--font-mono`    | `ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace`               | Code, codes people type back (join codes, one-time codes), raw data |
+| `--font-mono`    | `ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace`               | Code, codes people type back (join codes, one-time codes, result codes), raw data. Cabin's zero is as round as its O, so codes stay monospace on screen and in PDFs (Courier) |
 
 Kept on purpose (Cabin must never be placed ahead of these):
 
@@ -45,7 +45,7 @@ Self-hosted from each site's own origin; no third-party font host at runtime.
 | `cabin-latin-ext-normal.woff2`         | Cabin, Latin Extended           | Only when a page shows Latin Extended letters (`unicode-range`) |
 | `cabin-latin-italic.woff2`, `cabin-latin-ext-italic.woff2` | Cabin Italic, wght 400–700 | Only when italic text renders                       |
 | `cabin-figures-{400,500,600,700}.woff2` (≈1.4 KiB each) | Cabin Figures, digits only | Only weights a tabular-number element actually uses |
-| `cabin-pdf-{regular,bold}.ttf`         | Cabin 400 / 700, static         | Never by a web page; embedded into jsPDF documents            |
+| `cabin-pdf-{regular,bold}.ttf`         | Cabin 400 / 700, static         | Never by a web page; embedded into generated PDFs             |
 
 Every `@font-face` uses `font-display: swap`. Cabin and Cabin Italic declare
 `font-weight: 400 700` (one variable file, real weights; never synthesized).
@@ -125,9 +125,12 @@ and record it.
   same tokens; print stylesheets do not swap faces. A standalone print window
   or standalone HTML page declares its own Cabin `@font-face` and waits for
   `document.fonts.ready` before printing.
-- **jsPDF documents** (statements, letters, sheets, rosters): embed
-  `cabin-pdf-regular.ttf` / `cabin-pdf-bold.ttf` through the shared helper;
-  never call `setFont("helvetica", …)` directly.
+- **Generated PDFs** (Program Partner's jsPDF statements, letters, sheets
+  and rosters; Woodshed's score, progress and results PDFs): embed
+  `cabin-pdf-regular.ttf` / `cabin-pdf-bold.ttf` through each product's
+  shared PDF helper; never set Helvetica directly. Codes stay Courier. The
+  PDF fonts have Cabin's proportional digits, so right-align amounts in PDF
+  tables.
 - **pdf-lib signed records and text placed onto uploaded third-party PDFs**
   stay in Helvetica until a separately scoped export change has tested field
   geometry and signatures with Cabin. They are records, not reports.
