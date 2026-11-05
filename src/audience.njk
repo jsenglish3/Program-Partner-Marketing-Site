@@ -21,7 +21,7 @@ eleventyComputed:
 <ol style="list-style:none;margin:0;padding:0;border-top:1px solid var(--border)">
 {%- for w in [["Monday",copy["audience"].week.text_002],["Tuesday",copy["audience"].week.text_003],["Wednesday",copy["audience"].week.text_004],["Thursday",copy["audience"].week.text_005],["Friday",copy["audience"].week.text_006]] %}
 <li style="display:grid;grid-template-columns:minmax(110px,180px) minmax(0,1fr);gap:8px 32px;align-items:baseline;padding:clamp(20px,2.6vw,28px) 0;border-bottom:1px solid var(--border)">
-<span class="serif" style="font-size:clamp(24px,2.6vw,30px);line-height:1.2">{{ w[0] }}</span>
+<span class="font-heading" style="font-size:clamp(24px,2.6vw,30px);line-height:1.2">{{ w[0] }}</span>
 <span class="body-lg">{{ w[1] }}</span>
 </li>
 {%- endfor %}
@@ -38,28 +38,28 @@ eleventyComputed:
 </div>
 <div class="card card-shadow" style="flex:2 1 520px;min-width:0;gap:28px">
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
-<div class="stack" style="gap:4px"><span class="serif" style="font-size:24px;line-height:1.2">{{ copy["audience"].report.text_009 | safe }}</span><span class="muted" style="font-size:15px">{{ copy["audience"].report.text_010 | safe }}</span></div>
+<div class="stack" style="gap:4px"><span class="font-heading" style="font-size:24px;line-height:1.2">{{ copy["audience"].report.text_009 | safe }}</span><span class="muted" style="font-size:15px">{{ copy["audience"].report.text_010 | safe }}</span></div>
 <span class="pill pill-accent">{{ copy["audience"].report.text_011 | safe }}</span>
 </div>
 <div class="stack" style="gap:10px">
 <span class="muted" style="font-size:14px;font-weight:600">{{ copy["audience"].report.text_012 | safe }}</span>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px">
 {%- for l in [[copy["audience"].report.text_013,"$4,000"],[copy["audience"].report.text_014,"$12,000"],["Concessions","$1,500"]] %}
-<div class="stack" style="background:var(--bg);border-radius:12px;padding:16px;gap:4px"><span class="muted" style="font-size:14px">{{ l[0] }}</span><span class="serif" style="font-size:28px;line-height:1.1">{{ l[1] }}</span></div>
+<div class="stack" style="background:var(--bg);border-radius:12px;padding:16px;gap:4px"><span class="muted" style="font-size:14px">{{ l[0] }}</span><span class="font-heading tabular-nums" style="font-size:28px;line-height:1.1">{{ l[1] }}</span></div>
 {%- endfor %}
 </div>
 </div>
 <div class="stack" style="gap:12px">
 <span class="muted" style="font-size:14px;font-weight:600">{{ copy["audience"].report.text_015 | safe }}</span>
 {%- for b in [[copy["audience"].report.text_016,"$2,000","$5,000",40],["Uniforms","$1,000","$3,000",33],[copy["audience"].report.text_017,"$5,000","$12,000",42]] %}
-<div class="stack" style="gap:6px"><div style="display:flex;justify-content:space-between;gap:12px;font-size:16px"><span style="font-weight:500">{{ b[0] }}</span><span class="muted">{{ b[1] }} {{ copy["audience"].report.text_018 | safe }} {{ b[2] }}</span></div><div style="height:8px;border-radius:99px;background:var(--sand);overflow:hidden"><div style="height:100%;width:{{ b[3] }}%;background:var(--primary)"></div></div></div>
+<div class="stack" style="gap:6px"><div style="display:flex;justify-content:space-between;gap:12px;font-size:16px"><span style="font-weight:500">{{ b[0] }}</span><span class="muted tabular-nums">{{ b[1] }} {{ copy["audience"].report.text_018 | safe }} {{ b[2] }}</span></div><div style="height:8px;border-radius:99px;background:var(--sand);overflow:hidden"><div style="height:100%;width:{{ b[3] }}%;background:var(--primary)"></div></div></div>
 {%- endfor %}
 </div>
 <div class="stack" style="gap:10px">
 <div style="display:flex;justify-content:space-between;gap:12px"><span class="muted" style="font-size:14px;font-weight:600">{{ copy["audience"].report.text_019 | safe }}</span><span style="font-size:14px;font-weight:600">3 · $150</span></div>
 <div class="stack" style="border-top:1px solid var(--sand)">
 {%- for r in [[copy["audience"].report.text_020,"Cash","$50"],[copy["audience"].report.text_021,"Check","$75"],[copy["audience"].report.text_022,"Venmo","$25"]] %}
-<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--sand);font-size:16px"><span><span style="font-weight:500">{{ r[0] }}</span><span class="muted"> · {{ r[1] }}</span></span><span style="display:flex;align-items:center;gap:12px"><span>{{ r[2] }}</span><span style="font-size:14px;font-weight:600;padding:6px 12px;border-radius:8px;border:1.5px solid var(--fg)">{{ copy["audience"].report.text_023 | safe }}</span></span></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--sand);font-size:16px"><span><span style="font-weight:500">{{ r[0] }}</span><span class="muted"> · {{ r[1] }}</span></span><span style="display:flex;align-items:center;gap:12px"><span class="tabular-nums">{{ r[2] }}</span><span style="font-size:14px;font-weight:600;padding:6px 12px;border-radius:8px;border:1.5px solid var(--fg)">{{ copy["audience"].report.text_023 | safe }}</span></span></div>
 {%- endfor %}
 </div>
 </div>
@@ -77,7 +77,7 @@ eleventyComputed:
 </div>
 <article aria-label="For your approval packet" class="card card-shadow" style="flex:2 1 520px;min-width:0;border-radius:6px;padding:clamp(28px,4vw,52px);gap:24px">
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:18px;border-bottom:2px solid var(--fg)">
-<div class="stack" style="gap:4px"><span class="serif" style="font-size:clamp(24px,2.8vw,32px);line-height:1.15">{{ copy["audience"].packet.text_030 | safe }}</span><span class="muted" style="font-size:15px">{{ copy["audience"].packet.text_031 | safe }}</span></div>
+<div class="stack" style="gap:4px"><span class="font-heading" style="font-size:clamp(24px,2.8vw,32px);line-height:1.15">{{ copy["audience"].packet.text_030 | safe }}</span><span class="muted" style="font-size:15px">{{ copy["audience"].packet.text_031 | safe }}</span></div>
 <span class="pill pill-accent">{{ copy["audience"].packet.text_032 | safe }}</span>
 </div>
 <dl style="margin:0;display:flex;flex-direction:column">
@@ -98,7 +98,7 @@ eleventyComputed:
 </div>
 <div class="card card-shadow" style="flex:2 1 520px;min-width:0;gap:22px">
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
-<div class="stack" style="gap:4px"><span class="serif" style="font-size:24px;line-height:1.2">{{ copy["audience"].day.text_045 | safe }}</span><span class="muted" style="font-size:15px">{{ copy["audience"].day.text_046 | safe }}</span></div>
+<div class="stack" style="gap:4px"><span class="font-heading" style="font-size:24px;line-height:1.2">{{ copy["audience"].day.text_045 | safe }}</span><span class="muted" style="font-size:15px">{{ copy["audience"].day.text_046 | safe }}</span></div>
 <span class="pill pill-accent">{{ copy["audience"].day.text_047 | safe }}</span>
 </div>
 <div class="stack" style="border-top:1px solid var(--sand)">

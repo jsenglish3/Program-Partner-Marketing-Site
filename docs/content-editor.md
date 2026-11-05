@@ -19,7 +19,7 @@ For SEO changes, select the corresponding preview page and inspect its browser t
 ## Hosting and boundaries
 
 Inspected baseline: jsenglish3/Program-Partner-Marketing-Site at 4d1d43b0bb95bf17d9a8c6945d51ae310088c8cd.
-The marketing site uses Eleventy, Newsreader and DM Sans. It is hosted on **GitHub Pages**, deployed by .github/workflows/deploy.yml on pushes to main. It is not currently a Cloudflare Pages project. This implementation retains that deployment and adds only a separate Cloudflare OAuth Worker.
+The marketing site uses Eleventy and Cabin (see docs/TYPOGRAPHY.md). It is hosted on **GitHub Pages**, deployed by .github/workflows/deploy.yml on pushes to main. It is not currently a Cloudflare Pages project. This implementation retains that deployment and adds only a separate Cloudflare OAuth Worker.
 
 No Program Partner application, database, billing, customer data or application authentication changes are included. Existing marketing copy is carried over, including existing claims; this setup does not certify or revise those claims. Contact-form endpoint and submitted option values remain fixed.
 
