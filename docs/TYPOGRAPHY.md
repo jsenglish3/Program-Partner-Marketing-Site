@@ -1,6 +1,6 @@
 # Cabin typography — Program Partner and Woodshed
 
-**Status: Approved by the product owner, 4 November 2026 — implementation in review.**
+**Status: Approved by the product owner, 4 November 2026. Live on Woodshed and myprogrampartner.com since 4 November 2026; the Program Partner app and console get Cabin with their next full production release.**
 Cabin is the one typeface for Program Partner (app and console), Woodshed and the
 myprogrampartner.com marketing site: interface text, headings, navigation,
 buttons, forms, tables, dialogs, display numerals and generated reports. It
