@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+current: pricing
+title: Subscribe
+permalink: /subscribe/
+description: "Subscribe to Program Partner online, or pay by purchase order or check. We'll email you within one business day to set up your program."
+---
+{% import "macros.njk" as m %}
+{%- set c = copy["subscribe"] -%}
+{%- set founding = pricing.founding -%}
+{%- set checkoutUrl = pricing.checkout.founding if founding else pricing.checkout.standard -%}
+{{ m.hero({ eyebrow: c.hero.eyebrow, title: c.hero.heading, subhead: (c.hero.subhead_founding if founding else c.hero.subhead_standard) }, site, shots) }}
+<section class="subscribe-section" aria-label="Ways to subscribe">
+<div class="wrap subscribe-grid">
+<div class="card card-shadow">
+<h2 id="pay-h" class="price-name">{{ c.checkout.heading }}</h2>
+<p class="price-line"><span class="price-amount tabular-nums">{{ copy["pricing"].plan.amount_founding if founding else copy["pricing"].plan.amount_standard }}</span> <span class="price-per">{{ copy["pricing"].plan.per }}</span></p>
+<p class="muted">{{ c.checkout.body }}</p>
+<div class="hero-actions">
+{%- if checkoutUrl %}
+<a href="{{ checkoutUrl }}" class="btn btn-primary" data-checkout-link>{{ c.checkout.button }}</a>
+{%- else %}
+<a href="/demo/?topic=pricing#chat" class="btn btn-primary">{{ c.checkout.fallback_button }}</a>
+{%- endif %}
+</div>
+<p class="muted small-print">{{ c.checkout.terms_before }} <a href="/terms/">{{ c.checkout.terms_link }}</a>{{ c.checkout.terms_after }}</p>
+</div>
+<div class="card" id="purchase-order">
+<h2 id="po-h" class="price-name">{{ c.purchase_order.heading }}</h2>
+<p class="muted">{{ c.purchase_order.body }}</p>
+{%- if founding %}<p class="callout" style="font-size:15px;padding:12px 16px">{{ c.purchase_order.founding_note }}</p>{% endif %}
+<div class="hero-actions">
+<a href="/demo/?topic=pricing#chat" class="btn btn-outline">{{ c.purchase_order.button }}</a>
+</div>
+</div>
+</div>
+</section>
+{%- set steps = [] -%}
+{%- for s in c.steps.items %}{% set added = steps.push({ title: s.title, body: s.body }) %}{% endfor %}
+{{ m.steps(c.steps.heading, steps, "sand", "steps-h") }}
+<section class="section-tight" aria-label="Questions">
+<div class="wrap-narrow">
+<p class="lede">{{ c.help.text }} <a href="/demo/?topic=pricing#chat">{{ c.help.link }}</a> {{ c.help.email_before }} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
+</div>
+</section>

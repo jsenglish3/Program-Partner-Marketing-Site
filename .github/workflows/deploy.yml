@@ -3,6 +3,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # The founding price ($299) shows until the start of 1 July 2027, Eastern
+  # time. This rebuild at 04:05 UTC on 1 July (00:05 Eastern) switches the
+  # pricing and subscribe pages to $349 (src/_data/pricing.js).
+  schedule:
+    - cron: "5 4 1 7 *"
 permissions:
   contents: read
   pages: write

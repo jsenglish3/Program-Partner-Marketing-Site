@@ -3,26 +3,38 @@ layout: layouts/base.njk
 current: pricing
 title: Pricing
 permalink: /pricing/
-description: "Program Partner is quoted to fit each program. No payment fees, portals at no cost to families, and guided setup."
+description: "Every feature for one yearly price: $299 per program if you subscribe by June 30, 2027, then $349. No payment fees, and portals are free for families."
 ---
 {% import "macros.njk" as m %}
-{{ m.hero({ title: copy["pricing"].introduction.text_001, primaryLabel: copy["pricing"].introduction.text_002, primaryHref: copy["pricing"].buttons.link_01 }, site, shots) }}
-{{ m.gets(copy["pricing"].introduction.text_003, [
-  copy["pricing"].introduction.text_004,
-  copy["pricing"].introduction.text_005,
-  copy["pricing"].introduction.text_006,
-  copy["pricing"].introduction.text_007,
-  copy["pricing"].introduction.text_018
-], "h-gets") }}
-<section aria-label="Setup and purchasing" style="padding:0 0 var(--section-y)">
-<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
-<div class="card"><h2 style="font-size:28px;line-height:1.2">{{ copy["pricing"].setup_and_purchasing.text_008 | safe }}</h2><p class="muted">{{ copy["pricing"].setup_and_purchasing.text_009 | safe }}</p></div>
-<div class="card"><h2 style="font-size:28px;line-height:1.2">{{ copy["pricing"].setup_and_purchasing.text_010 | safe }}</h2><p class="muted">{{ copy["pricing"].setup_and_purchasing.text_011 | safe }}</p></div>
+{%- set c = copy["pricing"] -%}
+{%- set founding = pricing.founding -%}
+{{ m.hero({ title: c.hero.heading, subhead: (c.hero.subhead_founding if founding else c.hero.subhead_standard) }, site, shots) }}
+<section class="price-section" aria-labelledby="plan-h">
+<div class="wrap">
+<div class="card card-shadow price-card" data-price-tier="{{ 'founding' if founding else 'standard' }}">
+{%- if founding %}<p class="pill pill-accent">{{ c.plan.badge_founding }}</p>{% endif %}
+<h2 id="plan-h" class="price-name">{{ c.plan.name }}</h2>
+<p class="price-line"><span class="price-amount tabular-nums">{{ c.plan.amount_founding if founding else c.plan.amount_standard }}</span> <span class="price-per">{{ c.plan.per }}</span></p>
+<p class="muted">{{ c.plan.note_founding if founding else c.plan.note_standard }}</p>
+<div class="hero-actions">
+<a href="/subscribe/" class="btn btn-primary">{{ c.plan.subscribe }}</a>
+<a href="/subscribe/#purchase-order" class="btn btn-outline">{{ c.plan.purchase_order }}</a>
+</div>
+<p class="muted price-demo">{{ c.plan.demo_line }} <a href="/demo/">{{ c.plan.demo_link }}</a></p>
+</div>
 </div>
 </section>
-{{ m.faq("Questions", [
-  { q: copy["pricing"].setup_and_purchasing.text_012, a: copy["pricing"].setup_and_purchasing.text_013 },
-  { q: copy["pricing"].setup_and_purchasing.text_014, a: copy["pricing"].setup_and_purchasing.text_015 },
-  { q: copy["pricing"].setup_and_purchasing.text_019, a: copy["pricing"].setup_and_purchasing.text_020 }
-], "sand", "h-faq") }}
-{{ m.cta(copy["pricing"].setup_and_purchasing.text_016, copy["pricing"].setup_and_purchasing.text_017, copy["pricing"].buttons.link_02) }}
+{{ m.gets(c.included.heading, c.included.items, "h-gets") }}
+<section aria-label="Setup and purchasing" style="padding:0 0 var(--section-y)">
+<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
+<div class="card"><h2 style="font-size:28px;line-height:1.2">{{ c.setup.heading }}</h2><p class="muted">{{ c.setup.body }}</p></div>
+<div class="card"><h2 style="font-size:28px;line-height:1.2">{{ c.purchasing.heading }}</h2><p class="muted">{{ c.purchasing.body }}</p><p><a href="/subscribe/#purchase-order">{{ c.plan.purchase_order }}</a></p></div>
+</div>
+</section>
+{%- set questions = [] -%}
+{%- for it in c.faq.items %}{% if founding or not it.founding_only %}{% set added = questions.push({ q: it.q, a: it.a }) %}{% endif %}{% endfor %}
+{{ m.faq(c.faq.heading, questions, "sand", "h-faq") }}
+{{ m.cta(c.closing.heading, c.closing.subscribe, "/subscribe/", c.closing.body) }}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Program Partner","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"{{ site.url }}/","publisher":{"@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}"},"offers":{"@type":"Offer","url":"{{ site.url }}/pricing/","priceCurrency":"USD","price":"{{ pricing.amount.founding if founding else pricing.amount.standard }}"{% if founding %},"priceValidUntil":"{{ pricing.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ pricing.amount.founding if founding else pricing.amount.standard }}","priceCurrency":"USD","billingDuration":"P1Y","unitText":"program per year"}}}
+</script>
