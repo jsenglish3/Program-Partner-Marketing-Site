@@ -15,6 +15,8 @@ function prepare(directory){
   html=html.replace(/<head>/i,'<head>\n<meta name="robots" content="noindex,nofollow">');
   html=html.replaceAll('https://app.myprogrampartner.com','https://program-partner-staging.jsenglish3.workers.dev');
   html=html.replace(/data-endpoint="[^"]*"/g,'data-endpoint=""');
+  // Subscribe buttons go to live Stripe checkout; a review copy must never take a real payment.
+  html=html.replace(/href="https:\/\/buy\.stripe\.com\/[^"]*"/g,'href="/subscribe/#staging-checkout-off"');
   html=html.replace(/<script\b[^>]*src="https:\/\/static\.cloudflareinsights\.com[^>]*><\/script>/g,'');
   fs.writeFileSync(file,html);
  }
@@ -22,4 +24,4 @@ function prepare(directory){
 prepare(output);
 fs.writeFileSync(path.join(output,'robots.txt'),'User-agent: *\nDisallow: /\n');
 fs.appendFileSync(path.join(output,'_headers'),'\n/*\n  X-Robots-Tag: noindex, nofollow\n');
-console.log('Prepared _staging: no indexing, no editor, no live form endpoint; app links use staging.');
+console.log('Prepared _staging: no indexing, no editor, no live form endpoint or checkout; app links use staging.');

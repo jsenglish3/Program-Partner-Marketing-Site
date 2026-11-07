@@ -75,3 +75,13 @@ Put the photo at `src/assets/trey-english.jpg` (portrait, roughly 2:3). The home
 The Decap content editor is implemented at `/admin/` with a live preview and separate draft/publish workflow. **It is not activated until the dedicated GitHub App and Cloudflare OAuth Worker secrets are configured.** See [setup, editing instructions and verification status](docs/content-editor.md).
 
 Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/_data/`. The existing templates, Cabin typography (docs/TYPOGRAPHY.md), CSS, scripts and GitHub Pages deployment remain in place. Run `npm run build` and `npm test` for the editor checks.
+
+## Pricing and the subscribe page
+
+The price is $299 a year per program (the founding price) for programs that subscribe by June 30, 2027, kept every year they renew, then $349 a year. The words are in `content/copy/pricing.json` and `content/copy/subscribe.json` (both in the content editor). What the editor must not change lives in `src/_data/pricing.js`:
+
+- `founding` switches from the founding to the standard wording at the start of July 1, 2027, Eastern time (`2027-07-01T04:00:00Z`). The site only changes when it's rebuilt, so `deploy.yml` also runs on a schedule at 04:05 UTC on July 1. GitHub turns scheduled workflows off in a public repository after 60 days without a commit, so check the pricing page that morning and run the deploy by hand if it didn't run.
+- `checkout.founding` and `checkout.standard` are Stripe Payment Links on the Program Partner, LLC account. An empty link sends Subscribe to the Let's chat form with Pricing checked. The $349 link isn't set yet.
+- Build as another moment with `PRICING_NOW=2027-07-01T00:00:00-04:00 npm run build`; `tests/pricing.test.mjs` builds both sides of the deadline.
+
+The staging review copy points every Subscribe button back at the page (`scripts/prepare-staging.mjs`), so nobody pays from a review copy.
