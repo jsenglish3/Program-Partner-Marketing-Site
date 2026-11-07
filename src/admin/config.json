@@ -1893,6 +1893,12 @@
                   "label": "Paragraph 2",
                   "widget": "text",
                   "required": false
+                },
+                {
+                  "name": "text_018",
+                  "label": "What's included: Woodshed",
+                  "widget": "string",
+                  "required": false
                 }
               ]
             },
@@ -1960,6 +1966,18 @@
                   "name": "text_017",
                   "label": "Request a quote",
                   "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "text_019",
+                  "label": "Is Woodshed included?",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "text_020",
+                  "label": "Is Woodshed included? (answer)",
+                  "widget": "text",
                   "required": false
                 }
               ]
@@ -2819,6 +2837,18 @@
                   "name": "text_021",
                   "label": "Open Woodshed",
                   "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "text_022",
+                  "label": "Included with Program Partner (bold lead)",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "text_023",
+                  "label": "Included with Program Partner (rest of note)",
+                  "widget": "text",
                   "required": false
                 }
               ]
