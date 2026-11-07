@@ -3137,6 +3137,18 @@
                   "label": "Open Woodshed",
                   "widget": "string",
                   "required": false
+                },
+                {
+                  "name": "text_022",
+                  "label": "Included with Program Partner (bold lead)",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "text_023",
+                  "label": "Included with Program Partner (rest of note)",
+                  "widget": "text",
+                  "required": false
                 }
               ]
             }
