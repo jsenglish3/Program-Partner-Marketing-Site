@@ -32,6 +32,37 @@ description: "Program Partner started as one band director's answer to the paper
 </div>
 </div>
 </section>
+{%- set team = copy["about"].team %}
+{%- if team and team.members and team.members.length %}
+<section id="team" class="section band-sand" aria-labelledby="h-team">
+<div class="wrap stack" style="gap:clamp(28px,4vw,48px)">
+<div class="stack" style="gap:12px">
+<h2 id="h-team" class="h2-sm">{{ team.heading | safe }}</h2>
+{%- if team.intro %}<p class="lede">{{ team.intro | safe }}</p>{% endif %}
+</div>
+<ul class="grid-2" style="list-style:none;margin:0;padding:0;gap:24px">
+{%- for p in team.members %}
+<li class="card card-shadow" style="gap:18px">
+<div style="display:flex;flex-wrap:wrap;gap:16px 20px;align-items:center">
+{%- if p.photo %}
+<img src="{{ p.photo | escape }}" alt="{{ (p.photo_alt or p.name) | escape }}" width="96" height="96" loading="lazy" style="flex:none;width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center 30%;background:var(--sand)">
+{%- else %}
+<div aria-hidden="true" class="font-heading" style="flex:none;width:96px;height:96px;border-radius:50%;background:var(--accent);color:var(--primary-deep);display:grid;place-items:center;font-size:40px">{{ p.name | first }}</div>
+{%- endif %}
+<div class="stack" style="gap:6px;min-width:0;flex:1 1 220px">
+<h3 class="h3" style="font-size:26px">{{ p.name | safe }}</h3>
+{%- if p.role %}<p class="pill pill-accent" style="margin:0;max-width:100%">{{ p.role | safe }}</p>{% endif %}
+{%- if p.title %}<p class="muted" style="margin:0;font-size:15px;line-height:1.4">{{ p.title | safe }}</p>{% endif %}
+</div>
+</div>
+<p style="margin:0;font-size:17px;line-height:1.65;text-wrap:pretty">{{ p.bio | safe }}</p>
+{%- if p.link and p.link_text %}<a class="link" href="{{ p.link | escape }}" style="margin-top:auto">{{ p.link_text | safe }}</a>{% endif %}
+</li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+{%- endif %}
 <section class="section band-dark" aria-labelledby="h-believe">
 <div class="wrap stack" style="gap:clamp(32px,5vw,56px)">
 <h2 id="h-believe" class="h2">{{ copy["about"].believe.text_018 | safe }}</h2>
