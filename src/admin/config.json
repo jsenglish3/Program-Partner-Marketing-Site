@@ -216,6 +216,88 @@
               ]
             },
             {
+              "name": "team",
+              "label": "Meet the team",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Section heading",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "intro",
+                  "label": "Introduction",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "members",
+                  "label": "Team members",
+                  "widget": "list",
+                  "required": false,
+                  "collapsed": true,
+                  "summary": "{{fields.name}}",
+                  "fields": [
+                    {
+                      "name": "name",
+                      "label": "Name",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "role",
+                      "label": "Role (shown as a tag)",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "title",
+                      "label": "Title or other role",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "bio",
+                      "label": "Bio",
+                      "widget": "text",
+                      "required": false
+                    },
+                    {
+                      "name": "photo",
+                      "label": "Photo (square works best; leave empty to show an initial)",
+                      "widget": "image",
+                      "required": false
+                    },
+                    {
+                      "name": "photo_alt",
+                      "label": "Photo alternative text",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "link_text",
+                      "label": "Link text (optional)",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "link",
+                      "label": "Link destination (optional)",
+                      "widget": "string",
+                      "required": false,
+                      "pattern": [
+                        "^(?:https?://|mailto:|tel:|/|#).*|^$",
+                        "Use a relative path, https URL, email or telephone link."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "name": "believe",
               "label": "Promises",
               "widget": "object",
