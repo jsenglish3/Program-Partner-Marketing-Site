@@ -9,6 +9,8 @@ description: "Subscribe to Program Partner online, or pay by purchase order or c
 {%- set c = copy["subscribe"] -%}
 {%- set founding = pricing.founding -%}
 {%- set checkoutUrl = pricing.checkout.founding if founding else pricing.checkout.standard -%}
+{%- set studioCheckout = pricing.studio.checkout.founding if founding else pricing.studio.checkout.standard -%}
+{%- set sp = copy["pricing"].studio -%}
 {{ m.hero({ eyebrow: c.hero.eyebrow, title: c.hero.heading, subhead: (c.hero.subhead_founding if founding else c.hero.subhead_standard) }, site, shots) }}
 <section class="subscribe-section" aria-label="Ways to subscribe">
 <div class="wrap subscribe-grid">
@@ -24,6 +26,23 @@ description: "Subscribe to Program Partner online, or pay by purchase order or c
 {%- endif %}
 </div>
 <p class="muted small-print">{{ c.checkout.terms_before }} <a href="/terms/">{{ c.checkout.terms_link }}</a>{{ c.checkout.terms_after }}</p>
+</div>
+<div class="card card-shadow" id="studio">
+<h2 id="studio-h" class="price-name">{{ c.studio.heading }}</h2>
+<p class="price-line price-line-pair"><span class="price-pair"><span class="price-amount tabular-nums">{{ sp.monthly_founding if founding else sp.monthly_standard }}</span> <span class="price-per">{{ sp.per_month }}</span></span> <span class="price-per">{{ sp.or }}</span> <span class="price-pair"><span class="price-amount tabular-nums">{{ sp.yearly_founding if founding else sp.yearly_standard }}</span> <span class="price-per">{{ sp.per_year }}</span></span></p>
+<p class="muted">{{ c.studio.body }}</p>
+<div class="hero-actions">
+{%- if studioCheckout.monthly %}
+<a href="{{ studioCheckout.monthly }}" class="btn btn-primary" data-studio-checkout="monthly">{{ c.studio.monthly_button }}</a>
+{%- endif %}
+{%- if studioCheckout.yearly %}
+<a href="{{ studioCheckout.yearly }}" class="btn btn-outline" data-studio-checkout="yearly">{{ c.studio.yearly_button }}</a>
+{%- endif %}
+{%- if not studioCheckout.monthly and not studioCheckout.yearly %}
+<a href="/demo/?topic=pricing#chat" class="btn btn-primary">{{ c.studio.fallback_button }}</a>
+{%- endif %}
+</div>
+<p class="muted small-print">{{ c.checkout.terms_before }} <a href="/terms/">{{ c.checkout.terms_link }}</a>{{ c.studio.terms_after }}</p>
 </div>
 <div class="card" id="purchase-order">
 <h2 id="po-h" class="price-name">{{ c.purchase_order.heading }}</h2>
