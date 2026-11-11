@@ -3,12 +3,14 @@ layout: layouts/base.njk
 current: pricing
 title: Pricing
 permalink: /pricing/
-description: "Every feature included: $299 a year per school program, or $19 a month for a private studio, when you subscribe by June 30, 2027. No payment fees, and portals are free for families."
+description: "Every feature included: $299 a year per school program when you subscribe by June 30, 2027, and a monthly or yearly plan for private studios. No payment fees, and portals are free for families."
 ---
 {% import "macros.njk" as m %}
 {%- set c = copy["pricing"] -%}
 {%- set founding = pricing.founding -%}
-{{ m.hero({ title: c.hero.heading, subhead: (c.hero.subhead_founding if founding else c.hero.subhead_standard) }, site, shots) }}
+{%- set studioFounding = pricing.studio.founding -%}
+{%- set subhead = c.hero.subhead_founding if (founding and studioFounding) else (c.hero.subhead_school_founding if founding else c.hero.subhead_standard) -%}
+{{ m.hero({ title: c.hero.heading, subhead: subhead }, site, shots) }}
 <section class="price-section" aria-labelledby="plan-h">
 <div class="wrap price-grid">
 <div class="card card-shadow price-card" data-price-tier="{{ 'founding' if founding else 'standard' }}">
@@ -22,11 +24,11 @@ description: "Every feature included: $299 a year per school program, or $19 a m
 </div>
 <p class="muted price-demo">{{ c.plan.demo_line }} <a href="/demo/">{{ c.plan.demo_link }}</a></p>
 </div>
-<div class="card card-shadow price-card" id="studio" data-price-tier="{{ 'studio-founding' if founding else 'studio-standard' }}">
-{%- if founding %}<p class="pill pill-accent">{{ c.studio.badge_founding }}</p>{% endif %}
+<div class="card card-shadow price-card" id="studio" data-price-tier="{{ 'studio-founding' if studioFounding else 'studio-standard' }}">
+{%- if studioFounding %}<p class="pill pill-accent">{{ c.studio.badge_founding }}</p>{% endif %}
 <h2 id="studio-plan-h" class="price-name">{{ c.studio.name }}</h2>
-<p class="price-line price-line-pair"><span class="price-pair"><span class="price-amount tabular-nums">{{ c.studio.monthly_founding if founding else c.studio.monthly_standard }}</span> <span class="price-per">{{ c.studio.per_month }}</span></span> <span class="price-per">{{ c.studio.or }}</span> <span class="price-pair"><span class="price-amount tabular-nums">{{ c.studio.yearly_founding if founding else c.studio.yearly_standard }}</span> <span class="price-per">{{ c.studio.per_year }}</span></span></p>
-<p class="muted">{{ c.studio.note_founding if founding else c.studio.note_standard }}</p>
+<p class="price-line price-line-pair"><span class="price-pair"><span class="price-amount tabular-nums">{{ c.studio.monthly_founding if studioFounding else c.studio.monthly_standard }}</span> <span class="price-per">{{ c.studio.per_month }}</span></span> <span class="price-per">{{ c.studio.or }}</span> <span class="price-pair"><span class="price-amount tabular-nums">{{ c.studio.yearly_founding if studioFounding else c.studio.yearly_standard }}</span> <span class="price-per">{{ c.studio.per_year }}</span></span></p>
+<p class="muted">{{ c.studio.note_founding if studioFounding else c.studio.note_standard }}</p>
 <div class="hero-actions">
 <a href="/subscribe/#studio" class="btn btn-primary">{{ c.studio.subscribe }}</a>
 </div>
@@ -41,10 +43,10 @@ description: "Every feature included: $299 a year per school program, or $19 a m
 </div>
 </section>
 {%- set questions = [] -%}
-{%- for it in c.faq.items %}{% if founding or not it.founding_only %}{% set added = questions.push({ q: it.q, a: it.a }) %}{% endif %}{% endfor %}
+{%- for it in c.faq.items %}{% if founding or not it.founding_only %}{% set added = questions.push({ q: it.q, a: (it.a ~ " " ~ it.a_studio_founding) if (studioFounding and it.a_studio_founding) else it.a }) %}{% endif %}{% endfor %}
 {{ m.faq(c.faq.heading, questions, "sand", "h-faq") }}
 {{ m.cta(c.closing.heading, c.closing.subscribe, "/subscribe/", c.closing.body) }}
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Program Partner","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"{{ site.url }}/","publisher":{"@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}"},{%- set studioAmount = pricing.studio.amount.founding if founding else pricing.studio.amount.standard -%}
-"offers":[{"@type":"Offer","url":"{{ site.url }}/pricing/","priceCurrency":"USD","price":"{{ pricing.amount.founding if founding else pricing.amount.standard }}"{% if founding %},"priceValidUntil":"{{ pricing.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ pricing.amount.founding if founding else pricing.amount.standard }}","priceCurrency":"USD","billingDuration":"P1Y","unitText":"program per year"}},{"@type":"Offer","name":"Private studio, monthly","url":"{{ site.url }}/pricing/#studio","priceCurrency":"USD","price":"{{ studioAmount.monthly }}"{% if founding %},"priceValidUntil":"{{ pricing.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ studioAmount.monthly }}","priceCurrency":"USD","billingDuration":"P1M","unitText":"studio per month"}},{"@type":"Offer","name":"Private studio, yearly","url":"{{ site.url }}/pricing/#studio","priceCurrency":"USD","price":"{{ studioAmount.yearly }}"{% if founding %},"priceValidUntil":"{{ pricing.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ studioAmount.yearly }}","priceCurrency":"USD","billingDuration":"P1Y","unitText":"studio per year"}}]}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Program Partner","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"{{ site.url }}/","publisher":{"@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}"},{%- set studioAmount = pricing.studio.amount.founding if studioFounding else pricing.studio.amount.standard -%}
+"offers":[{"@type":"Offer","url":"{{ site.url }}/pricing/","priceCurrency":"USD","price":"{{ pricing.amount.founding if founding else pricing.amount.standard }}"{% if founding %},"priceValidUntil":"{{ pricing.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ pricing.amount.founding if founding else pricing.amount.standard }}","priceCurrency":"USD","billingDuration":"P1Y","unitText":"program per year"}},{"@type":"Offer","name":"Private studio, monthly","url":"{{ site.url }}/pricing/#studio","priceCurrency":"USD","price":"{{ studioAmount.monthly }}"{% if studioFounding %},"priceValidUntil":"{{ pricing.studio.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ studioAmount.monthly }}","priceCurrency":"USD","billingDuration":"P1M","unitText":"studio per month"}},{"@type":"Offer","name":"Private studio, yearly","url":"{{ site.url }}/pricing/#studio","priceCurrency":"USD","price":"{{ studioAmount.yearly }}"{% if studioFounding %},"priceValidUntil":"{{ pricing.studio.foundingLastDay }}"{% endif %},"availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ studioAmount.yearly }}","priceCurrency":"USD","billingDuration":"P1Y","unitText":"studio per year"}}]}
 </script>

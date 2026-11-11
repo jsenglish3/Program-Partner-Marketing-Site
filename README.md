@@ -82,6 +82,10 @@ The price is $299 a year per program (the founding price) for programs that subs
 
 - `founding` switches from the founding to the standard wording at the start of July 1, 2027, Eastern time (`2027-07-01T04:00:00Z`). The site only changes when it's rebuilt, so `deploy.yml` also runs on a schedule at 04:05 UTC on July 1. GitHub turns scheduled workflows off in a public repository after 60 days without a commit, so check the pricing page that morning and run the deploy by hand if it didn't run.
 - `checkout.founding` and `checkout.standard` are Stripe Payment Links on the Program Partner, LLC account. An empty link sends Subscribe to the Let's chat form with Pricing checked. The $349 link isn't set yet.
-- Build as another moment with `PRICING_NOW=2027-07-01T00:00:00-04:00 npm run build`; `tests/pricing.test.mjs` builds both sides of the deadline.
+- Private studios have their own plan and their own deadline, under `studio`. The founding price is $19 a month or $190 a year for studios that subscribe by December 31, 2026; from January 1, 2027 it's $24 a month or $240 a year.
+  - `studio.founding` switches at the start of January 1, 2027, Eastern time (`2027-01-01T05:00:00Z`), and `deploy.yml` also runs at 05:05 UTC on January 1.
+  - Between January 1 and June 30, 2027 the Pricing page shows schools' founding price and studios' standard price, with the hero's `subhead_school_founding`.
+  - `studio.checkout` holds both pairs of studio links, all set.
+- Build as another moment with `PRICING_NOW=2027-07-01T00:00:00-04:00 npm run build`; `tests/pricing.test.mjs` builds both sides of each deadline.
 
 The staging review copy points every Subscribe button back at the page (`scripts/prepare-staging.mjs`), so nobody pays from a review copy.
