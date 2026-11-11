@@ -66,6 +66,46 @@ test('from the start of 1 July 2027, Eastern, the site shows $349 and no foundin
   }
 });
 
+test('private studios see their own plan: $19 a month or $190 a year until 1 July 2027', () => {
+  const b = buildAt('2027-06-30T23:59:00-04:00');
+  try {
+    const pricing = b.page('pricing');
+    const subscribe = b.page('subscribe');
+    assert.match(pricing, /data-price-tier="studio-founding"/);
+    assert.match(text(pricing), /\$19 a month or \$190 a year/);
+    assert.match(pricing, /href="\/subscribe\/#studio"/);
+    assert.match(pricing, /"price":"19\.00","priceValidUntil":"2027-06-30"[^}]*"billingDuration":"P1M"/);
+    assert.match(pricing, /"price":"190\.00","priceValidUntil":"2027-06-30"/);
+    // The subscribe page sends a studio straight to its own monthly and yearly checkout links.
+    assert.match(subscribe, /id="studio"/);
+    assert.match(subscribe, /href="https:\/\/buy\.stripe\.com\/6oUaEWbkZ3FSg27aa22sM03" class="btn btn-primary" data-studio-checkout="monthly"/);
+    assert.match(subscribe, /href="https:\/\/buy\.stripe\.com\/3cI9AS2Ot2BO9DJ6XQ2sM04" class="btn btn-outline" data-studio-checkout="yearly"/);
+    assert.match(text(subscribe), /through the month or year you paid for/);
+    // The school checkout is still its own link.
+    assert.match(subscribe, /href="https:\/\/buy\.stripe\.com\/3cI9AS74J3FS2bh1Dw2sM02" class="btn btn-primary" data-checkout-link/);
+    // The studios page points to the price without a date that can go stale.
+    assert.match(text(b.page('studios')), /Private studios have their own plan, billed monthly or yearly/);
+  } finally {
+    fs.rmSync(b.output, { recursive: true, force: true });
+  }
+});
+
+test('from 1 July 2027 a studio sees $24 a month or $240 a year, and no founding offer', () => {
+  const b = buildAt('2027-07-01T00:00:00-04:00');
+  try {
+    const pricing = b.page('pricing');
+    const subscribe = b.page('subscribe');
+    assert.match(pricing, /data-price-tier="studio-standard"/);
+    assert.match(text(pricing), /\$24 a month or \$240 a year/);
+    assert.match(pricing, /"price":"24\.00"/);
+    assert.doesNotMatch(subscribe, /data-studio-checkout/);
+    // No $24 / $240 links yet, so the studio card falls back to the Let's chat form.
+    assert.match(subscribe, /id="studio"[\s\S]*href="\/demo\/\?topic=pricing#chat" class="btn btn-primary"/);
+  } finally {
+    fs.rmSync(b.output, { recursive: true, force: true });
+  }
+});
+
 test('no page still says every program is quoted', () => {
   const b = buildAt('2026-11-07T12:00:00-05:00');
   try {

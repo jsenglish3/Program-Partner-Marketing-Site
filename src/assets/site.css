@@ -375,9 +375,14 @@ button { font: inherit; }
 .price-section { padding: 0; }
 .subscribe-section { padding: 0 0 var(--section-y); }
 .price-card { max-width: 640px; }
+.price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px; align-items: start; }
+.price-grid .price-card { max-width: none; }
 .price-name { font-size: 28px; line-height: 1.2; }
 .price-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
 .price-amount { font-size: clamp(56px, 8vw, 80px); line-height: 1; font-weight: 500; letter-spacing: -0.02em; color: var(--fg); }
 .price-per { font-size: 18px; color: var(--muted); }
+/* Two prices on one line (the studio plan): smaller numerals, and each price keeps its unit. */
+.price-line-pair .price-amount { font-size: clamp(44px, 6vw, 64px); }
+.price-pair { display: inline-flex; align-items: baseline; gap: 4px 12px; white-space: nowrap; }
 .price-demo, .small-print { font-size: 15px; }
 .subscribe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px; align-items: start; }

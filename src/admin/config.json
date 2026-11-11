@@ -2029,6 +2029,86 @@
               ]
             },
             {
+              "name": "studio",
+              "label": "Studio price card",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "name",
+                  "label": "Plan name",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "badge_founding",
+                  "label": "Founding badge",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "monthly_founding",
+                  "label": "Founding monthly price",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "yearly_founding",
+                  "label": "Founding yearly price",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "monthly_standard",
+                  "label": "Monthly price from July 1, 2027",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "yearly_standard",
+                  "label": "Yearly price from July 1, 2027",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "per_month",
+                  "label": "Monthly unit",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "per_year",
+                  "label": "Yearly unit",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "or",
+                  "label": "Word between the two prices",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "note_founding",
+                  "label": "Note while the founding price shows",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "note_standard",
+                  "label": "Note from July 1, 2027",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "subscribe",
+                  "label": "Button",
+                  "widget": "string",
+                  "required": false
+                }
+              ]
+            },
+            {
               "name": "included",
               "label": "What's included",
               "widget": "object",
@@ -2250,6 +2330,50 @@
                 {
                   "name": "terms_after",
                   "label": "Terms line, after the link",
+                  "widget": "string",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "studio",
+              "label": "Studio checkout",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Heading",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "body",
+                  "label": "Text",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "monthly_button",
+                  "label": "Monthly button",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "yearly_button",
+                  "label": "Yearly button",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "fallback_button",
+                  "label": "Button when no checkout link is set",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "terms_after",
+                  "label": "Text after the Terms link",
                   "widget": "string",
                   "required": false
                 }
