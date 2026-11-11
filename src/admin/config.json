@@ -1942,7 +1942,13 @@
                 },
                 {
                   "name": "subhead_founding",
-                  "label": "Subheading while the founding price shows",
+                  "label": "Subheading while both founding prices show (until December 31, 2026)",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "subhead_school_founding",
+                  "label": "Subheading from January 1 to June 30, 2027 (school founding price, studio standard price)",
                   "widget": "text",
                   "required": false
                 },
@@ -2060,13 +2066,13 @@
                 },
                 {
                   "name": "monthly_standard",
-                  "label": "Monthly price from July 1, 2027",
+                  "label": "Monthly price from January 1, 2027",
                   "widget": "string",
                   "required": false
                 },
                 {
                   "name": "yearly_standard",
-                  "label": "Yearly price from July 1, 2027",
+                  "label": "Yearly price from January 1, 2027",
                   "widget": "string",
                   "required": false
                 },
@@ -2090,13 +2096,13 @@
                 },
                 {
                   "name": "note_founding",
-                  "label": "Note while the founding price shows",
+                  "label": "Note while the studio founding price shows (until December 31, 2026)",
                   "widget": "text",
                   "required": false
                 },
                 {
                   "name": "note_standard",
-                  "label": "Note from July 1, 2027",
+                  "label": "Note from January 1, 2027",
                   "widget": "text",
                   "required": false
                 },
@@ -2209,6 +2215,12 @@
                       "widget": "boolean",
                       "required": false,
                       "default": false
+                    },
+                    {
+                      "name": "a_studio_founding",
+                      "label": "Added to the answer while the studio founding price shows (until December 31, 2026)",
+                      "widget": "text",
+                      "required": false
                     }
                   ]
                 }
