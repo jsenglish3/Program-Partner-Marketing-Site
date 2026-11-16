@@ -377,6 +377,30 @@
     "caption": "",
     "preferImage": false
   },
+  "studios-billing": {
+    "image": "/screenshots/studios-billing.webp",
+    "alt": "",
+    "caption": "",
+    "preferImage": false
+  },
+  "studios-hero-browser": {
+    "image": "/screenshots/studios-hero-browser.webp",
+    "alt": "",
+    "caption": "",
+    "preferImage": false
+  },
+  "studios-hero-phone": {
+    "image": "/screenshots/studios-hero-phone.webp",
+    "alt": "",
+    "caption": "",
+    "preferImage": false
+  },
+  "studios-inquiries": {
+    "image": "/screenshots/studios-inquiries.webp",
+    "alt": "",
+    "caption": "",
+    "preferImage": false
+  },
   "teaching-how-0": {
     "image": "/screenshots/teaching-how-0.webp",
     "alt": "",

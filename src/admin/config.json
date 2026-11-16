@@ -8677,6 +8677,146 @@
               ]
             },
             {
+              "name": "studios-billing",
+              "label": "studios billing",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "alt",
+                  "label": "Alternative text",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "caption",
+                  "label": "Caption",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "preferImage",
+                  "label": "Use still image instead of animation",
+                  "widget": "boolean",
+                  "required": false,
+                  "default": false,
+                  "hint": "A replacement image automatically takes precedence. Turn this on to show the current poster as a still image."
+                }
+              ]
+            },
+            {
+              "name": "studios-hero-browser",
+              "label": "studios hero browser",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "alt",
+                  "label": "Alternative text",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "caption",
+                  "label": "Caption",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "preferImage",
+                  "label": "Use still image instead of animation",
+                  "widget": "boolean",
+                  "required": false,
+                  "default": false,
+                  "hint": "A replacement image automatically takes precedence. Turn this on to show the current poster as a still image."
+                }
+              ]
+            },
+            {
+              "name": "studios-hero-phone",
+              "label": "studios hero phone",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "alt",
+                  "label": "Alternative text",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "caption",
+                  "label": "Caption",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "preferImage",
+                  "label": "Use still image instead of animation",
+                  "widget": "boolean",
+                  "required": false,
+                  "default": false,
+                  "hint": "A replacement image automatically takes precedence. Turn this on to show the current poster as a still image."
+                }
+              ]
+            },
+            {
+              "name": "studios-inquiries",
+              "label": "studios inquiries",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "alt",
+                  "label": "Alternative text",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "caption",
+                  "label": "Caption",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "preferImage",
+                  "label": "Use still image instead of animation",
+                  "widget": "boolean",
+                  "required": false,
+                  "default": false,
+                  "hint": "A replacement image automatically takes precedence. Turn this on to show the current poster as a still image."
+                }
+              ]
+            },
+            {
               "name": "teaching-how-0",
               "label": "teaching how 0",
               "required": false,
