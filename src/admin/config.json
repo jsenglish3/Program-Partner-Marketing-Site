@@ -5274,6 +5274,39 @@
               "widget": "text"
             },
             {
+              "name": "featuresH",
+              "label": "Features heading",
+              "required": false,
+              "widget": "string"
+            },
+            {
+              "name": "featuresIntro",
+              "label": "Features introduction",
+              "required": false,
+              "widget": "text"
+            },
+            {
+              "name": "features",
+              "label": "Features",
+              "required": false,
+              "widget": "list",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Feature name",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "body",
+                  "label": "What it does",
+                  "required": false,
+                  "widget": "text"
+                }
+              ]
+            },
+            {
               "name": "cta",
               "label": "Call to action heading",
               "required": false,
