@@ -113,6 +113,18 @@ eleventyComputed:
 </div>
 </div>
 </section>
+{%- if a.features %}
+<section class="section" aria-labelledby="h-features">
+<div class="wrap stack" style="gap:clamp(28px,4vw,48px)">
+<div class="stack" style="gap:14px;max-width:760px"><h2 id="h-features" class="h2-sm">{{ a.featuresH | safe }}</h2>{% if a.featuresIntro %}<p class="body-lg muted">{{ a.featuresIntro | safe }}</p>{% endif %}</div>
+<ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+{%- for f in a.features %}
+<li class="card" style="gap:10px;padding:24px"><h3 style="font-size:22px;line-height:1.25">{{ f.title }}</h3><p class="muted" style="font-size:16px">{{ f.body }}</p></li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+{%- endif %}
 {%- endif %}
 
 {%- if a.faq %}{{ m.faq(a.faqH, a.faq, "sand", "h-faq") }}{% endif %}
