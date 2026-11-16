@@ -28,9 +28,9 @@ description: "Woodshed helps band, orchestra and choir students practice fingeri
 <h2 id="h-linked" class="h2">{{ copy["woodshed"].linked.text_016 | safe }}</h2>
 <p class="body-lg">{{ copy["woodshed"].linked.text_017 | safe }}</p>
 <p class="callout"><strong>{{ copy["woodshed"].linked.text_022 | safe }}</strong> {{ copy["woodshed"].linked.text_023 | safe }}</p>
-<a href="{{ copy["woodshed"].linked.text_018 | escape }}" class="link">{{ copy["woodshed"].linked.text_019 | safe }}</a>
+<div style="display:flex;flex-wrap:wrap;gap:12px 28px"><a href="{{ copy["woodshed"].linked.text_018 | escape }}" class="link">{{ copy["woodshed"].linked.text_019 | safe }}</a><a href="{{ copy["woodshed"].linked.text_024 | escape }}" class="link">{{ copy["woodshed"].linked.text_025 | safe }}</a></div>
 </div>
-<div style="flex:2 1 520px;min-width:0">{{ m.frame("browser", "Screenshot: Woodshed progress in Program Partner", "woodshed-linked", shots) }}</div>
+<div style="flex:2 1 520px;min-width:0">{{ m.frame("browser", "Screenshot: Practice in Program Partner", "woodshed-linked", shots) }}</div>
 </div>
 </section>
 {{ m.cta(copy["woodshed"].linked.text_020, copy["woodshed"].linked.text_021, site.woodshedUrl) }}

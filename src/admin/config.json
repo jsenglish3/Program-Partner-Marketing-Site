@@ -1273,7 +1273,7 @@
                 },
                 {
                   "name": "text_023",
-                  "label": "woodshed.myprogrampartner.com ↗",
+                  "label": "app.woodshedpractice.com ↗",
                   "widget": "string",
                   "required": false
                 },
@@ -3366,6 +3366,22 @@
                   "name": "text_023",
                   "label": "Included with Program Partner (rest of note)",
                   "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "text_024",
+                  "label": "Link destination 2",
+                  "widget": "string",
+                  "required": false,
+                  "pattern": [
+                    "^(?:https?://|mailto:|tel:|/|#).*|^$",
+                    "Use a relative path, https URL, email or telephone link."
+                  ]
+                },
+                {
+                  "name": "text_025",
+                  "label": "Everything in Woodshed All-Access ↗",
+                  "widget": "string",
                   "required": false
                 }
               ]
