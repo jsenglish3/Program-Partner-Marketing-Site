@@ -18,6 +18,7 @@ function prepare(directory){
   // Subscribe buttons go to live Stripe checkout; a review copy must never take a real payment.
   html=html.replace(/href="https:\/\/buy\.stripe\.com\/[^"]*"/g,'href="/subscribe/#staging-checkout-off"');
   html=html.replace(/<script\b[^>]*src="https:\/\/static\.cloudflareinsights\.com[^>]*><\/script>/g,'');
+  html=html.replace(/<script\b[^>]*data-heycatch[^>]*>[\s\S]*?<\/script>\n?/g,'');
   fs.writeFileSync(file,html);
  }
 }
