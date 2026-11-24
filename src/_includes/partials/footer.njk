@@ -15,6 +15,9 @@
 <li><a href="{{ copy["footer"].introduction.text_007 | escape }}">{{ copy["footer"].introduction.text_008 | safe }}</a></li>
 <li><a href="{{ copy["footer"].introduction.text_009 | escape }}">{{ copy["footer"].introduction.text_010 | safe }}</a></li>
 <li><a href="{{ copy["footer"].introduction.text_011 | escape }}">{{ copy["footer"].introduction.text_012 | safe }}</a></li>
+{%- if copy["footer"].introduction.text_024 %}
+<li><a href="{{ copy["footer"].introduction.text_024 | escape }}">{{ copy["footer"].introduction.text_025 | safe }}</a></li>
+{%- endif %}
 </ul></nav>
 <nav aria-label="Company"><h2>{{ copy["footer"].introduction.text_013 | safe }}</h2><ul>
 {%- for c in nav.company %}<li><a href="{{ c.href }}">{{ c.name }}</a></li>{% endfor %}
@@ -25,6 +28,10 @@
 <a href="mailto:{{ site.supportEmail }}" class="mail">{{ site.supportEmail }}</a>
 <a href="{{ site.facebook }}">{{ copy["footer"].introduction.text_015 | safe }}</a>
 <a href="{{ site.instagram }}">{{ copy["footer"].introduction.text_016 | safe }}</a>
+{#- The founders' professional profiles, set on the About page's team cards (About → Meet the team). -#}
+{%- for p in (copy["about"].team.members if (copy["about"].team and copy["about"].team.members) else []) %}{% if p.profile_url %}
+<a href="{{ p.profile_url | escape }}">{{ (p.profile_text or p.name) | safe }}</a>
+{%- endif %}{% endfor %}
 </div>
 <div class="legal">
 <a href="{{ copy["footer"].introduction.text_017 | escape }}">{{ copy["footer"].introduction.text_018 | safe }}</a><span aria-hidden="true">·</span>

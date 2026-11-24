@@ -35,8 +35,8 @@ description: "The program office for band, orchestra, choir, theatre and private
 {%- for t in programs %}
 <div role="tabpanel" id="panel-{{ t.key }}" aria-labelledby="tab-{{ t.key }}"{% if not loop.first %} hidden{% endif %}>
 <div class="shot-pair">
-{{ m.frame("browser", t.browser, "home-hero-" + t.key + "-browser", shots) }}
-<div class="shot-phone">{{ m.frame("phone", t.phone, "home-hero-" + t.key + "-phone", shots, "100%") }}</div>
+{{ m.frame("browser", t.browser, "home-hero-" + t.key + "-browser", shots, none, false, loop.first) }}
+<div class="shot-phone">{{ m.frame("phone", t.phone, "home-hero-" + t.key + "-phone", shots, "100%", false, loop.first) }}</div>
 </div>
 </div>
 {%- endfor %}
@@ -59,6 +59,30 @@ description: "The program office for band, orchestra, choir, theatre and private
 <a href="{{ copy["index"].built.text_016 | escape }}" class="link">{{ copy["index"].built.text_017 | safe }}</a>
 </div>
 </section>
+
+{#- Outside mentions: a dated strip that stays hidden until the first real one is added in the content editor
+    (Home → Mentioned in). Each item: source, what it was, a link, and the month it ran (YYYY-MM). Nothing here is
+    ever filled in for show: an association newsletter, a directory listing or a review profile, once it exists. -#}
+{%- set mentions = copy["index"].mentions %}
+{%- if mentions and mentions.items and mentions.items.length %}
+{%- set months = ["January","February","March","April","May","June","July","August","September","October","November","December"] %}
+<section class="mentions" aria-labelledby="h-mentions">
+<div class="wrap mentions-row">
+<h2 id="h-mentions" class="mentions-h">{{ mentions.heading }}</h2>
+<ul class="mentions-list">
+{%- for it in mentions.items %}
+{%- set ym = (it.date or "") | split("-") %}
+<li>
+{%- if it.url %}<a href="{{ it.url | escape }}">{{ it.source }}</a>{% else %}<span class="src">{{ it.source }}</span>{% endif %}
+{%- if it.title %}<span class="what">{{ it.title }}</span>{% endif %}
+{%- if it.quote %}<q>{{ it.quote }}</q>{% endif %}
+{%- if ym.length >= 2 %}<time datetime="{{ ym[0] }}-{{ ym[1] }}">{{ months[(ym[1] | int) - 1] }} {{ ym[0] }}</time>{% endif %}
+</li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+{%- endif %}
 
 <section class="section" aria-labelledby="h-problem">
 <div class="wrap grid-2" style="gap:24px 64px;align-items:start">
@@ -128,6 +152,31 @@ description: "The program office for band, orchestra, choir, theatre and private
 <p class="callout">{{ copy["index"].money.text_059 | safe }}</p>
 </div>
 </section>
+
+{#- Customer proof: real quotes from programs that use Program Partner, added in the content editor (Home → Customer
+    quotes). Hidden until there's at least one quote; the usage line shows only once it's filled in. Never invent one. -#}
+{%- set proof = copy["index"].proof %}
+{%- if proof and ((proof.items and proof.items.length) or proof.usage_line) %}
+<section class="section band-sand" aria-labelledby="h-proof">
+<div class="wrap stack" style="gap:clamp(28px,4vw,44px)">
+<h2 id="h-proof" class="h2">{{ proof.heading }}</h2>
+{%- if proof.items and proof.items.length %}
+<ul class="quote-wall">
+{%- for q in proof.items %}
+<li class="card quote-card">
+<blockquote><p>{{ q.quote }}</p></blockquote>
+<div class="who">
+{%- if q.photo %}<img src="{{ q.photo | escape }}" alt="{{ (q.photo_alt or q.name) | escape }}" width="56" height="56" loading="lazy">{% else %}<span class="initial" aria-hidden="true">{{ q.name | first }}</span>{% endif %}
+<p><span class="name">{{ q.name }}</span>{% if q.role or q.program %}<span class="role">{{ q.role }}{% if q.role and q.program %}, {% endif %}{{ q.program }}</span>{% endif %}</p>
+</div>
+</li>
+{%- endfor %}
+</ul>
+{%- endif %}
+{%- if proof.usage_line %}<p class="usage-line">{{ proof.usage_line }}</p>{% endif %}
+</div>
+</section>
+{%- endif %}
 
 <section class="section band-dark" aria-labelledby="h-families">
 <div class="wrap-wide" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px 64px;align-items:center">

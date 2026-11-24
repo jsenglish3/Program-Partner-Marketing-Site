@@ -48,11 +48,24 @@ analytics.init({
   },
 });
 
-// site.js announces a Let's chat message the app accepted: the site's one conversion.
-document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_request_sent'));
+// site.js announces a Let's chat message the app accepted: the site's conversion. A trial request (/trial/) is
+// also counted on its own, so trial asks per pricing-page visitor can be read separately.
+document.addEventListener('pp:chat-sent', (e) => {
+  analytics.trackEvent('chat_request_sent');
+  if (e.detail && e.detail.form === 'trial') analytics.trackEvent('trial_request_sent');
+});
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-horizontal-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]}
+{#- Organization data. The team's professional profiles (About → Meet the team) join it once they're set: the founder as
+    founder, everyone else as a member. -#}
+{%- set founders = [] -%}{%- set members = [] -%}
+{%- for p in (copy["about"].team.members if (copy["about"].team and copy["about"].team.members) else []) %}{% if p.profile_url %}
+{%- set person = { "@type": "Person", "name": p.name, "jobTitle": p.role, "sameAs": [p.profile_url] } -%}
+{%- if (p.role or "").indexOf("Founder") >= 0 %}{% set added = founders.push(person) %}{% else %}{% set added = members.push(person) %}{% endif -%}
+{%- endif %}{% endfor -%}
+{"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-horizontal-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]
+{%- if founders.length %},"founder":{{ founders | dump | replace("<", "\\u003c") | safe }}{% endif %}
+{%- if members.length %},"member":{{ members | dump | replace("<", "\\u003c") | safe }}{% endif %}}
 </script>
 </head>
 <body>

@@ -27,6 +27,7 @@ description: "Subscribe to Program Partner online, or pay by purchase order or c
 {%- endif %}
 </div>
 <p class="muted small-print">{{ c.checkout.terms_before }} <a href="/terms/">{{ c.checkout.terms_link }}</a>{{ c.checkout.terms_after }}</p>
+{%- if c.checkout.trial_link %}<p class="muted small-print">{{ c.checkout.trial_before }} <a href="/trial/" data-trial-link>{{ c.checkout.trial_link }}</a>{{ c.checkout.trial_after }}</p>{% endif %}
 </div>
 <div class="card card-shadow" id="studio">
 <h2 id="studio-h" class="price-name">{{ c.studio.heading }}</h2>

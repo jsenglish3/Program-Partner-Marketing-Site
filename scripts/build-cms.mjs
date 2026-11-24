@@ -10,7 +10,7 @@ const templates={},pages={};
 for(const p of fs.readdirSync('src').filter(p=>p.endsWith('.njk')&&!['sitemap.njk','short-links.njk'].includes(p))){
  const f=matter(fs.readFileSync('src/'+p,'utf8'));templates[p]=f.content;pages[p]=f.data;
 }
-for(const p of ['macros.njk','layouts/base.njk','partials/header.njk','partials/footer.njk','partials/pathways.njk'])templates[p]=fs.readFileSync('src/_includes/'+p,'utf8');
+for(const p of ['macros.njk','layouts/base.njk','partials/header.njk','partials/footer.njk','partials/pathways.njk','partials/chat-form.njk'])templates[p]=fs.readFileSync('src/_includes/'+p,'utf8');
 const data={};for(const p of fs.readdirSync('src/_data')){const key=p.replace(/\.(js|json)$/,'');if(p.endsWith('.json'))data[key]=read('src/_data/'+p);else if(p.endsWith('.js'))data[key]=(await import(pathToFileURL(path.resolve('src/_data/'+p)).href+'?cms='+Date.now())).default;}
 data.buildYear=new Date().getFullYear();data.hasFounderPhoto=fs.existsSync('src/assets/trey-english.jpg');data.shareOrigin='';data.pathPrefix='/';data.shots={};
 for(const p of fs.readdirSync('src/screenshots')){const m=p.match(/^(.+)\.(png|jpe?g|webp)$/);if(m)data.shots[m[1]]='/screenshots/'+p;const v=p.match(/^(.+)\.(mp4|webm)$/);if(v)data.shots[v[1]+(v[2]==='mp4'?'@video':'@webm')]='/screenshots/'+p;}
