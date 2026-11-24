@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+current: blog
+title: Blog
+permalink: /blog/
+description: "Articles from Program Partner on running a band, orchestra, choir, theatre or studio program: fees, forms, families and the work around them."
+---
+{#- The blog's index: every article published in HeyCatch, as that build read them (src/_data/blog.js; README: "Blog").
+    Title, published date and read time only: no excerpt and no images. -#}
+<div style="padding:clamp(56px,8vw,104px) 0 var(--section-y)">
+<div class="wrap-narrow stack" style="gap:28px">
+<h1 style="font-size:clamp(40px,5.4vw,64px);line-height:1.05;letter-spacing:-.02em">Blog</h1>
+{%- if blog.articles.length %}
+<ol class="changelog blog-list">
+{%- for a in blog.articles %}
+<li>
+<h2><a href="{{ a.path }}">{{ a.title }}</a></h2>
+{%- if a.publishedLabel or a.readTime %}
+<p class="when">{% if a.publishedLabel %}<time datetime="{{ a.published }}">{{ a.publishedLabel }}</time>{% endif %}{% if a.publishedLabel and a.readTime %}<span aria-hidden="true"> · </span>{% endif %}{% if a.readTime %}{{ a.readTime }} min read{% endif %}</p>
+{%- endif %}
+</li>
+{%- endfor %}
+</ol>
+{%- else %}
+<p class="lede">No articles yet.</p>
+{%- endif %}
+</div>
+</div>

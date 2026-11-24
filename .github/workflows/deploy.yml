@@ -2,6 +2,7 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Also started by blog-check.yml when the blog's articles in HeyCatch have changed (README: "Blog").
   workflow_dispatch:
   # The studio founding price ($19 / $190) shows until the start of 1 January
   # 2027, Eastern time, and the school founding price ($299) until the start of
@@ -29,7 +30,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # The last good copy of the blog's articles, used only if HeyCatch can't be read during this build.
+      - uses: actions/cache@v4
+        with:
+          path: .cache/heycatch
+          key: heycatch-blog-${{ github.run_id }}
+          restore-keys: heycatch-blog-
       - run: npm run build
+        env:
+          HEYCATCH_API_KEY: ${{ secrets.HEYCATCH_API_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
