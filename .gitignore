@@ -9,3 +9,6 @@ _site
 
 # Local staging review build (npm run build:staging)
 _staging/
+
+# Resized screenshot copies (scripts/responsive-images.mjs)
+.cache/

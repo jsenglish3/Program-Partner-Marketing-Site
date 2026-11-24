@@ -1,5 +1,9 @@
-{#- Screenshot frame. kind: browser | phone | tablet. slot: file stem in src/screenshots. shots: the global shots map. -#}
-{%- macro frame(kind, caption, slot, shots, phoneMax, showCaption) -%}
+{#- Screenshot frame. kind: browser | phone | tablet. slot: file stem in src/screenshots. shots: the global shots map.
+    eager: the frame is the page's first screen above the fold, so its image loads straight away (and the browser
+    shot is fetched first) instead of lazily.
+    srcset: when the build made smaller copies of the image (scripts/responsive-images.mjs), shots["<url>@srcset"]
+    lists them, and sizes says roughly how wide the frame is drawn, so a phone picks a phone-sized file. -#}
+{%- macro frame(kind, caption, slot, shots, phoneMax, showCaption, eager) -%}
 {%- set clean = caption | replace("Screenshot: ", "") | replace(", Westbrook Middle School demo", "") | replace(", studio demo", "") -%}
 {%- set wood = (caption.indexOf("Screenshot: Woodshed") == 0) and (caption.indexOf("in Program Partner") < 0) -%}
 {%- set alt = ("Woodshed screen: " if wood else "Program Partner screen: ") + clean -%}
@@ -18,8 +22,15 @@
 <video class="shot-video" muted loop playsinline preload="none"{% if shots[slot] %} poster="{{ shots[slot] }}"{% endif %} aria-label="{{ alt }} (short animation)" data-shot-video><source src="{{ shots[slot + '@video'] }}" type="video/mp4">{% if shots[slot + '@webm'] %}<source src="{{ shots[slot + '@webm'] }}" type="video/webm">{% endif %}</video>
 <button type="button" class="shot-toggle" data-video-toggle aria-label="Play animation" hidden><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path class="i-play" d="M4 2.5v11l9-5.5z"/><path class="i-pause" d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button>
 {%- elif shots and shots[slot] %}
-<img src="{{ shots[slot] }}" alt="{{ alt }}" loading="lazy"{% if dark %} class="shot-l"{% endif %}>
-{%- if dark %}<img src="{{ dark }}" alt="{{ alt }}, in dark mode" loading="lazy" class="shot-d">{% endif %}
+{%- if kind == "phone" -%}
+{%- set sizes = phoneMax if (phoneMax and phoneMax.indexOf("px") > 0) else ("(min-width: 768px) 280px, 33vw" if phoneMax else "280px") -%}
+{%- else -%}
+{%- set sizes = "(min-width: 1280px) 1120px, (min-width: 768px) 80vw, 92vw" -%}
+{%- endif -%}
+{%- set ss = shots[shots[slot] + "@srcset"] -%}
+{%- set ssDark = shots[dark + "@srcset"] if dark else "" -%}
+<img src="{{ shots[slot] }}"{% if ss %} srcset="{{ ss }}" sizes="{{ sizes }}"{% endif %} alt="{{ alt }}"{% if eager %} loading="eager"{% if kind != "phone" %} fetchpriority="high"{% endif %}{% else %} loading="lazy"{% endif %}{% if dark %} class="shot-l"{% endif %}>
+{%- if dark %}<img src="{{ dark }}"{% if ssDark %} srcset="{{ ssDark }}" sizes="{{ sizes }}"{% endif %} alt="{{ alt }}, in dark mode" loading="lazy" class="shot-d">{% endif %}
 {%- else %}
 <div class="placeholder" role="img" aria-label="{{ alt }} (screenshot coming)">{{ clean | upper }}</div>
 {%- endif %}
@@ -47,8 +58,8 @@
 {%- if o.browser %}
 <div class="hero-visual">
 <div class="shot-pair"{% if not o.phone %} style="padding:0"{% endif %}>
-{{ frame("browser", o.browser, o.slot + "-browser", shots) }}
-{%- if o.phone %}<div class="shot-phone">{{ frame("phone", o.phone, o.slot + "-phone", shots, "100%") }}</div>{% endif %}
+{{ frame("browser", o.browser, o.slot + "-browser", shots, none, false, true) }}
+{%- if o.phone %}<div class="shot-phone">{{ frame("phone", o.phone, o.slot + "-phone", shots, "100%", false, true) }}</div>{% endif %}
 </div>
 </div>
 {%- endif %}
@@ -79,6 +90,13 @@
 </div>
 </div>
 </section>
+{#- FAQPage structured data, built from the same items the page shows, so the markup can't drift from the visible answers.
+    Each page calls this macro at most once, so there is one FAQPage per page. "<" is escaped so no answer can end the script. -#}
+{%- if items and items.length %}
+{%- set entities = [] -%}
+{%- for it in items %}{% set added = entities.push({ "@type": "Question", "name": it.q, "acceptedAnswer": { "@type": "Answer", "text": it.a } }) %}{% endfor %}
+<script type="application/ld+json">{{ { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": entities } | dump | replace("<", "\\u003c") | safe }}</script>
+{%- endif %}
 {%- endmacro -%}
 
 {#- What you get: check cards -#}

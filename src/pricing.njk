@@ -13,21 +13,28 @@ description: "Every feature included: $299 a year per school program when you su
 {{ m.hero({ title: c.hero.heading, subhead: subhead }, site, shots) }}
 <section class="price-section" aria-labelledby="plan-h">
 <div class="wrap price-grid">
-<div class="card card-shadow price-card" data-price-tier="{{ 'founding' if founding else 'standard' }}">
+<div class="card card-shadow price-card price-card-main" data-price-tier="{{ 'founding' if founding else 'standard' }}">
+<div class="price-badges">
+{%- if c.plan.badge_audience %}<p class="pill pill-primary">{{ c.plan.badge_audience }}</p>{% endif %}
 {%- if founding %}<p class="pill pill-accent">{{ c.plan.badge_founding }}</p>{% endif %}
+</div>
 <h2 id="plan-h" class="price-name">{{ c.plan.name }}</h2>
 <p class="price-line"><span class="price-amount tabular-nums">{{ c.plan.amount_founding if founding else c.plan.amount_standard }}</span> <span class="price-per">{{ c.plan.per }}</span></p>
+{%- set anchor = c.plan.anchor_founding if founding else c.plan.anchor_standard %}
+{%- if anchor %}<p class="price-anchor">{{ anchor }}</p>{% endif %}
 <p class="muted">{{ c.plan.note_founding if founding else c.plan.note_standard }}</p>
 <div class="hero-actions">
 <a href="/subscribe/" class="btn btn-primary">{{ c.plan.subscribe }}</a>
-<a href="/subscribe/#purchase-order" class="btn btn-outline">{{ c.plan.purchase_order }}</a>
+<a href="{{ site.appUrl }}/demo" class="btn btn-outline" data-demo-school-link>{{ c.plan.explore }}</a>
 </div>
-<p class="muted price-demo">{{ c.plan.demo_line }} <a href="/demo/">{{ c.plan.demo_link }}</a></p>
+<p class="muted price-demo">{{ c.plan.explore_note }} {{ c.plan.demo_line }} <a href="/demo/">{{ c.plan.demo_link }}</a></p>
+<p class="muted price-demo"><a href="/subscribe/#purchase-order">{{ c.plan.purchase_order }}</a></p>
 </div>
 <div class="card card-shadow price-card" id="studio" data-price-tier="{{ 'studio-founding' if studioFounding else 'studio-standard' }}">
-{%- if studioFounding %}<p class="pill pill-accent">{{ c.studio.badge_founding }}</p>{% endif %}
+{%- if studioFounding %}<div class="price-badges"><p class="pill pill-accent">{{ c.studio.badge_founding }}</p></div>{% endif %}
 <h2 id="studio-plan-h" class="price-name">{{ c.studio.name }}</h2>
 <p class="price-line price-line-pair"><span class="price-pair"><span class="price-amount tabular-nums">{{ c.studio.monthly_founding if studioFounding else c.studio.monthly_standard }}</span> <span class="price-per">{{ c.studio.per_month }}</span></span> <span class="price-per">{{ c.studio.or }}</span> <span class="price-pair"><span class="price-amount tabular-nums">{{ c.studio.yearly_founding if studioFounding else c.studio.yearly_standard }}</span> <span class="price-per">{{ c.studio.per_year }}</span></span></p>
+{%- if c.studio.anchor %}<p class="price-anchor">{{ c.studio.anchor }}</p>{% endif %}
 <p class="muted">{{ c.studio.note_founding if studioFounding else c.studio.note_standard }}</p>
 <div class="hero-actions">
 <a href="/subscribe/#studio" class="btn btn-primary">{{ c.studio.subscribe }}</a>
@@ -43,7 +50,9 @@ description: "Every feature included: $299 a year per school program when you su
 </div>
 </section>
 {%- set questions = [] -%}
-{%- for it in c.faq.items %}{% if founding or not it.founding_only %}{% set added = questions.push({ q: it.q, a: (it.a ~ " " ~ it.a_studio_founding) if (studioFounding and it.a_studio_founding) else it.a }) %}{% endif %}{% endfor %}
+{%- for it in c.faq.items %}{% if founding or not it.founding_only %}
+{%- set answer = (it.a ~ " " ~ it.a_studio_founding) if (studioFounding and it.a_studio_founding) else it.a -%}
+{%- set added = questions.push({ q: it.q, a: answer }) %}{% endif %}{% endfor %}
 {{ m.faq(c.faq.heading, questions, "sand", "h-faq") }}
 {{ m.cta(c.closing.heading, c.closing.subscribe, "/subscribe/", c.closing.body) }}
 <script type="application/ld+json">

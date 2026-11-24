@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { buildCms } from "./scripts/build-cms.mjs";
 import { resolveMedia } from "./scripts/media.mjs";
+import { srcsets, writeVariants, forget as forgetVariants } from "./scripts/responsive-images.mjs";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
@@ -20,14 +21,17 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/admin/config.json": "admin/config.json", "src/admin/preview.js": "admin/preview.js" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addWatchTarget("content/");
+  eleventyConfig.on("eleventy.before", () => forgetVariants());
   eleventyConfig.on("eleventy.after",({directories})=>buildCms(directories.output));
+  // Phone-sized copies of the screenshots (scripts/responsive-images.mjs); the frame macro lists them in srcset.
+  eleventyConfig.on("eleventy.after", ({ directories }) => writeVariants(directories.output));
   // Screenshots live in src/screenshots/<slot>.png (or .jpg/.webp).
   // The frame partial shows the image when the file exists, otherwise a quiet placeholder.
   // <slot>-dark.webp is the same screen in dark mode (the home hero's Light/Dark switch shows it).
   // <slot>.mp4 (plus an optional <slot>.webm) is a short looping animation; <slot>.webp is its poster and fallback.
   // Videos are exposed as shots["<slot>@video"] so the frame macro can see them.
   const shotDir = path.join(process.cwd(), "src", "screenshots");
-  eleventyConfig.addGlobalData("shots", () => {
+  eleventyConfig.addGlobalData("shots", async () => {
     const out = {};
     if (!fs.existsSync(shotDir)) return out;
     for (const f of fs.readdirSync(shotDir)) {
@@ -37,7 +41,8 @@ export default function (eleventyConfig) {
       if (v) out[v[1] + (v[2].toLowerCase() === "mp4" ? "@video" : "@webm")] = "/screenshots/" + f;
     }
     const media=JSON.parse(fs.readFileSync(new URL('./content/media.json',import.meta.url),'utf8'));
-    return resolveMedia(out,media);
+    // "<image url>@srcset" entries: keyed by the image's own address, so they follow an editor's replacement upload.
+    return { ...resolveMedia(out,media), ...(await srcsets()) };
   });
 
   eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());

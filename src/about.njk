@@ -53,6 +53,8 @@ description: "Program Partner started as one band director's answer to the paper
 <h3 class="h3" style="font-size:26px">{{ p.name | safe }}</h3>
 {%- if p.role %}<p class="pill pill-accent" style="margin:0;max-width:100%">{{ p.role | safe }}</p>{% endif %}
 {%- if p.title %}<p class="muted" style="margin:0;font-size:15px;line-height:1.4">{{ p.title | safe }}</p>{% endif %}
+{#- A professional profile (LinkedIn or similar), so a principal or treasurer can check who stands behind the product. Hidden until set. -#}
+{%- if p.profile_url %}<p style="margin:0;font-size:15px;line-height:1.4"><a href="{{ p.profile_url | escape }}" rel="me">{{ (p.profile_text or "Professional profile") | safe }}</a></p>{% endif %}
 </div>
 </div>
 <p style="margin:0;font-size:17px;line-height:1.65;text-wrap:pretty">{{ p.bio | safe }}</p>

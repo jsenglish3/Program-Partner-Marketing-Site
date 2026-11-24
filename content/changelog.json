@@ -1,0 +1,61 @@
+{
+  "heading": "What's new",
+  "intro": "Changes to Program Partner, newest first. Each one is dated, so you can see what's current.",
+  "entries": [
+    {
+      "date": "2026-11-16",
+      "title": "Calendar import by link",
+      "body": "Add any calendar feed by its link, such as your school's or district's calendar, and its events come into your program calendar and stay in sync."
+    },
+    {
+      "date": "2026-11-14",
+      "title": "The front office for private studios",
+      "body": "Studios get a Today home screen and a four-step setup. Families can see their lessons and notes, cancel within your policy, book from your open times and sign your studio policy. Lesson reminders go out about a day ahead, inquiries come in from a form you share, and families can save a card or bank account for autopay with your own payment account."
+    },
+    {
+      "date": "2026-11-11",
+      "title": "A plan for private studios",
+      "body": "Private studios have their own plan, billed monthly or yearly, with every feature included."
+    },
+    {
+      "date": "2026-11-09",
+      "title": "See who acknowledged a behavior notice",
+      "body": "Directors see which guardian acknowledged each behavior notice and when. A guardian can add one optional note with the acknowledgement, and you can reply through Messages."
+    },
+    {
+      "date": "2026-11-07",
+      "title": "Published pricing and online subscribing",
+      "body": "One yearly price per school program, with every feature included. Subscribe online, or pay by purchase order or check."
+    },
+    {
+      "date": "2026-11",
+      "title": "An access control review of the whole platform",
+      "body": "Andrew Casal tested Program Partner as a director, a parent and a student in two test schools, checking who can see and change which records, then retested every fix."
+    },
+    {
+      "date": "2026-10-31",
+      "title": "Program Partner moves to its own hosting",
+      "body": "The app now runs on its own hosting and its own database, with off-site backups kept for 30 days."
+    },
+    {
+      "date": "2026-10-31",
+      "title": "Fewer surprises before something is saved or sent",
+      "body": "Program Partner now asks before throwing away unsaved edits and before one-tap deletes. Before a new fee, a credit or a bulk payment is saved, it shows who is affected and the total, and families' form answers are kept as a draft until they submit."
+    },
+    {
+      "date": "2026-10-28",
+      "title": "Behavior notices reach guardians right away",
+      "body": "When you log an incident, guardians get the notice straight away, with a nightly reminder until someone acknowledges it."
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Hold event sign-up for past-due fees",
+      "body": "Turn on a setting for any optional event, and a student can't sign up until their fees are paid. Fees that aren't due yet don't count, and you can make an exception."
+    },
+    {
+      "date": "2026-10-21",
+      "title": "Bus assignments and printable event rosters",
+      "body": "Assign travelers to buses, filter and group them quickly, and print rosters for the trip."
+    }
+  ]
+}

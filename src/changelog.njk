@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+current: changelog
+title: What's new
+permalink: /changelog/
+description: "What's new in Program Partner, newest first: dated changes to the program office for band, orchestra, choir, theatre and private studios."
+---
+{#- Dated entries from content/changelog.json. A date is YYYY-MM-DD, or YYYY-MM when only the month is known. Each entry
+    has a stable anchor (its date and title), so a link to one keeps working when newer entries go in above it. -#}
+{% import "macros.njk" as m %}
+{%- set c = changelog -%}
+{%- set months = ["January","February","March","April","May","June","July","August","September","October","November","December"] -%}
+{{ m.hero({ eyebrow: "Changelog", title: c.heading, subhead: c.intro }, site, shots) }}
+<section aria-label="Changes" style="padding:0 0 var(--section-y)">
+<div class="wrap-narrow">
+<ol class="changelog">
+{%- for e in c.entries %}
+{%- set p = (e.date or "") | split("-") %}
+{%- set monthName = months[(p[1] | int) - 1] if p.length >= 2 else "" %}
+{%- set label = (monthName + " " + (p[2] | int) + ", " + p[0]) if p.length >= 3 else ((monthName + " " + p[0]) if monthName else "") %}
+{%- set id = (e.date + "-" + e.title) | slug %}
+<li id="{{ id }}">
+{%- if label %}<p class="when"><time datetime="{{ e.date }}">{{ label }}</time></p>{% endif %}
+<h2><a href="#{{ id }}">{{ e.title }}</a></h2>
+<p>{{ e.body }}</p>
+</li>
+{%- endfor %}
+</ol>
+</div>
+</section>
+{{ m.cta("See what's there today.", site.ctaPrimary, "/demo/") }}

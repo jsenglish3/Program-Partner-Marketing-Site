@@ -5,12 +5,6 @@ title: Schedule a demo
 permalink: /demo/
 description: "Ask for a demo of Program Partner. Tell us about your program and we'll reply within one business day."
 ---
-{%- set states = "Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,District of Columbia,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming,Outside the US" | split(",") -%}
-{#- Roles must match DEMO_LEAD_ROLES in the app (programhq-fmms, src/lib/demo-access.ts): the app refuses any other value. -#}
-{%- set roles = ["Director","Assistant director","Booster or parent leader","School or district administrator","Private studio teacher","Student teacher","Other"] -%}
-{%- set kinds = ["Band","Orchestra","Choir","Theatre","Guard","Private studio","Other"] -%}
-{%- set sizes = ["Under 50","50–149","150–299","300 or more"] -%}
-{%- set topics = [["fees","Fees and budgets"],["students","Students and families"],["communication","Communication"],["forms","Forms and paperwork"],["events","Events and trips"],["inventory","Inventory and uniforms"],["library","Music library"],["seating","Seating charts"],["teaching","Teaching tools"],["pricing","Pricing"]] -%}
 <div style="padding:clamp(48px,7vw,96px) 0 var(--section-y)">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,80px);align-items:flex-start">
 <div class="stack" style="flex:1 1 320px;max-width:420px;gap:20px">
@@ -29,48 +23,6 @@ description: "Ask for a demo of Program Partner. Tell us about your program and 
 <p class="muted" style="font-size:16px;line-height:1.6;padding-top:12px;border-top:1px solid var(--border)">{% if site.bookingUrl %}{{ copy["demo"].introduction.text_005 | safe }}{% else %}{{ copy["demo"].introduction.text_006 | safe }}{% endif %} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
 </div>
 
-<form id="chat" class="form-card" data-chat-form data-endpoint="{{ site.chatEndpoint }}" data-thanks="{{ "/thanks/" | url }}" novalidate aria-labelledby="form-h" style="flex:1.6 1 460px;min-width:0">
-<h2 id="form-h" style="font-size:28px;line-height:1.2">{{ site.ctaSecondary }}</h2>
-<p style="margin-top:-14px;font-size:15px" class="muted">{{ copy["demo"].introduction.text_007 | safe }}</p>
-<div class="alert" data-errors hidden tabindex="-1" role="alert">
-<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
-<div class="stack" style="gap:8px"><p style="font-weight:600"></p><ul></ul></div>
-</div>
-<div class="alert" data-server-error hidden tabindex="-1" role="alert">
-<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
-<p><strong style="font-weight:600">{{ copy["demo"].introduction.text_008 | safe }}</strong> {{ copy["demo"].introduction.text_009 | safe }} <a href="mailto:{{ site.supportEmail }}">{{ site.supportEmail }}</a>.</p>
-</div>
-<div class="form-grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px">
-<div class="field" data-field="name"><label for="f-name">{{ copy["demo"].introduction.text_010 | safe }} <span class="opt">{{ copy["demo"].introduction.text_011 | safe }}</span></label><input class="input" id="f-name" name="name" autocomplete="name" maxlength="120" required></div>
-<div class="field" data-field="email"><label for="f-email">{{ copy["demo"].introduction.text_012 | safe }} <span class="opt">{{ copy["demo"].introduction.text_013 | safe }}</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" maxlength="320" required aria-describedby="help-email" data-help="help-email"><p id="help-email" class="help">{{ copy["demo"].introduction.text_014 | safe }}</p></div>
-<div class="field" data-field="role"><label for="f-role">{{ copy["demo"].introduction.text_015 | safe }} <span class="opt">{{ copy["demo"].introduction.text_016 | safe }}</span></label><select class="select" id="f-role" name="role" required><option value="">{{ copy["demo"].introduction.text_017 | safe }}</option>{% for o in roles %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
-<div class="field" data-field="state"><label for="f-state">{{ copy["demo"].introduction.text_018 | safe }} <span class="opt">{{ copy["demo"].introduction.text_019 | safe }}</span></label><select class="select" id="f-state" name="state" autocomplete="address-level1" required><option value="">{{ copy["demo"].introduction.text_020 | safe }}</option>{% for o in states %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
-</div>
-<div class="field" data-field="school"><label for="f-school">{{ copy["demo"].introduction.text_021 | safe }} <span class="opt">{{ copy["demo"].introduction.text_022 | safe }}</span></label><input class="input" id="f-school" name="school" autocomplete="organization" maxlength="160" required></div>
-{# ph-no-capture: HeyCatch autocapture skips these choice groups, so which boxes a visitor ticks never leaves the page (privacy policy, section 12). #}
-<fieldset class="field" id="f-kind" data-field="kind" style="border:0;margin:0;padding:0;gap:12px">
-<legend>{{ copy["demo"].introduction.text_023 | safe }} <span class="opt">{{ copy["demo"].introduction.text_024 | safe }}</span></legend>
-<div class="choices ph-no-capture" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">{% for o in kinds %}<label><input type="checkbox" name="kind" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
-</fieldset>
-<fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
-<legend>{{ copy["demo"].introduction.text_025 | safe }}</legend>
-<div class="choices ph-no-capture" style="display:flex;flex-wrap:wrap;gap:4px 24px">{% for o in sizes %}<label><input type="radio" name="size" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
-</fieldset>
-<fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
-<legend>{{ copy["demo"].introduction.text_026 | safe }} <span class="opt">{{ copy["demo"].introduction.text_027 | safe }}</span></legend>
-<div class="choices ph-no-capture" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{% for o in topics %}<label><input type="checkbox" name="topic" value="{{ o[0] }}">{{ o[1] }}</label>{% endfor %}</div>
-</fieldset>
-<div class="field" data-field="tools"><label for="f-tools">{{ copy["demo"].introduction.text_028 | safe }}</label><input class="input" id="f-tools" name="tools" maxlength="200" aria-describedby="help-tools" data-help="help-tools"><p id="help-tools" class="help">{{ copy["demo"].introduction.text_029 | safe }}</p></div>
-<div class="field" data-field="notes"><label for="f-notes">{{ copy["demo"].introduction.text_030 | safe }}</label><textarea class="textarea" id="f-notes" name="notes" rows="4" maxlength="2000"></textarea></div>
-<div class="hp" aria-hidden="true"><label for="f-website">{{ copy["demo"].introduction.text_031 | safe }}</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-{%- if site.turnstileSiteKey %}
-<div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}"></div>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-{%- endif %}
-<div class="stack" style="gap:10px;align-items:flex-start">
-<button type="submit" class="btn btn-primary" data-label="{{ copy.demo.introduction.text_033 | escape }}">{{ copy["demo"].introduction.text_033 | safe }}</button>
-<p style="font-size:15px" class="muted">{{ copy["demo"].introduction.text_034 | safe }}</p>
-</div>
-</form>
+{% include "partials/chat-form.njk" %}
 </div>
 </div>

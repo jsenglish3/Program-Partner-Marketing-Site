@@ -59,6 +59,22 @@ Two extras:
 
 How the current set was taken: the Westbrook demo at app.myprogrampartner.com/demo, captured at 2× (desktop 1440×900, tablet 1180×820, phone 390×845) in both light and dark color schemes. The demo resets nightly, so retakes look the same.
 
+**Phone-sized copies.** The build also writes smaller WebP copies of every screenshot (400, 800 and 1200 px wide, whichever are narrower than the original) to `/screenshots/w/`, and the frames list them in `srcset`, so a phone downloads a phone-sized file. Nothing to do by hand: add or replace a screenshot and the next build makes its copies (`scripts/responsive-images.mjs`, cached in `.cache/responsive/`). The first home hero shot loads straight away; everything else loads as it nears the screen.
+
+## Proof, profiles and what's new
+
+These fill in through the content editor and stay hidden until something real goes in them. Never fill them for show.
+
+- **Customer quotes** (Home → Customer quotes): a quote wall after "Your money stays yours". Each quote has a first name, role, program and an optional photo, and needs the customer's permission. The usage line ("14 programs run on Program Partner") shows on its own once filled in.
+- **Mentioned in** (Home → Mentioned in): a slim dated strip under the founder story, for outside mentions such as an association newsletter, a directory listing or a review profile. The date is the month it ran (YYYY-MM).
+- **Profile links** (About → Meet the team → each person → Professional profile link): shows on the team card, in the footer beside Facebook and Instagram, and in the site's Organization data (the founder as founder, everyone else as a member).
+- **What's new** (`/changelog/`, What's new in the editor): dated entries, newest first. Each has a stable anchor from its date and title. Linked from Resources and the footer.
+- **`/llms.txt`** (`src/llms.11ty.js`): a plain-text map of the site for AI assistants, built from the same prices, page descriptions and What's new entries, so it changes with them.
+
+## Demo school instead of a trial
+
+There is no free trial (owner decision, 24 November 2026). "Explore the demo school" on the school price card and the subscribe page links to the app's own `/demo` page, where a visitor asks for access and gets a link by email once it's approved by hand. The site's Let's chat form still never gives demo access.
+
 ## Settings in `src/_data/site.json`
 
 - `bookingUrl` — the public booking page. While empty, "Schedule a demo" scrolls to the Let's chat form instead.

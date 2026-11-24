@@ -292,6 +292,22 @@
                         "^(?:https?://|mailto:|tel:|/|#).*|^$",
                         "Use a relative path, https URL, email or telephone link."
                       ]
+                    },
+                    {
+                      "name": "profile_url",
+                      "label": "Professional profile link (LinkedIn or similar), shown on the card and in the footer",
+                      "widget": "string",
+                      "required": false,
+                      "pattern": [
+                        "^https://.*|^$",
+                        "Use the full https:// address of the profile."
+                      ]
+                    },
+                    {
+                      "name": "profile_text",
+                      "label": "Profile link text",
+                      "widget": "string",
+                      "required": false
                     }
                   ]
                 }
@@ -1920,6 +1936,136 @@
                   ]
                 }
               ]
+            },
+            {
+              "name": "proof",
+              "label": "Customer quotes (hidden until there is a quote or a usage line)",
+              "widget": "object",
+              "collapsed": true,
+              "required": false,
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Section heading",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "items",
+                  "label": "Quotes (real customers only, with their permission)",
+                  "widget": "list",
+                  "required": false,
+                  "collapsed": true,
+                  "summary": "{{fields.name}}, {{fields.program}}",
+                  "fields": [
+                    {
+                      "name": "quote",
+                      "label": "One-line quote",
+                      "widget": "text",
+                      "required": false
+                    },
+                    {
+                      "name": "name",
+                      "label": "First name",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "role",
+                      "label": "Role (for example: Band director)",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "program",
+                      "label": "Program (for example: Feagin Mill Middle School)",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "photo",
+                      "label": "Photo",
+                      "widget": "image",
+                      "required": false
+                    },
+                    {
+                      "name": "photo_alt",
+                      "label": "Photo alternative text",
+                      "widget": "string",
+                      "required": false
+                    }
+                  ]
+                },
+                {
+                  "name": "usage_line",
+                  "label": "Usage line, once the number is reportable (for example: 14 programs run on Program Partner)",
+                  "widget": "string",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "mentions",
+              "label": "Mentioned in (hidden until there is a real mention)",
+              "widget": "object",
+              "collapsed": true,
+              "required": false,
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Strip heading",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "items",
+                  "label": "Mentions",
+                  "widget": "list",
+                  "required": false,
+                  "collapsed": true,
+                  "summary": "{{fields.source}} ({{fields.date}})",
+                  "fields": [
+                    {
+                      "name": "source",
+                      "label": "Who (for example: GMEA newsletter)",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "title",
+                      "label": "What it was (for example: Member spotlight)",
+                      "widget": "string",
+                      "required": false
+                    },
+                    {
+                      "name": "url",
+                      "label": "Link",
+                      "widget": "string",
+                      "required": false,
+                      "pattern": [
+                        "^https?://.*|^$",
+                        "Use the full address, starting with https://"
+                      ]
+                    },
+                    {
+                      "name": "date",
+                      "label": "Month it ran (YYYY-MM)",
+                      "widget": "string",
+                      "required": false,
+                      "pattern": [
+                        "^\\d{4}-(0[1-9]|1[0-2])$|^$",
+                        "Use YYYY-MM, for example 2026-11"
+                      ]
+                    },
+                    {
+                      "name": "quote",
+                      "label": "Short quote from it (optional)",
+                      "widget": "text",
+                      "required": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1979,6 +2125,12 @@
                   "required": false
                 },
                 {
+                  "name": "badge_audience",
+                  "label": "Audience badge (school card)",
+                  "widget": "string",
+                  "required": false
+                },
+                {
                   "name": "amount_founding",
                   "label": "Founding price",
                   "widget": "string",
@@ -1993,6 +2145,18 @@
                 {
                   "name": "per",
                   "label": "Price unit",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "anchor_founding",
+                  "label": "What the price comes to, while the founding price shows",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "anchor_standard",
+                  "label": "What the price comes to, from July 1, 2027",
                   "widget": "string",
                   "required": false
                 },
@@ -2017,6 +2181,18 @@
                 {
                   "name": "purchase_order",
                   "label": "Purchase order link",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "explore",
+                  "label": "Demo school button",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "explore_note",
+                  "label": "Demo school note",
                   "widget": "string",
                   "required": false
                 },
@@ -2091,6 +2267,12 @@
                 {
                   "name": "or",
                   "label": "Word between the two prices",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "anchor",
+                  "label": "What the price comes to",
                   "widget": "string",
                   "required": false
                 },
@@ -2342,6 +2524,24 @@
                 {
                   "name": "terms_after",
                   "label": "Terms line, after the link",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "explore_before",
+                  "label": "Demo school line: before the link",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "explore_link",
+                  "label": "Demo school line: link text",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "explore_after",
+                  "label": "Demo school line: after the link",
                   "widget": "string",
                   "required": false
                 }
@@ -3765,6 +3965,22 @@
                 {
                   "name": "text_023",
                   "label": "Program Partner, LLC",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "text_024",
+                  "label": "Link destination 8",
+                  "widget": "string",
+                  "required": false,
+                  "pattern": [
+                    "^(?:https?://|mailto:|tel:|/|#).*|^$",
+                    "Use a relative path, https URL, email or telephone link."
+                  ]
+                },
+                {
+                  "name": "text_025",
+                  "label": "What's new",
                   "widget": "string",
                   "required": false
                 }
@@ -5234,6 +5450,33 @@
               "label": "Button destination",
               "required": false,
               "widget": "string"
+            },
+            {
+              "name": "faqH",
+              "label": "FAQ heading",
+              "required": false,
+              "widget": "string"
+            },
+            {
+              "name": "faq",
+              "label": "Faq",
+              "required": false,
+              "widget": "list",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "q",
+                  "label": "Question",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "a",
+                  "label": "Answer",
+                  "required": false,
+                  "widget": "text"
+                }
+              ]
             }
           ]
         },
@@ -5629,6 +5872,57 @@
                   "label": "Answer",
                   "required": false,
                   "widget": "string"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "changelog",
+          "label": "What's new (changelog)",
+          "file": "content/changelog.json",
+          "fields": [
+            {
+              "name": "heading",
+              "label": "Page heading",
+              "widget": "string",
+              "required": false
+            },
+            {
+              "name": "intro",
+              "label": "Introduction",
+              "widget": "text",
+              "required": false
+            },
+            {
+              "name": "entries",
+              "label": "Entries, newest first",
+              "widget": "list",
+              "required": false,
+              "collapsed": true,
+              "summary": "{{fields.date}}: {{fields.title}}",
+              "fields": [
+                {
+                  "name": "date",
+                  "label": "Date (YYYY-MM-DD, or YYYY-MM if only the month is known)",
+                  "widget": "string",
+                  "required": false,
+                  "pattern": [
+                    "^\\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?$",
+                    "Use YYYY-MM-DD or YYYY-MM"
+                  ]
+                },
+                {
+                  "name": "title",
+                  "label": "Title",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "body",
+                  "label": "What changed",
+                  "widget": "text",
+                  "required": false
                 }
               ]
             }
@@ -6434,6 +6728,39 @@
             {
               "name": "/studios/",
               "label": "/studios/",
+              "required": false,
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Title",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "required": false,
+                  "widget": "text"
+                },
+                {
+                  "name": "image",
+                  "label": "Image upload",
+                  "required": false,
+                  "widget": "image"
+                },
+                {
+                  "name": "imageAlt",
+                  "label": "Social image alternative text",
+                  "required": false,
+                  "widget": "text"
+                }
+              ]
+            },
+            {
+              "name": "/changelog/",
+              "label": "/changelog/",
               "required": false,
               "widget": "object",
               "collapsed": true,
