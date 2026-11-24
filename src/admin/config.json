@@ -2185,14 +2185,14 @@
                   "required": false
                 },
                 {
-                  "name": "trial",
-                  "label": "Free trial button",
+                  "name": "explore",
+                  "label": "Demo school button",
                   "widget": "string",
                   "required": false
                 },
                 {
-                  "name": "trial_note",
-                  "label": "Free trial note",
+                  "name": "explore_note",
+                  "label": "Demo school note",
                   "widget": "string",
                   "required": false
                 },
@@ -2403,12 +2403,6 @@
                       "label": "Added to the answer while the studio founding price shows (until December 31, 2026)",
                       "widget": "text",
                       "required": false
-                    },
-                    {
-                      "name": "a_founding",
-                      "label": "Added to the answer while the school founding price shows (until June 30, 2027)",
-                      "widget": "text",
-                      "required": false
                     }
                   ]
                 }
@@ -2534,20 +2528,20 @@
                   "required": false
                 },
                 {
-                  "name": "trial_before",
-                  "label": "Free trial line: before the link",
+                  "name": "explore_before",
+                  "label": "Demo school line: before the link",
                   "widget": "string",
                   "required": false
                 },
                 {
-                  "name": "trial_link",
-                  "label": "Free trial line: link text",
+                  "name": "explore_link",
+                  "label": "Demo school line: link text",
                   "widget": "string",
                   "required": false
                 },
                 {
-                  "name": "trial_after",
-                  "label": "Free trial line: after the link",
+                  "name": "explore_after",
+                  "label": "Demo school line: after the link",
                   "widget": "string",
                   "required": false
                 }
@@ -2728,133 +2722,6 @@
                 {
                   "name": "link_3",
                   "label": "Link 3 (security)",
-                  "widget": "string",
-                  "required": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "copy_trial",
-          "label": "Free trial",
-          "file": "content/copy/trial.json",
-          "fields": [
-            {
-              "name": "hero",
-              "label": "Top of page",
-              "widget": "object",
-              "collapsed": true,
-              "required": false,
-              "fields": [
-                {
-                  "name": "eyebrow",
-                  "label": "Eyebrow",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "heading",
-                  "label": "Main heading",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "subhead",
-                  "label": "Introduction",
-                  "widget": "text",
-                  "required": false
-                }
-              ]
-            },
-            {
-              "name": "how",
-              "label": "How the trial works",
-              "widget": "object",
-              "collapsed": true,
-              "required": false,
-              "fields": [
-                {
-                  "name": "heading",
-                  "label": "Heading",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "items",
-                  "label": "Steps",
-                  "widget": "list",
-                  "required": false,
-                  "field": {
-                    "name": "item",
-                    "label": "Step",
-                    "widget": "text",
-                    "required": false
-                  }
-                },
-                {
-                  "name": "founding_note",
-                  "label": "Founding price note (shown until June 30, 2027)",
-                  "widget": "text",
-                  "required": false
-                }
-              ]
-            },
-            {
-              "name": "form",
-              "label": "Form",
-              "widget": "object",
-              "collapsed": true,
-              "required": false,
-              "fields": [
-                {
-                  "name": "heading",
-                  "label": "Form heading",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "intro",
-                  "label": "Form introduction",
-                  "widget": "text",
-                  "required": false
-                },
-                {
-                  "name": "submit",
-                  "label": "Send button",
-                  "widget": "string",
-                  "required": false
-                }
-              ]
-            },
-            {
-              "name": "aside",
-              "label": "Demo and pricing line",
-              "widget": "object",
-              "collapsed": true,
-              "required": false,
-              "fields": [
-                {
-                  "name": "before",
-                  "label": "Before the demo link",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "link",
-                  "label": "Demo link text",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "after",
-                  "label": "Before the pricing link",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "pricing_link",
-                  "label": "Pricing link text",
                   "widget": "string",
                   "required": false
                 }
@@ -6861,39 +6728,6 @@
             {
               "name": "/studios/",
               "label": "/studios/",
-              "required": false,
-              "widget": "object",
-              "collapsed": true,
-              "fields": [
-                {
-                  "name": "title",
-                  "label": "Title",
-                  "required": false,
-                  "widget": "string"
-                },
-                {
-                  "name": "description",
-                  "label": "Description",
-                  "required": false,
-                  "widget": "text"
-                },
-                {
-                  "name": "image",
-                  "label": "Image upload",
-                  "required": false,
-                  "widget": "image"
-                },
-                {
-                  "name": "imageAlt",
-                  "label": "Social image alternative text",
-                  "required": false,
-                  "widget": "text"
-                }
-              ]
-            },
-            {
-              "name": "/trial/",
-              "label": "/trial/",
               "required": false,
               "widget": "object",
               "collapsed": true,

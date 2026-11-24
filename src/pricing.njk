@@ -25,9 +25,9 @@ description: "Every feature included: $299 a year per school program when you su
 <p class="muted">{{ c.plan.note_founding if founding else c.plan.note_standard }}</p>
 <div class="hero-actions">
 <a href="/subscribe/" class="btn btn-primary">{{ c.plan.subscribe }}</a>
-<a href="/trial/" class="btn btn-outline" data-trial-link>{{ c.plan.trial }}</a>
+<a href="{{ site.appUrl }}/demo" class="btn btn-outline" data-demo-school-link>{{ c.plan.explore }}</a>
 </div>
-<p class="muted price-demo">{{ c.plan.trial_note }} {{ c.plan.demo_line }} <a href="/demo/">{{ c.plan.demo_link }}</a></p>
+<p class="muted price-demo">{{ c.plan.explore_note }} {{ c.plan.demo_line }} <a href="/demo/">{{ c.plan.demo_link }}</a></p>
 <p class="muted price-demo"><a href="/subscribe/#purchase-order">{{ c.plan.purchase_order }}</a></p>
 </div>
 <div class="card card-shadow price-card" id="studio" data-price-tier="{{ 'studio-founding' if studioFounding else 'studio-standard' }}">
@@ -52,7 +52,6 @@ description: "Every feature included: $299 a year per school program when you su
 {%- set questions = [] -%}
 {%- for it in c.faq.items %}{% if founding or not it.founding_only %}
 {%- set answer = (it.a ~ " " ~ it.a_studio_founding) if (studioFounding and it.a_studio_founding) else it.a -%}
-{%- set answer = (answer ~ " " ~ it.a_founding) if (founding and it.a_founding) else answer -%}
 {%- set added = questions.push({ q: it.q, a: answer }) %}{% endif %}{% endfor %}
 {{ m.faq(c.faq.heading, questions, "sand", "h-faq") }}
 {{ m.cta(c.closing.heading, c.closing.subscribe, "/subscribe/", c.closing.body) }}

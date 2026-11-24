@@ -187,9 +187,8 @@
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
         .then((r) => {
           if (!r.ok) throw new Error(String(r.status));
-          // HeyCatch (layouts/base.njk) records this as chat_request_sent, and a request from /trial/ also as
-          // trial_request_sent. Only which page's form sent goes with it, nothing typed or ticked in the form.
-          try { document.dispatchEvent(new CustomEvent("pp:chat-sent", { detail: { form: form.dataset.formKind || "chat" } })); } catch (e) {}
+          // HeyCatch (layouts/base.njk) records this as chat_request_sent. Nothing from the form goes with it.
+          try { document.dispatchEvent(new CustomEvent("pp:chat-sent")); } catch (e) {}
           location.href = thanks;
         })
         .catch(() => { btn.disabled = false; btn.textContent = btn.dataset.label || "Send"; serverBox.hidden = false; serverBox.focus(); });

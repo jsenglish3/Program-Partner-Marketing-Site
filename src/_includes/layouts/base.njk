@@ -48,12 +48,8 @@ analytics.init({
   },
 });
 
-// site.js announces a Let's chat message the app accepted: the site's conversion. A trial request (/trial/) is
-// also counted on its own, so trial asks per pricing-page visitor can be read separately.
-document.addEventListener('pp:chat-sent', (e) => {
-  analytics.trackEvent('chat_request_sent');
-  if (e.detail && e.detail.form === 'trial') analytics.trackEvent('trial_request_sent');
-});
+// site.js announces a Let's chat message the app accepted: the site's one conversion.
+document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_request_sent'));
 </script>
 <script type="application/ld+json">
 {#- Organization data. The team's professional profiles (About → Meet the team) join it once they're set: the founder as

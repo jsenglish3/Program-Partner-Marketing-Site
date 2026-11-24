@@ -1,4 +1,4 @@
-// The November 2026 site review: FAQ structured data, phone-sized screenshots, the free trial, honest price anchors,
+// The November 2026 site review: FAQ structured data, phone-sized screenshots, the demo school link, honest price anchors,
 // What's new and llms.txt, and the proof slots that stay hidden until something real goes in them.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -58,19 +58,14 @@ test('the school price card is set apart honestly: an audience badge and a plain
   assert.doesNotMatch(html, /[Mm]ost popular/);
 });
 
-test('the free trial is a request: pricing and subscribe link to it, and its form arrives with the trial ticked', () => {
-  assert.match(page('pricing'), /<a href="\/trial\/" class="btn btn-outline" data-trial-link>Try it free for 30 days<\/a>/);
-  assert.match(page('subscribe'), /href="\/trial\/" data-trial-link>Try it free for 30 days</);
-  const html = page('trial');
-  assert.match(html, /data-chat-form data-form-kind="trial" data-endpoint="https:\/\/app\.myprogrampartner\.com\/api\/public\/demo-access-request"/);
-  assert.match(html, /<input type="checkbox" name="topic" value="trial" checked>Free 30-day trial/);
-  assert.match(html, /Ask for my trial/);
-  // The demo page's form is the same form, with nothing ticked.
-  const demo = page('demo');
-  assert.match(demo, /<input type="checkbox" name="topic" value="trial">Free 30-day trial/);
-  assert.doesNotMatch(demo, /data-form-kind=/);
-  // The app takes help-with labels of 60 characters at most.
-  assert.ok('Free 30-day trial'.length <= 60);
+test('no trial: pricing and subscribe send visitors to explore the demo school on the app', () => {
+  assert.match(page('pricing'), /<a href="https:\/\/app\.myprogrampartner\.com\/demo" class="btn btn-outline" data-demo-school-link>Explore the demo school<\/a>/);
+  assert.match(page('subscribe'), /href="https:\/\/app\.myprogrampartner\.com\/demo" data-demo-school-link>Explore the demo school</);
+  assert.ok(!fs.existsSync(path.join(site, 'trial')));
+  for (const url of ['', 'pricing', 'subscribe', 'demo']) assert.doesNotMatch(page(url), /free trial|30-day trial|\/trial\//i, url);
+  assert.doesNotMatch(fs.readFileSync(path.join(site, 'llms.txt'), 'utf8'), /trial/i);
+  // The site's own form still never gives demo access: it posts to the contact endpoint only.
+  assert.match(page('demo'), /data-chat-form data-endpoint="https:\/\/app\.myprogrampartner\.com\/api\/public\/demo-access-request"/);
 });
 
 test("What's new: dated entries, newest first, each with its own anchor, linked from the menu and the footer", () => {
@@ -136,7 +131,7 @@ test('filled proof slots render: quotes with name and program, dated mentions, a
   assert.equal(org.founder[0].name, 'Trey English');
   assert.equal(org.member[0].name, 'Andrew Casal');
   // Every file the editor can open renders, the two new ones included.
-  for (const name of ['copy_trial', 'changelog']) {
+  for (const name of ['changelog']) {
     const f = config.collections[0].files.find((x) => x.name === name);
     assert.ok(f, name);
     const out = p.render(name, JSON.parse(fs.readFileSync(f.file, 'utf8')), (x) => x);

@@ -71,9 +71,9 @@ These fill in through the content editor and stay hidden until something real go
 - **What's new** (`/changelog/`, What's new in the editor): dated entries, newest first. Each has a stable anchor from its date and title. Linked from Resources and the footer.
 - **`/llms.txt`** (`src/llms.11ty.js`): a plain-text map of the site for AI assistants, built from the same prices, page descriptions and What's new entries, so it changes with them.
 
-## Free trial
+## Demo school instead of a trial
 
-A 30-day trial is asked for, not self-serve (owner decision, 24 November 2026). "Try it free for 30 days" on the school price card and the subscribe page goes to `/trial/`, which uses the same Let's chat form (`src/_includes/partials/chat-form.njk`) with "Free 30-day trial" ticked. The request lands in Console → Prospects like any website message, and the trial program is set up by hand. HeyCatch counts it as `chat_request_sent` and also `trial_request_sent`.
+There is no free trial (owner decision, 24 November 2026). "Explore the demo school" on the school price card and the subscribe page links to the app's own `/demo` page, where a visitor asks for access and gets a link by email once it's approved by hand. The site's Let's chat form still never gives demo access.
 
 ## Settings in `src/_data/site.json`
 
