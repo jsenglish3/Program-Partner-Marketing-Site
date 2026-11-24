@@ -29,6 +29,28 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/cabin-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+{# HeyCatch analytics, set up from https://heycatch.ai/agents.md. Pinned to an exact release: bump the
+    version here when updating (npm view @heycatch/sdk version). The staging copy and the content
+    editor's preview remove this script (data-heycatch), as they do the Cloudflare beacon. #}
+<script type="module" async data-heycatch>
+import { analytics } from 'https://esm.sh/@heycatch/sdk@0.8.5';
+
+analytics.init({
+  projectKey: 'hck_pk_LE_NekGTgV-xpmj8S-HFDRtL-7Yado9_',
+  site: 'landing',
+  requestBatching: false,
+  // The privacy policy (section 12) promises no cookies and no stored IP addresses: keep both.
+  persistence: 'sessionStorage',
+  collectIp: false,
+  install: {
+    framework: 'web',
+    agent: 'claude-code',
+  },
+});
+
+// site.js announces a Let's chat message the app accepted: the site's one conversion.
+document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_request_sent'));
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-horizontal-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]}
 </script>

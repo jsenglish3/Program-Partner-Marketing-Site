@@ -52,7 +52,7 @@
  function render(file,value,getAsset,selected){
   const {d,template}=context(file,value,selected);
   function assets(obj){if(!obj||typeof obj!=='object')return;for(const [k,v]of Object.entries(obj)){if(typeof v==='string'&&/^(\/uploads\/|\/screenshots\/|\/assets\/)/.test(v)){const asset=getAsset(v);const url=asset?String(asset):v;obj[k]=assetDataUrls.get(url)||url;}else if(v&&typeof v==='object')assets(v);}}assets(d);
-  d.content=env.render(template,d);let html=env.render('layouts/base.njk',d);
+  d.content=env.render(template,d);let html=env.render('layouts/base.njk',d);html=html.replace(/<script\b[^>]*data-heycatch[^>]*>[\s\S]*?<\/script>\n?/g,'');
   const origin=location.origin;
   const protection='<base href="'+origin+'/"><meta http-equiv="Content-Security-Policy" content="default-src '+origin+' blob: data:; script-src '+origin+' \'unsafe-inline\'; style-src '+origin+' \'unsafe-inline\'; img-src '+origin+' blob: data: https:; font-src '+origin+'; connect-src \'none\'; form-action \'none\'"><script>addEventListener("submit",e=>{e.preventDefault();e.stopImmediatePropagation()},true);addEventListener("click",e=>{if(e.target.closest("a"))e.preventDefault()},true)<\/script>';
   return html.replace('<head>','<head>'+protection);

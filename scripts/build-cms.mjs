@@ -7,7 +7,7 @@ const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const write=(p,d)=>{fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,typeof d==='string'?d:JSON.stringify(d,null,2)+'\n')};
 export async function buildCms(outputDir='_site'){
 const templates={},pages={};
-for(const p of fs.readdirSync('src').filter(p=>p.endsWith('.njk')&&p!=='sitemap.njk')){
+for(const p of fs.readdirSync('src').filter(p=>p.endsWith('.njk')&&!['sitemap.njk','short-links.njk'].includes(p))){
  const f=matter(fs.readFileSync('src/'+p,'utf8'));templates[p]=f.content;pages[p]=f.data;
 }
 for(const p of ['macros.njk','layouts/base.njk','partials/header.njk','partials/footer.njk','partials/pathways.njk'])templates[p]=fs.readFileSync('src/_includes/'+p,'utf8');

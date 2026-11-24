@@ -1,0 +1,26 @@
+---
+# HeyCatch short links (https://heycatch.ai/agents.md, step 5): /a to /z and /0 to /9 open the home page
+# tagged ?utm_source=heycatch&utm_campaign=<character>. GitHub Pages can't send a 302, so each one is a
+# tiny page that forwards straight away. They load no analytics themselves (the home page counts the
+# visit), stay out of the sitemap, and ask search engines not to index them.
+chars: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+pagination:
+  data: chars
+  size: 1
+  alias: c
+permalink: "/{{ c }}/index.html"
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Program Partner</title>
+<meta http-equiv="refresh" content="0; url=/?utm_source=heycatch&amp;utm_campaign={{ c }}">
+<script>location.replace("/?utm_source=heycatch&utm_campaign={{ c }}");</script>
+</head>
+<body>
+<p><a href="/?utm_source=heycatch&amp;utm_campaign={{ c }}">Continue to Program Partner</a></p>
+</body>
+</html>

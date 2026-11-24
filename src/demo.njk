@@ -47,17 +47,18 @@ description: "Ask for a demo of Program Partner. Tell us about your program and 
 <div class="field" data-field="state"><label for="f-state">{{ copy["demo"].introduction.text_018 | safe }} <span class="opt">{{ copy["demo"].introduction.text_019 | safe }}</span></label><select class="select" id="f-state" name="state" autocomplete="address-level1" required><option value="">{{ copy["demo"].introduction.text_020 | safe }}</option>{% for o in states %}<option value="{{ o }}">{{ o }}</option>{% endfor %}</select></div>
 </div>
 <div class="field" data-field="school"><label for="f-school">{{ copy["demo"].introduction.text_021 | safe }} <span class="opt">{{ copy["demo"].introduction.text_022 | safe }}</span></label><input class="input" id="f-school" name="school" autocomplete="organization" maxlength="160" required></div>
+{# ph-no-capture: HeyCatch autocapture skips these choice groups, so which boxes a visitor ticks never leaves the page (privacy policy, section 12). #}
 <fieldset class="field" id="f-kind" data-field="kind" style="border:0;margin:0;padding:0;gap:12px">
 <legend>{{ copy["demo"].introduction.text_023 | safe }} <span class="opt">{{ copy["demo"].introduction.text_024 | safe }}</span></legend>
-<div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">{% for o in kinds %}<label><input type="checkbox" name="kind" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
+<div class="choices ph-no-capture" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">{% for o in kinds %}<label><input type="checkbox" name="kind" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
 </fieldset>
 <fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
 <legend>{{ copy["demo"].introduction.text_025 | safe }}</legend>
-<div class="choices" style="display:flex;flex-wrap:wrap;gap:4px 24px">{% for o in sizes %}<label><input type="radio" name="size" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
+<div class="choices ph-no-capture" style="display:flex;flex-wrap:wrap;gap:4px 24px">{% for o in sizes %}<label><input type="radio" name="size" value="{{ o }}">{{ o }}</label>{% endfor %}</div>
 </fieldset>
 <fieldset class="field" style="border:0;margin:0;padding:0;gap:12px">
 <legend>{{ copy["demo"].introduction.text_026 | safe }} <span class="opt">{{ copy["demo"].introduction.text_027 | safe }}</span></legend>
-<div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{% for o in topics %}<label><input type="checkbox" name="topic" value="{{ o[0] }}">{{ o[1] }}</label>{% endfor %}</div>
+<div class="choices ph-no-capture" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{% for o in topics %}<label><input type="checkbox" name="topic" value="{{ o[0] }}">{{ o[1] }}</label>{% endfor %}</div>
 </fieldset>
 <div class="field" data-field="tools"><label for="f-tools">{{ copy["demo"].introduction.text_028 | safe }}</label><input class="input" id="f-tools" name="tools" maxlength="200" aria-describedby="help-tools" data-help="help-tools"><p id="help-tools" class="help">{{ copy["demo"].introduction.text_029 | safe }}</p></div>
 <div class="field" data-field="notes"><label for="f-notes">{{ copy["demo"].introduction.text_030 | safe }}</label><textarea class="textarea" id="f-notes" name="notes" rows="4" maxlength="2000"></textarea></div>

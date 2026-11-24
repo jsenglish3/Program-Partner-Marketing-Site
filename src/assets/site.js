@@ -185,7 +185,12 @@
       btn.disabled = true; btn.textContent = "Sending…";
       if (!endpoint) { setTimeout(() => { location.href = thanks; }, 400); return; }
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-        .then((r) => { if (!r.ok) throw new Error(String(r.status)); location.href = thanks; })
+        .then((r) => {
+          if (!r.ok) throw new Error(String(r.status));
+          // HeyCatch (layouts/base.njk) records this as chat_request_sent. Nothing from the form goes with it.
+          try { document.dispatchEvent(new CustomEvent("pp:chat-sent")); } catch (e) {}
+          location.href = thanks;
+        })
         .catch(() => { btn.disabled = false; btn.textContent = btn.dataset.label || "Send"; serverBox.hidden = false; serverBox.focus(); });
     });
   }
