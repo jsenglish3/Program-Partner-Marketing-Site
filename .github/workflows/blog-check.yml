@@ -1,0 +1,35 @@
+name: Check the blog for new articles
+# The blog (README: "Blog") is built from articles in HeyCatch, so publishing one there has to rebuild the site.
+# Every 15 minutes this asks HeyCatch whether its articles differ from the ones the live site was built from
+# (/blog/version.txt) and, only then, starts the deploy workflow. It is its own workflow so that a check which
+# finds nothing new never cancels a deploy in progress (deploy.yml cancels older runs in its `pages` group).
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: blog-check
+  cancel-in-progress: true
+jobs:
+  check:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: blog
+        run: node scripts/blog-changed.mjs
+        env:
+          HEYCATCH_API_KEY: ${{ secrets.HEYCATCH_API_KEY }}
+      - if: steps.blog.outputs.changed == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}

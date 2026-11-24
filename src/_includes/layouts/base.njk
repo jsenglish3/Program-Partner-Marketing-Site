@@ -11,21 +11,27 @@
 {%- if noindex %}
 <meta name="robots" content="noindex">
 {%- endif %}
-<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<meta property="og:type" content="website">
+{#- A page served at an address other than its file's (a blog article: blog/<slug>.html at /blog/<slug>) names it in canonicalPath. -#}
+{%- set pagePath = canonicalPath or page.url %}
+<link rel="canonical" href="{{ site.url }}{{ pagePath }}">
+<meta property="og:type" content="{{ ogType or 'website' }}">
 <meta property="og:site_name" content="Program Partner">
 <meta property="og:title" content="{{ (title or 'Program Partner') | escape }}">
 <meta property="og:description" content="{{ (description or site.description) | escape }}">
 {%- set origin = shareOrigin or site.url %}
 {%- set socialImage = meta.image or '/assets/share.png' %}
 {%- set socialImageUrl = socialImage if (socialImage.indexOf('https://') == 0 or socialImage.indexOf('http://') == 0 or socialImage.indexOf('blob:') == 0) else origin + socialImage %}
-<meta property="og:url" content="{{ origin }}{{ page.url }}">
+<meta property="og:url" content="{{ origin }}{{ pagePath }}">
 <meta property="og:image" content="{{ socialImageUrl | escape }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ (meta.imageAlt or 'Program Partner: Stress less. Teach more. The program office for band, orchestra, choir, theatre and private studios.') | escape }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ socialImageUrl | escape }}">
+{%- if post %}
+<meta name="twitter:title" content="{{ title | escape }}">
+<meta name="twitter:description" content="{{ (description or site.description) | escape }}">
+{%- endif %}
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/cabin-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
@@ -63,6 +69,10 @@ document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_reque
 {%- if founders.length %},"founder":{{ founders | dump | replace("<", "\\u003c") | safe }}{% endif %}
 {%- if members.length %},"member":{{ members | dump | replace("<", "\\u003c") | safe }}{% endif %}}
 </script>
+{#- A blog article's own structured data, as HeyCatch sent it (scripts/blog.mjs writes it script-safe). -#}
+{%- if post and post.jsonLd %}
+<script type="application/ld+json">{{ post.jsonLd | safe }}</script>
+{%- endif %}
 </head>
 <body>
 {% include "partials/header.njk" %}

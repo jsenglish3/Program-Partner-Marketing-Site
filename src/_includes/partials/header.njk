@@ -3,7 +3,7 @@
 {%- for f in nav.features %}{% if f.key == cur %}{% set inFeatures = true %}{% endif %}{% endfor -%}
 {%- set inWho = false -%}
 {%- for w in nav.who %}{% if w.key == cur %}{% set inWho = true %}{% endif %}{% endfor -%}
-{%- set inRes = (cur == "security" or cur == "woodshed" or cur == "contact" or cur == "switching") -%}
+{%- set inRes = (cur == "security" or cur == "woodshed" or cur == "contact" or cur == "switching" or cur == "blog") -%}
 {%- macro chevron() %}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg>{% endmacro -%}
 <header class="site-header">
 <a href="#main" class="skip">{{ copy["header"].introduction.text_001 | safe }}</a>
@@ -36,6 +36,10 @@
 {%- for r in nav.resources %}
 <li><a href="{{ r.href }}"{% if r.key == cur %} aria-current="page"{% endif %}>{{ r.name }}</a></li>
 {%- endfor %}
+{#- The blog is linked only once it has an article (src/_data/blog.js). -#}
+{%- if blog and blog.articles.length %}
+<li><a href="/blog/"{% if cur == "blog" %} aria-current="page"{% endif %}>Blog</a></li>
+{%- endif %}
 </ul></div>
 </details>
 <a href="{{ copy["header"].introduction.text_011 | escape }}"{% if cur == "about" %} aria-current="page"{% endif %}>{{ copy["header"].introduction.text_012 | safe }}</a>
@@ -53,7 +57,8 @@
 <div><p class="group-label">{{ copy["header"].introduction.text_019 | safe }}</p><ul>
 {%- for w in nav.who %}<li><a href="{{ w.href }}">{{ w.name }}</a></li>{% endfor %}</ul>
 <p class="group-label" style="padding-top:20px">{{ copy["header"].introduction.text_020 | safe }}</p><ul>
-{%- for r in nav.resources %}<li><a href="{{ r.href }}">{{ r.name }}</a></li>{% endfor %}</ul></div>
+{%- for r in nav.resources %}<li><a href="{{ r.href }}">{{ r.name }}</a></li>{% endfor %}
+{%- if blog and blog.articles.length %}<li><a href="/blog/">Blog</a></li>{% endif %}</ul></div>
 <div><p class="group-label">{{ copy["header"].introduction.text_021 | safe }}</p><ul>
 <li><a href="{{ copy["header"].introduction.text_022 | escape }}">{{ copy["header"].introduction.text_023 | safe }}</a></li>
 <li><a href="{{ copy["header"].introduction.text_024 | escape }}">{{ copy["header"].introduction.text_025 | safe }}</a></li>

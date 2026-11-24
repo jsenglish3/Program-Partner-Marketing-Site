@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+current: blog
+pagination:
+  data: blog.articles
+  size: 1
+  alias: post
+  addAllPagesToCollections: true
+permalink: "/blog/{{ post.slug }}.html"
+ogType: article
+eleventyComputed:
+  title: "{{ post.title | safe }}"
+  description: "{{ post.description | safe }}"
+  canonicalPath: "{{ post.path }}"
+  lastmod: "{{ post.updated or post.published }}"
+---
+{#- One article from HeyCatch (src/_data/blog.js; README: "Blog"). Written to blog/<slug>.html, which GitHub Pages
+    serves at /blog/<slug>, the address HeyCatch expects. post.html is the article as sent, in order (Key takeaways,
+    body, FAQ), already sanitised and with its table of contents (scripts/blog.mjs). The description is for the
+    head only and is never shown here. -#}
+<div style="padding:clamp(56px,8vw,104px) 0 var(--section-y)">
+<article class="wrap-narrow stack" style="gap:22px"{% if post.lang %} lang="{{ post.lang }}"{% endif %}{% if post.dir %} dir="{{ post.dir }}"{% endif %}>
+<nav aria-label="Breadcrumb" class="crumb"><a href="/blog/">Blog</a></nav>
+<h1 style="font-size:clamp(36px,5vw,56px);line-height:1.08;letter-spacing:-.02em">{{ post.title }}</h1>
+{%- if post.publishedLabel or post.readTime %}
+<p class="muted" style="font-size:16px">{% if post.publishedLabel %}<time datetime="{{ post.published }}">{{ post.publishedLabel }}</time>{% endif %}{% if post.publishedLabel and post.readTime %}<span aria-hidden="true"> · </span>{% endif %}{% if post.readTime %}{{ post.readTime }} min read{% endif %}</p>
+{%- endif %}
+<div class="legal-body blog-body">
+{{ post.html | safe }}
+</div>
+</article>
+</div>

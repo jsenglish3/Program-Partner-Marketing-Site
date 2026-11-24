@@ -18,6 +18,9 @@
 {%- if copy["footer"].introduction.text_024 %}
 <li><a href="{{ copy["footer"].introduction.text_024 | escape }}">{{ copy["footer"].introduction.text_025 | safe }}</a></li>
 {%- endif %}
+{%- if blog and blog.articles.length %}
+<li><a href="/blog/">Blog</a></li>
+{%- endif %}
 </ul></nav>
 <nav aria-label="Company"><h2>{{ copy["footer"].introduction.text_013 | safe }}</h2><ul>
 {%- for c in nav.company %}<li><a href="{{ c.href }}">{{ c.name }}</a></li>{% endfor %}

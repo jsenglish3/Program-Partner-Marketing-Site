@@ -61,6 +61,15 @@ How the current set was taken: the Westbrook demo at app.myprogrampartner.com/de
 
 **Phone-sized copies.** The build also writes smaller WebP copies of every screenshot (400, 800 and 1200 px wide, whichever are narrower than the original) to `/screenshots/w/`, and the frames list them in `srcset`, so a phone downloads a phone-sized file. Nothing to do by hand: add or replace a screenshot and the next build makes its copies (`scripts/responsive-images.mjs`, cached in `.cache/responsive/`). The first home hero shot loads straight away; everything else loads as it nears the screen.
 
+## Blog
+
+The blog at `/blog/` is written and published in HeyCatch, not here. The build reads the published articles from HeyCatch's API (`scripts/blog.mjs`, following https://heycatch.ai/blog-agents.md) and writes `/blog/` (title, date and read time of each) and one page per article at `/blog/<slug>`. There is no article text in this repository.
+
+- **The key.** `HEYCATCH_API_KEY` is HeyCatch's read-only blog key (`hck_lv_…`), a repository secret under Settings → Secrets and variables → Actions. It is not the `hck_pk_…` analytics key in `base.njk`. For a local build, put `HEYCATCH_API_KEY=…` in the environment (`HEYCATCH_API_KEY=… npm start`). Without it the blog builds empty: `/blog/` says "No articles yet." and the Blog links in the header and footer stay hidden. Pull request builds and the staging copy have no key unless you give them one.
+- **New articles.** `.github/workflows/blog-check.yml` asks HeyCatch every 15 minutes whether its articles differ from the ones the live site was built from (`/blog/version.txt`) and starts the deploy only when they do. So a published or edited article is live within about 20 minutes, and nothing is deployed when nothing changed.
+- **When HeyCatch can't be reached.** The check does nothing, so the live site keeps its articles. A build that can't read HeyCatch uses the last good copy the deploy keeps (`.cache/heycatch/`, an Actions cache) and otherwise builds an empty blog; it never fails the build.
+- **What an article page is.** HeyCatch's HTML, in order, through an allowlist that drops scripts, styles, frames and event handlers; a "Table of contents" after the Key takeaways; the title, description, canonical address and HeyCatch's structured data in the head. Articles are written to `blog/<slug>.html`, which GitHub Pages serves at `/blog/<slug>`.
+
 ## Proof, profiles and what's new
 
 These fill in through the content editor and stay hidden until something real goes in them. Never fill them for show.
