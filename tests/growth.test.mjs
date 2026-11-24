@@ -143,3 +143,19 @@ test('filled proof slots render: quotes with name and program, dated mentions, a
     assert.ok(!out.includes('undefined'), name);
   }
 });
+
+test('families sign in with an approved email: no page outside the legal documents mentions registration or join codes', () => {
+  const hits = [];
+  const walk = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) { if (!['admin', 'terms', 'privacy', 'accessibility'].includes(e.name)) walk(p); }
+      else if (e.name.endsWith('.html') || e.name.endsWith('.txt')) {
+        const t = fs.readFileSync(p, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '');
+        if (/registration code|join code|the code you give/i.test(t)) hits.push(p);
+      }
+    }
+  };
+  walk(site);
+  assert.deepEqual(hits, []);
+});
