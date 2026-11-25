@@ -37,9 +37,13 @@ console.log('Custom domains:');
 for (const d of domains) console.log(`  ${d.hostname} → ${d.service}`);
 // Only routes written for exactly one of the two names are removed. A wildcard route that also covers them (it could
 // carry app. or woodshed.) is only reported, to be looked at by hand.
+// The exception: every route of the Worker the Cloudflare dashboard Git connection made on 24 Nov
+// (program-partner-marketing-site), whose route *.myprogrampartner.com/* put the old marketing site in front of
+// app., console. and woodshed. as well as www.
+const DASHBOARD_WORKER = 'program-partner-marketing-site';
 const exact = (r) => NAMES.has(r.pattern.split('/')[0].toLowerCase());
-const strayRoutes = routes.filter((r) => exact(r) && !OURS.has(r.script));
-for (const r of routes.filter((r) => !exact(r) && routeHosts(r.pattern).length && !OURS.has(r.script))) {
+const strayRoutes = routes.filter((r) => (exact(r) && !OURS.has(r.script)) || r.script === DASHBOARD_WORKER);
+for (const r of routes.filter((r) => !strayRoutes.includes(r) && routeHosts(r.pattern).length && !OURS.has(r.script))) {
   console.log(`Check by hand (wildcard, not removed): ${r.pattern} → ${r.script}`);
 }
 const strayDomains = domains.filter((d) => NAMES.has(d.hostname) && !OURS.has(d.service));
