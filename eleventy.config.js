@@ -8,6 +8,11 @@ import { writeHeaders } from "./scripts/headers.mjs";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
+  // The site is deployed only by .github/workflows/deploy.yml (README: "Hosting"). A Cloudflare dashboard Git
+  // connection (Workers Builds, which sets WORKERS_CI) would race it for the custom domains, so its builds stop here.
+  if (process.env.WORKERS_CI) {
+    throw new Error("This site deploys from GitHub Actions (deploy.yml), not from a Cloudflare Git connection. Disconnect this repository in the Cloudflare dashboard.");
+  }
   // The site is served from the root of myprogrampartner.com. PATH_PREFIX is only for building a copy that
   // lives under a subfolder (for example a GitHub preview address); production builds leave it unset.
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);

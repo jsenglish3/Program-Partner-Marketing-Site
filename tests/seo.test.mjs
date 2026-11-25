@@ -117,7 +117,7 @@ test('the headers file sends HSTS, the three security headers and a report-only 
   assert.match(text, /X-Content-Type-Options: nosniff/);
   assert.match(text, /X-Frame-Options: (DENY|SAMEORIGIN)/);
   assert.match(text, /Referrer-Policy: strict-origin-when-cross-origin/);
-  assert.match(text, /^https:\/\/program-partner-site\.:account\.workers\.dev\/\*\n  X-Robots-Tag: noindex/m);
+  assert.match(text, /^https:\/\/:worker\.:account\.workers\.dev\/\*\n  X-Robots-Tag: noindex/m);
   const csp = text.match(/Content-Security-Policy-Report-Only: (.*)/)[1];
   const { inlineScriptHashes } = await import('../scripts/headers.mjs');
   for (const h of inlineScriptHashes(site)) assert.ok(csp.includes(`'${h}'`), h);
