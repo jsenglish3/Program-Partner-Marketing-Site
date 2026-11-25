@@ -1,9 +1,7 @@
 // _headers: the security headers for a host that reads a headers file (Cloudflare Pages, Netlify). Written after each
 // build (eleventy.config.js) so the policy allows exactly the inline scripts the pages carry, by their hashes.
 //
-// GitHub Pages, where myprogrampartner.com is served today, ignores this file and can't send headers of its own: these
-// take effect on the staging copy (Cloudflare Pages) now, and on the live site once it is served from a host that
-// reads them, or through a proxy that adds them (README: "Security headers").
+// Cloudflare reads it: the site's Worker (wrangler.jsonc) and the staging copy on Cloudflare Pages (README: "Hosting").
 //
 // The Content-Security-Policy is report-only for now: browsers log what it would block in the console and block
 // nothing. Once a week of browsing the staging copy shows no reports, rename it to Content-Security-Policy.
@@ -51,7 +49,7 @@ export function inlineScriptHashes(outputDir) {
 
 export function writeHeaders(outputDir) {
   const lines = [
-    '# Written by scripts/headers.mjs on every build. Read by Cloudflare (wrangler.jsonc and the staging copy); GitHub Pages ignores it.',
+    '# Written by scripts/headers.mjs on every build. Read by Cloudflare (wrangler.jsonc and the staging copy).',
     '/*',
     '  Strict-Transport-Security: max-age=31536000; includeSubDomains',
     '  X-Content-Type-Options: nosniff',

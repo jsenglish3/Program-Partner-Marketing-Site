@@ -1,0 +1,13 @@
+// www.myprogrampartner.com → myprogrampartner.com (worker.mjs). Deployed by .github/workflows/deploy.yml with the site.
+{
+  "name": "program-partner-www",
+  "main": "worker.mjs",
+  "account_id": "dad12c2149e6112b958637b2ece5cb5b",
+  "compatibility_date": "2026-11-01",
+  "routes": [{ "pattern": "www.myprogrampartner.com", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": false
+  }
+}

@@ -17,7 +17,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("shareOrigin", () => process.env.SHARE_ORIGIN || "");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/screenshots": "screenshots" });
-  eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
 
   eleventyConfig.addPassthroughCopy({ "src/admin/config.json": "admin/config.json", "src/admin/preview.js": "admin/preview.js" });

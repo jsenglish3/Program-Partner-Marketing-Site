@@ -14,8 +14,8 @@ eleventyComputed:
   canonicalPath: "{{ post.path }}"
   lastmod: "{{ post.updated or post.published }}"
 ---
-{#- One article from HeyCatch (src/_data/blog.js; README: "Blog"). Written to blog/<slug>.html, which GitHub Pages
-    serves at /blog/<slug>, the address HeyCatch expects. post.html is the article as sent, in order (Key takeaways,
+{#- One article from HeyCatch (src/_data/blog.js; README: "Blog"). Written to blog/<slug>.html, which the host
+    (Cloudflare) serves at /blog/<slug>, the address HeyCatch expects. post.html is the article as sent, in order (Key takeaways,
     body, FAQ), already sanitised and with its table of contents (scripts/blog.mjs). The description is for the
     head only and is never shown here. -#}
 <div style="padding:clamp(56px,8vw,104px) 0 var(--section-y)">

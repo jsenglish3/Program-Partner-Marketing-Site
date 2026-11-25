@@ -1,6 +1,6 @@
 # Program Partner marketing site
 
-Source for **myprogrampartner.com**. A static site built with [Eleventy](https://www.11ty.dev/) from the Claude Design canvas, published on every push to `main` (`.github/workflows/deploy.yml`) to GitHub Pages and, during the move described under "Hosting", to Cloudflare.
+Source for **myprogrampartner.com**. A static site built with [Eleventy](https://www.11ty.dev/) from the Claude Design canvas, published to Cloudflare on every push to `main` (`.github/workflows/deploy.yml`; see "Hosting").
 
 ## Working on it
 
@@ -68,7 +68,7 @@ The blog at `/blog/` is written and published in HeyCatch, not here. The build r
 - **The key.** `HEYCATCH_API_KEY` is HeyCatch's read-only blog key (`hck_lv_…`), a repository secret under Settings → Secrets and variables → Actions. It is not the `hck_pk_…` analytics key in `base.njk`. For a local build, put `HEYCATCH_API_KEY=…` in the environment (`HEYCATCH_API_KEY=… npm start`). Without it the blog builds empty: `/blog/` says "No articles yet." and the Blog links in the header and footer stay hidden. Pull request builds and the staging copy have no key unless you give them one.
 - **New articles.** `.github/workflows/blog-check.yml` asks HeyCatch every 15 minutes whether its articles differ from the ones the live site was built from (`/blog/version.txt`) and starts the deploy only when they do. So a published or edited article is live within about 20 minutes, and nothing is deployed when nothing changed.
 - **When HeyCatch can't be reached.** The check does nothing, so the live site keeps its articles. A build that can't read HeyCatch uses the last good copy the deploy keeps (`.cache/heycatch/`, an Actions cache) and otherwise builds an empty blog; it never fails the build.
-- **What an article page is.** HeyCatch's HTML, in order, through an allowlist that drops scripts, styles, frames and event handlers; a "Table of contents" after the Key takeaways; the title, description, canonical address and HeyCatch's structured data in the head. Articles are written to `blog/<slug>.html`, which GitHub Pages serves at `/blog/<slug>`.
+- **What an article page is.** HeyCatch's HTML, in order, through an allowlist that drops scripts, styles, frames and event handlers; a "Table of contents" after the Key takeaways; the title, description, canonical address and HeyCatch's structured data in the head. Articles are written to `blog/<slug>.html`, which the site's host serves at `/blog/<slug>`.
 
 ## Proof, profiles and what's new
 
@@ -99,7 +99,7 @@ Rules from the November 2026 SEO audit (HeyCatch), kept by `tests/seo.test.mjs`:
 
 ## Security headers
 
-GitHub Pages can't send custom headers. The build writes `_site/_headers` (`scripts/headers.mjs`) for Cloudflare, which reads it (see "Hosting"):
+The build writes `_site/_headers` (`scripts/headers.mjs`), which Cloudflare reads (see "Hosting"):
 
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains` (every subdomain must be on HTTPS: app., woodshed., www.)
 - `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`
@@ -111,12 +111,12 @@ The pages also carry `<meta name="referrer">`, which works on any host.
 
 ## Hosting
 
-myprogrampartner.com is moving from GitHub Pages to a Cloudflare Worker that serves the built site as static assets (`wrangler.jsonc`, worker `program-partner-site` in jsenglish3@gmail.com's Cloudflare account), the way Woodshed is served, so the headers above are sent.
+myprogrampartner.com is served by a Cloudflare Worker that serves the built site as static assets (`wrangler.jsonc`, worker `program-partner-site` in jsenglish3@gmail.com's Cloudflare account), the way Woodshed is served, so the headers above are sent. A second, tiny Worker (`www/`, `program-partner-www`) sends www.myprogrampartner.com to the same address on myprogrampartner.com.
 
-1. **Both, for now.** `deploy.yml` builds once, then deploys to GitHub Pages (which still serves the domain) and, once the `CLOUDFLARE_API_TOKEN` repository secret exists, to the Worker at its workers.dev address for checking.
-   - The token: Cloudflare → My Profile → API Tokens → Create Token → "Edit Cloudflare Workers". Account resources: jsenglish3@gmail.com's account. Zone resources: myprogrampartner.com, because the switch-over adds custom domains, which need Workers Routes write on the zone.
-2. **Switch-over.** Delete the GitHub Pages DNS records in Cloudflare (the four A and four AAAA records on myprogrampartner.com, and the www CNAME; Cloudflare won't put a Worker on a name that has a CNAME), then merge the switch-over pull request. Its deploy adds myprogrampartner.com and www.myprogrampartner.com as the Worker's custom domains; Cloudflare makes the DNS records and certificates. Check that SSL/TLS → Edge Certificates → Always Use HTTPS is on.
-3. **After.** Remove the custom domain under the repository's Settings → Pages, and stop the GitHub Pages deploy.
+- `deploy.yml` builds once and deploys both Workers with the `CLOUDFLARE_API_TOKEN` repository secret: a Cloudflare "Edit Cloudflare Workers" token for jsenglish3@gmail.com's account, with the myprogrampartner.com zone in its zone resources (the custom domains need Workers Routes write on the zone).
+- Each Worker owns its custom domain: Cloudflare made the DNS records and certificates. Don't add other records on myprogrampartner.com or www.
+- SSL/TLS → Edge Certificates → Always Use HTTPS sends http to https.
+- GitHub Pages no longer serves the site (moved in November 2026).
 
 ## Demo school instead of a trial
 
@@ -137,7 +137,7 @@ Put the photo at `src/assets/trey-english.jpg` (portrait, roughly 2:3). The home
 
 The Decap content editor is implemented at `/admin/` with a live preview and separate draft/publish workflow. **It is not activated until the dedicated GitHub App and Cloudflare OAuth Worker secrets are configured.** See [setup, editing instructions and verification status](docs/content-editor.md).
 
-Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/_data/`. The existing templates, Cabin typography (docs/TYPOGRAPHY.md), CSS, scripts and GitHub Pages deployment remain in place. Run `npm run build` and `npm test` for the editor checks.
+Content lives in `content/` JSON files, with thin Eleventy data loaders in `src/_data/`. The existing templates, Cabin typography (docs/TYPOGRAPHY.md), CSS, scripts and deployment remain in place. Run `npm run build` and `npm test` for the editor checks.
 
 ## Pricing and the subscribe page
 
