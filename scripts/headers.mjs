@@ -64,5 +64,8 @@ export function writeHeaders(outputDir) {
     '  ! Content-Security-Policy-Report-Only',
     '',
   ];
+  // Cloudflare reads at most 2,000 characters a line and 100 rules: a longer policy would be dropped without a word.
+  const long = lines.find((l) => l.length > 2000);
+  if (long) throw new Error(`_headers: a line is ${long.length} characters, over Cloudflare's 2,000: ${long.slice(0, 80)}…`);
   fs.writeFileSync(path.join(outputDir, '_headers'), lines.join('\n'));
 }

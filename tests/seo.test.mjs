@@ -121,5 +121,6 @@ test('the headers file sends HSTS, the three security headers and a report-only 
   const { inlineScriptHashes } = await import('../scripts/headers.mjs');
   for (const h of inlineScriptHashes(site)) assert.ok(csp.includes(`'${h}'`), h);
   assert.doesNotMatch(csp.split(';').find((d) => d.trim().startsWith('script-src')), /unsafe-inline/);
+  for (const line of text.split('\n')) assert.ok(line.length <= 2000, `a _headers line is ${line.length} characters`);
   for (const p of pages) assert.match(p.html, /<meta name="referrer" content="strict-origin-when-cross-origin">/, p.path);
 });
