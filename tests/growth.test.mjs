@@ -11,7 +11,8 @@ import { execFileSync } from 'node:child_process';
 
 const site = '_site';
 const page = (url) => fs.readFileSync(path.join(site, url, 'index.html'), 'utf8');
-const ld = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+// Every JSON-LD node on a page: the site-wide @graph (base.njk) is flattened, so each node is found by its @type.
+const ld = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => { const j = JSON.parse(m[1]); return j['@graph'] || [j]; });
 const decode = (s) => s.replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
 test('every FAQ page carries one FAQPage that matches its visible questions and answers', () => {

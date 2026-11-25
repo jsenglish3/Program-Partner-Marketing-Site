@@ -6,8 +6,12 @@
 {% set meta = seo[page.url] or {} %}
 {% set title = meta.title if meta.title is defined else title %}
 {% set description = meta.description if meta.description is defined else description %}
-<title>{% if title %}{{ title | escape }} | Program Partner{% else %}Program Partner: a program office for performing arts{% endif %}</title>
+{#- The home page's title carries its heading. Every other page's own title gets " | Program Partner" added: keep that
+    part 12 to 42 characters (content/seo.json), so the whole title is 30 to 60. -#}
+{%- set fullTitle = (title + " | Program Partner") if title else "Program Partner: Stress less. Teach more." %}
+<title>{{ fullTitle | escape }}</title>
 <meta name="description" content="{{ (description or site.description) | escape }}">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 {%- if noindex %}
 <meta name="robots" content="noindex">
 {%- endif %}
@@ -57,18 +61,48 @@ analytics.init({
 // site.js announces a Let's chat message the app accepted: the site's one conversion.
 document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_request_sent'));
 </script>
-<script type="application/ld+json">
-{#- Organization data. The team's professional profiles (About → Meet the team) join it once they're set: the founder as
-    founder, everyone else as a member. -#}
+{#- Structured data, one graph for every page: the company, the site, the app, this page and its breadcrumb trail
+    (names from src/_data/related.js). The pricing page adds the app's prices to the same app (its @id), each FAQ section
+    adds its own FAQPage (macros.njk), and a blog article adds HeyCatch's own article data below.
+    The company's sameAs: Facebook, Instagram and any other company profile in Site settings (site.json "profiles").
+    The team's professional profiles (About → Meet the team) join the company once they're set: the founder as
+    founder, everyone else as a member. "<" is escaped so no text can end the script. -#}
 {%- set founders = [] -%}{%- set members = [] -%}
 {%- for p in (copy["about"].team.members if (copy["about"].team and copy["about"].team.members) else []) %}{% if p.profile_url %}
 {%- set person = { "@type": "Person", "name": p.name, "jobTitle": p.role, "sameAs": [p.profile_url] } -%}
 {%- if (p.role or "").indexOf("Founder") >= 0 %}{% set added = founders.push(person) %}{% else %}{% set added = members.push(person) %}{% endif -%}
 {%- endif %}{% endfor -%}
-{"@context":"https://schema.org","@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}","logo":"{{ site.url }}/assets/logo-horizontal-color.svg","email":"{{ site.supportEmail }}","sameAs":["{{ site.facebook }}","{{ site.instagram }}"]
-{%- if founders.length %},"founder":{{ founders | dump | replace("<", "\\u003c") | safe }}{% endif %}
-{%- if members.length %},"member":{{ members | dump | replace("<", "\\u003c") | safe }}{% endif %}}
-</script>
+{%- set sameAs = [] -%}
+{%- for u in [site.facebook, site.instagram] %}{% if u %}{% set added = sameAs.push(u) %}{% endif %}{% endfor -%}
+{%- for pr in (site.profiles or []) %}{% if pr.url %}{% set added = sameAs.push(pr.url) %}{% endif %}{% endfor -%}
+{%- set orgId = site.url + "/#organization" -%}{%- set siteId = site.url + "/#website" -%}{%- set appId = site.url + "/#software" -%}
+{%- set pageUrl = site.url + pagePath -%}{%- set crumbId = pageUrl + "#breadcrumb" -%}
+{%- set names = related.pages if related else {} -%}
+{%- set pageName = (names[pagePath].name if names[pagePath] else (post.title if post else (title or "Program Partner"))) -%}
+{%- set kind = "AboutPage" if pagePath == "/about/" else ("ContactPage" if pagePath == "/contact/" else ("CollectionPage" if (pagePath == "/blog/" or pagePath == "/changelog/") else "WebPage")) -%}
+{%- set aboutApp = not (current == "legal" or pagePath == "/about/" or pagePath == "/contact/" or pagePath == "/blog/" or pagePath == "/woodshed/") -%}
+{%- set nodes = [] -%}
+{%- set node %}{"@type":"Organization","@id":{{ orgId | dump | safe }},"name":"Program Partner, LLC","url":{{ site.url | dump | safe }},"logo":{{ (site.url + "/assets/logo-horizontal-color.svg") | dump | safe }},"email":{{ site.supportEmail | dump | safe }},"sameAs":{{ sameAs | dump | safe }}{% if founders.length %},"founder":{{ founders | dump | safe }}{% endif %}{% if members.length %},"member":{{ members | dump | safe }}{% endif %}}{% endset %}{% set added = nodes.push(node) -%}
+{%- set node %}{"@type":"WebSite","@id":{{ siteId | dump | safe }},"url":{{ (site.url + "/") | dump | safe }},"name":"Program Partner","inLanguage":"en-US","publisher":{"@id":{{ orgId | dump | safe }}}}{% endset %}{% set added = nodes.push(node) -%}
+{%- set node %}{"@type":"SoftwareApplication","@id":{{ appId | dump | safe }},"name":"Program Partner","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":{{ (site.url + "/") | dump | safe }},"description":{{ site.description | dump | safe }},"publisher":{"@id":{{ orgId | dump | safe }}}}{% endset %}{% set added = nodes.push(node) -%}
+{%- if not post %}
+{%- set node %}{"@type":{{ kind | dump | safe }},"@id":{{ (pageUrl + "#webpage") | dump | safe }},"url":{{ pageUrl | dump | safe }},"name":{{ fullTitle | dump | safe }},"description":{{ (description or site.description) | dump | safe }},"inLanguage":"en-US","isPartOf":{"@id":{{ siteId | dump | safe }}}
+{%- if aboutApp %},"about":{"@id":{{ appId | dump | safe }}}{% endif %}
+{%- if pagePath == "/woodshed/" %},"about":{"@type":"SoftwareApplication","name":"Woodshed","applicationCategory":"EducationalApplication","operatingSystem":"Web","isAccessibleForFree":true,"url":{{ site.woodshedUrl | dump | safe }},"publisher":{"@id":{{ orgId | dump | safe }}}}{% endif %}
+{%- if pagePath == "/about/" %},"mainEntity":{"@id":{{ orgId | dump | safe }}}{% endif %}
+{%- if lastmod %},"dateModified":{{ lastmod | dump | safe }}{% endif %}
+{%- if pagePath != "/" %},"breadcrumb":{"@id":{{ crumbId | dump | safe }}}{% endif %}}{% endset %}{% set added = nodes.push(node) -%}
+{%- endif %}
+{%- if pagePath != "/" %}
+{%- set trail = [{ "name": "Home", "url": site.url + "/" }] -%}
+{%- if pagePath.indexOf("/features/") == 0 %}{% set added = trail.push({ "name": names["/product/"].name if names["/product/"] else "Every feature", "url": site.url + "/product/" }) %}{% endif -%}
+{%- if post %}{% set added = trail.push({ "name": "Blog", "url": site.url + "/blog/" }) %}{% endif -%}
+{%- set added = trail.push({ "name": pageName, "url": pageUrl }) -%}
+{%- set items = [] -%}
+{%- for t in trail %}{% set added = items.push({ "@type": "ListItem", "position": loop.index, "name": t.name, "item": t.url }) %}{% endfor -%}
+{%- set node %}{"@type":"BreadcrumbList","@id":{{ crumbId | dump | safe }},"itemListElement":{{ items | dump | safe }}}{% endset %}{% set added = nodes.push(node) -%}
+{%- endif %}
+<script type="application/ld+json">{{ ('{"@context":"https://schema.org","@graph":[' + (nodes | join(",")) + ']}') | replace("<", "\\u003c") | safe }}</script>
 {#- A blog article's own structured data, as HeyCatch sent it (scripts/blog.mjs writes it script-safe). -#}
 {%- if post and post.jsonLd %}
 <script type="application/ld+json">{{ post.jsonLd | safe }}</script>
@@ -78,6 +112,21 @@ document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_reque
 {% include "partials/header.njk" %}
 <main id="main">
 {{ content | safe }}
+{#- Related pages on the same topic (src/_data/related.js), so each page is linked from other pages' content. -#}
+{%- set rel = related.links[pagePath] if (related and not noindex) else none %}
+{%- if not rel and post and related %}{% set rel = related.links["/blog/"] %}{% endif %}
+{%- if rel and rel.length %}
+<section class="section-tight related" aria-labelledby="related-h">
+<div class="wrap stack" style="gap:clamp(20px,3vw,28px)">
+<h2 id="related-h" class="h2-sm">{{ related.heading }}</h2>
+<ul class="related-list">
+{%- for r in rel %}
+<li><a href="{{ r.href }}"><span class="related-name">{{ r.name }}</span><span class="related-blurb">{{ r.blurb }}</span></a></li>
+{%- endfor %}
+</ul>
+</div>
+</section>
+{%- endif %}
 </main>
 {% include "partials/footer.njk" %}
 <script src="/assets/site.js" defer></script>

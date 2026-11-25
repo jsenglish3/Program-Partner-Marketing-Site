@@ -31,6 +31,10 @@
 <a href="mailto:{{ site.supportEmail }}" class="mail">{{ site.supportEmail }}</a>
 <a href="{{ site.facebook }}">{{ copy["footer"].introduction.text_015 | safe }}</a>
 <a href="{{ site.instagram }}">{{ copy["footer"].introduction.text_016 | safe }}</a>
+{#- Other company profiles (Site settings → Other company profiles); they also go in the company's sameAs (base.njk). -#}
+{%- for pr in (site.profiles or []) %}{% if pr.url %}
+<a href="{{ pr.url | escape }}">{{ (pr.label or pr.url) | escape }}</a>
+{%- endif %}{% endfor %}
 {#- The founders' professional profiles, set on the About page's team cards (About → Meet the team). -#}
 {%- for p in (copy["about"].team.members if (copy["about"].team and copy["about"].team.members) else []) %}{% if p.profile_url %}
 <a href="{{ p.profile_url | escape }}">{{ (p.profile_text or p.name) | safe }}</a>
