@@ -113,8 +113,9 @@ The pages also carry `<meta name="referrer">`, which works on any host.
 
 myprogrampartner.com is served by a Cloudflare Worker that serves the built site as static assets (`wrangler.jsonc`, worker `program-partner-site` in jsenglish3@gmail.com's Cloudflare account), the way Woodshed is served, so the headers above are sent. A second, tiny Worker (`www/`, `program-partner-www`) sends www.myprogrampartner.com to the same address on myprogrampartner.com.
 
-- `deploy.yml` builds once and deploys both Workers with the `CLOUDFLARE_API_TOKEN` repository secret: a Cloudflare "Edit Cloudflare Workers" token for jsenglish3@gmail.com's account, with the myprogrampartner.com zone in its zone resources (the custom domains need Workers Routes write on the zone).
-- Each Worker owns its custom domain: Cloudflare made the DNS records and certificates. Don't add other records on myprogrampartner.com or www.
+- `deploy.yml` builds once and deploys both Workers with the `CLOUDFLARE_API_TOKEN` repository secret: a Cloudflare user token on jsenglish3@gmail.com's account with Workers Scripts Edit, Workers Routes Edit, Account Settings Read, Zone Read, DNS Edit and Zone Settings Edit (the custom domains need Workers Routes on the zone; the move needs DNS and Zone Settings).
+- The move itself (`scripts/cloudflare-switch-over.mjs`, run by the deploy before wrangler): deletes only the records that pointed at GitHub Pages (the apex's A and AAAA records on GitHub's addresses and www's CNAME to jsenglish3.github.io), turns on Always Use HTTPS, and puts the GitHub records back if the deploy fails. Once nothing points at GitHub it does nothing; it and the token's DNS and zone-settings permissions can then be removed.
+- Each Worker owns its custom domain: Cloudflare made the DNS records and certificates. Don't add other A, AAAA or CNAME records on myprogrampartner.com or www.
 - SSL/TLS → Edge Certificates → Always Use HTTPS sends http to https.
 - GitHub Pages no longer serves the site (moved in November 2026).
 

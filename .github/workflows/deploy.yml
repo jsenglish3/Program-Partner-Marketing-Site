@@ -72,8 +72,14 @@ jobs:
         with:
           name: site
           path: _site
+      # The one-time move off GitHub Pages: frees the two names for the Workers' custom domains, and does nothing once
+      # it has run (scripts/cloudflare-switch-over.mjs).
+      - run: node scripts/cloudflare-switch-over.mjs before
       - run: npx --yes wrangler@4.168.0 deploy
       - run: npx --yes wrangler@4.168.0 deploy --config www/wrangler.jsonc
+      # If either deploy failed, GitHub Pages gets its records back and serves the site again.
+      - if: failure()
+        run: node scripts/cloudflare-switch-over.mjs restore
   # Tells the search engines that take IndexNow which pages changed (src/_data/indexnow.js). Never fails the deploy.
   indexnow:
     timeout-minutes: 5
