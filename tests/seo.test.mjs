@@ -117,11 +117,17 @@ test('the headers file sends HSTS, the three security headers and a report-only 
   assert.match(text, /X-Content-Type-Options: nosniff/);
   assert.match(text, /X-Frame-Options: (DENY|SAMEORIGIN)/);
   assert.match(text, /Referrer-Policy: strict-origin-when-cross-origin/);
-  assert.match(text, /^https:\/\/program-partner-site\.:account\.workers\.dev\/\*\n  X-Robots-Tag: noindex/m);
+  assert.match(text, /^https:\/\/:worker\.:account\.workers\.dev\/\*\n  X-Robots-Tag: noindex/m);
   const csp = text.match(/Content-Security-Policy-Report-Only: (.*)/)[1];
   const { inlineScriptHashes } = await import('../scripts/headers.mjs');
   for (const h of inlineScriptHashes(site)) assert.ok(csp.includes(`'${h}'`), h);
   assert.doesNotMatch(csp.split(';').find((d) => d.trim().startsWith('script-src')), /unsafe-inline/);
   for (const line of text.split('\n')) assert.ok(line.length <= 2000, `a _headers line is ${line.length} characters`);
   for (const p of pages) assert.match(p.html, /<meta name="referrer" content="strict-origin-when-cross-origin">/, p.path);
+});
+
+test('the switch-over deletes only the records that point at GitHub Pages', async () => {
+  const { pointsAtGitHub } = await import('../scripts/cloudflare-switch-over.mjs');
+  for (const r of [{ type: 'A', content: '185.199.108.153' }, { type: 'A', content: '185.199.111.153' }, { type: 'AAAA', content: '2606:50c0:8003::153' }, { type: 'CNAME', content: 'jsenglish3.github.io' }]) assert.ok(pointsAtGitHub(r), JSON.stringify(r));
+  for (const r of [{ type: 'MX', content: 'smtp.google.com' }, { type: 'TXT', content: 'v=spf1 include:_spf.google.com ~all' }, { type: 'A', content: '192.0.2.1' }, { type: 'AAAA', content: '100::' }, { type: 'CNAME', content: 'other.example.com' }]) assert.ok(!pointsAtGitHub(r), JSON.stringify(r));
 });

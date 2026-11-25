@@ -1,4 +1,4 @@
-name: Build and deploy to GitHub Pages
+name: Build and deploy
 on:
   push:
     branches: [main]
@@ -14,8 +14,6 @@ on:
     - cron: "5 4 1 7 *"
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -49,29 +47,15 @@ jobs:
       - id: changed
         run: node scripts/indexnow.mjs changed _site/sitemap.xml >> "$GITHUB_OUTPUT"
         continue-on-error: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-      # The same build for the Cloudflare job below.
+      # The build, for the deploy job below.
       - uses: actions/upload-artifact@v4
         with:
           name: site
           path: _site
           retention-days: 1
+  # The site's Worker serves myprogrampartner.com, and a second Worker sends www there (wrangler.jsonc,
+  # www/wrangler.jsonc; README: "Hosting"). Both with the CLOUDFLARE_API_TOKEN repository secret.
   deploy:
-    timeout-minutes: 10
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-  # The same build on Cloudflare (wrangler.jsonc; README: "Hosting"), so the security headers in _headers are sent.
-  # Skipped until the CLOUDFLARE_API_TOKEN repository secret exists. Until the switch-over this copy answers only at
-  # its workers.dev address; GitHub Pages above still serves myprogrampartner.com.
-  cloudflare:
     timeout-minutes: 10
     needs: build
     runs-on: ubuntu-latest
@@ -80,21 +64,22 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
-      - if: env.CLOUDFLARE_API_TOKEN == ''
-        run: echo "No CLOUDFLARE_API_TOKEN secret yet, so nothing is deployed to Cloudflare."
-      - if: env.CLOUDFLARE_API_TOKEN != ''
-        uses: actions/checkout@v4
-      - if: env.CLOUDFLARE_API_TOKEN != ''
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - if: env.CLOUDFLARE_API_TOKEN != ''
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: site
           path: _site
-      - if: env.CLOUDFLARE_API_TOKEN != ''
-        run: npx --yes wrangler@4.168.0 deploy
+      # The one-time move off GitHub Pages: frees the two names for the Workers' custom domains, and does nothing once
+      # it has run (scripts/cloudflare-switch-over.mjs).
+      - run: node scripts/cloudflare-switch-over.mjs before
+      - run: npx --yes wrangler@4.168.0 deploy
+      - run: npx --yes wrangler@4.168.0 deploy --config www/wrangler.jsonc
+      # If either deploy failed, GitHub Pages gets its records back and serves the site again.
+      - if: failure()
+        run: node scripts/cloudflare-switch-over.mjs restore
   # Tells the search engines that take IndexNow which pages changed (src/_data/indexnow.js). Never fails the deploy.
   indexnow:
     timeout-minutes: 5
