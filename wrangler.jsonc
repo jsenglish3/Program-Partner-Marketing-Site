@@ -1,0 +1,21 @@
+// The live site on Cloudflare: a Worker that serves the built site (_site) as static assets, the way Woodshed is
+// served, so the _headers file the build writes (scripts/headers.mjs) is sent with every page. README: "Hosting".
+// .github/workflows/deploy.yml deploys it on every build once the CLOUDFLARE_API_TOKEN secret exists.
+// Until the switch-over it answers only at its workers.dev address, which asks search engines not to index it.
+{
+  "name": "program-partner-site",
+  // jsenglish3@gmail.com's Cloudflare account, where the app and Woodshed Workers and the myprogrampartner.com zone live.
+  "account_id": "dad12c2149e6112b958637b2ece5cb5b",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./_site",
+    // /about serves about/index.html at /about/, and /blog/<slug> serves blog/<slug>.html, as GitHub Pages does.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": false
+  }
+}

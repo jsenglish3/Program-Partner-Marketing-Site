@@ -51,13 +51,17 @@ export function inlineScriptHashes(outputDir) {
 
 export function writeHeaders(outputDir) {
   const lines = [
-    '# Written by scripts/headers.mjs on every build. Read by Cloudflare Pages (the staging copy); GitHub Pages ignores it.',
+    '# Written by scripts/headers.mjs on every build. Read by Cloudflare (wrangler.jsonc and the staging copy); GitHub Pages ignores it.',
     '/*',
     '  Strict-Transport-Security: max-age=31536000; includeSubDomains',
     '  X-Content-Type-Options: nosniff',
     '  X-Frame-Options: SAMEORIGIN',
     '  Referrer-Policy: strict-origin-when-cross-origin',
     `  Content-Security-Policy-Report-Only: ${csp(inlineScriptHashes(outputDir))}`,
+    '',
+    '# The Cloudflare copy at its workers.dev address (wrangler.jsonc) is for checking, not for search engines.',
+    'https://program-partner-site.:account.workers.dev/*',
+    '  X-Robots-Tag: noindex, nofollow',
     '',
     '# The content editor loads its own scripts and talks to GitHub: the site policy is not for it.',
     '/admin/*',
