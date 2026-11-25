@@ -80,6 +80,33 @@ These fill in through the content editor and stay hidden until something real go
 - **What's new** (`/changelog/`, What's new in the editor): dated entries, newest first. Each has a stable anchor from its date and title. Linked from Resources and the footer.
 - **`/llms.txt`** (`src/llms.11ty.js`): a plain-text map of the site for AI assistants, built from the same prices, page descriptions and What's new entries, so it changes with them.
 
+## Search: titles, descriptions, structured data and links
+
+Rules from the November 2026 SEO audit (HeyCatch), kept by `tests/seo.test.mjs`:
+
+- **Titles.** The layout adds " | Program Partner" to every page's own title (Content editor: SEO, or the page's front matter), so write that part 12 to 42 characters long: 30 to 60 in all. Keep the main words of the page's heading in it ("Fees and budgets: know who owes what" for "Know who owes what, without the envelope pile."). The home page's title is in `base.njk`.
+- **Descriptions.** 110 to 160 characters, saying what the reader gets on the page, with no sales adjectives.
+- **First paragraph.** Each page opens by saying what its subject is, in one sentence: "Event HQ is one page for each concert, competition and trip that tracks…".
+- **Images.** The build adds each image's own width and height (`scripts/image-sizes.mjs`), so nothing to do by hand.
+- **Structured data.** Every page carries one JSON-LD graph (`base.njk`): the company (Organization, with its profiles as `sameAs`), the site, the app (SoftwareApplication), the page itself and its breadcrumb trail. The pricing page adds the prices, and each FAQ section its FAQPage.
+- **Company profiles.** Facebook and Instagram, plus Site settings → Other company profiles for any other profile Program Partner, LLC owns (LinkedIn company page, YouTube channel). Each shows in the footer and in the company's `sameAs`. Add only real ones.
+- **Related pages.** Each page ends with three to five links on the same topic (`src/_data/related.js`), so every page is linked from other pages and not only from the menus. A new page gets an entry there, and a place in a few other pages' lists.
+
+## Sitemap and IndexNow
+
+- `<lastmod>` in `/sitemap.xml` is when the page's own files last changed on main (its template and its content files, not the shared layout or SEO text), read from git (`scripts/lastmod.mjs`). The deploy checks out the whole history for this; a build without it leaves lastmod out rather than guess. The pricing and subscribe pages also count their price switch-over moments, and the blog index its newest article.
+- After each deploy, the pages whose lastmod is new or changed since the live site are sent to IndexNow (Bing and the other engines that take it; not Google) by `scripts/indexnow.mjs`, with the key in `src/_data/indexnow.js` served at `/<key>.txt`. Neither step can fail a deploy.
+
+## Security headers
+
+GitHub Pages, which serves myprogrampartner.com today, can't send custom headers. The build writes `_site/_headers` (`scripts/headers.mjs`) for a host that reads one, such as Cloudflare Pages, where the staging copy runs:
+
+- `Strict-Transport-Security: max-age=31536000; includeSubDomains` (every subdomain must be on HTTPS: app., woodshed., www.)
+- `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`
+- `Content-Security-Policy-Report-Only`, allowing the pages' own inline scripts by hash plus HeyCatch, the Cloudflare beacon, Turnstile and the app. Report-only blocks nothing; it logs in the browser console what it would block. After a week of browsing the staging copy without reports, rename it to `Content-Security-Policy`.
+
+For the live site to send them, it has to be served by such a host, or by a proxy that adds them (for example, Cloudflare proxying the domain with a response-header rule and HSTS turned on). Until then only the referrer policy applies, through a `<meta name="referrer">` tag.
+
 ## Demo school instead of a trial
 
 There is no free trial (owner decision, 24 November 2026). "Explore the demo school" on the school price card and the subscribe page links to the app's own `/demo` page, where a visitor asks for access and gets a link by email once it's approved by hand. The site's Let's chat form still never gives demo access.

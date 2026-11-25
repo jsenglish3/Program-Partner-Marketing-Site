@@ -5635,6 +5635,28 @@
               "widget": "string"
             },
             {
+              "name": "profiles",
+              "label": "Other company profiles",
+              "hint": "Only profiles Program Partner, LLC owns, such as its LinkedIn company page or YouTube channel. Each shows in the footer beside Facebook and Instagram, and in the site's company data for search engines (sameAs).",
+              "required": false,
+              "widget": "list",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "label",
+                  "label": "Name shown in the footer",
+                  "required": false,
+                  "widget": "string"
+                },
+                {
+                  "name": "url",
+                  "label": "Profile address (https://…)",
+                  "required": false,
+                  "widget": "string"
+                }
+              ]
+            },
+            {
               "name": "bookingUrl",
               "label": "Booking Url",
               "required": false,

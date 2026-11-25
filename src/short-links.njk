@@ -18,7 +18,9 @@ eleventyExcludeFromCollections: true
 <meta name="robots" content="noindex">
 <title>Program Partner</title>
 <meta http-equiv="refresh" content="0; url=/?utm_source=heycatch&amp;utm_campaign={{ c }}">
-<script>location.replace("/?utm_source=heycatch&utm_campaign={{ c }}");</script>
+{#- The same script on every short link (it reads the address from the refresh tag), so the security policy allows all
+    of them with one hash (scripts/headers.mjs). -#}
+<script>location.replace(document.querySelector('meta[http-equiv="refresh"]').content.replace(/^[^=]*=/, ""));</script>
 </head>
 <body>
 <p><a href="/?utm_source=heycatch&amp;utm_campaign={{ c }}">Continue to Program Partner</a></p>
