@@ -117,6 +117,7 @@ myprogrampartner.com is served by a Cloudflare Worker that serves the built site
 - The move itself (`scripts/cloudflare-switch-over.mjs`, run by the deploy before wrangler): deletes only the records that pointed at GitHub Pages (the apex's A and AAAA records on GitHub's addresses and www's CNAME to jsenglish3.github.io), turns on Always Use HTTPS, and puts the GitHub records back if the deploy fails. Once nothing points at GitHub it does nothing; it and the token's DNS and zone-settings permissions can then be removed.
 - Each Worker owns its custom domain: Cloudflare made the DNS records and certificates. Don't add other A, AAAA or CNAME records on myprogrampartner.com or www.
 - SSL/TLS → Edge Certificates → Always Use HTTPS sends http to https.
+- To see which Workers answer the two names, run Actions → "Cloudflare routes for myprogrampartner.com". With "fix" ticked it removes routes and custom domains on them that belong to any other Worker (a Cloudflare dashboard Git connection made one on 24 Nov). Don't connect this repository in the Cloudflare dashboard: the build refuses to run there.
 - GitHub Pages no longer serves the site (moved in November 2026).
 
 ## Demo school instead of a trial

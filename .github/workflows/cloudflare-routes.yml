@@ -1,0 +1,24 @@
+name: Cloudflare routes for myprogrampartner.com
+# Run by hand (Actions → this workflow → Run workflow). Lists the Worker routes and custom domains on the zone and,
+# with "fix", removes those on myprogrampartner.com or www that belong to another Worker (scripts/cloudflare-routes.mjs).
+on:
+  workflow_dispatch:
+    inputs:
+      fix:
+        description: Remove routes and custom domains that belong to other Workers
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  routes:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/cloudflare-routes.mjs ${{ inputs.fix && '--fix' || '' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
