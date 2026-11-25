@@ -7,7 +7,12 @@
   "supportEmail": "support@myprogrampartner.com",
   "facebook": "https://www.facebook.com/myprogrampartner",
   "instagram": "https://www.instagram.com/myprogrampartner/",
-  "profiles": [],
+  "profiles": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@ProgramPartner"
+    }
+  ],
   "bookingUrl": "",
   "chatEndpoint": "https://app.myprogrampartner.com/api/public/demo-access-request",
   "turnstileSiteKey": "",

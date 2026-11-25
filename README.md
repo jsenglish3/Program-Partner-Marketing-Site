@@ -1,6 +1,6 @@
 # Program Partner marketing site
 
-Source for **myprogrampartner.com**. A static site built with [Eleventy](https://www.11ty.dev/) from the Claude Design canvas, published to GitHub Pages on every push to `main` (`.github/workflows/deploy.yml`).
+Source for **myprogrampartner.com**. A static site built with [Eleventy](https://www.11ty.dev/) from the Claude Design canvas, published on every push to `main` (`.github/workflows/deploy.yml`) to GitHub Pages and, during the move described under "Hosting", to Cloudflare.
 
 ## Working on it
 
@@ -99,13 +99,24 @@ Rules from the November 2026 SEO audit (HeyCatch), kept by `tests/seo.test.mjs`:
 
 ## Security headers
 
-GitHub Pages, which serves myprogrampartner.com today, can't send custom headers. The build writes `_site/_headers` (`scripts/headers.mjs`) for a host that reads one, such as Cloudflare Pages, where the staging copy runs:
+GitHub Pages can't send custom headers. The build writes `_site/_headers` (`scripts/headers.mjs`) for Cloudflare, which reads it (see "Hosting"):
 
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains` (every subdomain must be on HTTPS: app., woodshed., www.)
 - `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`
-- `Content-Security-Policy-Report-Only`, allowing the pages' own inline scripts by hash plus HeyCatch, the Cloudflare beacon, Turnstile and the app. Report-only blocks nothing; it logs in the browser console what it would block. After a week of browsing the staging copy without reports, rename it to `Content-Security-Policy`.
+- `Content-Security-Policy-Report-Only`, allowing the pages' own inline scripts by hash plus HeyCatch, the Cloudflare beacon, Turnstile and the app. Report-only blocks nothing; it logs in the browser console what it would block. After a week without reports, rename it to `Content-Security-Policy`.
+- Cloudflare reads at most 2,000 characters a line, so the build stops if a line is longer. Keep inline scripts few and identical across pages (the short links share one) so the policy stays short.
+- The Cloudflare copy's workers.dev address gets `X-Robots-Tag: noindex`.
 
-For the live site to send them, it has to be served by such a host, or by a proxy that adds them (for example, Cloudflare proxying the domain with a response-header rule and HSTS turned on). Until then only the referrer policy applies, through a `<meta name="referrer">` tag.
+The pages also carry `<meta name="referrer">`, which works on any host.
+
+## Hosting
+
+myprogrampartner.com is moving from GitHub Pages to a Cloudflare Worker that serves the built site as static assets (`wrangler.jsonc`, worker `program-partner-site` in jsenglish3@gmail.com's Cloudflare account), the way Woodshed is served, so the headers above are sent.
+
+1. **Both, for now.** `deploy.yml` builds once, then deploys to GitHub Pages (which still serves the domain) and, once the `CLOUDFLARE_API_TOKEN` repository secret exists, to the Worker at its workers.dev address for checking.
+   - The token: Cloudflare → My Profile → API Tokens → Create Token → "Edit Cloudflare Workers". Account resources: jsenglish3@gmail.com's account. Zone resources: myprogrampartner.com, because the switch-over adds custom domains, which need Workers Routes write on the zone.
+2. **Switch-over.** Delete the GitHub Pages DNS records in Cloudflare (the four A and four AAAA records on myprogrampartner.com, and the www CNAME; Cloudflare won't put a Worker on a name that has a CNAME), then merge the switch-over pull request. Its deploy adds myprogrampartner.com and www.myprogrampartner.com as the Worker's custom domains; Cloudflare makes the DNS records and certificates. Check that SSL/TLS → Edge Certificates → Always Use HTTPS is on.
+3. **After.** Remove the custom domain under the repository's Settings → Pages, and stop the GitHub Pages deploy.
 
 ## Demo school instead of a trial
 
