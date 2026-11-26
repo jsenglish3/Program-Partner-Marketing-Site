@@ -383,6 +383,11 @@ button { font: inherit; }
 .price-per { font-size: 18px; color: var(--muted); }
 /* Two prices on one line (the studio plan): smaller numerals, and each price keeps its unit. */
 .price-line-pair .price-amount { font-size: clamp(44px, 6vw, 64px); }
+/* The GMEA district plan: one strip across the grid under the two main plans, name and price beside the text. */
+.price-card-wide { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px 40px; }
+.price-card-wide > .price-wide-head { flex: 1 1 320px; display: grid; gap: 8px; }
+.price-card-wide > .price-wide-body { flex: 2 1 380px; display: grid; gap: 16px; }
+.price-card-wide .price-amount { font-size: clamp(44px, 6vw, 64px); }
 .price-pair { display: inline-flex; align-items: baseline; gap: 4px 12px; white-space: nowrap; }
 .price-demo, .small-print { font-size: 15px; }
 /* The school plan is the main plan: a terracotta edge and an audience badge set it apart from the studio card. */

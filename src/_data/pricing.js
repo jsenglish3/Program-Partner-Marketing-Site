@@ -39,6 +39,12 @@ export default {
   },
   // Structured data for the pricing page.
   amount: { founding: '299.00', standard: '349.00' },
+  // GMEA districts: Honor Band only, $199 a year per district for every honor
+  // band event it runs (owner decision, 25 November 2026). No founding price and
+  // no checkout link yet: a district is set up by hand, so its buttons lead to
+  // the demo and Let's chat. The words live in content/copy/honorband.json and
+  // content/copy/pricing.json.
+  district: { amount: '199.00' },
   foundingLastDay: '2027-06-30',
   // The studio plan: its own deadline, and its Payment Links, monthly and
   // yearly. An empty link falls back to the Let's chat form.

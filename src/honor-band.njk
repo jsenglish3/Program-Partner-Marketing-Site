@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+current: honor-band
+title: Honor Band for GMEA districts
+permalink: /honor-band/
+description: "Run your GMEA district's honor band auditions in one place: judges score on tablets, the score room tracks every room and directors see results. $199 a year."
+---
+{% import "macros.njk" as m %}
+{%- set c = copy["honorband"] -%}
+{%- set demoDistrict = site.appUrl ~ "/demo?program=district" -%}
+{{ m.hero({ eyebrow: c.hero.eyebrow, title: c.hero.heading, subhead: c.hero.subhead, primaryLabel: c.hero.primary, primaryHref: demoDistrict, secondaryLabel: c.hero.secondary, secondaryHref: "/demo/" }, site, shots) }}
+{{ m.steps(c.day.heading, c.day.steps, "sand", "h-day", shots) }}
+<section class="section" aria-labelledby="h-value">
+<div class="wrap stack" style="gap:clamp(24px,4vw,40px)">
+<h2 id="h-value" class="h2" style="max-width:760px">{{ c.value.heading }}</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
+<div class="card" aria-labelledby="h-paper">
+<h3 id="h-paper" style="font-size:24px;line-height:1.25">{{ c.value.paper_heading }}</h3>
+<ul class="muted" style="margin:0;padding-left:1.2em;display:grid;gap:10px">
+{%- for it in c.value.paper %}<li>{{ it }}</li>{% endfor %}
+</ul>
+</div>
+<div class="card card-shadow" aria-labelledby="h-app">
+<h3 id="h-app" style="font-size:24px;line-height:1.25">{{ c.value.app_heading }}</h3>
+<ul style="margin:0;padding-left:1.2em;display:grid;gap:10px">
+{%- for it in c.value.app %}<li>{{ it }}</li>{% endfor %}
+</ul>
+</div>
+</div>
+<p class="callout" data-honorband-math>{{ c.value.math }}</p>
+</div>
+</section>
+{{ m.gets(c.included.heading, c.included.items, "h-included") }}
+{{ m.faq(c.faq.heading, c.faq.items, "sand", "h-faq") }}
+{{ m.cta(c.closing.heading, c.closing.label, demoDistrict, c.closing.body) }}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Offer","name":"Honor Band for a GMEA district","url":"{{ site.url }}/honor-band/","priceCurrency":"USD","price":"{{ pricing.district.amount }}","availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ pricing.district.amount }}","priceCurrency":"USD","billingDuration":"P1Y","unitText":"district per year"},"seller":{"@type":"Organization","name":"Program Partner, LLC","url":"{{ site.url }}"}}
+</script>
