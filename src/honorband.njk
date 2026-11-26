@@ -11,11 +11,11 @@ description: "Run your GMEA district's honor band auditions in one place: judges
 {{ m.hero({ eyebrow: c.hero.eyebrow, title: c.hero.heading, subhead: c.hero.subhead, primaryLabel: c.hero.primary, primaryHref: demoDistrict, secondaryLabel: c.hero.secondary, secondaryHref: "/demo/", browser: "Screenshot: the score room's audition list on audition day, Westbrook Music District demo", phone: "Screenshot: the registration desk checking a student in on a phone, Westbrook Music District demo", slot: "honorband-hero" }, site, shots) }}
 {#- Each audition-day step with its screen, in the steps' order. The copy (titles and text) stays in the content editor. -#}
 {%- set dayShots = [
-  { kind: "browser", slot: "honorband-setup", caption: "Screenshot: setting up judging rooms, their judges and instruments, Westbrook Music District demo" },
+  { kind: "browser", slot: "honorband-setup", caption: "Screenshot: setting up a judging panel with a scales room and an étude room, each with its own judges, Westbrook Music District demo" },
   { kind: "browser", slot: "honorband-logins", caption: "Screenshot: printing judge and staff login sheets, Westbrook Music District demo" },
   { kind: "tablet", slot: "honorband-judge", caption: "Screenshot: a judge scoring a clarinet étude on a tablet, Westbrook Music District demo" },
   { kind: "browser", slot: "honorband-correction", caption: "Screenshot: the score room correcting a signed sheet with a reason, Westbrook Music District demo" },
-  { kind: "browser", slot: "honorband-results", caption: "Screenshot: ranking with ties flagged, ready to publish, Westbrook Music District demo" }
+  { kind: "browser", slot: "honorband-results", caption: "Screenshot: ranking with a tie broken by the étude's tone, deciding third chair, Westbrook Music District demo" }
 ] -%}
 {%- set daySteps = [] -%}
 {%- for st in c.day.steps %}{% set added = daySteps.push({ title: st.title, body: st.body, kind: dayShots[loop.index0].kind if dayShots[loop.index0] else none, slot: dayShots[loop.index0].slot if dayShots[loop.index0] else none, caption: dayShots[loop.index0].caption if dayShots[loop.index0] else none }) %}{% endfor -%}
