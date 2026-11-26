@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+current: theatre
+title: "Theatre: auditions and Thespian points"
+permalink: /theatre/
+description: "Audition sign-ups with videos, callbacks and casting, Thespian points families can see, and the fees, forms and fittings behind each production."
+---
+{% import "macros.njk" as m %}
+{%- set c = copy["theatre"] -%}
+{#- The demo's theatre program (Westbrook High School Theatre), entered as its director once the visitor's demo access is approved. -#}
+{%- set demoTheatre = site.appUrl ~ "/demo?program=theatre&persona=director" -%}
+{#- Screenshots: the Westbrook Theatre demo's auditions (Spring Musical: The Lantern Keeper, part cast, and Summer Showcase,
+    taking sign-ups), captured from the app's auditions harness with the demo's own rows; Thespian Points from the demo itself. -#}
+{{ m.hero({ eyebrow: c.hero.eyebrow, title: c.hero.heading, subhead: c.hero.subhead, primaryLabel: site.ctaPrimary, primaryHref: "/demo/", secondaryLabel: c.hero.secondary, secondaryHref: demoTheatre, browser: "Screenshot: the sign-ups for the spring musical's auditions, with callbacks, crew interest and an uploaded video marked, Westbrook Theatre demo", phone: "Screenshot: a family signing up for the Summer Showcase auditions on a phone, Westbrook Theatre demo", slot: "theatre-hero" }, site, shots) }}
+{%- set auditionShots = [
+  { slot: "theatre-auditions-link", caption: "Screenshot: a show's sign-up link and QR code, Westbrook Theatre demo" },
+  { slot: "theatre-auditions-video", caption: "Screenshot: watching an uploaded audition video inside a sign-up, beside the director's notes, Westbrook Theatre demo" },
+  { slot: "theatre-auditions-callbacks", caption: "Screenshot: callbacks for the whole show and for each lead, Westbrook Theatre demo" },
+  { slot: "theatre-auditions-cast", caption: "Screenshot: adding to a lead role, with the person called back for it listed first, Westbrook Theatre demo" },
+  { slot: "theatre-auditions-publish", caption: "Screenshot: reviewing the cast's new group and the newcomers before publishing, Westbrook Theatre demo" }
+] -%}
+{%- set auditionSteps = [] -%}
+{%- for st in c.auditions.steps %}{% set sh = auditionShots[loop.index0] %}{% set added = auditionSteps.push({ title: st.title, body: st.body, kind: "browser" if sh else none, slot: sh.slot if sh else none, caption: sh.caption if sh else none }) %}{% endfor -%}
+{{ m.steps(c.auditions.heading, auditionSteps, "sand", "h-auditions", shots, c.auditions.intro) }}
+<section class="section" aria-labelledby="h-points">
+<div class="wrap-wide stack" style="gap:clamp(28px,4vw,44px)">
+<div class="stack" style="gap:14px;max-width:760px">
+<h2 id="h-points" class="h2">{{ c.points.heading }}</h2>
+<p class="body-lg muted">{{ c.points.intro }}</p>
+</div>
+{{ m.frame("browser", "Screenshot: a student's Thespian points, with high school progress toward induction and each award, Westbrook Theatre demo", "home-hero-theatre-browser", shots) }}
+<ul class="points-grid">
+{%- for it in c.points.items %}
+<li><h3>{{ it.title }}</h3><p>{{ it.body }}</p></li>
+{%- endfor %}
+</ul>
+{%- if c.points.note %}<p class="callout">{{ c.points.note }}</p>{% endif %}
+</div>
+</section>
+{{ m.gets(c.production.heading, c.production.items, "h-production") }}
+{%- set faqItems = c.faq.items.concat([{ q: c.faq.cost_q, a: c.faq.cost_founding if pricing.founding else c.faq.cost_standard }]) if c.faq.cost_q else c.faq.items -%}
+{{ m.faq(c.faq.heading, faqItems, "sand", "h-faq") }}
+{{ m.cta(c.closing.heading, c.closing.label, demoTheatre, c.closing.body) }}

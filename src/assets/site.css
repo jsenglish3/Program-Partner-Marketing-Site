@@ -242,6 +242,11 @@ button { font: inherit; }
 .check-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; flex: 1 1 560px; min-width: 0; }
 .check-grid li { display: flex; gap: 14px; align-items: flex-start; padding: 22px 22px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; font-size: 17px; line-height: 1.55; text-wrap: pretty; }
 .check-grid .tick { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; }
+/* Theatre page: Thespian Points, short titled notes in a grid */
+.points-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px 40px; }
+.points-grid li { display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid var(--border); }
+.points-grid h3 { font-size: 22px; line-height: 1.25; }
+.points-grid p { font-size: 17px; line-height: 1.55; text-wrap: pretty; }
 
 /* Cards */
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; }
