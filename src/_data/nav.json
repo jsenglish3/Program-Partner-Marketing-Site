@@ -15,6 +15,7 @@
     { "key": "boosters", "name": "Boosters", "href": "/boosters/" },
     { "key": "schools", "name": "Schools", "href": "/schools/" },
     { "key": "studios", "name": "Studios", "href": "/studios/" },
+    { "key": "honor-band", "name": "GMEA districts", "href": "/honor-band/" },
     { "key": "families", "name": "Families", "href": "/families/" }
   ],
   "resources": [
