@@ -124,7 +124,7 @@
 <ol class="steps-show">
 {%- for s in items %}
 <li>
-<div class="text"><span class="num"><span class="sr-only">Step </span>{{ loop.index }}</span><p style="font-size:17px;line-height:1.55">{{ s.body }}</p></div>
+<div class="text"><span class="num"><span class="sr-only">Step </span>{{ loop.index }}</span>{% if s.title %}<h3 style="font-size:24px;line-height:1.25">{{ s.title }}</h3>{% endif %}<p style="font-size:17px;line-height:1.55">{{ s.body }}</p></div>
 <div class="vis">{% if s.caption %}<div style="width:{{ 'min(100%,360px)' if s.kind == 'phone' else '100%' }}">{{ frame(s.kind or 'browser', s.caption, s.slot, shots, '360px') }}</div>{% endif %}</div>
 </li>
 {%- endfor %}

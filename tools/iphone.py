@@ -27,6 +27,7 @@ CUT_AT = {
     'home-woodshed': 1500,
     'woodshed-share': 1420,
     'home-fam-student': 1464,
+    'honorband-hero-phone': 1518,
 }
 
 def luminance(rgb):

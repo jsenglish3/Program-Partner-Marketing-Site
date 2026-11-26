@@ -49,6 +49,7 @@ Slot names: open any built page and look for `class="placeholder"` — the text 
 - Feature pages: `<feature>-how-0`, `<feature>-how-1`, `<feature>-how-2` (and `-how-3` for teaching), `feature-<feature>-phone`, plus `fees-walkthrough` and `seating-how-main`
 - Families: `families-hero-browser`, `families-hero-phone`
 - Woodshed: `woodshed-hero-browser`, `woodshed-hero-phone`, `woodshed-create`, `woodshed-share`, `woodshed-practice`, `woodshed-linked`
+- Honor Band: `honorband-hero-browser`, `honorband-hero-phone`, and one per audition-day step: `honorband-setup`, `honorband-logins`, `honorband-judge` (tablet), `honorband-correction`, `honorband-results`
 
 Browser frames are 16:10, tablet frames 1180×820, phone frames iPhone 15 shape (393×852, so 786×1704 at 2×). Phone shots already include the iPhone status bar, Dynamic Island and home indicator (`tools/iphone.py` adds them to a raw 390-wide capture); the frame adds the titanium edge and buttons. Anything else is cropped from the top-left.
 
@@ -58,6 +59,8 @@ Two extras:
 - **Animations.** Add `<slot>.mp4` (and optionally `<slot>.webm`) and the frame plays it as a short muted loop, with `<slot>.webp` as its poster. It plays only while on screen, has a pause button, and stays paused for visitors who ask for reduced motion. Current animations: `fees-walkthrough` (create a fee, a parent uploads a receipt, approve it), `teaching-how-2` (review a Skill Pathways submission and pass it) and `seating-how-main` (move a student on a concert chart; a taken chair swaps).
 
 How the current set was taken: the Westbrook demo at app.myprogrampartner.com/demo, captured at 2× (desktop 1440×900, tablet 1180×820, phone 390×845) in both light and dark color schemes. The demo resets nightly, so retakes look the same.
+
+The Honor Band shots show the demo district (Westbrook Music District) and its seeded audition day: the same fictional students, schools and marks the demo resets to each night. They were captured at 2× (desktop 1440×900, the correction at 1600×1000, tablet 1180×820, phone 390×845, light only) from the score app's own page in the app repository's isolated harness (`e2e/honorband-isolated`), so they carry no demo banner. The phone shot went through `tools/iphone.py`.
 
 **Phone-sized copies.** The build also writes smaller WebP copies of every screenshot (400, 800 and 1200 px wide, whichever are narrower than the original) to `/screenshots/w/`, and the frames list them in `srcset`, so a phone downloads a phone-sized file. Nothing to do by hand: add or replace a screenshot and the next build makes its copies (`scripts/responsive-images.mjs`, cached in `.cache/responsive/`). The first home hero shot loads straight away; everything else loads as it nears the screen.
 
