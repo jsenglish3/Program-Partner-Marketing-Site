@@ -56,7 +56,7 @@ export function sourceFiles(inputPath, data) {
   const files = [file, `content/copy/${name}.json`];
   if (name === 'index') files.push('content/copy/pathways.json', 'src/_includes/partials/pathways.njk');
   if (name === 'switching') files.push('content/switching.json');
-  if (name === 'changelog') files.push('content/changelog.json');
+  if (name === 'changelog') files.push('content/changelog.json', 'scripts/whats-new.mjs');
   if (name === 'demo') files.push('src/_includes/partials/chat-form.njk');
   if (name === 'pricing' || name === 'subscribe') files.push('content/copy/pricing.json', 'src/_data/pricing.js');
   return files;

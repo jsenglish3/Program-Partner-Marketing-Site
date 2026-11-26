@@ -40,6 +40,12 @@ jobs:
           path: .cache/heycatch
           key: heycatch-blog-${{ github.run_id }}
           restore-keys: heycatch-blog-
+      # The last good copy of Program Partner's What's new list, used only if it can't be read during this build.
+      - uses: actions/cache@v4
+        with:
+          path: .cache/whats-new
+          key: whats-new-${{ github.run_id }}
+          restore-keys: whats-new-
       - run: npm run build
         env:
           HEYCATCH_API_KEY: ${{ secrets.HEYCATCH_API_KEY }}

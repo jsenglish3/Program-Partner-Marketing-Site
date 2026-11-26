@@ -15,7 +15,7 @@
   else if(file.startsWith('audiences_')){d.a=value;template='audience.njk';d.audiences=d.audiences.map(a=>a.key===value.key?value:a);}
   else if(file.startsWith('legal_')){d.k=file.slice(6);d.legal[d.k]=value;template='legal.njk';}
   else if(file==='switching'){d.switching=value;template='switching.njk';}
-  else if(file==='changelog'){d.changelog=value;template='changelog.njk';}
+  else if(file==='changelog'){d.changelog={...d.changelog,...value};template='changelog.njk';}
   else if(['seo','site','nav','media'].includes(file))d[file]=value;
   if(selected){
    if(selected.startsWith('features/')){template='feature.njk';d.f=d.features.find(f=>f.key===selected.slice(9));}

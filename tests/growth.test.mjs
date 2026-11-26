@@ -70,12 +70,14 @@ test('no trial: pricing and subscribe send visitors to explore the demo school o
 });
 
 test("What's new: dated entries, newest first, each with its own anchor, linked from the menu and the footer", () => {
-  const data = JSON.parse(fs.readFileSync('content/changelog.json', 'utf8'));
+  // The entries come from Program Partner's list when the site is built (scripts/whats-new.mjs; tests/whats-new.test.mjs
+  // builds against a copy of the feed). Whatever this build read, the page holds them in order with unique anchors.
   const html = page('changelog');
   const ids = [...html.matchAll(/<li id="([^"]+)"/g)].map((m) => m[1]);
-  assert.equal(ids.length, data.entries.length);
+  assert.ok(ids.length > 0);
   assert.equal(new Set(ids).size, ids.length);
-  const dates = data.entries.map((e) => e.date);
+  const dates = [...html.matchAll(/<p class="when"><time datetime="([^"]+)">/g)].map((m) => m[1].slice(0, 10));
+  assert.equal(dates.length, ids.length);
   for (const d of dates) assert.match(d, /^\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?$/);
   assert.deepEqual([...dates].sort().reverse(), dates);
   const home = page('');

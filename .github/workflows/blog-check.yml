@@ -1,7 +1,8 @@
-name: Check the blog for new articles
-# The blog (README: "Blog") is built from articles in HeyCatch, so publishing one there has to rebuild the site.
-# Every 15 minutes this asks HeyCatch whether its articles differ from the ones the live site was built from
-# (/blog/version.txt) and, only then, starts the deploy workflow. It is its own workflow so that a check which
+name: Check the blog and What's new for changes
+# The blog (README: "Blog") is built from articles in HeyCatch, and What's new from Program Partner's What's new list
+# (README: "Proof, profiles and what's new"), so a new article or entry has to rebuild the site. Every 15 minutes
+# this asks each whether it differs from what the live site was built from (/blog/version.txt,
+# /changelog/version.txt) and, only then, starts the deploy workflow. It is its own workflow so that a check which
 # finds nothing new never cancels a deploy in progress (deploy.yml cancels older runs in its `pages` group).
 on:
   schedule:
@@ -28,7 +29,10 @@ jobs:
         run: node scripts/blog-changed.mjs
         env:
           HEYCATCH_API_KEY: ${{ secrets.HEYCATCH_API_KEY }}
-      - if: steps.blog.outputs.changed == 'true'
+      # Program Partner's list is public product copy: no key.
+      - id: whatsnew
+        run: node scripts/whats-new-changed.mjs
+      - if: steps.blog.outputs.changed == 'true' || steps.whatsnew.outputs.changed == 'true'
         run: gh workflow run deploy.yml --ref main
         env:
           GH_TOKEN: ${{ github.token }}

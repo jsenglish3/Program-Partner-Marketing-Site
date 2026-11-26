@@ -5,27 +5,40 @@ title: What's new
 permalink: /changelog/
 description: "What's new in Program Partner, newest first: dated changes to the program office for band, orchestra, choir, theatre and private studios."
 ---
-{#- Dated entries from content/changelog.json. A date is YYYY-MM-DD, or YYYY-MM when only the month is known. Each entry
-    has a stable anchor (its date and title), so a link to one keeps working when newer entries go in above it. -#}
+{#- Entries from Program Partner's What's new list (src/_data/changelog.js, scripts/whats-new.mjs), newest first.
+    Each has a stable anchor, its id, so a link to one keeps working when newer entries go in above it; an entry from
+    before the list also keeps the anchor its date and title gave it then. An entry stamped to the minute shows its time
+    in Eastern Time; older ones show their date, or month. -#}
 {% import "macros.njk" as m %}
 {%- set c = changelog -%}
-{%- set months = ["January","February","March","April","May","June","July","August","September","October","November","December"] -%}
 {{ m.hero({ eyebrow: "Changelog", title: c.heading, subhead: c.intro }, site, shots) }}
 <section aria-label="Changes" style="padding:0 0 var(--section-y)">
 <div class="wrap-narrow">
 <ol class="changelog">
 {%- for e in c.entries %}
-{%- set p = (e.date or "") | split("-") %}
-{%- set monthName = months[(p[1] | int) - 1] if p.length >= 2 else "" %}
-{%- set label = (monthName + " " + (p[2] | int) + ", " + p[0]) if p.length >= 3 else ((monthName + " " + p[0]) if monthName else "") %}
-{%- set id = (e.date + "-" + e.title) | slug %}
-<li id="{{ id }}">
-{%- if label %}<p class="when"><time datetime="{{ e.date }}">{{ label }}</time></p>{% endif %}
-<h2><a href="#{{ id }}">{{ e.title }}</a></h2>
+<li id="{{ e.id }}">
+{%- if e.legacyAnchor and e.legacyAnchor != e.id %}<span id="{{ e.legacyAnchor }}" aria-hidden="true"></span>{% endif %}
+<p class="when"><time datetime="{{ e.datetime }}">{{ e.label }}</time></p>
+<h2><a href="#{{ e.id }}">{{ e.title }}</a></h2>
 <p>{{ e.body }}</p>
+{%- if e.link %}
+<p><a href="{{ e.link }}">Read more</a></p>
+{%- endif %}
 </li>
 {%- endfor %}
 </ol>
+<p class="changelog-follow"><a href="/changelog/feed.xml">Follow What's new by RSS</a></p>
+{%- if c.woodshed and c.woodshed.length %}
+<aside class="changelog-woodshed" aria-labelledby="latest-woodshed-h">
+<h2 id="latest-woodshed-h" class="h2-sm">Latest in Woodshed</h2>
+<ul>
+{%- for e in c.woodshed %}
+<li><a href="https://woodshedpractice.com/whats-new/#{{ e.id }}">{{ e.title }}</a> <span class="when"><time datetime="{{ e.datetime }}">{{ e.label }}</time></span></li>
+{%- endfor %}
+</ul>
+<p><a href="https://woodshedpractice.com/whats-new/">Everything new in Woodshed</a></p>
+</aside>
+{%- endif %}
 </div>
 </section>
 {{ m.cta("See what's there today.", site.ctaPrimary, "/demo/") }}
