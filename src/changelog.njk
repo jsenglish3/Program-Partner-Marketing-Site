@@ -33,10 +33,10 @@ description: "What's new in Program Partner, newest first: dated changes to the 
 <h2 id="latest-woodshed-h" class="h2-sm">Latest in Woodshed</h2>
 <ul>
 {%- for e in c.woodshed %}
-<li><a href="https://woodshedpractice.com/whats-new/#{{ e.id }}">{{ e.title }}</a> <span class="when"><time datetime="{{ e.datetime }}">{{ e.label }}</time></span></li>
+<li><a href="https://woodshedpractice.com/whats-new#{{ e.id }}">{{ e.title }}</a> <span class="when"><time datetime="{{ e.datetime }}">{{ e.label }}</time></span></li>
 {%- endfor %}
 </ul>
-<p><a href="https://woodshedpractice.com/whats-new/">Everything new in Woodshed</a></p>
+<p><a href="https://woodshedpractice.com/whats-new">Everything new in Woodshed</a></p>
 </aside>
 {%- endif %}
 </div>

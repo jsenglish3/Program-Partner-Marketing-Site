@@ -95,7 +95,7 @@ test('the page shows the list, newest first, with old anchors, its RSS feed and 
     assert.match(html, /<link rel="alternate" type="application\/rss\+xml" title="What&#39;s new in Program Partner" href="\/changelog\/feed.xml">|<link rel="alternate" type="application\/rss\+xml" title="What's new in Program Partner" href="\/changelog\/feed.xml">/);
     // Woodshed's newest three, linking to its own What's new.
     const box = html.slice(html.indexOf('Latest in Woodshed'));
-    assert.deepEqual([...box.matchAll(/woodshedpractice\.com\/whats-new\/#([a-z-]+)/g)].map((m) => m[1]), ['write-the-note', 'held-counts', 'older']);
+    assert.deepEqual([...box.matchAll(/woodshedpractice\.com\/whats-new#([a-z-]+)/g)].map((m) => m[1]), ['write-the-note', 'held-counts', 'older']);
     const feed = site.read('changelog/feed.xml');
     assert.match(feed, /<title>Fees &amp; &quot;families&quot;<\/title><link>https:\/\/myprogrampartner\.com\/changelog\/#newest<\/link>/);
     assert.equal(site.read('changelog/version.txt').trim().length, 16);
