@@ -2,15 +2,6 @@
 // Built from the same data as the pages (prices and their deadlines, page descriptions, What's new), so it changes
 // with them on every build. Plain JavaScript rather than Nunjucks, so nothing in it is HTML-escaped.
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-const dateLabel = (date) => {
-  const [y, m, d] = String(date || '').split('-');
-  const month = MONTHS[Number(m) - 1];
-  if (!month) return '';
-  return d ? `${month} ${Number(d)}, ${y}` : `${month} ${y}`;
-};
-
 export const data = {
   permalink: '/llms.txt',
   eleventyExcludeFromCollections: true,
@@ -71,7 +62,7 @@ export function render({ site, seo, pricing, copy, audiences, features, changelo
     '',
     '## Recent changes',
     '',
-    ...(changelog.entries || []).slice(0, 6).map((e) => `- ${dateLabel(e.date)}: [${e.title}](${url}/changelog/#${slug(e.date + '-' + e.title)}). ${e.body}`),
+    ...(changelog.entries || []).slice(0, 6).map((e) => `- ${e.label}: [${e.title}](${url}/changelog/#${e.id}). ${e.body}`),
     '',
   ];
   return lines.join('\n');

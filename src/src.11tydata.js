@@ -13,6 +13,10 @@ export default {
         if (data.pricing && !data.pricing.founding) date = later(date, data.pricing.foundingEnds);
         if (data.pricing && data.pricing.studio && !data.pricing.studio.founding) date = later(date, data.pricing.studio.foundingEnds);
       }
+      // What's new changes whenever an entry goes live in Program Partner (scripts/whats-new.mjs).
+      if (name === 'changelog.njk' && data.changelog && data.changelog.entries) {
+        for (const e of data.changelog.entries) date = later(date, e.liveAt);
+      }
       // The blog's index changes whenever an article is published or edited in HeyCatch.
       if (name === 'blog.njk' && data.blog && data.blog.articles) {
         for (const a of data.blog.articles) date = later(date, a.updated || a.published);

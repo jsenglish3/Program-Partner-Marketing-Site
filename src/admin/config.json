@@ -6385,7 +6385,7 @@
         },
         {
           "name": "changelog",
-          "label": "What's new (changelog)",
+          "label": "What's new (heading and introduction)",
           "file": "content/changelog.json",
           "fields": [
             {
@@ -6399,38 +6399,6 @@
               "label": "Introduction",
               "widget": "text",
               "required": false
-            },
-            {
-              "name": "entries",
-              "label": "Entries, newest first",
-              "widget": "list",
-              "required": false,
-              "collapsed": true,
-              "summary": "{{fields.date}}: {{fields.title}}",
-              "fields": [
-                {
-                  "name": "date",
-                  "label": "Date (YYYY-MM-DD, or YYYY-MM if only the month is known)",
-                  "widget": "string",
-                  "required": false,
-                  "pattern": [
-                    "^\\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?$",
-                    "Use YYYY-MM-DD or YYYY-MM"
-                  ]
-                },
-                {
-                  "name": "title",
-                  "label": "Title",
-                  "widget": "string",
-                  "required": false
-                },
-                {
-                  "name": "body",
-                  "label": "What changed",
-                  "widget": "text",
-                  "required": false
-                }
-              ]
             }
           ]
         },

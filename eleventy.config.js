@@ -5,6 +5,7 @@ import { resolveMedia } from "./scripts/media.mjs";
 import { srcsets, writeVariants, forget as forgetVariants } from "./scripts/responsive-images.mjs";
 import { addImageSizes } from "./scripts/image-sizes.mjs";
 import { writeHeaders } from "./scripts/headers.mjs";
+import { writeRedirects } from "./scripts/redirects.mjs";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
@@ -37,6 +38,8 @@ export default function (eleventyConfig) {
   });
   // The security headers file for hosts that read one (scripts/headers.mjs), with the pages' inline script hashes.
   eleventyConfig.on("eleventy.after", ({ directories }) => writeHeaders(directories.output));
+  // /whats-new/ forwards to /changelog/ (scripts/redirects.mjs).
+  eleventyConfig.on("eleventy.after", ({ directories }) => writeRedirects(directories.output));
   // Screenshots live in src/screenshots/<slot>.png (or .jpg/.webp).
   // The frame partial shows the image when the file exists, otherwise a quiet placeholder.
   // <slot>-dark.webp is the same screen in dark mode (the home hero's Light/Dark switch shows it).

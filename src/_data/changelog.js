@@ -1,4 +1,6 @@
-// What's new (/changelog/): dated entries, newest first, edited in content/changelog.json (content editor: What's new).
-// changelog.njk turns each date into words and an anchor, so the editor's preview shows the same thing.
-import fs from 'node:fs';
-export default JSON.parse(fs.readFileSync(new URL('../../content/changelog.json', import.meta.url), 'utf8'));
+// What's new (/changelog/): the heading and introduction from content/changelog.json (content editor: What's new),
+// and the entries from Program Partner's What's new list, read when the site is built (scripts/whats-new.mjs,
+// changelogPage; README: "Proof, profiles and what's new"). { heading, intro, entries, woodshed, version, source }.
+import { changelogPage } from '../../scripts/whats-new.mjs';
+
+export default () => changelogPage();

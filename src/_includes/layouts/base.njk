@@ -103,6 +103,9 @@ document.addEventListener('pp:chat-sent', () => analytics.trackEvent('chat_reque
 {%- set node %}{"@type":"BreadcrumbList","@id":{{ crumbId | dump | safe }},"itemListElement":{{ items | dump | safe }}}{% endset %}{% set added = nodes.push(node) -%}
 {%- endif %}
 <script type="application/ld+json">{{ ('{"@context":"https://schema.org","@graph":[' + (nodes | join(",")) + ']}') | replace("<", "\\u003c") | safe }}</script>
+{%- if pagePath == "/changelog/" %}
+<link rel="alternate" type="application/rss+xml" title="What's new in Program Partner" href="/changelog/feed.xml">
+{%- endif %}
 {#- A blog article's own structured data, as HeyCatch sent it (scripts/blog.mjs writes it script-safe). -#}
 {%- if post and post.jsonLd %}
 <script type="application/ld+json">{{ post.jsonLd | safe }}</script>

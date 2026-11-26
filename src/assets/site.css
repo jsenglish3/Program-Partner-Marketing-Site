@@ -438,6 +438,13 @@ button { font: inherit; }
 .changelog h2 a { color: inherit; text-decoration: none; }
 .changelog h2 a:hover, .changelog h2 a:focus-visible { text-decoration: underline; }
 .changelog p:last-child { font-size: 17px; line-height: 1.6; }
+.changelog li > span[id] { display: block; scroll-margin-top: 96px; }
+.changelog .when time { font-variant-numeric: tabular-nums; }
+.changelog-follow { margin: 20px 0 0; font-size: 15px; }
+.changelog-woodshed { margin-top: clamp(32px, 4vw, 48px); padding-top: clamp(24px, 3vw, 32px); border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px; }
+.changelog-woodshed ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.changelog-woodshed li { font-size: 17px; line-height: 1.5; }
+.changelog-woodshed .when { display: block; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 /* Blog (/blog/ and /blog/<slug>): articles from HeyCatch. The index reuses the What's new list; an article's HTML
    arrives with no classes (scripts/blog.mjs strips them), so its elements are styled here on top of .legal-body. */
