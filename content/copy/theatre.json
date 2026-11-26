@@ -1,0 +1,120 @@
+{
+  "hero": {
+    "eyebrow": "For theatre programs",
+    "heading": "Auditions, casting and Thespian points, in one place.",
+    "subhead": "Program Partner is the program office for school theatre: an audition sign-up link that takes videos, callbacks and a casting board, Thespian points families can see, and the fees, forms, fittings and volunteers behind every production.",
+    "secondary": "Explore the demo theatre"
+  },
+  "auditions": {
+    "heading": "Auditions, from one link to the cast list",
+    "intro": "Auditions replaces the sign-up form you copy for every show and the spreadsheet behind it. It's off until you turn it on, and any school program can use it.",
+    "steps": [
+      {
+        "title": "Share one link",
+        "body": "Each show gets its own sign-up link and QR code. Anyone can sign up without an account: your students, students from other schools, and adults for an adult ensemble. Keep the form to the basics, or ask for the roles they'd take, voice part, conflicts during your rehearsal dates, crew interest and up to five questions of your own."
+      },
+      {
+        "title": "Watch every audition video",
+        "body": "Families paste a YouTube or Google Drive link, or upload the video to a folder in your program's own Google Drive. You watch it inside the sign-up, next to the roles they'd take, their conflicts and your private notes."
+      },
+      {
+        "title": "Call back",
+        "body": "Call someone back for the whole show or for a role. Print the callback list, or copy every called-back family's email address for your own message."
+      },
+      {
+        "title": "Cast the show",
+        "body": "Each role shows its spots, who has it and their conflicts. Adding someone to a role lists the people you called back for it first, then everyone who chose it. Double-cast a role with an alternate, give one person a lead and the ensemble, and build the crew from those who said yes."
+      },
+      {
+        "title": "Publish and tell everyone",
+        "body": "Publishing puts the cast and crew in a group in your roster and adds newcomers as students, with their parent or guardian as the family contact. Then send one message to the cast and one to everyone else, each in your own words, and read both before they go."
+      }
+    ]
+  },
+  "points": {
+    "heading": "Thespian points, kept for your troupe",
+    "intro": "Thespian Points keeps a record of each student's theatre work and their progress toward induction. Theatre programs have it, and it stays off until you set up your troupe.",
+    "items": [
+      {
+        "title": "Your troupe's catalog",
+        "body": "Start from EdTA's suggested point values, then rename, add or remove categories and activities to match your troupe's rules."
+      },
+      {
+        "title": "A whole cast at once",
+        "body": "Choose several students, the production or activity, their role and the date. The suggested points fill in, and you set the final value with a note."
+      },
+      {
+        "title": "Junior and high school",
+        "body": "Junior Thespian and high school records stay separate. Outside work counts toward induction only up to the standard limit, and the full total stays visible."
+      },
+      {
+        "title": "Corrections that keep the record",
+        "body": "A correction is added beside the award with its reason, so the original stays on file."
+      },
+      {
+        "title": "Families can see it",
+        "body": "Students and families see their points, their progress toward induction, your troupe's requirements and their history in their portal."
+      },
+      {
+        "title": "Export any time",
+        "body": "Download the whole point history as a spreadsheet file whenever you need it."
+      }
+    ],
+    "note": "Progress toward induction is a guide for your review. Induction and registration with EdTA stay with you."
+  },
+  "production": {
+    "heading": "Everything behind the production",
+    "items": [
+      "Productions, rehearsals and tech week on one calendar families can subscribe to",
+      "Event HQ for each production, festival and conference trip: who has paid, signed and registered",
+      "Show fees, Thespian dues and costume deposits, paid online into your program's own account",
+      "Permission slips and forms signed on a phone, with a list of who hasn't signed",
+      "Fitting day: measure a whole cast in one grid, with a costume set of measurements",
+      "Lighting, sound, costumes and makeup kits in inventory, with who has each piece",
+      "Volunteer shifts for house managers, ushers, concessions and set builds",
+      "Show shirts and makeup kits in your store, ordered from the family portal",
+      "Theatre's own words throughout: productions, performers, crews and companies, and you can rename them"
+    ]
+  },
+  "faq": {
+    "heading": "Questions theatre directors ask",
+    "items": [
+      {
+        "q": "Do auditioners need an account?",
+        "a": "No. They sign up from the show's link on any phone or computer. The family gets a confirmation email with a private link to change their answers until sign-ups close."
+      },
+      {
+        "q": "Can students from other schools, or adults, audition?",
+        "a": "Yes. The link is public, so new students, students from other schools and adults can all sign up. When you publish the cast, each newcomer becomes a student in your program, and an adult joins as an adult learner with their own email address."
+      },
+      {
+        "q": "Where do audition videos go?",
+        "a": "An uploaded video goes from the family's browser straight to a folder in your program's own Google Drive. Each can be up to 2 GB, and an interrupted upload can continue from where it stopped. Families can send a YouTube or Google Drive link instead. Either way, you watch it inside the sign-up."
+      },
+      {
+        "q": "What happens to the sign-ups of people who weren't cast?",
+        "a": "Six months after you publish the cast, the sign-ups of everyone not cast or on crew are deleted, and their uploaded videos go to your Google Drive's trash. You can turn that off for any show."
+      },
+      {
+        "q": "Is Auditions only for theatre?",
+        "a": "No. Any school program can turn it on, so a choir or show choir can run its auditions the same way. Thespian Points is for theatre programs."
+      },
+      {
+        "q": "Our troupe has its own point rules. Can we follow them?",
+        "a": "Yes. Edit the categories, activities and suggested values, write your troupe's requirements where students and families can read them, and enter the final value of each award yourself. Changes apply to new awards; past awards keep the values they were given."
+      },
+      {
+        "q": "Is Program Partner part of EdTA or the International Thespian Society?",
+        "a": "No. Program Partner is an independent company. Thespian Points starts from EdTA's published point guidance, and your troupe's rules and EdTA's own induction process still apply."
+      }
+    ],
+    "cost_q": "What does it cost?",
+    "cost_founding": "Auditions and Thespian Points are part of the school plan, with nothing extra to buy. It's $299 a year per program for programs that subscribe by June 30, 2027, and they keep that price every year they renew. After that it's $349 a year.",
+    "cost_standard": "Auditions and Thespian Points are part of the school plan, with nothing extra to buy: $349 a year per program."
+  },
+  "closing": {
+    "heading": "See a show cast in the demo theatre.",
+    "body": "Explore Westbrook Theatre on your own, with a show part way through casting, or schedule a demo and we'll walk you through it.",
+    "label": "Explore the demo theatre"
+  }
+}

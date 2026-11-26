@@ -50,6 +50,7 @@ Slot names: open any built page and look for `class="placeholder"` — the text 
 - Families: `families-hero-browser`, `families-hero-phone`
 - Woodshed: `woodshed-hero-browser`, `woodshed-hero-phone`, `woodshed-create`, `woodshed-share`, `woodshed-practice`, `woodshed-linked`
 - Honor Band: `honorband-hero-browser`, `honorband-hero-phone`, and one per audition-day step: `honorband-setup`, `honorband-logins`, `honorband-judge` (tablet), `honorband-correction`, `honorband-results`
+- Theatre: `theatre-hero-browser`, `theatre-hero-phone`, and one per auditions step: `theatre-auditions-link`, `theatre-auditions-video`, `theatre-auditions-callbacks`, `theatre-auditions-cast`, `theatre-auditions-publish`. Its Thespian Points section reuses the home hero's `home-hero-theatre-browser`.
 
 Browser frames are 16:10, tablet frames 1180×820, phone frames iPhone 15 shape (393×852, so 786×1704 at 2×). Phone shots already include the iPhone status bar, Dynamic Island and home indicator (`tools/iphone.py` adds them to a raw 390-wide capture); the frame adds the titanium edge and buttons. Anything else is cropped from the top-left.
 
@@ -61,6 +62,8 @@ Two extras:
 How the current set was taken: the Westbrook demo at app.myprogrampartner.com/demo, captured at 2× (desktop 1440×900, tablet 1180×820, phone 390×845) in both light and dark color schemes. The demo resets nightly, so retakes look the same.
 
 The Honor Band shots show the demo district (Westbrook Music District) and its seeded audition day: the same fictional students, schools and marks the demo resets to each night. They were captured at 2× (desktop 1440×900, the correction at 1600×1000, tablet 1180×820, phone 390×845, light only) from the score app's own page in the app repository's isolated harness (`e2e/honorband-isolated`), so they carry no demo banner. The phone shot went through `tools/iphone.py`.
+
+The theatre page's auditions shots show the Westbrook Theatre demo's two shows (Spring Musical: The Lantern Keeper, part cast, and Summer Showcase, taking sign-ups) with the rows the demo seeds each night, loaded into the app repository's isolated auditions harness (`e2e/auditions-isolated`) and captured at 2× (desktop 1280×800, phone 390×845, light only). Two things differ from the demo: Summer Showcase offers the video upload and one sign-up has an uploaded video (the harness's sample clip), and the sign-up link uses a token no program has, so its QR code leads nowhere. The phone shot went through `tools/iphone.py`.
 
 **Phone-sized copies.** The build also writes smaller WebP copies of every screenshot (400, 800 and 1200 px wide, whichever are narrower than the original) to `/screenshots/w/`, and the frames list them in `srcset`, so a phone downloads a phone-sized file. Nothing to do by hand: add or replace a screenshot and the next build makes its copies (`scripts/responsive-images.mjs`, cached in `.cache/responsive/`). The first home hero shot loads straight away; everything else loads as it nears the screen.
 
